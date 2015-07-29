@@ -18,11 +18,11 @@ Run the index.html file and you’ll see the app’s interface. Let’s have a l
 
 The codebase of our app consists of:
 
-- index.html file that is a start page and the only html file in our app
-- app.js file that includes the configuration of the app;
-- the views folder containing modules for interface elements;
-- the models folder that includes modules for data operations;
-- the libs folder where all the applied libraries are located, including the Webix  library.
+- *index.html* file that is a start page and the only html file in our app
+- *app.js* file that includes the configuration of the app;
+- the *views* folder containing modules for interface elements;
+- the *models* folder that includes modules for data operations;
+- the *libs* folder where all the applied libraries are located, including the Webix  library.
 
 ##How it works
 
@@ -37,7 +37,7 @@ For example, there are next 2 files in the views folder of our app:
 - top.js
 - start.js
 
-If you set the path to “index.html#!/top/start”, the interface described in the views/top.js file will be rendered first. Then the interface from views/start will be added in some cell of top level interface.
+If you set the path to *“index.html#!/top/start”*, the interface described in the *views/top.js* file will be rendered first. Then the interface from *views/start* will be added in some cell of top level interface.
 
 ##Defining a view module
 
@@ -58,10 +58,11 @@ This is a module that returns a template with the text of the page. Each module 
 
 You can look at this page by opening the url: index.html#!/start
 
-views/top
+**views/top**
 
-The views/top module defines the top level view, that contains a menu and includes the start page view, which we have described above:
+The *views/top* module defines the top level view, that contains a menu and includes the start page view, which we have described above:
 
+```js
 //views/top.js
 define([
 "views/start"
@@ -73,19 +74,22 @@ define([
         ]
     };
 });
+```
 
 In the above code we have described a layout with two columns.
 At the top of the file we are providing the list of dependencies, which we will use in this layout.
 
-Open the path index.html#!/top and you’ll see the page with start view inside of the top one.
+Open the path *index.html#!/top* and you’ll see the page with *start* view inside of the *top* one.
 
 
-Creating subviews
+
+## Creating subviews
 
 As it’s already been said, our app consists of a single page. How is the process of views manipulation organized?
 
 Let’s check the following code:
 
+```js
 //views/top.js
 define([], function(){
     return {
@@ -95,19 +99,22 @@ define([], function(){
        ]
     };
 })
+```
 
-The line { $subview: true } implies that we can enclose other modules inside of the top module. The next segment of the url will be loaded into this structure. So for rendering the interface including a particular subview, put its name after index.html#!/top/ like index.html#!/top/start. 
-The { $subview: true } placeholder will be replaced with the content of subview file ( views/start.js in the above example ) and the corresponding interface will be rendered.
+The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the url will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*. 
+The *{ $subview: true }* placeholder will be replaced with the content of subview file ( *views/start.js* in the above example ) and the corresponding interface will be rendered.
 
-For example, if you enter the url index.html#!/top/data, you’ll get the interface with a menu in the left part and a datatable in the right part. Then, add one more /top subdirectory into the path. The url will look as index.html#!/top/top/data and the app will have another menu view inserted into the first one. This view will contain the datatable.
+For example, if you enter the url *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part. Then, add one more /top subdirectory into the path. The url will look as* index.html#!/top/top/data* and the app will have another menu view inserted into the first one. This view will contain the datatable.
 
 The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.  
 
-Loading data with models
+
+## Loading data with models
 
 While views contain the code of interfaces, models are used to control the data.
-We’ll consider data loading on the example of the views/data.js file. It takes data from the models/records module.To load data into the view we’ll use data collection. Take a look at the content of the records.js file:
+We’ll consider data loading on the example of the *views/data.js* file. It takes data from the *models/records* module.To load data into the view we’ll use data collection. Take a look at the content of the records.js file:
 
+```js
 //models/records.js
 define([],function(){
 	var collection = new webix.DataCollection({ 
@@ -120,11 +127,13 @@ return {
                 }
 	};
 });
+```
 
-In this module, we create a new data collection that loads data from the data.php file. The module returns a helper method that provides access to our DataCollection.
+In this module, we create a new data collection that loads data from the *data.php* file. The module returns a helper method that provides access to our DataCollection.
 
-The views/data module has the following code: 
+The *views/data* module has the following code: 
 
+```js
 //views/data.js
 define(["models/records"],function(records){
 	var ui = {
@@ -138,9 +147,10 @@ define(["models/records"],function(records){
 		}
 	};
 });
+```
 
-As you can see, this module returns an object that differs from those we described earlier. There are two variants of the return object. It can be simply a description of interface or an extended object with the following properties. 
+As you can see, this module returns an object that differs from those we described earlier. There are two variants of the return object. It can be simply a description of interface or an extended object with the following properties: 
 
-the $ui property defines the interface of the component that will be initialized. In our example it’s datatable;
-the $oninit function specifies that data from the records model will be loaded into the view after its creation.
+- the *$ui* property defines the interface of the component that will be initialized. In our example it’s datatable;
+- the* $oninit* function specifies that data from the records model will be loaded into the view after its creation.
 
