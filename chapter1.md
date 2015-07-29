@@ -1,15 +1,14 @@
 
 Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix MVC framework.
 
-Advantages of Webix MVC
+##Advantages of Webix MVC
 
 Webix MVC allows you to create a flexible, easy maintainable app, where data and visual presentation are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins and user access levels. 
 
 Webix MVC is a fully client-side solution, and can  be used with any REST-based data api. So there aren’t any special requirements to the server.
 
 
-
-Getting started
+##Getting started
 
 To begin with, you should grab the app package from https://github.com/mkozhukh/webix-app-start/archive/master.zip and unpack it to the root folder of your webhost.
 
