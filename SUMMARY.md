@@ -2,5 +2,5 @@
 
 * [Introduction](README.md)
 * [First Chapter](chapter1.md)
-* Advanced Techniques
+* [Advanced Techniques](chapter3.md)
 
