@@ -1,6 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [Basics](basics.md)
+* [Basics](chapter1.md)
 * [Advanced Techniques](chapter3.md)
 
