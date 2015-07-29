@@ -14,18 +14,17 @@ To begin with, you should grab the app package from https://github.com/mkozhukh/
 
 Run the index.html file and you’ll see the app’s interface. Let’s have a look what it has inside.
 
-The app’s structure
+##The app’s structure
 
 The codebase of our app consists of:
 
-index.html file that is a start page and the only html file in our app
-app.js file that includes the configuration of the app;
+- index.html file that is a start page and the only html file in our app
+- app.js file that includes the configuration of the app;
+- the views folder containing modules for interface elements;
+- the models folder that includes modules for data operations;
+- the libs folder where all the applied libraries are located, including the Webix  library.
 
-the views folder containing modules for interface elements;
-the models folder that includes modules for data operations;
-the libs folder where all the applied libraries are located, including the Webix  library.
-
-How it works
+##How it works
 
 The basic principle of creating an app is the following. The app is a single page. We divide it into multiple views which will be kept in separate files. Thus, the process of controlling the app’s behavior gets much easier and quicker.
 
@@ -35,23 +34,25 @@ The app splits the url into parts, finds the corresponding files in the views fo
 
 For example, there are next 2 files in the views folder of our app:
 
-top.js
-start.js
+- top.js
+- start.js
 
 If you set the path to “index.html#!/top/start”, the interface described in the views/top.js file will be rendered first. Then the interface from views/start will be added in some cell of top level interface.
 
-Defining a view module
+##Defining a view module
 
-views/start
+**views/start**
 
 The start.js file describes a start page view
 
+```js
 //views/start.js
 define([],function(){
 	return {
 		template:"Start page"
 	};
 });
+```
 
 This is a module that returns a template with the text of the page. Each module starts from the “define” call which contains a description of ui inside. 
 
