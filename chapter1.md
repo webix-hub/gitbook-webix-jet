@@ -1,5 +1,5 @@
 
-Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix MVC framework.
+Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix Jet framework.
 
 ##Advantages of Webix Jet
 
@@ -12,7 +12,7 @@ Webix Jet is a fully client-side solution, and can  be used with any REST-based 
 
 To begin with, you should grab the app package from https://github.com/mkozhukh/webix-app-start/archive/master.zip and unpack it to the root folder of your webhost.
 
-Run the index.html file and you’ll see the app’s interface. Let’s have a look what it has inside.
+Run the *index.html* file and you’ll see the app’s interface. Let’s have a look what it has inside.
 
 ##The app’s structure
 
@@ -32,7 +32,7 @@ In order to navigate between pages we will change the url of the page. But as we
 
 The app splits the url into parts, finds the corresponding files in the views folder and creates an interface by combining UI from those files.
 
-For example, there are next 2 files in the views folder of our app:
+For example, there are next 2 files in the *views* folder of our app:
 
 - top.js
 - start.js
@@ -43,7 +43,7 @@ If you set the path to *“index.html#!/top/start”*, the interface described i
 
 **views/start**
 
-The start.js file describes a start page view
+The *start.js* file describes a start page view
 
 ```js
 //views/start.js
@@ -54,9 +54,9 @@ define([],function(){
 });
 ```
 
-This is a module that returns a template with the text of the page. Each module starts from the “define” call which contains a description of ui inside. 
+This is a module that returns a template with the text of the page. Each module starts from the *“define”* call which contains a description of ui inside. 
 
-You can look at this page by opening the url: index.html#!/start
+You can look at this page by opening the url *index.html#!/start*
 
 **views/top**
 
