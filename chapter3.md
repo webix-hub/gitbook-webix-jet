@@ -458,7 +458,7 @@ As for the third variant, it will do fine for our needs. By using isolated ID sp
 
 There is one more way. We can specify a function that will return a view with a new id each time the code is executed:
 
-```
+```js
 define([],function(){
 	return {
 	    $ui:function(){
