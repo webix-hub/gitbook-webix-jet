@@ -157,7 +157,7 @@ Unlike events, methods not only call actions in views, but also can return somet
 
 Let's have a look at the example below:
 
-```
+```js
 // views/list
 {
 	$ui:{ view:"list", id:"mylist"},
@@ -174,7 +174,7 @@ The code of a view creates a list component. It this view we declare the *trunca
 
 In another view we have the following code:
 
-```
+```js
 define(["list"], function(list){
 	var button = {
 		click:function(){
@@ -196,14 +196,14 @@ There's one more way to organize views communication. It's possible to create a 
 
 Let's consider a more concrete case. Imagine that you have two views: one with a grid that contains names of users and one more view somewhere in the app that has a button. To share data between the grid and the button, we will define a separate model file.
 
-```
+```js
 // models/state.js
 return {
 	// state config
 };
 ```
 
-```
+```js
 //views/data.js
 define([
 	"models/state"
@@ -217,7 +217,7 @@ define([
 	}
 })
 ```
-```
+```js
 //views/top.js
 define([
 	"models/state"
@@ -307,7 +307,7 @@ define([
 ```
 In the view which needs to be localized the "locale" dependency should be included. This dependency will provide the translating function. All the text values that need to be translated must be wrapped into this function:
 
-```
+```js
 //views/input.js
 define(["locale"], function(_){
 	  return {
@@ -323,7 +323,7 @@ Files of locales are stored as *locales/language.js*.
 
 The format of files is the following:
 
-```
+```js
 // locales/en.js
 define ([], function(){     
 	return {  "Language": "Language" };
@@ -341,16 +341,16 @@ As you can see, this is a collection of *key:value* pairs, where the key is the 
 
 By default, English locale is set. You can specify the default language in the *app.js* file.
 
-```
+```js
 app.use(locale, { lang:"ru" })
 ```
 To change the active language of the app, use the *setLang()* method. It takes a two-letter code of the language as the argument:
-```
+```js
 locale.setLang("ru");
 ```
 It's also possible to return the currently set language, using the *getLang()* method:
 
-```
+```js
 locale.getLang();
 ```
 
@@ -360,7 +360,7 @@ The basis of Webix MVC localization is [Polyglot.js](http://airbnb.io/polyglot.j
 
 To get a pluralized phrase,  a special string is used. The plural forms are separated by the delimiter "||||", or four vertical line characters.
 
-```
+```js
 define(["locale"], function(_){
 	  var count = 100;
 	  return {
@@ -369,7 +369,7 @@ define(["locale"], function(_){
 });
 ```
 
-```
+```js
 //locale/en.js
 define(function(){     
 	return {         
@@ -379,7 +379,7 @@ define(function(){
 ```
 
 To understand the difference better, check the next example:
-```
+```js
 var label = _("BooksCountLabel",{count:1}); // You have 1 book
 var label = _("BooksCountLabel",{count:50}); // You have 50 books
 ```
@@ -421,7 +421,7 @@ Webix components can have ids. They are used to refer to this or that component,
 - create a complex id that have the structure *{viewname}:{role}*, for example: *"start:view"*. By using the view's name in the 1st part of id we make it unique;
 - generating a unique id:
 
-```
+```js
 var listid = webix.uid();
 return {
     $ui:{ id:"r1", rows:[
@@ -436,7 +436,7 @@ While you can get a view by its id from any module of your app, it is strongly r
 
 - isolated ID spaces
 
-```
+```js
 return {
     $ui:{ isolate:true, rows:[
 		{ view:"list", id:"mylist" },
