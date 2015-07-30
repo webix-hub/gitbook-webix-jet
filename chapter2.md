@@ -55,7 +55,8 @@ Let’s consider each property in detail.
 The ui property gives the description of Webix interface. It can include any possible content of a component (settings, events, data, templates).
 
 Our interface can also include other views. Such a structure is called composition:
-```
+
+```js
 define(["views/start", function(start){
     return {
         $ui: {
