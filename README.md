@@ -1,4 +1,5 @@
-My Awesome Book
+Introduction to Webix Jet Guide
 =======
 
-This file serves as your book's preface, a great place to describe your book's content and ideas.
+This guide provides all the information needed to start creating web applications with Webix Jet.
+It includes the description 
