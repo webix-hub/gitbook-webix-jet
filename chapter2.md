@@ -13,9 +13,9 @@ In order to load and save data with the help of REST API, we should initialize a
 define([],function(){
 
 	var collection = new webix.DataCollection({ 
-url:"rest->/records", 
-save:"rest->/records" 
-});
+        url:"rest->/records", 
+        save:"rest->/records" 
+    });
 	return {
 		getData: function(){
                     return collection;
