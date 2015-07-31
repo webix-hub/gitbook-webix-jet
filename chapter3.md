@@ -96,8 +96,7 @@ app.trigger("eventName", [ ... ])
 ```
 <br>
 
-There's also the *app.action()* method that unites ****both the *click* *handler and the* *callEvent* method.**** 
-For example, let's consider the code of initialization of a segmented button:
+There's also the *app.action()* method that unites both the *click* *handler and the* *callEvent* method. For example, let's consider the code of initialization of a segmented button:
 
 ```js
 ...
