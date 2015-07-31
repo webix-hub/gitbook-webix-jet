@@ -294,7 +294,7 @@ There are several ways to implement asynchronous data loading:
 
 You can easily localize your application by using a special plugin. All you need to enable localization is to include the *locale.js* file into the app.js and add the *app.use(locale)* line in the configuration:
 
-```
+```js
 // app.js
 define([
 	"webix-mvc-core/plugins/locale"
