@@ -37,7 +37,11 @@ For example, there are next 2 files in the *views* folder of our app:
 - top.js
 - start.js
 
-If you set the path to *“index.html#!/top/start”*, the interface described in the *views/top.js* file will be rendered first. Then the interface from *views/start* will be added in some cell of top level interface.
+If you set the path to *“index.html#!/top/start”*, the interface described in the *views/top.js* file will be rendered first. Then the interface from *views/start* will be added in some cell of top level interface:
+
+**index.html#!/top/start**
+
+![](how_it_works.png)
 
 ##Defining a view module
 
@@ -104,7 +108,17 @@ define([], function(){
 The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the url will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*. 
 The *{ $subview: true }* placeholder will be replaced with the content of subview file ( *views/start.js* in the above example ) and the corresponding interface will be rendered.
 
-For example, if you enter the url *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part. Then, add one more /top subdirectory into the path. The url will look as* index.html#!/top/top/data* and the app will have another menu view inserted into the first one. This view will contain the datatable.
+For example, if you enter the url *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part: 
+
+**index.html#!/top/data**
+
+![](top_data.png)
+
+Then, add one more /top subdirectory into the path. The url will look as* index.html#!/top/top/data* and the app will have another menu view inserted into the first one. This view will contain the datatable:
+
+**index.html#!/top/top/data**
+
+![](top_top_data.png)
 
 The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.  
 
