@@ -11,7 +11,7 @@ define([
 ],function(records){
 	return {
 		$ui: {
-			view:”list”, click:function(){ $$("p1").show();}
+			view:"list", click:function(){ $$("p1").show();}
 		},
 		$windows:[
 			{ view:"popup", id:"p1" }, 
@@ -43,10 +43,10 @@ define([
 ],function(app, records){
 	return {
 		$ui: { view:"datatable" },
-		$oninit:function(){
+		$oninit:function(view){
 			app.attachEvent("detailsModeChanged", function(data){
 				if (data == "all")
-					this.showColumn("col1")
+					view.showColumn("col1")
 			})
 		}
 	}
@@ -102,7 +102,7 @@ There's also the *app.action()* method that unites both the *click* *handler and
 ...
 	return {
 		view:"segmented", on:{
-			onItemClick:function(id){
+			onAfterTabClick:function(id){
 				app.callEvent("detailsModeChanged", [ id ])
 			}
 		}
@@ -113,7 +113,7 @@ We can simplify it in the following way:
 ```js
 	return {
 		view:"segmented", on:{
-			onItemClick:app.action("detailsModeChanged")
+			onAfterTabClick:app.action("detailsModeChanged")
 		}
 	}
 ```
@@ -125,11 +125,11 @@ It's also possible to replace the `$oninit` property and the attachEvent method 
 ...
 	return {
 		$ui: { view:"datatable" },
-		$oninit:function(){
+		$oninit:function(view){
 			app.attachEvent("detailsModeChanged", function(data){
 				if (data == "all")
-					this.showColumn("dummy")
-			})
+					view.showColumn("dummy")
+			});
 		}
 	}
 ```
