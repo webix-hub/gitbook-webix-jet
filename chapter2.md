@@ -18,8 +18,8 @@ define([],function(){
     });
 	return {
 		getData: function(){
-                    return collection;
-                }
+            return collection;
+        }
 	};
 });
 ```
@@ -76,7 +76,7 @@ This method is called each time when a view is created. It’s used to load data
 ```js
 define(["models/records"],function(records){
     return {
-        $ui : {
+        $ui: {
             view:"list"
         },
         $oninit:function(view,scope){
@@ -86,18 +86,18 @@ define(["models/records"],function(records){
 });
 ```
 
-The important note: when the url is changed, the oninit method won’t be called for existing views. For example, if we go from /top/data to /top/start, $oninit will be called for the “start” only. As the top view has already been rendered, $oninit won’t be called for it.
+The important note: when the url is changed, the oninit method won’t be called for existing views. For example, if we go from /top/data to /top/start, $oninit will be called for the "start" only. As the top view has already been rendered, $oninit won’t be called for it.
 
 **$onurlchange**
 
-The method is called when the “local” url is changed (after going to the next page). It’s used to restore the view’s state by means of the url’s parameters.
+The method is called when the "local" url is changed (after going to the next page). It’s used to restore the view’s state by means of the url’s parameters.
 
 ```js
 define([
     "models/records"
 ],function(records){
     return {
-        $ui : {
+        $ui: {
             view:"list"
         },
         $onurlchange:function(view, config, url, scope){
@@ -126,10 +126,10 @@ define([
     var popup;
 	return {
        	$ui: {
-	       view:”list”
+	       view:"list"
         },
         $oninit:function(view,scope){
-            popup = webix.ui({ view:”popup”});
+            popup = webix.ui({ view:"popup"});
             eventid = records.attachEvent(name, handler);
             view.parse(records.data);
         },
@@ -167,7 +167,7 @@ define([
 ],function(records){
 
     var ui = {
-		view:“datatable”
+		view:"datatable"
     };
     return {
         $ui :ui,
@@ -201,11 +201,11 @@ define([
 ],function(records){
     var popup;
 	return {
-       	 $ui: {
-	        view:”list”
+       	$ui: {
+	        view:"list"
         },
         $oninit:function(view,scope){
-            popup = webix.ui({ view:”popup”});
+            popup = webix.ui({ view:"popup"});
             view.parse(records.data);
         },
 	    $ondestroy:function(){
@@ -219,7 +219,7 @@ can be redefined as:
 
 ```js
         $oninit:function(view,scope){
-            popup = scope.ui({ view:”popup”});
+            popup = scope.ui({ view:"popup"});
             view.parse(records.data);
         },
 		//no need to define $ondestroy
@@ -235,7 +235,7 @@ of the page.
 1) direct url navigation ( A tag or document.location )
 
 ```html
-<a href=”#!/top/data”>some</a>
+<a href="#!/top/data">some</a>
 ```
 
 2) the *app.show* method is applied to the whole application:
@@ -273,7 +273,7 @@ This way is more convenient, as the method allows reloading just the part of the
 this.$scope.show("news");
 ```
 
-The current subview will be changed to “news”. For example: the path *index.html#!/top/data/* will be reloaded as *index.html#!/top/news/*
+The current subview will be changed to "news". For example: the path *index.html#!/top/data/* will be reloaded as *index.html#!/top/news/*
 
 - loading a child subview
 ```js
@@ -289,7 +289,7 @@ It is quite common to have some kind of menu and subview next to it. When item i
 
 ```js
 {
-	view:”list”, id:”mymenu”, on:{
+	view:"list", id:"mymenu", on:{
 		onItemSelect:function(id){
 			this.$scope.show(id);
         }
@@ -305,7 +305,7 @@ We can use the onUrlChange handler:
 return {
 	$ui:ui,
 	$onurlchange:function(url){	
-		$$(“mymenu”).select(some);
+		$$("mymenu").select(some);
     }
 }
 ```
@@ -332,7 +332,7 @@ The plugin is used in a view by means of the *$menu* parameter which takes the i
 ```js
 return {
 	$ui:ui,
-	$menu:”mymenu”
+	$menu:"mymenu"
 }
 ```
 
