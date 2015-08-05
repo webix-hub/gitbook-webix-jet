@@ -291,8 +291,8 @@ It is quite common to have some kind of menu and subview next to it. When item i
 ```js
 {
 	view:"list", id:"mymenu", on:{
-		onItemSelect:function(id){
-			this.$scope.show(id);
+		onAfterSelect:function(id){
+			this.$scope.show("./"+id);
         }
     }
 }
@@ -305,8 +305,8 @@ We can use the onUrlChange handler:
 ```js
 return {
 	$ui:ui,
-	$onurlchange:function(url){	
-		$$("mymenu").select(some);
+	$onurlchange:function(view, config, url, scope){
+		$$("mymenu").select(config[0].page);
     }
 }
 ```
@@ -318,7 +318,7 @@ A plugin is an independent module used to extend the app’s functionality.
 The *menu* plugin can be used for highlighting a menu item or an element when a page is changed. To enable menu, you need to include the plugin in the *app.js* file in the following way:
 
 ```js
-define([
+define( 
     "libs/webix-mvc-core/plugins/menu"
 ],function(menu){
     // after the description of the app configuration
