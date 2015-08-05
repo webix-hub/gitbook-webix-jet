@@ -193,6 +193,7 @@ The above code defines that after adding a new record to datatable an alert "New
 ```
 
 Due to attaching event by the scope.on method, the handler of the onAfterAdd event will be detached when a new view will be loaded on the page.
+
 In order to create a popup that will be destroyed together with the current view, the scope.ui() method can be used instead of webix.ui(). Thus, the code below
 
 ```js
