@@ -46,8 +46,8 @@ define([
 		$oninit:function(view){
 			app.attachEvent("detailsModeChanged", function(data){
 				if (data == "all")
-					view.showColumn("col1")
-			})
+					view.showColumn("col1");
+			});
 		}
 	}
 });
@@ -63,7 +63,7 @@ define([
 ],function(app, records){
 	return {
 		view:"segmented", click:function(){
-			app.callEvent("detailsModeChanged", [ this.getValue() ])
+			app.callEvent("detailsModeChanged", [ this.getValue() ]);
 		}
 	}
 });
@@ -78,21 +78,21 @@ Handlers of the events which are used for connecting views can be presented in a
 For example, *app.attachEvent* 
 
 ```js
-app.attachEvent("eventName", function(){})
+app.attachEvent("eventName", function(){});
 ```
 can be replaced with *app.on*
 ```js
-app.on ("eventName", function(){})
+app.on ("eventName", function(){});
 ```
 Instead of the *callEvent* method 
 
 ```js
-app.callEvent("eventName", [ ... ])
+app.callEvent("eventName", [ ... ]);
 ```
 we can use the *app.trigger* one 
 
 ```js
-app.trigger("eventName", [ ... ])
+app.trigger("eventName", [ ... ]);
 ```
 <br>
 
@@ -103,7 +103,7 @@ There's also the *app.action()* method that unites both the *click* *handler and
 	return {
 		view:"segmented", on:{
 			onAfterTabClick:function(id){
-				app.callEvent("detailsModeChanged", [ id ])
+				app.callEvent("detailsModeChanged", [ id ]);
 			}
 		}
 	}
@@ -113,7 +113,7 @@ We can simplify it in the following way:
 ```js
 	return {
 		view:"segmented", on:{
-			onAfterTabClick:app.action("detailsModeChanged")
+			onAfterTabClick:app.action("detailsModeChanged");
 		}
 	}
 ```
@@ -128,7 +128,7 @@ It's also possible to replace the `$oninit` property and the attachEvent method 
 		$oninit:function(view){
 			app.attachEvent("detailsModeChanged", function(data){
 				if (data == "all")
-					view.showColumn("dummy")
+					view.showColumn("dummy");
 			});
 		}
 	}
@@ -142,7 +142,7 @@ return {
 	$on:{
 		detailsModeChanged: function(data){
 			if (data == "all")
-				this.showColumn("dummy")
+				this.showColumn("dummy");
 		}
 	}
 }
