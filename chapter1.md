@@ -132,13 +132,13 @@ We’ll consider data loading on the example of the *views/data.js* file. It tak
 //models/records.js
 define([],function(){
 	var collection = new webix.DataCollection({ 
-		url:”data.php”
+		url:"data.php"
 });
 
 return {
 		getData: function(){
-	                    return collection;
-                }
+		    return collection;
+        }
 	};
 });
 ```
