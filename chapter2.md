@@ -320,9 +320,7 @@ The *menu* plugin can be used for highlighting a menu item or an element when a 
 ```js
 define([
     "libs/webix-mvc-core/plugins/menu"
-],function(
-	menu
-){
+],function(menu){
     // after the description of the app configuration
     app.use(menu);
 });
