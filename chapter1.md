@@ -102,7 +102,7 @@ define([], function(){
           { $subview: true }
        ]
     };
-})
+});
 ```
 
 The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the url will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*. 
