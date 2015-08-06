@@ -10,7 +10,7 @@ Webix Jet is a fully client-side solution, and can  be used with any REST-based 
 
 ##Getting started
 
-To begin with, you should grab the app package from https://github.com/mkozhukh/webix-app-start/archive/master.zip and unpack it to the root folder of your webhost.
+To begin with, you should grab the app package from http://webix.com/packages/webix-app-start.zip and unpack it to the root folder of your webhost.
 
 Run the *index.html* file and you’ll see the app’s interface. Let’s have a look what it has inside.
 
