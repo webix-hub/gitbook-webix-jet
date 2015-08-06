@@ -281,7 +281,7 @@ define([
 	});
 })
 ```
-In the above code all the colors used for lines of the chart are stored in DB and are returned by "colors.php" script. *webix.ajax* call  sends an asynchronous request to the "colors.php" script on the server and returns promise of data instead of real data. All data should come to the client first and only after that final view configuration constructed and view will be rendered. 
+In the above code all the colors used for lines of the chart are stored in DB and are returned by "colors.php" script. *webix.ajax* call  sends an asynchronous request to the "colors.php" script on the server and returns promise of data instead of real data. First, all data should come to the client and only after that final view configuration will be constructed and the view will be rendered. 
 
 There are several ways to implement asynchronous data loading:
 
@@ -292,7 +292,7 @@ There are several ways to implement asynchronous data loading:
 
 ## Multi-language support
 
-You can easily localize your application by using a special plugin. All you need to enable localization is to include the *locale.js* file into the app.js and add the *app.use(locale)* line in the configuration:
+You can easily localize your application by using a special plugin. All you need is to include the *locale.js* file into the app.js and add the *app.use(locale)* line in the configuration:
 
 ```js
 // app.js
@@ -355,7 +355,7 @@ locale.getLang();
 
 ###Benefits of localization
 
-The basis of Webix MVC localization is [Polyglot.js](http://airbnb.io/polyglot.js/) library. Besides usual words substitution, it can insert necessary parameters into a line and create phrases in the right form depending on the number of a noun.
+The basis of Webix Jet localization is [Polyglot.js](http://airbnb.io/polyglot.js/) library. Besides usual words substitution, it can insert necessary parameters into a line as well as create phrases in the right form depending on the number of a noun.
 
 To get a pluralized phrase,  a special string is used. The plural forms are separated by the delimiter "||||", or four vertical line characters.
 
