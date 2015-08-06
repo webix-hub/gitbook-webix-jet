@@ -38,7 +38,7 @@ For example, if we select a row with the id "1" in the grid in the top view and 
 In general, if it’s needed to render a view with selected data and show a subview inside of it, we can use the this.$scope.show() method and pass the id of the record that should be selected as an argument:
 
 ```js
-// /data/form
+// /data
 this.$scope.show({ id:1 });
 ```
 In the url of the page the id of the selected record follows the view name and then the subview name goes:
@@ -48,7 +48,7 @@ In the url of the page the id of the selected record follows the view name and t
 It's possible to pass several parameters of selected records:
 
 ```js
-// /data/form
+// /data
 this.$scope.show({ id:1, task:2});
 ```
 
