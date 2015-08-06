@@ -76,10 +76,10 @@ define([
 			{ rows:[
 				{view:"list", id:"mylist1", select:true, click:function(id){
 					this.$scope.show({ id: id });
-	 		 	 },
+	 		 	}},
 	   			{view:"list", id:"mylist2", select:true, click:function(id){
 					this.$scope.show({ task: id });
-	   			}
+	   			}}
 	   		]
 		},
 		$onurlchange:function(view, config, url, scope){
