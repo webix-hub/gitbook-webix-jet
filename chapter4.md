@@ -60,8 +60,8 @@ In this case the above url will have the following format:
 
 ```js
 // "data" is the top view, the result of both methods' work will be the same
-this.$scope.show("/data?id=3/form") 
-app.show("/data?id=3/form")
+this.$scope.show("/data?id=3/form");
+app.show("/data?id=3/form");
 ```
 To restore the state of the app after the page’s reloading, the `$onurlchange` handler is used. 
 
