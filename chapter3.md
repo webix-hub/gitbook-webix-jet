@@ -174,7 +174,7 @@ The code of a view creates a list component. It this view we declare the *trunca
 In another view we have the following code:
 
 ```js
-define(["list"], function(list){
+define(["views/list"], function(list){
 	var button = {
 		click:function(){
 			alert(list.getActiveRecord());
@@ -191,7 +191,7 @@ Here we specify a button and place our list and this button in two rows. By clic
 
 ###Using a shared state 
 
-There's one more way to organize views communication. It's possible to create a separate module that will keep a state which is common for other views. For example, when we select some record in one view, its id will be kept in the state module and another view will take this id. Thus, if we rerender the second view after some time, it will take the current id from the state module and display correct data.
+There's one more way to organize views communication. It's possible to create a separate module that will keep a state that is common for other views. For example, when we select some record in one view, its id will be kept in the state module and another view will take this id. Thus, if we rerender the second view after some time, it will take the current id from the state module and display correct data.
 
 Let's consider a more concrete case. Imagine that you have two views: one with a grid that contains names of users and one more view somewhere in the app that has a button. To share data between the grid and the button, we will define a separate model file.
 
@@ -210,7 +210,7 @@ define([
 	return {
 		view:"datatable", on:{
 			onItemClick: function(id){
-				state.selectedId = id;
+				state.selectedId = id.row;
 			}
 		}
 	}
