@@ -331,7 +331,7 @@ define ([], function(){
 // locales/fr.js
 define([],function(){     
 	return { "Language": "Langue"}; 
-);
+});
 ```
 
 As you can see, this is a collection of *key:value* pairs, where the key is the name of the text string used in a view file, and the value is the translation. 
@@ -438,12 +438,12 @@ While you can get a view by its id from any module of your app, it is strongly r
 ```js
 return {
     $ui:{ isolate:true, rows:[
-		    { view:"list", id:"mylist" },
-		    { view:"button", value:"clear", click:function(){
-			    var layout = this.getTopParentView();
-			    layout.$$("mylist").clear();
-		    }}
-	    ]}
+		{ view:"list", id:"mylist" },
+		{ view:"button", value:"clear", click:function(){
+			var layout = this.getTopParentView();
+			layout.$$("mylist").clear();
+		}}
+	]}
 }
 ```
 The above code contains an isolated layout that includes a list and a button. By clicking the button, the layout is cleared. As our layout is located in an isolated space, we need to call the *getTopParentView()* method to refer to the isolated id "*mylist"* to call the *clear* method, as there are can be the same global ids.  
