@@ -46,6 +46,7 @@ define([], function(){
         $onurlchange:function(view, config, url, scope){ /*after navigation*/},
         $ondestroy:function(){ /*before destroy*/}
     }
+});    
 ```
 
 Let’s consider each property in detail.
@@ -122,8 +123,8 @@ The method is called each time when a view is destroyed. It can be used to destr
 ```js
 define([
     "models/records"
-],function(records){
-    var popup;
+], function(records){
+    var popup, eventid;
 	return {
        	$ui: {
 	       view:"list"
@@ -184,12 +185,12 @@ define([
 The above code defines that after adding a new record to datatable an alert "New data available" appears. This message will try to appear, even when another view will be loaded instead of the datatable, as event handler never detaches by itself. To solve this issue, we can use the scope.on method:
 
 ```js
-        $oninit:function(view, scope){
-         	scope.on(records.getData(), "onAfterAdd", function(){
-                view.showOverlay("New data available");
-            });
-            view.parse(records.data);
-        }
+$oninit:function(view, scope){
+    scope.on(records.getData(), "onAfterAdd", function(){
+        view.showOverlay("New data available");
+    });
+    view.parse(records.data);
+}
 ```
 
 Due to attaching event by the scope.on method, the handler of the onAfterAdd event will be detached when a new view will be loaded on the page.
@@ -219,12 +220,11 @@ define([
 can be redefined as:
 
 ```js
-        $oninit:function(view,scope){
-            popup = scope.ui({ view:"popup"});
-            view.parse(records.data);
-        },
-		//no need to define $ondestroy
- }
+$oninit:function(view,scope){
+    popup = scope.ui({ view:"popup"});
+    view.parse(records.data);
+});
+//no need to define $ondestroy
 ```
 
 
@@ -249,7 +249,7 @@ define([
     var ui = {
     view:"datatable", autoConfig:true, select:true, on:{
 		onItemClick:function(id){
-			app.show("/top/data/"+id);
+			app.show("/top/data/"+id.row);
 		}
 	}
 };
