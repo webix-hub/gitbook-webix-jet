@@ -184,7 +184,7 @@ define(["views/list"], function(list){
 	return {
 		$ui:{ rows:[ list, button ] },  
 	}
-})
+});
 ```
 Here we specify a button and place our list and this button in two rows. By clicking the button we get the id of the active record and call the *truncateAll()* method which clears the list in the above view.
 
@@ -214,7 +214,7 @@ define([
 			}
 		}
 	}
-})
+});
 ```
 ```js
 //views/top.js
@@ -229,7 +229,7 @@ define([
 	return {
 		$ui:{ rows:[ grid, tabbar, { $subview:true  }] }, 
 	}
-})
+});
 ```
 
 When we select a row in the grid with the name of some user, the code stores the selected row's id in the model. When we need to access this info in the click handler of the subview with the button, we can retrieve it from the same model object. For example, in the above snippet, we will load subview with data for the selected record. 
@@ -279,7 +279,7 @@ define([
 		
 		return ui;
 	});
-})
+});
 ```
 In the above code all the colors used for lines of the chart are stored in DB and are returned by "colors.php" script. *webix.ajax* call  sends an asynchronous request to the "colors.php" script on the server and returns promise of data instead of real data. First, all data should come to the client and only after that final view configuration will be constructed and the view will be rendered. 
 
@@ -302,7 +302,7 @@ define([
 	// configuration
 	...
 	app.use(locale);
-}) 
+});
 ```
 In the view which needs to be localized the "locale" dependency should be included. This dependency will provide the translating function. All the text values that need to be translated must be wrapped into this function:
 
@@ -341,7 +341,7 @@ As you can see, this is a collection of *key:value* pairs, where the key is the 
 By default, English locale is set. You can specify the default language in the *app.js* file.
 
 ```js
-app.use(locale, { lang:"ru" })
+app.use(locale, { lang:"ru" });
 ```
 To change the active language of the app, use the *setLang()* method. It takes a two-letter code of the language as the argument:
 ```js
@@ -468,6 +468,6 @@ define([],function(){
   			]};
 		}
 	}
-})
+});
 ```
 Thus, the above code will create each new instance of a list view with a unique id.
