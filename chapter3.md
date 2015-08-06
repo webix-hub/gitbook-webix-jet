@@ -138,11 +138,11 @@ can be shortened as in
 ```js
 ...
 return {
-	$ui: { view:"datatable" },
+	$ui: { view:"datatable", id:"grid" },
 	$on:{
 		detailsModeChanged: function(data){
 			if (data == "all")
-				this.showColumn("dummy");
+				$$("grid").showColumn("dummy");
 		}
 	}
 }
