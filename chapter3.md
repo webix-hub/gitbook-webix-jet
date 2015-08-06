@@ -164,7 +164,7 @@ Let's have a look at the example below:
 		$$("mylist").clearAll();
 	},
 	getActiveRecord:function(){
-		return list.getSelectedId();
+		return $$("mylist").getSelectedId();
 	}
 }
 ```
