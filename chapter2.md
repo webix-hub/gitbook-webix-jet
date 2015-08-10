@@ -17,9 +17,7 @@ define([],function(){
         save:"rest->/records" 
     });
 	return {
-		getData: function(){
-            return collection;
-        }
+		data: collection
 	};
 });
 ```
