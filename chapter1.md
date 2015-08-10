@@ -136,9 +136,7 @@ define([],function(){
 });
 
 return {
-		getData: function(){
-		    return collection;
-        }
+		data: collection;
 	};
 });
 ```
@@ -157,7 +155,7 @@ define(["models/records"],function(records){
 	return {
 		$ui: ui,
 		$oninit:function(view){
-			view.parse(records.getData());
+			view.parse(records.data);
 		}
 	};
 });
