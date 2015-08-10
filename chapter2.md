@@ -186,10 +186,10 @@ define([
     };
     return {
         $ui :ui,
-        $oninit:function(view){
-          	records.getData().attachEvent("onAfterAdd", function(){
-				view.showOverlay("New data available");
-		    });
+        $oninit:function(view, scope){
+          	scope.on(records.data, "onDataUpdate", function(){
+				popup.show();
+			});
             view.parse(records.data);
         }
     }
