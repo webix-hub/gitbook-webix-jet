@@ -299,14 +299,14 @@ This way is more convenient, as the method allows reloading just the part of the
 
 - loading a subview of the same level (sibling):
 ```js
-this.$scope.show("news");
+this.$scope.show("start");
 ```
 
-The current subview will be changed to "news". For example: the path *index.html#!/top/data/* will be reloaded as *index.html#!/top/news/*
+The current subview will be changed to "news". For example: the path *index.html#!/top/data/* will be reloaded as *index.html#!/top/start/*
 
 - loading a child subview
 ```js
-this.$scope.show("./+news”); 
+this.$scope.show("./details”); 
 ```
 
 In this case the *news* subview will be loaded inside of the data view and the path *index.html#!/top/data/* will be changed into *index.html#!/top/data/news*.
