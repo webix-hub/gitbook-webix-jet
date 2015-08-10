@@ -136,7 +136,7 @@ define([],function(){
 });
 
 return {
-		data: collection;
+		data: collection
 	};
 });
 ```
