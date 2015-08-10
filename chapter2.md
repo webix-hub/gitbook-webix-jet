@@ -58,15 +58,17 @@ Our interface can also include other views. Such a structure is called compositi
 ```js
 // views/top.js
 
-define(["views/start", function(start){
+define(["app"], function(app){
+    var ui =  {
+        cols:[
+            { view:"menu", id:"top:menu"},
+            { $subview:true}
+        ]
+    };
+    
     return {
-        $ui: {
-        	cols:[
-            	{ view:"menu" },
-            	start  // using ui from views/start.js
-            ]
-        };
-     };
+        $ui: ui
+    };
 });
 ```
 
@@ -100,10 +102,14 @@ The method is called when the "local" url is changed (after going to the next pa
 define([
 	"app"
 ],function(app){
+    var ui =  {
+        cols:[
+            { view:"menu", id:"top:menu"},
+            { $subview:true}
+        ]
+    };
     return {
-        $ui: {
-            view:"menu", id:"top:menu"
-        },
+        $ui: ui,
         $onurlchange:function(view, config, url, scope){
             $$("top:menu").select(config[0].page);
         }
