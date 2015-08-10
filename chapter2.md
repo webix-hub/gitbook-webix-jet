@@ -134,9 +134,10 @@ define([
     "models/records"
 ], function(records){
     var popup, eventid;
+    
 	return {
-       	$ui: {
-	       view:"datatable", editable:true
+        $ui: {
+            view:"datatable", editable:true
         },
         $oninit:function(view,scope){
             popup = webix.ui({ 
@@ -180,34 +181,37 @@ For example:
 define([
        "models/records"
 ],function(records){
-
     var ui = {
 		view:"datatable"
     };
+    
     return {
         $ui :ui,
-        $oninit:function(view, scope){
-          	scope.on(records.data, "onDataUpdate", function(){
+        $oninit:function(view){
+            var popup = ({ 
+                view:"popup", 
+                body:"Data is updated"
+            });
+            records.data.attachEvent("onDataUpdate", function(){
 				popup.show();
-			});
+            });
             view.parse(records.data);
         }
     }
 });
 ```
 
-The above code defines that after adding a new record to datatable an alert "New data available" appears. This message will try to appear, even when another view will be loaded instead of the datatable, as event handler never detaches by itself. To solve this issue, we can use the scope.on method:
+The above code defines that after updating a record in datatable a popup "Data is updated" appears. This message will try to appear, even when another view will be loaded instead of the datatable, as event handler never detaches by itself. To solve this issue, we can use the scope.on method:
 
 ```js
 $oninit:function(view, scope){
-    scope.on(records.getData(), "onAfterAdd", function(){
-        view.showOverlay("New data available");
-    });
-    view.parse(records.data);
+    scope.on(records.data, "onDataUpdate", function(){
+		popup.show();
+	});
 }
 ```
 
-Due to attaching event by the scope.on method, the handler of the onAfterAdd event will be detached when a new view will be loaded on the page.
+Due to attaching event by the scope.on method, the handler of the onDateUpdate event will be detached when a new view will be loaded on the page.
 
 In order to create a popup that will be destroyed together with the current view, the scope.ui() method can be used instead of webix.ui(). Thus, the code below
 
@@ -217,12 +221,11 @@ define([
 ],function(records){
     var popup;
 	return {
-       	$ui: {
-	        view:"list"
+        $ui: {
+            view:"datatable"
         },
-        $oninit:function(view,scope){
+        $oninit:function(view){
             popup = webix.ui({ view:"popup"});
-            view.parse(records.data);
         },
 	    $ondestroy:function(){
 		    popup.destructor();
@@ -235,8 +238,7 @@ can be redefined as:
 
 ```js
 $oninit:function(view,scope){
-    popup = scope.ui({ view:"popup"});
-    view.parse(records.data);
+    var popup = scope.ui({ view:"popup"});
 });
 //no need to define $ondestroy
 ```
