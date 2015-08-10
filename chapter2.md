@@ -281,12 +281,13 @@ define([
 ],function(app){
     var ui = {
         view:"menu", 
+        select:true,
         data:[
             { id:"start", value:"Dashboard"},
             { id:"data", value:"Data"}
         ],
         on:{
-		    onItemClick:function(id){
+		    onAfterSelect:function(id){
 			    app.show("/top/"+id);
 		    }
 	    }
@@ -328,11 +329,12 @@ It is quite common to have some kind of menu and subview next to it. When item i
 
 ```js
 {
-	view:"list", id:"mymenu", on:{
-		onAfterSelect:function(id){
-			this.$scope.show("./"+id);
-        }
-    }
+	view:"menu", id:"top:menu",
+	select:true,
+	data:[
+	    { value:"DashBoard", id:"start", href:"#!/top/start" },
+		{ value:"Data", id:"data", href:"#!/top/data" }
+	]
 }
 ```
 
@@ -343,9 +345,9 @@ We can use the onUrlChange handler:
 ```js
 return {
 	$ui:ui,
-	$onurlchange:function(view, config, url, scope){
-		$$("mymenu").select(config[0].page);
-    }
+    $onurlchange:function(view, config, url, scope){
+		$$("top:menu").select(config[0].page);
+	}
 }
 ```
 
@@ -369,7 +371,7 @@ The plugin is used in a view by means of the *$menu* parameter which takes the i
 ```js
 return {
 	$ui:ui,
-	$menu:"mymenu"
+	$menu:"top:menu"
 }
 ```
 
