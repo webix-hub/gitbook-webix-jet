@@ -58,6 +58,8 @@ The ui property gives the description of Webix interface. It can include any pos
 Our interface can also include other views. Such a structure is called composition:
 
 ```js
+// views/top.js
+
 define(["views/start", function(start){
     return {
         $ui: {
@@ -75,10 +77,12 @@ define(["views/start", function(start){
 This method is called each time when a view is created. It’s used to load data into components and to set event handlers. The handler gets two parameters: the object of a newly created view and the current scope.
 
 ```js
+// views/data.js
+
 define(["models/records"],function(records){
     return {
         $ui: {
-            view:"list"
+            view:"datatable"
         },
         $oninit:function(view,scope){
             view.parse(records.data);
@@ -94,16 +98,16 @@ The important note: when the url is changed, the oninit method won’t be called
 The method is called when the "local" url is changed (after going to the next page). It’s used to restore the view’s state by means of the url’s parameters.
 
 ```js
+// /views/top.js
 define([
-    "models/records"
-],function(records){
+	"app"
+],function(app){
     return {
         $ui: {
-            view:"list"
+            view:"menu", id:"top:menu"
         },
         $onurlchange:function(view, config, url, scope){
-            if (config.id)
-                view.select(id);
+            $$("top:menu").select(config[0].page);
         }
     }
 });
@@ -121,17 +125,23 @@ where:
 The method is called each time when a view is destroyed. It can be used to destroy temporary objects (such as popups and event handlers) and prevent memory leaks.
 
 ```js
+// /views/data.js
 define([
     "models/records"
 ], function(records){
     var popup, eventid;
 	return {
        	$ui: {
-	       view:"list"
+	       view:"datatable", editable:true
         },
         $oninit:function(view,scope){
-            popup = webix.ui({ view:"popup"});
-            eventid = records.attachEvent(name, handler);
+            popup = webix.ui({ 
+                view:"popup", 
+                body:"Data is updated"
+            });
+            eventid = records.data.attachEvent("onDateUpdate", function(){
+                popup.show();
+            });
             view.parse(records.data);
         },
         $ondestroy:function(){
@@ -142,7 +152,7 @@ define([
 });
 ```
 
-Notice that the change of the url won’t call $ondestroy for the views that present in the new url. For example, if we go from the page /top/data to the page /top/start, the $ondestroy method will be called for the data view only. As the top view has already been created, $oninit won’t be called for it.
+Notice that the change of the url won’t call $ondestroy for the views that present in the new url. For example, if we go from the page /top/data to the page /top/start, the $ondestroy method will be called for the data view only. 
 
 The main use case of the ondestroy handler is removing of any unnecessary UI or unused event handlers. There are some other, more simple ways to handle this use-case though.It’s more handy to use scope for both initializing and destructing popups and event handlers.
 
