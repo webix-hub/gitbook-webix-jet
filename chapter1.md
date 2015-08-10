@@ -97,9 +97,9 @@ Let’s check the following code:
 //views/top.js
 define([], function(){
     return {
-       cols:[
-          { view:"menu" },
-          { $subview: true }
+        cols:[
+           { view:"menu" },
+           { $subview: true }
        ]
     };
 });
