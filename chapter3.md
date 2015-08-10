@@ -1,7 +1,7 @@
 ## Creating popups with $windows
 
 
-In the previous part we’ve described a popup creation by means of the scope. It's also possible to initialize a popup with the help of the *$windows* parameter. It allows creating several views at once when the current view is shown and destruct them when the current view is destroyed.
+In the previous part we’ve described a popup creation by means of the scope. It's also possible to initialize a popup or a window with the help of the *$windows* parameter. It allows creating several views at once when the current view is shown and destruct them when the current view is destroyed.
 
 In the example below the code creates a list view and a few popups.
 
@@ -11,15 +11,19 @@ define([
 ],function(records){
 	return {
 		$ui: {
-			view:"datatable", click:function(){ $$("p1").show();}
+			view:"datatable", on:{
+			    onItemClick:function(){
+				    $$("win2").show();
+			    }
+		    }
 		},
 		$windows:[
-			{ view:"popup", id:"p1" }, 
-			{ view:"popup", id:"p2" }
+			{ view:"window", id:"win1" }, 
+			{ view:"popup", id:"win2" }
 		],
 		$oninit:function(view,scope){
 			view.parse(records.data);
-			$$("p2").show();
+			$$("win1").show();
 		},
 	}
 });
