@@ -134,9 +134,8 @@ define([],function(){
 	var collection = new webix.DataCollection({ 
 		url:"data.php"
 	});	
-});
 
-return {
+    return {
 		data: collection
 	};
 });
