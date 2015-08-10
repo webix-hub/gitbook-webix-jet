@@ -13,8 +13,8 @@ In order to load and save data with the help of REST API, we should initialize a
 define([],function(){
 
 	var collection = new webix.DataCollection({ 
-        url:"rest->/records", 
-        save:"rest->/records" 
+        url:"rest->/records.php", 
+        save:"rest->/records.php" 
     });
 	return {
 		data: collection
@@ -23,8 +23,8 @@ define([],function(){
 ```
 
 where:
-- url:"rest->/records" defines the URL of the data loading script
-- save:"rest->/records" 
+- url:"rest->/records.php" defines the URL of the data loading script
+- save:"rest->/records.php" defines the URL of the data saving script
 
 Those parameters allow applying changes made on the client side to the database on the server
 
