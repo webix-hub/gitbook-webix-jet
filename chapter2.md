@@ -252,8 +252,21 @@ of the page.
 1) direct url navigation ( A tag or document.location )
 
 ```html
-<a href="#!/top/data">some</a>
+<a href="#!/top/data">Data</a>
 ```
+
+Direct url can be specified within Webix menu as value of *href* parameter: 
+
+~~~js
+// views/top.js
+var menu = {
+    view:"menu",
+	data:[
+		{ value:"DashBoard", href:"#!/top/start" },
+		{ value:"Data",	href:"#!/top/data" }
+	]
+};
+~~~
 
 2) the *app.show* method is applied to the whole application:
 
@@ -263,19 +276,18 @@ define([
 	"models/records"
 ],function(app, records){
     var ui = {
-    view:"datatable", autoConfig:true, select:true, on:{
-		onItemClick:function(id){
-			app.show("/top/data/"+id.row);
-		}
-	}
-};
-return {
+        view:"datatable", autoConfig:true, select:true, on:{
+		    onItemClick:function(id){
+			    app.show("/top/data/"+id.row);
+		    }
+	    }
+    };
+    return {
 		$ui: ui,
 		$oninit:function(view){		
 			view.parse(records.data);
-		},
+		}
 	};
-
 });
 ```
 
