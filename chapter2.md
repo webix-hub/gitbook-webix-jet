@@ -99,6 +99,7 @@ The method is called when the "local" url is changed (after going to the next pa
 
 ```js
 // views/top.js
+
 define([
 	"app"
 ],function(app){
@@ -130,6 +131,7 @@ The method is called each time when a view is destroyed. It can be used to destr
 
 ```js
 // views/data.js
+
 define([
     "models/records"
 ], function(records){
@@ -259,6 +261,7 @@ Direct url can be specified within Webix menu as value of *href* parameter:
 
 ~~~js
 // views/top.js
+
 var menu = {
     view:"menu",
 	data:[
@@ -271,27 +274,30 @@ var menu = {
 2) the *app.show* method is applied to the whole application:
 
 ```js
+// views/top.js
+
 define([
-	"app",
-	"models/records"
-],function(app, records){
+	"app"
+],function(app){
     var ui = {
-        view:"datatable", autoConfig:true, select:true, on:{
+        view:"menu", 
+        data:[
+            { id:"start", value:"Dashboard"},
+            { id:"data", value:"Data"}
+        ],
+        on:{
 		    onItemClick:function(id){
-			    app.show("/top/data/"+id.row);
+			    app.show("/top/"+id);
 		    }
 	    }
     };
     return {
-		$ui: ui,
-		$oninit:function(view){		
-			view.parse(records.data);
-		}
+		$ui: ui
 	};
 });
 ```
 
-In the above code it’s stated that on clicking a row in the datatable, we’ll get the id of this row in the url of the page, e.g.: *index.html#!/top/data/2*. Each time when we select some other row, the whole app will be rerendered and the url will change. 
+In the above code it’s stated that on clicking an item in the menu, we’ll get its id in the url of the page, e.g.: *#!/top/data*. Each time when we select some other item, the whole app will be rerendered and the url will change. 
 
 3) the *scope.show* method
 
@@ -299,17 +305,21 @@ This way is more convenient, as the method allows reloading just the part of the
 
 - loading a subview of the same level (sibling):
 ```js
-this.$scope.show("start");
+// views/start.js
+
+this.$scope.show("data");
 ```
 
-The current subview will be changed to "news". For example: the path *index.html#!/top/data/* will be reloaded as *index.html#!/top/start/*
+The current subview will be changed to "news". For example: the path *index.html#!/top/start* will be reloaded as *#!/top/data*
 
 - loading a child subview
 ```js
-this.$scope.show("./details”); 
+//views/start.js
+
+this.$scope.show("./news"); 
 ```
 
-In this case the *news* subview will be loaded inside of the data view and the path *index.html#!/top/data/* will be changed into *index.html#!/top/data/news*.
+In this case the *news* subview will be loaded inside of the data view and the path *#!/top/start* will be changed into *#!/top/start/news*.
 
 
 ## Working with menus
