@@ -98,7 +98,7 @@ The important note: when the url is changed, the oninit method won’t be called
 The method is called when the "local" url is changed (after going to the next page). It’s used to restore the view’s state by means of the url’s parameters.
 
 ```js
-// /views/top.js
+// views/top.js
 define([
 	"app"
 ],function(app){
@@ -125,7 +125,7 @@ where:
 The method is called each time when a view is destroyed. It can be used to destroy temporary objects (such as popups and event handlers) and prevent memory leaks.
 
 ```js
-// /views/data.js
+// views/data.js
 define([
     "models/records"
 ], function(records){
