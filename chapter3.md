@@ -29,7 +29,7 @@ define([
 });
 ```
 
-When a new view will be loaded on the page, all the popups will be destroyed together with the list view.
+When a new view will be loaded on the page, all the popups and windows will be destroyed together with the list view.
 		
 
 ##Creating connections between views
