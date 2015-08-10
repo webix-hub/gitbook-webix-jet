@@ -133,6 +133,7 @@ We’ll consider data loading on the example of the *views/data.js* file. It tak
 define([],function(){
 	var collection = new webix.DataCollection({ 
 		url:"data.php"
+	});	
 });
 
 return {
