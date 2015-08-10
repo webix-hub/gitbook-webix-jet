@@ -11,15 +11,15 @@ define([
 ],function(records){
 	return {
 		$ui: {
-			view:"list", click:function(){ $$("p1").show();}
+			view:"datatable", click:function(){ $$("p1").show();}
 		},
 		$windows:[
 			{ view:"popup", id:"p1" }, 
-			{ view:"popup", id:"p2" }, 
-			{ view:"popup", id:"p3" }
+			{ view:"popup", id:"p2" }
 		],
 		$oninit:function(view,scope){
 			view.parse(records.data);
+			$$("p2").show();
 		},
 	}
 });
