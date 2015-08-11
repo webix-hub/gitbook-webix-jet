@@ -444,7 +444,7 @@ As you can see, this is a collection of *key:value* pairs, where the key is the 
 By default, English locale is set. You can specify the default language in the *app.js* file.
 
 ```js
-app.use(locale, { lang:"ru" });
+app.use(locale, { lang:"de" });
 ```
 To change the active language of the app, use the *setLang()* method. It takes a two-letter code of the language as the argument:
 ```js
