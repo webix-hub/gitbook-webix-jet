@@ -201,21 +201,29 @@ Let's consider a more concrete case. Imagine that you have two views: one with a
 
 ```js
 // models/state.js
-return {
-	// state config
-};
+
+define([], function(){
+	return {
+		dataMode:"info"
+	};
+});
 ```
 
 ```js
 //views/data.js
+
 define([
 	"models/state"
 ], function(state){
 	return {
-		view:"datatable", on:{
-			onItemClick: function(id){
-				state.selectedId = id.row;
-			}
+		$ui:{ view:"datatable"},
+		$oninit:function(view){
+			view.parse(records.data);
+
+			view.showColumnBatch(state.dataMode);
+			app.attachEvent("detailsModeChanged", function(){
+                view.showColumnBatch(state.dataMode);
+            });
 		}
 	}
 });
