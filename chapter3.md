@@ -331,10 +331,23 @@ Sometimes we can include data used in a view directly in the view description. I
 ```js
 //views/start.js
 
-var ui = {
-	view:"chart",
-	series:[{ value:"#sales#", color:"#1293f8"},{value:"#sales2#", color:"#66cc00"}]
-};
+define([
+	"models/records"
+],function(records){
+
+    var ui = {
+	    view:"chart",
+	    series:[{ value:"#sales#", color:"#1293f8"},{value:"#sales2#", color:"#66cc00"}],
+	    ...
+    };
+    
+    return {
+	    $ui:ui,
+	    $oninit:function(){
+	        view.parse(records.data);
+	    }
+	};
+});	
 ```
 
 However, in practice some configuration settings in our UI can be stored in the database. For example in the above snippet we may want to store colors in DB to allow their customization by end user. (Replace hardcoded values with DB based ones)
@@ -344,6 +357,8 @@ In such case, a module can return a promise of UI instead of UI configuration.
 Let's initialize such a chart in the  *view/data.js* file with the help of the code below:
 
 ```js
+//view/data.js
+
 define([
 	"models/records"
 ],function(records){
@@ -354,16 +369,22 @@ define([
 		var ui = {
 			view:"chart",
 			series:[
-				{ value:"sale", color:data[0].color},
-				{ value:"expenses", color:data[1].color}
-			]
+				{ value:"#sales#", color:data[0].color},
+				{ value:"#sales2#", color:data[1].color}
+			],
+			...
 		};
 		
-		return ui;
+		return {
+		    $ui:ui,
+		    $oninit:function(){
+		        view.parse(records.data);
+		    }
+		};
 	});
 });
 ```
-In the above code all the colors used for lines of the chart are stored in DB and are returned by "colors.php" script. *webix.ajax* call  sends an asynchronous request to the "colors.php" script on the server and returns promise of data instead of real data. First, all data should come to the client and only after that final view configuration will be constructed and the view will be rendered. 
+In the above code all the colors used for lines of the chart are stored in DB and are returned by "server/colors.php" script. *webix.ajax* call  sends an asynchronous request to the "server/colors.php" script on the server and returns promise of data instead of real data. First, all data should come to the client and only after that final view configuration will be constructed and the view will be rendered. 
 
 There are several ways to implement asynchronous data loading:
 
