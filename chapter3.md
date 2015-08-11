@@ -257,7 +257,7 @@ By clicking the first button we get an object of the active datatable record and
 
 There's one more way to organize views communication. It's possible to create a separate module that will keep a state that is common for other views. For example, when we select some item in one view, its id will be kept in the state module and another view will use this id. Thus, if we rerender the second view after some time, it will take the current id from the state module and display correct data.
 
-Let's consider a more concrete case. In the *Triggering events* section we dealt with two views: one with a segmented button that switches data mode and one more view with a datatable to which this mode is applied. They are connected with *detailsModeChanged* event, but when you reload the view (change from "#!/top/data" to "#!/top/start"and back to top) current data mode is not applied to the datatable.
+Let's consider a more concrete case. In the *Triggering events* section we dealt with two views: one with a segmented button that switches data mode and one more view with a datatable to which this mode is applied. They are connected with *detailsModeChanged* event, but when you reload the view (change from *"#!/top/data"* to *"#!/top/start"* and back to top) current data mode is not applied to the datatable.
 
 To establish a permanent connection between the button and the datatable, we will define a separate model file where dataMode will be stored.
 
