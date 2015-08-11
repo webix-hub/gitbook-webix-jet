@@ -41,38 +41,62 @@ Since our app is split into several views, each of them is located in a separate
 Communication between views can be implemented through the global event bus. You can attach an event handler to the global event bus in one view and trigger the event in another view.  For example, in one view we will have the following code:
 
 ```js
+//views/data.jd
+
 define([
 	"app",
 	"models/records"
 ],function(app, records){
+	var ui = {
+		view:"datatable",
+		visibleBatch:"info",
+		columns:[
+			{ id:"title", header:"Title", fillspace:true },
+			{ id:"year", header:"Year", batch:"info" },
+			{ id:"votes", header:"Votes", batch:"stats" },
+			{ id:"rating", header:"Rating", batch:"stats", hidden:true },
+			{ id:"rank", header:"Rank", batch:"stats", hidden:true }
+		]
+	};
+
 	return {
-		$ui: { view:"datatable" },
+		$ui: ui,
 		$oninit:function(view){
-			app.attachEvent("detailsModeChanged", function(data){
-				if (data == "all")
-					view.showColumn("col1");
-			});
+			view.parse(records.data);
+
+			app.attachEvent("detailsModeChanged", function(mode){
+                view.showColumnBatch(mode);
+            });
 		}
-	}
+	};
 });
 ```
-The view has an event handler "detailsModeChanged" which shows a particular column when the event is triggered. 
+The view has an event handler "detailsModeChanged" which shows a particular column group  when the event is triggered. 
 
-In another view a segmented button is initialized. A click on the button triggers the call of the "detailsModeChanged" event defined in the above view:
+In another view a segmented button is initialized. A click on the segmented button triggers the call of the "detailsModeChanged" event defined in the above view:
 
 ```js
+// views/top.js
+
 define([
-	"app",
-	"models/records"
-],function(app, records){
-	return {
-		view:"segmented", click:function(){
-			app.callEvent("detailsModeChanged", [ this.getValue() ]);
+	"app"
+],function(app){
+	
+	var mode =  { 
+	    view:"segmented", options:[
+			{id:"info", value:"Info"},
+			{id:"stats", value:"Stats"}
+		],
+		on:{
+			onChange:function(newv){
+				app.callEvent("detailsModeChanged", [ newv]);
+			}
 		}
 	}
+	...
 });
 ```
-Thus, on clicking the segmented button the detailsModeChanged event will fire and the "col1" column will be rendered in the datatable.
+Thus, on clicking the segmented button the detailsModeChanged event will fire and the corresponding  column group will be rendered in the datatable.
 
 
 #### Event handler shortcuts ( or aliases )
