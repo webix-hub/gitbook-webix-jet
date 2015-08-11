@@ -326,12 +326,14 @@ The usage of a module with a shared state allows keeping some state common for s
 
 ##Asynchronous UI loading
 
-Sometimes we can include data used in a view directly in the view description. In such a case we deal with the so-called "hardcoded" values. For example, we have a chart and need to define the colors of its lines, specified in the *series* parameter:
+Sometimes we can include data used in a view directly in the view description. In such a case we deal with the so-called "hardcoded" values. For example, we on a start page have a chart and need to define the colors of its lines, specified in the *series* parameter:
 
 ```js
+//views/start.js
+
 var ui = {
 	view:"chart",
-	series:[{ value:"sale", color:"red"},{value:"expenses", color:"green"}]
+	series:[{ value:"#sales#", color:"#1293f8"},{value:"#sales2#", color:"#66cc00"}]
 };
 ```
 
@@ -339,7 +341,7 @@ However, in practice some configuration settings in our UI can be stored in the 
 
 In such case, a module can return a promise of UI instead of UI configuration. 
 
-Let's have a look at the code below:
+Let's initialize such a chart in the  *view/data.js* file with the help of the code below:
 
 ```js
 define([
@@ -347,6 +349,7 @@ define([
 ],function(records){
 	return webix.ajax("colors.php").then(function(data){
 		data = data.json();
+		//[{"id":1,"color":"#1293f8"},{"id":2,"color":"#66cc00"}]
 		
 		var ui = {
 			view:"chart",
