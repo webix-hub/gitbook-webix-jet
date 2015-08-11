@@ -198,9 +198,9 @@ Let's have a look at the example below:
 // views/films.js
 
 return {
-	$ui:{ view:"datatable", id:"data:table"},
+	$ui:{ view:"datatable", id:"films:table"},
 	truncateAll:function(){
-		$$("data:table").clearAll();
+		$$("films:table").clearAll();
 	},
 	getActiveRecord:function(){
 		var id = $$("films:table").getSelectedId();
