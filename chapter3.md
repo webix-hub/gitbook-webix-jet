@@ -233,14 +233,19 @@ define([
 define([
 	"models/state"
 ], function(state){
-	var button = {
-		click:function(){
-			this.$scope.show("./details/"+state.selectedId);
+
+	var mode = { 
+	    view:"segmented", value:state.dataMode,  options:[
+			{id:"info", value:"Info"},
+			{id:"stats", value:"Stats"}
+		],
+		on:{
+			onChange:function(newv){
+				state.dataMode = newv;
+				app.callEvent("detailsModeChanged");
+			}
 		}
-	}
-	return {
-		$ui:{ rows:[ grid, tabbar, { $subview:true  }] }, 
-	}
+	};
 });
 ```
 
