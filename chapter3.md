@@ -285,7 +285,7 @@ define([
 });
 ```
 
-When we switch a segment in the button, the code stores the selected segment's id in the model. When we need to access this info in the click handler of the subview with the button, we can retrieve it from the same model object. For example, in the above snippet, we will load subview with data for the selected record. 
+When we switch a segment in the button, the code stores the selected segment's id in the model. When we need to access this info in the $oninit handler of the datatable, we can retrieve it from the same model object. For example, in the above snippet, we will apply the current state to a datatable each time it is reloaded. 
 
 ###Which way to choose?
 
