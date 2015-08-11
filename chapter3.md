@@ -229,9 +229,11 @@ Here we specify a button and place our list and this button in two rows. By clic
 
 ###Using a shared state 
 
-There's one more way to organize views communication. It's possible to create a separate module that will keep a state that is common for other views. For example, when we select some record in one view, its id will be kept in the state module and another view will take this id. Thus, if we rerender the second view after some time, it will take the current id from the state module and display correct data.
+There's one more way to organize views communication. It's possible to create a separate module that will keep a state that is common for other views. For example, when we select some item in one view, its id will be kept in the state module and another view will use this id. Thus, if we rerender the second view after some time, it will take the current id from the state module and display correct data.
 
-Let's consider a more concrete case. Imagine that you have two views: one with a grid that contains names of users and one more view somewhere in the app that has a button. To share data between the grid and the button, we will define a separate model file.
+Let's consider a more concrete case. In the *Triggering events* section we dealt with two views: one with a segmented button that switches data mode and one more view with a datatable to which this mode is applied. They are connected with *detailsModeChanged* event, but when you reload the view (change from "#!/top/data" to "#!/top/start"and back to top) current data mode is not applied to the datatable.
+
+To between the button and the datatable, we will define a separate model file.
 
 ```js
 // models/state.js
