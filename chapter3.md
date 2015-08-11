@@ -248,7 +248,9 @@ define([
 	
 });
 ```
-Here we specify a button and place our list and this button in two rows. By clicking the button we get the id of the active record and call the *truncateAll()* method which clears the list in the above view.
+Here we specify a toolbar with two buttons and detailed film view and we place everything in three rows. 
+
+By clicking the first button we get an object of the active datatable record and use it for *details* view while the second buttons calls the *truncateAll()* method which clears the datatable in the above view.
 
 
 ###Using a shared state 
