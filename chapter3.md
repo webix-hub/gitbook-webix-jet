@@ -233,7 +233,7 @@ There's one more way to organize views communication. It's possible to create a 
 
 Let's consider a more concrete case. In the *Triggering events* section we dealt with two views: one with a segmented button that switches data mode and one more view with a datatable to which this mode is applied. They are connected with *detailsModeChanged* event, but when you reload the view (change from "#!/top/data" to "#!/top/start"and back to top) current data mode is not applied to the datatable.
 
-To between the button and the datatable, we will define a separate model file.
+To establish a permanent connection between the button and the datatable, we will define a separate model file where dataMode will be stored.
 
 ```js
 // models/state.js
