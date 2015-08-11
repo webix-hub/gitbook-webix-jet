@@ -400,7 +400,7 @@ You can easily localize your application by using a special plugin. All you need
 ```js
 // app.js
 define([
-	"webix-mvc-core/plugins/locale"
+	"libs/webix-mvc-core/plugins/locale"
 ]),function(locale){
 	// configuration
 	...
