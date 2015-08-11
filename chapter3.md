@@ -195,23 +195,26 @@ Unlike events, methods not only call actions in views, but also can return somet
 Let's have a look at the example below:
 
 ```js
-// views/list
-{
-	$ui:{ view:"list", id:"mylist"},
-	truncateAll:function(){
-		$$("mylist").clearAll();
+// views/data.js
+
+return {
+	$ui:{ view:"datatable", id:"data:table"},
+	updateItem:function(id, data){
+		$$("data:table").updateItem(id, data);
 	},
 	getActiveRecord:function(){
-		return $$("mylist").getSelectedId();
+		return $$("data:table").getSelectedId();
 	}
 }
 ```
 
-The code of a view creates a list component. It this view we declare the *truncateAll()* method which defines a function for clearing the list's content. Additionally, the *getActiveRecord* handler specifies a function that returns a record selected in the list.
+The code of a view creates an already mentioned component. It this view we declare the *updateItem()* method which defines a function for updating the datatable's content. Additionally, the *getActiveRecord* method specifies a function that returns a record selected in the datatable.
 
 In another view we have the following code:
 
 ```js
+// views/details
+
 define(["views/list"], function(list){
 	var button = {
 		click:function(){
