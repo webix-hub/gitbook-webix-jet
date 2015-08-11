@@ -164,9 +164,8 @@ It's also possible to replace the `$oninit` property and the attachEvent method 
 	return {
 		$ui: { view:"datatable" },
 		$oninit:function(view){
-			app.attachEvent("detailsModeChanged", function(data){
-				if (data == "all")
-					view.showColumn("dummy");
+			app.attachEvent("detailsModeChanged", function(mode){
+				view.showColumnBatch(mode);
 			});
 		}
 	}
@@ -176,15 +175,16 @@ can be shortened as in
 ```js
 ...
 return {
-	$ui: { view:"datatable", id:"grid" },
+	$ui: { view:"datatable", id:"data:table" },
 	$on:{
-		detailsModeChanged: function(data){
-			if (data == "all")
-				$$("grid").showColumn("dummy");
+		detailsModeChanged: function(mode){
+			$$("data:table").showColumnBatch(mode);
 		}
 	}
 }
 ```
+
+In the sample above *view* variable is not accessible, so we need to address the datatable by id.
 
 ###Declaring and calling methods
 
