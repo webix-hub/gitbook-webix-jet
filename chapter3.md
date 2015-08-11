@@ -89,7 +89,7 @@ define([
 		],
 		on:{
 			onChange:function(newv){
-				app.callEvent("detailsModeChanged", [ newv]);
+				app.callEvent("detailsModeChanged", [newv]);
 			}
 		}
 	}
@@ -127,21 +127,30 @@ app.trigger("eventName", [ ... ]);
 There's also the *app.action()* method that unites both the *click* *handler and the* *callEvent* method. For example, let's consider the code of initialization of a segmented button:
 
 ```js
-...
-	return {
-		view:"segmented", on:{
-			onAfterTabClick:function(id){
-				app.callEvent("detailsModeChanged", [ id ]);
+// views/top.js
+
+	var mode = { 
+	    view:"segmented", options:[
+			{id:"info", value:"Info"},
+			{id:"stats", value:"Stats"}
+		],
+		on:{
+			onChange:function(newv){
+				app.callEvent("detailsModeChanged", [newv]);
 			}
 		}
-	}
+	};
 ```
 We can simplify it in the following way:
 
 ```js
-	return {
-		view:"segmented", on:{
-			onAfterTabClick:app.action("detailsModeChanged");
+	var mode =  {
+		view:"segmented", options:[
+			{id:"info", value:"Info"},
+			{id:"stats", value:"Stats"}
+		], 
+		on:{
+			onChange:app.action("detailsModeChanged");
 		}
 	}
 ```
@@ -149,7 +158,8 @@ We can simplify it in the following way:
 It's also possible to replace the `$oninit` property and the attachEvent method with the `$on` property. Thus, the above code of datatable initialization 
 
 ```js
-//top/grid
+//views/data.js
+
 ...
 	return {
 		$ui: { view:"datatable" },
