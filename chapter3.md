@@ -216,16 +216,36 @@ In another view we have the following code:
 ```js
 // views/data.js
 
-define(["views/films"], function(films){
-	var button = {
-		click:function(){
-			alert(list.getActiveRecord());
-			list.truncateAll();
-		}
-	}
+define([
+	"views/films"
+],function(films){
+
+	var details = { view:"template", id:"data:tpl", data:{}, template:function(obj){
+		return obj.id?obj.rank+obj.title;
+	}};
+
+	var ui = {
+		rows:[
+			{view:"toolbar", elements:[
+				{ view:"button", value:"Show details", click:function(){
+					var item = films.getActiveItem();
+					if(item){
+						$$("data:tpl").data = item;
+						$$("data:tpl").refresh();
+				}},
+				{ view:"button", value:"Clear All", click:function(){
+					films.truncateAll();
+				}}
+			]},
+			films,
+			details
+		]
+	};
+
 	return {
-		$ui:{ rows:[ list, button ] },  
-	}
+		$ui: ui
+	};
+	
 });
 ```
 Here we specify a button and place our list and this button in two rows. By clicking the button we get the id of the active record and call the *truncateAll()* method which clears the list in the above view.
