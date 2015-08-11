@@ -285,7 +285,7 @@ define([
 });
 ```
 
-When we select a row in the grid with the name of some user, the code stores the selected row's id in the model. When we need to access this info in the click handler of the subview with the button, we can retrieve it from the same model object. For example, in the above snippet, we will load subview with data for the selected record. 
+When we switch a segment in the button, the code stores the selected segment's id in the model. When we need to access this info in the click handler of the subview with the button, we can retrieve it from the same model object. For example, in the above snippet, we will load subview with data for the selected record. 
 
 ###Which way to choose?
 
