@@ -215,7 +215,7 @@ In another view we have the following code:
 ```js
 // views/details
 
-define(["views/list"], function(list){
+define(["views/data"], function(data){
 	var button = {
 		click:function(){
 			alert(list.getActiveRecord());
