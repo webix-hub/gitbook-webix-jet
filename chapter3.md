@@ -431,9 +431,9 @@ define ([], function(){
 	return {  "Language": "Language" };
 });
 
-// locales/fr.js
+// locales/de.js
 define([],function(){     
-	return { "Language": "Langue"}; 
+	return { "Language": "Sprache"}; 
 });
 ```
 
