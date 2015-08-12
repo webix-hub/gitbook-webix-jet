@@ -579,7 +579,7 @@ function(records){
 	};
 });
 ```
-The above code contains an isolated layout that includes a list and a button. By clicking the button, the layout is cleared. As our layout is located in an isolated space, we need to call the *getTopParentView()* method to refer to the isolated id "*selectbox"* to call the *setValue* method, as there are can be the same global ids.  
+The above code contains an isolated layout that includes a select box and a button. By clicking the button, the selection is cleared. As our layout is located in an isolated space, we need to call the *getTopParentView()* method to refer to the isolated id "*selectbox"* to call the *setValue* method, as there are can be the same global ids.  
 
 ###Creating ids for multiple displaying of a view
 Let's consider the case when it's necessary to show the same view on the screen several times. 
