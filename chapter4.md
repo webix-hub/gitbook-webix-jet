@@ -31,9 +31,9 @@ Besides simple urls used for navigation between views, we can create more comple
 
 Each segment of an url can contain certain parameters. These parameters can keep the id of the selected record, the mode of a segmented button that determines the state of the application, etc.
 
-For example, if we select a row with the id "1" in the grid in the top view and check some checkbox in the child view, the url will look as follows: 
+For example, if we select a row with the id "1" in the grid in the parent view and check some checkbox in the child view, the url will look as follows: 
 
-*“index.html#!/top?id=1/child?checked=true”*
+*"index.html#!/top:id=1/child:checked=true"*
 
 In general, if it’s needed to render a view with selected data and show a subview inside of it, we can use the this.$scope.show() method and pass the id of the record that should be selected as an argument:
 
@@ -43,7 +43,7 @@ this.$scope.show({ id:1 });
 ```
 In the url of the page the id of the selected record follows the view name and then the subview name goes:
 
-*“index.html#!/data?id=1/form"*
+*“index.html#!/data:id=1/form"*
 
 It's possible to pass several parameters of selected records:
 
@@ -54,39 +54,32 @@ this.$scope.show({ id:1, task:2});
 
 In this case the above url will have the following format:
 
-*“index.html#!/data?id=1&task=2/form"*
+*“index.html#!/data:id=1:task=2/form"*
 
 `this.$scope.show()` allows  reloading just the part of the app. If the app should be changed starting from the top view, *this.$scope.show()* and *app.show()* methods can be used with no difference:
 
 ```js
 // "data" is the top view, the result of both methods' work will be the same
-this.$scope.show("/data?id=3/form");
-app.show("/data?id=3/form");
+this.$scope.show("/data:id=3/form");
+app.show("/data:id=3/form");
 ```
 To restore the state of the app after the page’s reloading, the `$onurlchange` handler is used. 
 
-For example, we have a layout with two lists and we want to reload these lists with selected records kept. So, we'll specify the '$onurlchange' handler after the layout definition and pass the views configuration to it:
+For example, we have datatable and we want to reload it with a selected record kept. So, we'll specify the '$onurlchange' handler after its definition and process the id parameter in it:
 
 ```js
 define([
     "models/records"
 ],function(records){
+    var ui = {
+		view:"datatable", select:true 
+	};
+	
 	return:{
-		$ui:{
-			{ rows:[
-				{view:"list", id:"mylist1", select:true, click:function(id){
-					this.$scope.show({ id: id });
-	 		 	}},
-	   			{view:"list", id:"mylist2", select:true, click:function(id){
-					this.$scope.show({ task: id });
-	   			}}
-	   		]}
-		},
-		$onurlchange:function(view, config, url, scope){
+		$ui:ui,
+		$onurlchange:function(state, config, scope){
 			if (config.id)
-				$$("mylist1").select(id);
-			if (config.task)
-				$$("mylist2").select(task);
+				$$("data:table").select(id);
 		}
 	}
 });
