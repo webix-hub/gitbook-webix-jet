@@ -466,7 +466,7 @@ To get a pluralized phrase,  a special string is used. The plural forms are sepa
 define(["models/records", "locale"], function(records, _){
 	  var count = records.data.count();
 	  return {
-	    $ui:{ view:"label", label:_("FilmsCountLabel", count) }
+	    $ui:{ template:_("FilmsCountLabel", count) }
 	  }
 });
 ```
@@ -475,15 +475,15 @@ define(["models/records", "locale"], function(records, _){
 //locale/en.js
 define(function(){     
 	return {         
-		FilmsCountLabel:"You have %{count} films |||| You have %{count} films"
+		FilmsCountLabel:"You have %{smart_count} films |||| You have %{smart_count} films"
 	}
 });
 ```
 
 To understand the difference better, check the next example:
 ```js
-var label = _("FilmsCountLabel",{count:1}); // You have 1 film
-var label = _("FilmsCountLabel",{count:6}); // You have 6 films
+var label = _("FilmsCountLabel",1); // You have 1 film
+var label = _("FilmsCountLabel",6); // You have 6 films
 ```
 
 You can find more information in the [documentation of Polyglot.js](http://airbnb.io/polyglot.js/).
