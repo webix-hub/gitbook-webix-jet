@@ -448,7 +448,7 @@ app.use(locale, { lang:"de" });
 ```
 To change the active language of the app, use the *setLang()* method. It takes a two-letter code of the language as the argument:
 ```js
-locale.setLang("ru");
+locale.setLang("de");
 ```
 It's also possible to return the currently set language, using the *getLang()* method:
 
@@ -482,15 +482,15 @@ define(function(){
 
 To understand the difference better, check the next example:
 ```js
-var label = _("FilmsCountLabel",1); // You have 1 film
-var label = _("FilmsCountLabel",6); // You have 6 films
+var label = _("FilmsCountLabel", 1); // You have 1 film
+var label = _("FilmsCountLabel", 6); // You have 6 films
 ```
 
 You can find more information in the [documentation of Polyglot.js](http://airbnb.io/polyglot.js/).
 
 ##The structure of an URL and folders
 
-A typical URL looks as http://some.com/index.html#!/top/child/subchild. The part that goes after **#!** is the  current state of the app. Each segment is the name of a file from the *views* directory.
+A typical URL looks as http://some.com/#!/top/child/subchild. The part that goes after **#!** is the  current state of the app. Each segment is the name of a file from the *views* directory.
 
 The order of views rendering in the above url is the following:
 
@@ -498,29 +498,32 @@ The order of views rendering in the above url is the following:
  - if there is some space for a child element (subview) in top.js, views/child.js is taken and rendered in the defined place 
  - if child.js has some space for its own child element, views/subchild.js is rendered in the defined place
 
-If you need to include a file from a subdirectory, e.g. details/subchild.js instead of a subchild, the dot notation is used: http://some.com/index.html#!/top/child/details.subchild. Let's consider more examples:
+If you need to include a file from a subdirectory, e.g. details/subchild.js instead of a views/subchild.js, the dot notation is used: http://some.com/#!/top/child/details.subchild. 
 
-The */top/child* directory implies that two views will be loaded:
+Let's consider more examples:
 
- - views/top.js
- - views/child.js
-
-The path */top/folder.child* has the following views hierarchy:
+The */top/start* directory implies that two views will be loaded:
 
  - views/top.js
- - views/folder/child.js
+ - views/start.js
 
-A more complex structure can look as */top/folder.child/folder.subfolder.grand.js*. It includes the following directories and subdirectories:
+The path */top/start/details.descr* has the following views hierarchy:
+
+ - views/top.js
+ - views/start.js
+ - views/details/descr.js
+
+A more complex structure can look as */top/data.films/data.about.1*. It includes the following directories and subdirectories:
 
 - views/top.js
-- views/folder/child.js
-- views/folder/subfolder/grand.js
+- views/data/films.js
+- views/data/about/1.js
 
 ##Using unique IDs
 
 Webix components can have ids. They are used to refer to this or that component, which is rather handy. The important moment is that ids must be unique ( that is requirement of Webix UI, as code can't distinguish between two views with the same id ). There are three ways to make a unique id:
 
-- create a complex id that have the structure *{viewname}:{role}*, for example: *"start:view"*. By using the view's name in the 1st part of id we make it unique;
+- create a complex id that have the structure *{viewname}:{role}*, for example: *"start:view"*. By using the view's name (which is the name of the file where it is stored) in the 1st part of id we make it unique;
 - generating a unique id:
 
 ```js
@@ -539,17 +542,29 @@ While you can get a view by its id from any module of your app, it is strongly r
 - isolated ID spaces
 
 ```js
-return {
-    $ui:{ isolate:true, rows:[
-		{ view:"list", id:"mylist" },
-		{ view:"button", value:"clear", click:function(){
-			var layout = this.getTopParentView();
-			layout.$$("mylist").clear();
-		}}
-	]}
-}
+define([
+	"models/records"
+],
+function(records){
+
+	var ui = {
+		isolate:true, cols:[
+			{ view:"richselect", id:"selectbox", options:{
+				body:{	template:"#title#",	data:records.data }
+			}},
+			{ view:"button", value:"Clear", click:function(){
+				var selectbox = this.getTopParentView().$$("selectbox");
+				selectbox.setValue("");
+			}}
+		]
+	};
+
+	return {
+		$ui:ui
+	};
+});
 ```
-The above code contains an isolated layout that includes a list and a button. By clicking the button, the layout is cleared. As our layout is located in an isolated space, we need to call the *getTopParentView()* method to refer to the isolated id "*mylist"* to call the *clear* method, as there are can be the same global ids.  
+The above code contains an isolated layout that includes a list and a button. By clicking the button, the layout is cleared. As our layout is located in an isolated space, we need to call the *getTopParentView()* method to refer to the isolated id "*selectbox"* to call the *setValue* method, as there are can be the same global ids.  
 
 ###Creating ids for multiple displaying of a view
 Let's consider the case when it's necessary to show the same view on the screen several times. 
@@ -561,16 +576,28 @@ As for the third variant, it will do fine for our needs. By using isolated ID sp
 There is one more way. We can specify a function that will return a view with a new id each time the code is executed:
 
 ```js
-define([],function(){
+define([
+	"models/records"
+],
+function(records){
+
+	var select_id = webix.uid();
+
 	return {
-	    $ui:function(){
-	    	var listid = webix.uid();
-		    return { rows:[
-			    { view:"list", id:listid },
-   			    { view:"button", value:"clear", click:function(){ $$(listid).clearAll(); }}
-  			]};
-		}
-	}
+		$ui: (function(){
+			return {
+				cols:[
+					{ view:"richselect", id:select_id, 	options:{
+						body:{	template:"#title#",	data:records.data }
+					}},
+					{ view:"button",  value:"Clear", click:function(){
+						var selectbox = $$(select_id);
+						selectbox.setValue("");
+					}}
+				]
+			};
+		})()
+	};
 });
 ```
-Thus, the above code will create each new instance of a list view with a unique id.
+Thus, the above code will create each new instance of a richselect view with a unique id.
