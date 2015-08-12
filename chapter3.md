@@ -539,7 +539,7 @@ function(records){
 			{ view:"richselect", id:select_id, options:{
 				body:{	template:"#title#",	data:records.data }
 			}},
-			{ view:"button", value:"Clear", click:function(){
+			{ view:"button", id:button_id value:"Clear", click:function(){
 				var selectbox = this.getTopParentView().$$("selectbox");
 				selectbox.setValue("");
 			}}
