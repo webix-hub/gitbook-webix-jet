@@ -550,7 +550,7 @@ function(records){
 	};
 });
 ```
-Here we have a layout that contains a list and call a function that clears the list by its id. Each time the code creates a layout, it generates a new id for it.
+Here we have a layout that contains a select box and a button that calls a function to clear a it. Each time the code creates a layout, it generates a new id for both of them.
 
 While you can get a view by its id from any module of your app, it is strongly recommended to call an element by id only inside of the same module where this element was defined. 
 
