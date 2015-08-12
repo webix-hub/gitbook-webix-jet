@@ -524,16 +524,32 @@ A more complex structure can look as */top/data.films/data.about.1*. It includes
 Webix components can have ids. They are used to refer to this or that component, which is rather handy. The important moment is that ids must be unique ( that is requirement of Webix UI, as code can't distinguish between two views with the same id ). There are three ways to make a unique id:
 
 - create a complex id that have the structure *{viewname}:{role}*, for example: *"start:view"*. By using the view's name (which is the name of the file where it is stored) in the 1st part of id we make it unique;
-- generating a unique id:
+- generating a unique id with the webix.uid() method:
 
 ```js
-var listid = webix.uid();
-return {
-    $ui:{ id:"r1", rows:[
-	    { view:"list", id:listid }
-	]},
-    clear:function(){ $$(listid).clear(); }
-}
+define([
+	"models/records"
+],
+function(records){
+    var select_id = webix.uid();
+    var button_id = webix.uid();
+    
+	var ui = {
+		cols:[
+			{ view:"richselect", id:select_id, options:{
+				body:{	template:"#title#",	data:records.data }
+			}},
+			{ view:"button", value:"Clear", click:function(){
+				var selectbox = this.getTopParentView().$$("selectbox");
+				selectbox.setValue("");
+			}}
+		]
+	};
+
+	return {
+		$ui:ui
+	};
+});
 ```
 Here we have a layout that contains a list and call a function that clears the list by its id. Each time the code creates a layout, it generates a new id for it.
 
