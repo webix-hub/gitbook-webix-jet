@@ -73,7 +73,11 @@ define([
 ],function(records){
     var ui = {
         rows:[
-            { view:"datatable", select:true  },
+            { view:"datatable", select:true, on:{
+                onAfterSelect:function(id){
+                    this.$scope.show({id:id.row});
+                }
+            }},
             { $subview:true } //place for the form to render
         ]
 		
