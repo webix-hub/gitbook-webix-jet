@@ -65,14 +65,18 @@ app.show("/data:id=3/form");
 ```
 To restore the state of the app after the page’s reloading, the `$onurlchange` handler is used. 
 
-For example, we have datatable and we want to reload it with a selected record kept. So, we'll specify the '$onurlchange' handler after its definition and process the id parameter in it:
+For example, we have a layout with datatable and form and we want to reload the datatable with a selected record kept. So, we'll specify the '$onurlchange' handler after its definition and process the id parameter in it:
 
 ```js
 define([
     "models/records"
 ],function(records){
     var ui = {
-		view:"datatable", select:true 
+        rows:[
+            { view:"datatable", select:true  },
+            { $subview:true } //place for the form to render
+        ]
+		
 	};
 	
 	return:{
@@ -84,4 +88,4 @@ define([
 	}
 });
 ```
-The handler will be called each time the url changes and restore the state of the views after reloading the application.
+The handler will be called each time the url changes and restore the state of the view after reloading the application.
