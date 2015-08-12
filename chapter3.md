@@ -463,10 +463,10 @@ The basis of Webix Jet localization is [Polyglot.js](http://airbnb.io/polyglot.j
 To get a pluralized phrase,  a special string is used. The plural forms are separated by the delimiter "||||", or four vertical line characters.
 
 ```js
-define(["locale"], function(_){
-	  var count = 100;
+define(["models/records", "locale"], function(records, _){
+	  var count = records.data.count();
 	  return {
-	    $ui:{ view:"label", label:_("BooksCountLabel", count) }
+	    $ui:{ view:"label", label:_("FilmsCountLabel", count) }
 	  }
 });
 ```
@@ -475,15 +475,15 @@ define(["locale"], function(_){
 //locale/en.js
 define(function(){     
 	return {         
-		BooksCountLabel:"You have %{count} book |||| You have %{count} books"
+		FilmsCountLabel:"You have %{count} films |||| You have %{count} films"
 	}
 });
 ```
 
 To understand the difference better, check the next example:
 ```js
-var label = _("BooksCountLabel",{count:1}); // You have 1 book
-var label = _("BooksCountLabel",{count:50}); // You have 50 books
+var label = _("FilmsCountLabel",{count:1}); // You have 1 film
+var label = _("FilmsCountLabel",{count:6}); // You have 6 films
 ```
 
 You can find more information in the [documentation of Polyglot.js](http://airbnb.io/polyglot.js/).
