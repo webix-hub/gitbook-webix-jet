@@ -106,9 +106,9 @@ define([], function(){
 ```
 
 The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the url will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*. 
-The *{ $subview: true }* placeholder will be replaced with the content of subview file ( *views/start.js* in the above example ) and the corresponding interface will be rendered.
+The *{ $subview: true }* placeholder will be replaced with the content of a subview file ( *views/start.js* in the above example ) and the corresponding interface will be rendered.
 
-For example, if you enter the url *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part: 
+For example, we've got a *data.js* view which contains a datatable. If you enter the url *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part: 
 
 **index.html#!/top/data**
 
