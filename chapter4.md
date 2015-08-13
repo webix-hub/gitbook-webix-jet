@@ -85,7 +85,7 @@ define([
 	
 	return:{
 		$ui:ui,
-		$onurlchange:function(state, config, scope){
+		$onurlchange:function(config, url, scope){
 			if (config.id)
 				$$("data:table").select(id);
 		}
