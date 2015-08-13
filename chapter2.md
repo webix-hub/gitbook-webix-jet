@@ -41,7 +41,7 @@ define([], function(){
     return {
         $ui:{ /*ui config*/},
         $oninit:function(view, $scope){ /*after creating*/},
-        $onurlchange:function(view, config, url, $scope){ /*after navigation*/},
+        $onurlchange:function(config, url, $scope){ /*after navigation*/},
         $ondestroy:function(){ /*before destroy*/}
     }
 });    
@@ -111,8 +111,8 @@ define([
     };
     return {
         $ui: ui,
-        $onurlchange:function(view, config, url, $scope){
-            $$("top:menu").select(config[0].page);
+        $onurlchange:function(config, url, $scope){
+            $$("top:menu").select(url[0].page);
         }
     }
 });
@@ -120,7 +120,6 @@ define([
 
 where:
 
-- view - a view object
 - config - parameters of the url
 - url - contains the names of segments and all parameters of the url
 - $scope - the current scope
@@ -347,8 +346,8 @@ We can use the onUrlChange handler:
 ```js
 return {
 	$ui:ui,
-    $onurlchange:function(view, config, url, $scope){
-		$$("top:menu").select(config[0].page);
+    $onurlchange:function(config, url, $scope){
+		$$("top:menu").select(url[0].page);
 	}
 }
 ```
