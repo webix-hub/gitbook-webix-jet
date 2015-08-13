@@ -305,6 +305,7 @@ In the above code it’s stated that on clicking an item in the menu, we’ll ge
 This way is more convenient, as the method allows reloading just the part of the app. There are two variants of loading data with the scope.show method:
 
 - loading a subview of the same level (sibling):
+
 ```js
 // views/start.js
 
@@ -314,6 +315,7 @@ this.$scope.show("data");
 The current subview will be changed to "news". For example: the path *index.html#!/top/start* will be reloaded as *#!/top/data*
 
 - loading a child subview
+
 ```js
 //views/start.js
 
