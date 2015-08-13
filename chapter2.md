@@ -40,8 +40,8 @@ A view module returns an object which can have a set of special properties:
 define([], function(){
     return {
         $ui:{ /*ui config*/},
-        $oninit:function(view, scope){ /*after creating*/},
-        $onurlchange:function(view, config, url, scope){ /*after navigation*/},
+        $oninit:function(view, $scope){ /*after creating*/},
+        $onurlchange:function(view, config, url, $scope){ /*after navigation*/},
         $ondestroy:function(){ /*before destroy*/}
     }
 });    
@@ -84,7 +84,7 @@ define(["models/records"],function(records){
         $ui: {
             view:"datatable"
         },
-        $oninit:function(view,scope){
+        $oninit:function(view,$scope){
             view.parse(records.data);
         }
     }
@@ -111,7 +111,7 @@ define([
     };
     return {
         $ui: ui,
-        $onurlchange:function(view, config, url, scope){
+        $onurlchange:function(view, config, url, $scope){
             $$("top:menu").select(config[0].page);
         }
     }
@@ -123,7 +123,7 @@ where:
 - view - a view object
 - config - parameters of the url
 - url - contains the names of segments and all parameters of the url
-- scope - the current scope
+- $scope - the current scope
 
 **$ondestroy**
 
@@ -141,7 +141,7 @@ define([
         $ui: {
             view:"datatable", editable:true
         },
-        $oninit:function(view,scope){
+        $oninit:function(view,$scope){
             popup = webix.ui({ 
                 view:"popup", 
                 body:"Data is updated"
@@ -166,11 +166,11 @@ The main use case of the ondestroy handler is removing of any unnecessary UI or 
 
 ## What is scope?
 
-As you can see, the $oninit and $onurlchange properties contain functions that take the scope parameter as an argument. So, we need to explain the term scope.
+As you can see, the *$oninit* and *$onurlchange* properties contain functions that take the *$scope* parameter as an argument. So, we need to explain the term scope.
 
 Scope is an object that keeps the state of a part of an interface. Scope is automatically created for the whole application. What is more, scope is created for each subview which is presented in the code.
 
-For example, for app which shows the path /top/data we will have 2 scopes. One for top view and one for data view.
+For example, for an app which shows the path */top/data* we will have 2 scopes. One for top view and one for data view.
 
 
 ## Using scope
@@ -203,19 +203,19 @@ define([
 });
 ```
 
-The above code defines that after updating a record in datatable a popup "Data is updated" appears. This message will try to appear, even when another view will be loaded instead of the datatable, as event handler never detaches by itself. To solve this issue, we can use the scope.on method:
+The above code defines that after updating a record in datatable a popup "Data is updated" appears. This message will try to appear, even when another view will be loaded instead of the datatable, as event handler never detaches by itself. To solve this issue, we can use the *$scope.on* method:
 
 ```js
-$oninit:function(view, scope){
-    scope.on(records.data, "onDataUpdate", function(){
+$oninit:function(view, $scope){
+    $scope.on(records.data, "onDataUpdate", function(){
 		popup.show();
 	});
 }
 ```
 
-Due to attaching event by the scope.on method, the handler of the onDateUpdate event will be detached when a new view will be loaded on the page.
+Due to attaching event by the *$scope.on* method, the handler of the onDateUpdate event will be detached when a new view will be loaded on the page.
 
-In order to create a popup that will be destroyed together with the current view, the scope.ui() method can be used instead of webix.ui(). Thus, the code below
+In order to create a popup that will be destroyed together with the current view, the *$scope.ui()* method can be used instead of webix.ui(). Thus, the code below
 
 ```js
 define([
@@ -239,8 +239,8 @@ define([
 can be redefined as:
 
 ```js
-$oninit:function(view,scope){
-    var popup = scope.ui({ view:"popup"});
+$oninit:function(view,$scope){
+    var popup = $scope.ui({ view:"popup"});
 });
 //no need to define $ondestroy
 ```
@@ -300,7 +300,7 @@ define([
 
 In the above code it’s stated that on clicking an item in the menu, we’ll get its id in the url of the page, e.g.: *#!/top/data*. Each time when we select some other item, the whole app will be rerendered and the url will change. 
 
-3) the *scope.show* method
+3) the *$scope.show* method
 
 This way is more convenient, as the method allows reloading just the part of the app. There are two variants of loading data with the scope.show method:
 
@@ -347,7 +347,7 @@ We can use the onUrlChange handler:
 ```js
 return {
 	$ui:ui,
-    $onurlchange:function(view, config, url, scope){
+    $onurlchange:function(view, config, url, $scope){
 		$$("top:menu").select(config[0].page);
 	}
 }
