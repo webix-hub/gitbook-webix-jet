@@ -21,7 +21,7 @@ define([
 			{ view:"window", id:"win1" }, 
 			{ view:"popup", id:"win2" }
 		],
-		$oninit:function(view,scope){
+		$oninit:function(view,$scope){
 			view.parse(records.data);
 			$$("win1").show();
 		},
