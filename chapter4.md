@@ -86,7 +86,7 @@ define([
 	return:{
 		$ui:ui,
 		$onurlchange:function(config, url, scope){
-			if (config.id)
+			if (config.id && $$("data:table").exists(config.id))
 				$$("data:table").select(id);
 		}
 	}
