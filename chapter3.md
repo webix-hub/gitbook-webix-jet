@@ -326,7 +326,7 @@ The usage of a module with a shared state allows keeping some state common for s
 
 ##Asynchronous UI loading
 
-Sometimes we can include data used in a view directly in the view description. In such a case we deal with the so-called "hardcoded" values. For example, we on a start page have a chart and need to define the colors of its lines, specified in the *series* parameter:
+Sometimes we can include data used in a view directly in the view description. In such a case we deal with the so-called "hardcoded" values. For example, we have a chart on the start page and need to define the colors of its lines, specified in the *series* parameter:
 
 ```js
 //views/start.js
