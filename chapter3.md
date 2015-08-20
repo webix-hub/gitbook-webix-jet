@@ -475,7 +475,7 @@ define(["models/records", "locale"], function(records, _){
 //locale/en.js
 define(function(){     
 	return {         
-		FilmsCountLabel:"You have %{smart_count} films |||| You have %{smart_count} films"
+		FilmsCountLabel:"You have %{smart_count} film |||| You have %{smart_count} films"
 	}
 });
 ```
