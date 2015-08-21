@@ -311,7 +311,7 @@ This way is more convenient, as the method allows reloading just the part of the
 this.$scope.show("data");
 ```
 
-The current subview will be changed to "news". For example: the path *index.html#!/top/start* will be reloaded as *#!/top/data*
+The current subview will be changed to "data". For example: the path *index.html#!/top/start* will be reloaded as *#!/top/data*
 
 - loading a child subview
 
@@ -321,7 +321,7 @@ The current subview will be changed to "news". For example: the path *index.html
 this.$scope.show("./news"); 
 ```
 
-In this case the *news* subview will be loaded inside of the data view and the path *#!/top/start* will be changed into *#!/top/start/news*.
+In this case the *news* subview will be loaded inside of the "start" view and the path *#!/top/start* will be changed into *#!/top/start/news*.
 
 
 ## Working with menus
