@@ -73,7 +73,7 @@ define([
 ],function(records){
     var ui = {
         rows:[
-            { view:"datatable", select:true, on:{
+            { view:"datatable", id:"data:table", select:true, on:{
                 onAfterSelect:function(id){
                     this.$scope.show({id:id.row});
                 }
@@ -87,7 +87,7 @@ define([
 		$ui:ui,
 		$onurlchange:function(config, url, scope){
 			if (config.id && $$("data:table").exists(config.id))
-				$$("data:table").select(id);
+				$$("data:table").select(config.id);
 		}
 	}
 });
