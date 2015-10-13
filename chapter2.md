@@ -245,7 +245,7 @@ $oninit:function(view,$scope){
 });
 //no need to define $ondestroy
 ```
-
+To better understand how scope helps to make implementation of an application handier, check the [demo](https://github.com/webix-hub/jet-demos/tree/06_scope).
 
 ## In-app navigation
 
