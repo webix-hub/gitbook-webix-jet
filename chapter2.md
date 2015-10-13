@@ -325,10 +325,12 @@ this.$scope.show("./news");
 
 In this case the *news* subview will be loaded inside of the "start" view and the path *#!/top/start* will be changed into *#!/top/start/news*.
 
+Check the [demo](https://github.com/webix-hub/jet-demos/tree/07_navigate) to see how the described ways of navigation are used in an application.
+
 
 ## Working with menus
 
-It is quite common to have some kind of menu and subview next to it. When item in menu selected we can navigate subview to the selected page
+It is quite common to have some kind of menu and a subview next to it. When item in menu selected we can navigate the subview to the selected page:
 
 ```js
 {
@@ -378,8 +380,7 @@ return {
 }
 ```
 
-
-
+To see how the menu plugin works in an application, check the corresponding [demo](https://github.com/webix-hub/jet-demos/tree/08_menu_plugin).
 
 
 
