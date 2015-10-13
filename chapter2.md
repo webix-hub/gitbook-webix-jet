@@ -28,7 +28,7 @@ where:
 
 Those parameters allow applying changes made on the client side to the database on the server
 
-
+The described functionality is presented in the following [demo](https://github.com/webix-hub/jet-demos/tree/04_server).
 
 
 ## View Handlers
@@ -160,7 +160,9 @@ define([
 
 Notice that the change of the url won’t call $ondestroy for the views that present in the new url. For example, if we go from the page /top/data to the page /top/start, the $ondestroy method will be called for the data view only. 
 
-The main use case of the ondestroy handler is removing of any unnecessary UI or unused event handlers. There are some other, more simple ways to handle this use-case though.It’s more handy to use scope for both initializing and destructing popups and event handlers.
+The main use case of the ondestroy handler is removing of any unnecessary UI or unused event handlers. There are some other, simpler ways to handle this use-case though.It’s more handy to use scope for both initializing and destructing popups and event handlers.
+
+You can check the [demo](https://github.com/webix-hub/jet-demos/tree/05_view_handlers) showing how handlers are used in an application.
 
 
 ## What is scope?
