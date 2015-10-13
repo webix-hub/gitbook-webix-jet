@@ -30,7 +30,8 @@ define([
 ```
 
 When a new view will be loaded on the page, all the popups and windows will be destroyed together with the list view.
-		
+
+The demo illustrating the creation of several windows is available [here](https://github.com/webix-hub/jet-demos/tree/09_multiple_windows).
 
 ##Creating connections between views
 
@@ -98,6 +99,7 @@ define([
 ```
 Thus, on clicking the segmented button the detailsModeChanged event will fire and the corresponding  column group will be rendered in the datatable.
 
+You can check the [demo](https://github.com/webix-hub/jet-demos/tree/10_events) that shows how views can be connected with the help of events.
 
 #### Event handler shortcuts ( or aliases )
 
@@ -252,6 +254,7 @@ Here we specify a toolbar with two buttons and detailed film view and then place
 
 By clicking the first button we get an object of the active datatable record and use it for *details* view while the second button calls the *truncateAll()* method which clears the datatable in the child view.
 
+The use of methods for connecting views is presented in the [demo](https://github.com/webix-hub/jet-demos/tree/11_methods).
 
 ###Using a shared state 
 
