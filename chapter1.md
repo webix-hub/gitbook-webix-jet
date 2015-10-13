@@ -85,7 +85,7 @@ At the top of the file we are providing the list of dependencies, which we will 
 
 Open the path *index.html#!/top* and you’ll see the page with *start* view inside of the *top* one.
 
-
+You can have a look at the [demo](https://github.com/webix-hub/jet-demos/tree/01_basic) that shows how a basic application with Webix Jet is created.
 
 ## Creating subviews
 
@@ -121,6 +121,8 @@ Then, add one more /top subdirectory into the path. The url will look as* index.
 ![](top_top_data.png)
 
 The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.  
+
+A demo that illustrates the process of adding a subview into an application is given [here](https://github.com/webix-hub/jet-demos/tree/02_subview). 
 
 
 ## Loading data with models
@@ -165,4 +167,6 @@ As you can see, this module returns an object that differs from those we describ
 
 - the *$ui* property defines the interface of the component that will be initialized. In our example it’s datatable;
 - the* $oninit* function specifies that data from the records model will be loaded into the view after its creation.
+
+You can check the [demo](https://github.com/webix-hub/jet-demos/tree/03_data_model) describing the usage of a model with data in an application.
 
