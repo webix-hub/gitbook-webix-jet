@@ -316,6 +316,8 @@ define([
 
 When we switch a segment in the button, the code stores the selected segment's id in the model. When we need to access this info in the $oninit or "detailsModeChanged" handler of the datatable, we can retrieve it from the same model object. For example, in the above snippet, we will apply the current state to a datatable each time it is reloaded and each time another mode is selected. 
 
+Check the [demo](https://github.com/webix-hub/jet-demos/tree/12_shared_state) that shows the way of connecting views using a shared state.
+
 ###Which way to choose?
 
 Let's summarize when it's better to use this or that way of creating connections between views.
