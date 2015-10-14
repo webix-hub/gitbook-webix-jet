@@ -355,7 +355,7 @@ define([
 });	
 ```
 
-However, in practice some configuration settings in our UI can be stored in the database. For example in the above snippet we may want to store colors in DB to allow their customization by end user. (Replace hardcoded values with DB based ones)
+However, in practice some configuration settings in our UI can be stored in the database. For example in the above snippet we may want to store colors in DB to allow their customization by the end user. (Replace hardcoded values with DB based ones)
 
 In such case, a module can return a promise of UI instead of UI configuration. 
 
@@ -397,6 +397,7 @@ There are several ways to implement asynchronous data loading:
 - [data.waitData](http://docs.webix.com/api__ui.dataview_waitdata_other.html) which is used for data components, such as datacollection, list, tree, datatable, etc;
 - [webix.promise](http://docs.webix.com/helpers__ajax_operations.html#promiseapiforajaxrequests) that allows treating the result of asynchronous operations without callbacks.
 
+The [demo](https://github.com/webix-hub/jet-demos/tree/13_async_ui_config) will help you to learn the details of asynchronous UI loading with Webix Jet.
 
 ## Multi-language support
 
@@ -493,7 +494,9 @@ var label = _("FilmsCountLabel", 6); // You have 6 films
 
 You can find more information in the [documentation of Polyglot.js](http://airbnb.io/polyglot.js/).
 
-##The structure of an URL and folders
+The [demo](https://github.com/webix-hub/jet-demos/tree/14_locales) will give you the idea how localization can be implemented in an application.
+
+##The structure of URL and folders
 
 A typical URL looks as http://some.com/#!/top/child/subchild. The part that goes after **#!** is the  current state of the app. Each segment is the name of a file from the *views* directory.
 
@@ -523,6 +526,8 @@ A more complex structure can look as */top/data.films/data.about.1*. It includes
 - views/top.js
 - views/data/films.js
 - views/data/about/1.js
+
+Check the [demo](https://github.com/webix-hub/jet-demos/tree/15_subfolders) to see how URL is formed in case files from subfolders are used in an application.
 
 ##Using unique IDs
 
@@ -586,7 +591,9 @@ function(records){
 ```
 The above code contains an isolated layout that includes a select box and a button. By clicking the button, the selection is cleared. As our layout is located in an isolated space, we need to call the *getTopParentView()* method to refer to the isolated id "*selectbox"* to call the *setValue* method, as there can be the same global ids.  
 
-###Creating ids for multiple displaying of a view
+You can check the [demo](https://github.com/webix-hub/jet-demos/tree/16_isolated_ids) illustrating how isolated spaces are applied for making IDs. 
+
+###Creating unique IDs for multiple displaying of a view
 Let's consider the case when it's necessary to show the same view on the screen several times. 
 
 We can't directly specify the id of the view as it's made in the first variant, because each separate instance of the view must have a unique id. The second variant implies that a unique id will be generated just once, which is also improper for multiple displaying of a view.
@@ -621,3 +628,5 @@ function(records){
 });
 ```
 Thus, the above code will create each new instance of a richselect view with a unique id.
+
+The demo of the described functionality is presented [here](https://github.com/webix-hub/jet-demos/tree/17_unique_ids).
