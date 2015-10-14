@@ -93,3 +93,5 @@ define([
 });
 ```
 The handler will be called each time the url changes and restore the state of the view after reloading the application.
+
+You can check the [demo](https://github.com/webix-hub/jet-demos/tree/18_url_params) showing how parameters are passed in an url.
