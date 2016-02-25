@@ -62,10 +62,10 @@ define([
 
 	return {
 		$ui: ui,
-		$oninit:function(view){
+		$oninit:function(view, $scope){
 			view.parse(records.data);
 
-			app.attachEvent("detailsModeChanged", function(mode){
+			$scope.on(app, "detailsModeChanged", function(mode){
                 view.showColumnBatch(mode);
             });
 		}
@@ -100,6 +100,8 @@ define([
 Thus, on clicking the segmented button the detailsModeChanged event will fire and the corresponding  column group will be rendered in the datatable.
 
 You can check the [demo](https://github.com/webix-hub/jet-demos/tree/10_events) that shows how views can be connected with the help of events.
+
+Note that you can also attach event handler to app, but in this case they should be manually detached each time the view is destroyed: 
 
 #### Event handler shortcuts ( or aliases )
 
@@ -165,8 +167,8 @@ It's also possible to replace the `$oninit` property and the attachEvent method 
 ...
 	return {
 		$ui: { view:"datatable" },
-		$oninit:function(view){
-			app.attachEvent("detailsModeChanged", function(mode){
+		$oninit:function(view, $scope){
+			$scope.on(app, "detailsModeChanged", function(mode){
 				view.showColumnBatch(mode);
 			});
 		}
