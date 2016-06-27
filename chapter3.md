@@ -159,7 +159,7 @@ We can simplify it in the following way:
 	}
 ```
 
-It's also possible to replace the `$oninit` property and the attachEvent method with the `$on` property. Thus, the above code of datatable initialization 
+It's also possible to replace the `$oninit` property and the attachEvent method with the `$onevent` property. Thus, the above code of datatable initialization 
 
 ```js
 //views/data.js
@@ -180,7 +180,7 @@ can be shortened as in
 ...
 return {
 	$ui: { view:"datatable", id:"data:table" },
-	$on:{
+	$onevent:{
 		detailsModeChanged: function(mode){
 			$$("data:table").showColumnBatch(mode);
 		}
