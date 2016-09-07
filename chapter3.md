@@ -42,7 +42,7 @@ Since our app is split into several views, each of them is located in a separate
 Communication between views can be implemented through the global event bus. You can attach an event handler to the global event bus in one view and trigger the event in another view.  For example, in one view we will have the following code:
 
 ```js
-//views/data.jd
+//views/data.js
 
 define([
 	"app",
