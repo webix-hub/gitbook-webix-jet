@@ -395,9 +395,9 @@ In the above code all the colors used for lines of the chart are stored in DB an
 
 There are several ways to implement asynchronous data loading:
 
-- [webix.ajax](http://docs.webix.com/helpers__ajax_operations.html) that makes an asynchronous request to a PHP script and shows it response through a callback function;
-- [data.waitData](http://docs.webix.com/api__ui.dataview_waitdata_other.html) which is used for data components, such as datacollection, list, tree, datatable, etc;
-- [webix.promise](http://docs.webix.com/helpers__ajax_operations.html#promiseapiforajaxrequests) that allows treating the result of asynchronous operations without callbacks.
+- [webix.ajax](https://docs.webix.com/helpers__ajax_operations.html) that makes an asynchronous request to a PHP script and shows it response through a callback function;
+- [data.waitData](https://docs.webix.com/api__dataloader_waitdata_other.html) which is used for data components, such as datacollection, list, tree, datatable, etc;
+- [webix.promise](https://docs.webix.com/helpers__ajax_operations.html#promiseapiforajaxrequests) that allows treating the result of asynchronous operations without callbacks.
 
 The [demo](https://github.com/webix-hub/jet-demos/tree/13_async_ui_config) will help you to learn the details of asynchronous UI loading with Webix Jet.
 
