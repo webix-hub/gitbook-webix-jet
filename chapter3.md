@@ -232,7 +232,7 @@ define([
 		rows:[
 			{view:"toolbar", elements:[
 				{ view:"button", value:"Show details", click:function(){
-					var item = films.getActiveItem();
+					var item = films.getActiveRecord();
 					if(item){
 						$$("data:tpl").data = item;
 						$$("data:tpl").refresh();
