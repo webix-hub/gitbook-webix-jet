@@ -1,30 +1,35 @@
-
 Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix Jet framework.
 
-##Advantages of Webix Jet
+## Advantages of Webix Jet
 
 Webix Jet allows you to create a flexible, easy maintainable app, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins and user access levels. 
 
-Webix Jet is a fully client-side solution, and can  be used with any REST-based data api. So there aren’t any special requirements to the server.
+Webix Jet is a fully client-side solution, and can be used with any REST-based data api. So there aren’t any special requirements to the server.
 
 
-##Getting started
+## Getting started
 
-To begin with, you should grab the app package from http://webix.com/packages/webix-app-start.zip and unpack it to the root folder of your webhost.
+To begin with, you should grab the app package from https://github.com/webix-hub/jet-start/archive/master.zip and unpack it locally. After that, run next commands in the target folder ( this assumes that you have nodejs and npm installed )
 
-Run the *index.html* file and you’ll see the app’s interface. Let’s have a look what it has inside.
+```
+npm install
+npm run server
+```
 
-##The app’s structure
+and open ```http://localhost:8080``` in the browser. You’ll see the app’s interface. Let’s have a look what it has inside.
+
+## The app’s structure
 
 The codebase of our app consists of:
 
 - *index.html* file that is a start page and the only html file in our app
-- *app.js* file that includes the configuration of the app;
-- the *views* folder containing modules for interface elements;
-- the *models* folder that includes modules for data operations;
-- the *libs* folder where all the applied libraries are located, including the Webix  library.
+- *sources/myapp.js* file that creates the app and contains app's configuration;
+- the *sources/views* folder containing modules for interface elements;
+- the *sources/models* folder that includes modules for data operations;
+- the *sources/styles* folder for css assets
+- the *sources/locales* folder for app locales ( you can ignore it for now )
 
-##How it works
+## How it works
 
 The basic principle of creating an app is the following. The app is a single page. We divide it into multiple views which will be kept in separate files. Thus, the process of controlling the app’s behavior gets much easier and quicker.
 
@@ -41,7 +46,7 @@ If you set the path to *“index.html#!/top/start”*, the interface described i
 
 **index.html#!/top/start**
 
-![](how_it_works.png)
+![](images/how_it_works.png)
 
 ##Defining a view module
 
@@ -51,14 +56,12 @@ The *start.js* file describes a start page view
 
 ```js
 //views/start.js
-define([],function(){
-	return {
-		template:"Start page"
-	};
-});
+export default {
+	template:"Start page"
+};
 ```
 
-This is a module that returns a template with the text of the page. Each module starts from the *“define”* call which contains a description of ui inside. 
+This is a module that returns a template with the text of the page.
 
 You can look at this page by opening the url *index.html#!/start*
 
@@ -68,24 +71,21 @@ The *views/top* module defines the top level view, that contains a menu and incl
 
 ```js
 //views/top.js
-define([
-"views/start"
-], function(start){
-    return {
-        cols:[
-            { view:"menu" },
-            start
-        ]
-    };
-});
+
+import start from "views/start"
+
+export default {
+	cols:[
+		{ view:"menu" },
+		start
+	]
+};
 ```
 
 In the above code we have described a layout with two columns.
 At the top of the file we are providing the list of dependencies, which we will use in this layout.
 
 Open the path *index.html#!/top* and you’ll see the page with *start* view inside of the *top* one.
-
-You can have a look at the [demo](https://github.com/webix-hub/jet-demos/tree/01_basic) that shows how a basic application with Webix Jet is created.
 
 ## Creating subviews
 
@@ -95,34 +95,30 @@ Let’s check the following code:
 
 ```js
 //views/top.js
-define([], function(){
-    return {
-        cols:[
-           { view:"menu" },
-           { $subview: true }
-       ]
-    };
-});
+export default {
+	cols:[
+		{ view:"menu" },
+		{ $subview: true }
+	]
+};
 ```
 
-The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the url will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*. 
+The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the url will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*.
 The *{ $subview: true }* placeholder will be replaced with the content of a subview file ( *views/start.js* in the above example ) and the corresponding interface will be rendered.
 
-For example, we've got a *data.js* view which contains a datatable. If you enter the url *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part: 
+For example, we've got a *data.js* view which contains a datatable. If you enter the url *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part:
 
 **index.html#!/top/data**
 
-![](top_data.png)
+![](images/top_data.png)
 
 Then, add one more /top subdirectory into the path. The url will look as* index.html#!/top/top/data* and the app will have another menu view inserted into the first one. This view will contain the datatable:
 
 **index.html#!/top/top/data**
 
-![](top_top_data.png)
+![](images/top_top_data.png)
 
-The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.  
-
-A demo that illustrates the process of adding a subview into an application is given [here](https://github.com/webix-hub/jet-demos/tree/02_subview). 
+The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.
 
 
 ## Loading data with models
@@ -132,41 +128,30 @@ We’ll consider data loading on the example of the *views/data.js* file. It tak
 
 ```js
 //models/records.js
-define([],function(){
-	var collection = new webix.DataCollection({ 
-		url:"data.php"
-	});	
-
-    return {
-		data: collection
-	};
+export const data = new webix.DataCollection({
+	url:"data.php"
 });
 ```
 
 In this module, we create a new data collection that loads data from the *data.php* file. The module returns a helper method that provides access to our DataCollection.
 
-The *views/data* module has the following code: 
+The *views/data* module has the following code:
 
 ```js
 //views/data.js
-define(["models/records"],function(records){
-	var ui = {
-		view:"datatable", autoConfig:true
-	};
+import {JetView} from "webix-jet";
 
-	return {
-		$ui: ui,
-		$oninit:function(view){
-			view.parse(records.data);
-		}
-	};
-});
+export default class DataView extends JetView{
+	config(){
+		return { view:"datatable", autoConfig:true }
+	}
+	init(view){
+		view.parse(records.data);
+	}
+};
 ```
 
-As you can see, this module returns an object that differs from those we described earlier. There are two variants of the return object. It can be simply a description of interface or an extended object with the following properties: 
+As you can see, this module returns an object that differs from those we described earlier. There are two variants of the return object. It can be simply a description of interface or a JetView based class, which can have:
 
-- the *$ui* property defines the interface of the component that will be initialized. In our example it’s datatable;
-- the* $oninit* function specifies that data from the records model will be loaded into the view after its creation.
-
-You can check the [demo](https://github.com/webix-hub/jet-demos/tree/03_data_model) describing the usage of a model with data in an application.
-
+- the *config* method, that return the interface of the component that will be initialized. In our example it’s a datatable;
+- the *init* method specifies the component initialization behavior, in our case data from the records model will be loaded into the view after its creation.

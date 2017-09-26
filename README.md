@@ -7,4 +7,4 @@ It dwells on the process of creating an application, from making separate module
 
 Updates History
 ========
-Latest update made on June 27, 2016
+Latest update made on September 26, 2017
