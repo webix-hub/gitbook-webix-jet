@@ -23,7 +23,7 @@ However, in practice some configuration settings in our UI can be stored in the 
 ```js
 export class StatisticsView extends JetView {
     config() { 
-        return webix.ajax("server/colors.php").then(function(data){      //будет это работать?
+        return webix.ajax("server/colors.php").then(function(data){
             /* view creation */
             data = data.json();
             return {
