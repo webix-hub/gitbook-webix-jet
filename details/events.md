@@ -4,54 +4,54 @@ The views are separated, but there should be some means of communication between
 
 First, attach an event to one view:
 
-~~~js
+```js
 init(){
     on(app, "eventName", function(something){
         //handler
         this.show(something);
     });
 }
-~~~
+```
 
 In the other view, there should be code that triggers the event, e.g.:
 
-~~~js
+```js
 on:{
     onEvent:function(){
         app.callEvent("eventName", [some_value]);
     }
 }
-~~~
+```
 
-### Aliases (?)
+### Aliases
 
 To make your life happier, there are aliases for methods used to trigger events.
 
-1. *trigger*
+1. _trigger_
 
 Instead of using
 
-~~~js
+```js
 app.callEvent("eventName", [some_value]);
-~~~
+```
 
 you can write
 
-~~~js
+```js
 app.trigger("eventName", [some_value]);
-~~~
+```
 
-2. *action*
+1. _action_
 
 This alias unites both the click handler and the callEvent method. So the same code transforms into:
 
-~~~js
+```js
 on:{
     onEventName:app.action("eventName", [some_value]);
 }
-~~~
+```
 
-### Declaring and calling methods (?)
+### Declaring and calling methods
 
 One more effective way of connecting views is methods. In one of the views we define a handler that will call some function and in another view we call this handler.
 
@@ -59,7 +59,7 @@ Unlike events, methods both call actions in views and are able to return somethi
 
 Let's have a look at the example below:
 
-~~~js
+```js
 /* views/actions.js */
 export class Actions extends JetView {
     config() {
@@ -76,11 +76,11 @@ export class Actions extends JetView {
         this.$$("actions").clearAll();
     }
 };
-~~~
+```
 
-The code of a view creates a datatable. It this view we declare the **truncateAll()** method for clearing the table. Its parent view should call this method:
+The code of a view creates a datatable. It this view we declare the **truncateAll\(\)** method for clearing the table. Its parent view should call this method:
 
-~~~js
+```js
 /* views/demo.js */
 import {Actions} from "actions"
 export class DemoView extends JetView {
@@ -92,7 +92,6 @@ export class DemoView extends JetView {
                     click:()=>{
                         //this.app.$$("actions").clearAll();
                         Actions.truncateAll();
-                        //то что сверху в комментах работает, но не знаю, как ссылаться на другой вью, чтобы truncateAll вызвать.
                     } }
                 ] },
                 Actions
@@ -109,6 +108,7 @@ var app = new JetApp({
         "Actions": Actions
     }
 }).render();
-~~~
+```
 
 If you click the button, all the records from the datatable will be deleted.
+
