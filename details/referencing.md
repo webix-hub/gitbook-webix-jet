@@ -99,7 +99,7 @@ class FormView extends JetView {
 			]
 		};
 	}
-	$init(ui, url){
+	init(ui, url){
 		this.use(JetApp.plugins.UnloadGuard, () => {
 			if (this.getRoot().validate())
 				return true;
@@ -148,7 +148,7 @@ class ToolbarView extends JetView {
     config() {
         /* same config */
     }
-    $init(ui, url) {
+    init(ui, url) {
         if (url.length)
             this.$$("control").setValue(url[1].page);
     }

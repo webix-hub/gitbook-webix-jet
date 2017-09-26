@@ -33,7 +33,7 @@ class ToolbarView extends JetView{
 			]
 		};
 	}
-	$init(ui, url){
+	init(ui, url){
 		this.use(JetApp.plugins.Menu, {
 			id:"control"
 		});
@@ -58,7 +58,7 @@ class ToolbarView extends JetView {
 			]
 		};
 	}
-	$init(ui, url){
+	init(ui, url){
 		this.use(JetApp.plugins.Menu, {
 			id:"control",
 			urls:{
@@ -90,7 +90,7 @@ class FormView extends JetView{
 		};
 	}
 	
-	$init(ui, url){
+	init(ui, url){
 		this.use(JetApp.plugins.UnloadGuard, () => {
 			if (this.getRoot().validate())
 				return true;

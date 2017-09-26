@@ -5,7 +5,7 @@ The views are separated, but there should be some means of communication between
 First, attach an event to one view:
 
 ~~~js
-$init(){
+init(){
     on(app, "eventName", function(something){
         //handler
         this.show(something);

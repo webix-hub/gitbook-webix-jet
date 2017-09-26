@@ -90,7 +90,7 @@ class ToolbarView extends JetView{
 
 The method receives one parameter -- the UI of the view.
 
-- $init(view, url)
+- init(view, url)
 
 The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view. For instance, the above defined toolbar will be always rendered with the first segment active regardless of the URL. You can link the control state to the URL: 
 
@@ -106,7 +106,7 @@ class ToolbarView extends JetView{
             ]
         };
     }
-    $init(view, url){
+    init(view, url){
         if (url.length)
             this.$$("control").setValue(url[1].page);
     }
@@ -117,9 +117,9 @@ The method receives two parameters:
     - the view UI
     - the URL
 
-- $urlChange(view,url)
+- urlChange(view,url)
 
-This method is called every time there's a change of views. It reacts to the change in the URL after **!#**. **$urlChange** is only called for the view that is rendered and for its parent. Consider the following example. The initial URL is:
+This method is called every time there's a change of views. It reacts to the change in the URL after **!#**. **urlChange** is only called for the view that is rendered and for its parent. Consider the following example. The initial URL is:
 
 ~~~
 /Layout/Demo/Details
@@ -131,9 +131,9 @@ If you change it to
 /Layout/Demo/Preview
 ~~~
 
-**$urlChange** will be called for **Demo** and **Preview**. [Check out the demo](https://git.webix.io/mkozhukh/wjet/src/master/samples/02_life_stages.html).
+**urlChange** will be called for **Demo** and **Preview**. [Check out the demo](https://git.webix.io/mkozhukh/wjet/src/master/samples/02_life_stages.html).
 
-The **$urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right menu item.
+The **urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right menu item.
 
 ~~~js
 class ToolbarView extends JetView{
@@ -147,11 +147,11 @@ class ToolbarView extends JetView{
             ]
         };
     }
-    $init(view, url){
+    init(view, url){
         if (url.length)
             this.$$("control").setValue(url[1].page);
     }
-	$urlChange(view, url){
+	urlChange(view, url){
 		if (url.length > 1)
 			this.$$("control").setValue(url[1].page);
 	}
@@ -162,9 +162,9 @@ The method receives two parameters:
     - the view UI
     - the URL
 
-- $destroy
+- destroy
 
-**$destroy** is called only once for each instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL. **$destroy** also can be used to destroy temporary objects like popups and other child components to prevent memory leaks.
+**destroy** is called only once for each instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL. **destroy** also can be used to destroy temporary objects like popups and other child components to prevent memory leaks.
 
 ~~~js
 class ToolbarView extends JetView{
@@ -178,7 +178,7 @@ class ToolbarView extends JetView{
             ]
         };
     }
-    $init(view, url){
+    init(view, url){
         var popup = webix.ui({      //???
             view:"popup", 
             body:"Toolbar is created"
@@ -187,11 +187,11 @@ class ToolbarView extends JetView{
         if (url.length)
             this.$$("control").setValue(url[1].page);
     }
-	$urlChange(view, url){
+	urlChange(view, url){
 		if (url.length > 1)
 			this.$$("control").setValue(url[1].page);
 	}
-    $destroy(){
+    destroy(){
         popup.destructor();
     }
 } 
