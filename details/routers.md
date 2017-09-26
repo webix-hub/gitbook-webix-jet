@@ -55,11 +55,9 @@ var app2 = new JetApp({
 
 ### 4. Empty Router
 
-If you don't want this behavior from the app, there's the Emplty router for you. The app URL isn't displayed and isn't stored. It's used for nested apps because there is only one address bar. [Check out the demo](https://git.webix.io/mkozhukh/wjet/src/master/samples/06_highlevel.html).
+If you don't want this behavior from the app, there's the Emplty router for you. The app URL isn't displayed and isn't stored. It's used for nested apps because there is only one address bar. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html).
 
 ### 5. Custom Routers
 
 If these four routers aren't what you want, you can define your own.
-
-//HELP NEEDED WITH THIS AS WELL
 
