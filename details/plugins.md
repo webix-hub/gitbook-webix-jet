@@ -70,7 +70,7 @@ class ToolbarView extends JetView {
 }
 ~~~
 
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html).
+[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/04_plugins.html).
 
 #### UnloadGuard Plugin
 
@@ -106,18 +106,15 @@ class FormView extends JetView{
 }
 ~~~
 
-[Check out the demo](https://git.webix.io/mkozhukh/wjet/src/master/samples/05_guard.html).
+[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html).
 
 #### Login Plugin
 
     - login through custom script
     - login with external OATH service ( Google, Github, etc. )
 
-(?)
-#### Session Plugin
-#### Theme plugin
-#### Locale plugin
+**Other plugins:**
+- Theme plugin
+- Locale plugin
 
-2. Custom Plugins
-
-(?)
+**2.Custom Plugins**
