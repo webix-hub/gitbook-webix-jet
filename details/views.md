@@ -8,7 +8,7 @@ After reading the first chapter of this guide, you are familiar with the concept
 
 Views can be created as objects.
 
-* Disadvantages
+* **Disadvantages**
   if you prefer OOP, the syntax gets convoluted
 
 Here's a simple template object:
@@ -119,7 +119,7 @@ If you change it to
 /Layout/Demo/Preview
 ```
 
-**urlChange** will be called for **Demo** and **Preview**. [Check out the demo](https://git.webix.io/mkozhukh/wjet/src/master/samples/02_life_stages.html).
+**urlChange** will be called for **Demo** and **Preview**. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html).
 
 The **urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right menu item.
 
@@ -168,7 +168,7 @@ class ToolbarView extends JetView{
         };
     }
     init(view, url){
-        var popup = webix.ui({      //???
+        var popup = webix.ui({
             view:"popup", 
             body:"Toolbar is created"
         });
