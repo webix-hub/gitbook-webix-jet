@@ -1,4 +1,4 @@
-## (Detailed) Plugins (+later)
+## (Detailed) Plugins
 
 New version of Webix Jet provides both predefined plugins and the ability to create your own. This is the syntax to use a plugin:
 
@@ -70,7 +70,7 @@ class ToolbarView extends JetView {
 }
 ~~~
 
-[Check out the demo](https://git.webix.io/mkozhukh/wjet/src/master/samples/04_plugins.html).
+[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/04_plugins.html[[](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html))).
 
 #### UnloadGuard Plugin
 
