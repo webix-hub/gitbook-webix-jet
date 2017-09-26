@@ -27,7 +27,7 @@ on:{
 
 To make your life happier, there are aliases for methods used to trigger events.
 
-1. _trigger_
+**1.**_**trigger**_
 
 Instead of using
 
@@ -41,7 +41,7 @@ you can write
 app.trigger("eventName", [some_value]);
 ```
 
-1. _action_
+**2.**_**action**_
 
 This alias unites both the click handler and the callEvent method. So the same code transforms into:
 
@@ -90,7 +90,7 @@ export class DemoView extends JetView {
                 { view:"toolbar", elements: [
                     { view:"button", value:"Clear all",
                     click:()=>{
-                        //this.app.$$("actions").clearAll();
+                        //same as this.app.$$("actions").clearAll();
                         Actions.truncateAll();
                     } }
                 ] },
