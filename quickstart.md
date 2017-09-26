@@ -153,5 +153,5 @@ export default class DataView extends JetView{
 
 As you can see, this module returns an object that differs from those we described earlier. There are two variants of the return object. It can be simply a description of interface or a JetView based class, which can have:
 
-- the *config* method, that return the interface of the component that will be initialized. In our example it’s a datatable;
+- the *config* method, that returns the interface of the component that will be initialized. In our example it’s a datatable;
 - the *init* method specifies the component initialization behavior, in our case data from the records model will be loaded into the view after its creation.
