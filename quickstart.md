@@ -13,7 +13,7 @@ To begin with, you should grab the app package from https://github.com/webix-hub
 
 ```
 npm install
-npm run server
+npm start
 ```
 
 and open ```http://localhost:8080``` in the browser. You’ll see the app’s interface. Let’s have a look what it has inside.
