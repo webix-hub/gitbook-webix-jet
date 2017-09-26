@@ -55,7 +55,7 @@ Data collections can be created inside a method, if you need to process the data
 
 View classes inherit from **JetView**. Webix UI events are implemented through class methods. Here are the methods that you can define while defining your class views:
 
-* config\(ui\)
+* **config\(ui\)**
 
 This method returns the initial UI configuration of a view, all its contents.
 
@@ -77,7 +77,7 @@ class ToolbarView extends JetView{
 
 The method receives one parameter -- the UI of the view.
 
-* init\(view, url\)
+* **init\(view, url\)**
 
 The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view. For instance, the above defined toolbar will be always rendered with the first segment active regardless of the URL. You can link the control state to the URL:
 
@@ -105,7 +105,7 @@ The method receives two parameters:
 * the view UI
 * the URL
 
-* urlChange\(view,url\)
+* **urlChange\(view,url\)**
 
 This method is called every time there's a change of views. It reacts to the change in the URL after **!\#**. **urlChange** is only called for the view that is rendered and for its parent. Consider the following example. The initial URL is:
 
