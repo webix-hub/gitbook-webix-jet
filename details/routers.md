@@ -22,9 +22,7 @@ var app = new JetApp({
 
 ### 2. URL Router
 
-The app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server side code should be compatible. \(?\)
-
-//any examples?
+The app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server side code should be compatible.
 
 ### 3. Store Router
 
