@@ -22,14 +22,6 @@ const DashView = { template:"Dash" };
 
 View objects can also be returned by a factory function.
 
-* Advantages
-
-//?
-
-* Disadvantages
-
-//?
-
 Here's a simple template view returned by a factory:
 
 ```js
