@@ -84,7 +84,7 @@ With JS6 classes, inheritance is closer to classic OOP and the syntax is nicer. 
 
 * Data
 
-Data collections can be created inside a method, if you need to process the data before loading and don't want to create additional modules for that.
+Data collections can be created inside a method if you need to process the data before loading and don't want to create additional modules for that.
 
 #### JetView Methods
 

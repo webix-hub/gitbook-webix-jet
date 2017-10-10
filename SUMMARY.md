@@ -8,8 +8,8 @@
   * [In-app navigation](basic/navigation.md)
 * Part II - Webix Jet in details
   * [JetApp API](details/app.md)
-  * [JetView API](details/views.md)
   * [Views and SubViews](details/subviews.md)
+  * [JetView API](details/views.md)
   * [Navigation](details/navigation.md)
   * [Async views](details/async.md)
   * [Referencing views](details/referencing.md)
