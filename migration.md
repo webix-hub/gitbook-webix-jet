@@ -5,7 +5,7 @@ Migration Jet 0.x => Jet 1.x
 
 - You need to add webpack.config.js and package.json similar to https://github.com/webix-hub/jet-start 
 
-If you already has a package.json in your project just add the missed dependencies.
+If you already have package.json in your project, just add the missed dependencies.
 
 ```
 npm install --save-dev wjet babel-core babel-loader babel-preset-env css-loader file-loader less less-loader url-loader webpack webpack-dev-server extract-text-webpack-plugin
@@ -36,7 +36,7 @@ npm start
 
 ### Migrating views
 
-Jet 1.x can recognize old configuration objects and use them correctly, so you will need not change anything in a common case. There are still some scenarious when you will need to change the code
+Jet 1.x can recognize old configuration objects and use them correctly, so you will need not change anything in a common case. There are still some scenarios when you will need to change the code
 
 #### View has "app" as dependency
 
