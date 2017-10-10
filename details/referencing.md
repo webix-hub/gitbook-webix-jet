@@ -4,7 +4,7 @@ In the new version of Webix Jet, there is a convenient reference to a view from 
 
 **1.Reference to the view**
 
-Any Webix component created inside of view has the **$scope** property, which points to the instance of view class. If you want to change the URL from controls of the view, reference the view with **this.$scope**:
+Any Webix component created inside of view has the **$scope** property, which points to the instance of the view class. If you want to change the URL from controls of the view, reference the view with **this.$scope**:
 
 ```js
 /* views/toolbar.js */
@@ -122,7 +122,7 @@ class ToolbarView extends JetView {
 }
 ```
 
-This works fine, however, if you switch to **dash** and reload the page, the segmented button won't be turned to **dash**. In more complex apps this behavior might be confusing. To fix this, use **this.$$\("localId"\)** to reference the button and set its value. **this.$$\("localId"\)** can be used to reference nested views and controls by their global or local IDs.
+This works fine, however, if you switch to **dash** and reload the page, the segmented button won't be turned to **dash**. In more complex apps this behavior might be confusing. To fix this, use **this.\$\$("localId")** to reference the button and set its value. **this.\$\$("localId")** can be used to reference nested views and controls by their global or local IDs.
 
 ```js
 class ToolbarView extends JetView {
