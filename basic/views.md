@@ -1,6 +1,6 @@
 ## View Concept
 
-Views are modules for interface elements that are usually kept in separate files. This makes the code loosely coupled. If some part of the app is messed up, the rest of it works. All visual components of the UI are separated from each other and can be reused. Parts of an app can be developed and tested independently. All the above said is critical for large and huge apps. Besides, code looks neater.
+Views are modules for interface elements that are usually kept in separate files. This makes the code loosely coupled. If some part of the app is messed up, the rest of it works. All visual components of the UI are separated from each other and can be reused. Parts of an app can be developed and tested independently. All the above said is critical for large and huge apps. Besides, the code looks neater.
 
 All views should be stored in the **views** folder: one view per file. For example, this is how a view module is defined in _myview.js_:
 
@@ -21,7 +21,7 @@ index.html#!/MyView
 
 ## Subview
 
-Apps created with Webix Jet are single-page. Interface of your app can be constructed from multiple views. Some parts can be dynamic, so you may change them based on the state of the app. Such dynamic views are called subviews. 
+Apps created with Webix Jet are single-page. The interface of your app can be constructed from multiple views. Some parts can be dynamic, so you may change them based on the state of the app. Such dynamic views are called subviews. 
 
 #### Direct Including
 
@@ -53,7 +53,7 @@ index.html#!/bigview
 
 #### Dynamic Including 
 
-You can enable embedding multiple views that will change according to the URL. Instead the concrete name of the view class, write *{ $subview: true }*:
+You can enable embedding multiple views that will change according to the URL. Instead of the concrete name of the view class, write *{ $subview: true }*:
 
 ```js
 /* views/bigview.js */
