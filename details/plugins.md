@@ -1,6 +1,6 @@
 ## Plugins
 
-New version of Webix Jet provides both predefined plugins and the ability to create your own. This is the syntax to use a plugin:
+The new version of Webix Jet provides both predefined plugins and the ability to create your own. This is the syntax to use a plugin:
 
 ~~~js
 this.use(JetApp.plugins.PluginName, {
@@ -8,13 +8,13 @@ this.use(JetApp.plugins.PluginName, {
 });
 ~~~
 
-After the plugin name you are to specify the configuration of the plugin.
+After the plugin name, you are to specify the configuration of the plugin.
 
 ### 1. Default Plugins
 
 #### Menu Plugin
 
-This plugin simplifies you life if you plan to create a menu. The plugin sets URLs for menu option, buttons or other controls you plan to use for showing subviews. Also there's no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
+This plugin simplifies your life if you plan to create a menu. The plugin sets URLs for menu options, buttons or other controls you plan to use for showing subviews. Also, there's no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
 
 Let's create a familiar toolbar with a segmented button and use the plugin:
 
@@ -72,7 +72,7 @@ class ToolbarView extends JetView {
 
 #### UnloadGuard Plugin
 
-The **Unload** plugin can be used to prevent users form leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and going to the next and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
+The **Unload** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and going to the next and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
 
 The plugin reacts to an attempt of changing the URL. The syntax for using a plugin is _this.use\(plugin,handler\)_. Use takes two parameters:
 
@@ -113,7 +113,7 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 
 #### Login Plugin
 
-- login through custom script
+- login through a custom script
 - login with external OATH service ( Google, Github, etc. )
 
 ```js
