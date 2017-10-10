@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [Quick start](quickstart.md)
 * [Migration from older version](migration.md)
 * [Part I - Basic usage](part-i-basic-usage.md)
   * [Creating app](basic/app.md)
