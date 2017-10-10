@@ -2,7 +2,7 @@
 
 Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed[^1]. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
 
-The URL of the page reflects current state of the app. By default, it is stored as part after hashband. When we chaging the url, app updates self accordingly. 
+The URL of the page reflects the current state of the app. By default, it is stored as a part after the hashbang. When we chage the URL, the app updates itself accordingly. 
 
 
 ### 1. Jet Links
@@ -10,10 +10,10 @@ The URL of the page reflects current state of the app. By default, it is stored 
 You can add links with the **route** attribute instead of the usual **href** and provide the URL to the desired views, e.g.:
 
 ```html
-<a route="/Details/Data"></a>
+<a route="/details/data"></a>
 ```
 
-After you click on the link, the app UI will be rebuilt and will consist of a main view _Details_ and a subview _Data_.
+After you click on the link, the app UI will be rebuilt and will consist of the main view _Details_ and a subview _Data_.
 
 ### 2. app.show\(\)
 
@@ -21,7 +21,7 @@ The **app.show\(\)** method is applied to the whole application. You can call th
 
 ```js
 { view:"button", value:"Details", click: () => {
-    this.app.show("/Demo/"+this.getValue())
+    this.app.show("/demo/"+this.getValue())
 }}
 ```
 
