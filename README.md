@@ -7,7 +7,7 @@ This guide provides all the information needed to start creating web application
 
 ## Advantages of Webix Jet
 
-Webix Jet allows you to create a flexible, easy maintainable app, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins and user access levels. 
+Webix Jet allows you to create a flexible, easy maintainable app, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins, and user access levels. 
 
 Webix Jet is a fully client-side solution and can be used with any REST-based data API. So there aren’t any special requirements to the server.
 
