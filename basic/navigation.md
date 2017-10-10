@@ -1,27 +1,9 @@
 ## Navigation
 
-Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed. The framework reacts to the URL change and rebuilds the interface from the elements after the hashbang. In the previous section you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
+Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed[^1]. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
 
-Url of the page reflects current state of the app. By default, it is stored as part after hashband. When we chaging the url, app updates self accordingly. 
+The URL of the page reflects current state of the app. By default, it is stored as part after hashband. When we chaging the url, app updates self accordingly. 
 
-> from the elements after the hashbang
-based on the url
-
-
-
-{ view:"segmented", options:["Toolbar", "Demo", "Task"], click: () => {
-        this.show("/Toolbar");
-}},
-
-
-/App/Demo/Toolbar
-Toolbar
-./Toolbar
-../../Toolbar
-
-
-/LAyout/Details
-Details
 
 ### 1. Jet Links
 
@@ -56,37 +38,47 @@ You can also change the URL by calling the **show\(\)** method from a specific v
 ]
 ```
 
-The current URL is _"/Layout/Toolbar"_, so the subview is **Toolbar**. If you want to rebuild the whole app and load the **Toolbar** view as the only view, specify the name of the view with a slash:
+The current URL is _"/layout/details"_, so the subview is **details**. If you want to rebuild the whole app and load the **details** view as the only view, specify the name of the view with a slash:
 
 ```js
 /* toolbar.js*/
-{ view:"segmented", localId:"control", options:["Toolbar", "Demo", "Task"], click: () => {
-    var value = this.getValue();
-    if (value === "Toolbar")
-        this.$scope.show("/Toolbar");
-    //other options
-}},
+...
+{ view:"button", value:"Details", click: () => {
+    this.show("/details");
+}}
+...
 ```
 
-If you want to reload the current view \(**Toolbar**\) with the **Demo** view, specify the name of the view without a slash. Thus the URL will change to _"/Layout/Demo"_.
+To replace the current subview with a different one, specify the name as it is or with *./*:
 
 ```js
-//second option
-else if (value === "Demo")
-    this.$scope.show("Demo")
+{ view:"button", value:"demo", click: () => {
+    this.show("demo");
+}}
+
+//or
+
+{ view:"button", value:"demo", click: () => {
+    this.show("./demo");
+}}
 ```
 
-Suppose Toolbar has a subview of its own. If you want to reload the subview with the Demo view, specify the parameter with "./":
+The resulting URL is going to be */layout/demo*.
+
+URL syntax resembles the way you navigate through directories. So you can move some levels up, for example:
 
 ```js
-//third option
-else if (value === "Task")
-    this.$scope.show("./Demo")
+{ view:"button", value:"demo", click: () => {
+    this.show("../../bigview");
+}}
 ```
 
-The URL will change to _"/Layout/Toolbar/Demo"_.
+As a result, the app URL will be */bigview*.
 
 [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see how the described ways of navigation are used in an application.
 
 This is all about Webix Jet in a nutshell. For more details, go on to the next chapter.
 
+<!-- footnotes -->
+[^1]:
+This is relevant for HashRouter, which is the default router. There is no hashbang if you use UrlRouter. The app URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except EmptyRouter and the behavior is the same as if the URL were displayed.  for more details, [see the section on routers](../details/routers.md).
