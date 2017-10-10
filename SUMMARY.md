@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [Migration from older version](migration.md)
-* [Part I - Basic usage](part-i-basic-usage.md)
+* Part I - Basic usage
   * [Creating app](basic/app.md)
   * [Creating views](basic/views.md)
   * [In-app navigation](basic/navigation.md)
