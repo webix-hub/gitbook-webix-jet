@@ -14,6 +14,9 @@ App represents an application or an application module. It is used to group view
 An app module is created as a new instanse of JetApp class. You are to pass an object with your app configuration like the app name, version, etc as the parameter.
 
 ~~~js
+/* myapp.js */
+import {JetApp} from "webix-jet";
+
 var app = new JetApp({
     start:"/top/layout"
 }).render(); //mandatory!
