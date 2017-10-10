@@ -52,7 +52,7 @@ export default webix.ajax("server/colors.php").then(function(data){
             };
 }
 
-However, in practice some configuration settings in our UI can be stored in the database. For example in the above snippet we may want to store colors in DB to allow their customization by the end user. In such case, a module can return a promise of UI instead of UI configuration.
+However, in practice, some configuration settings in our UI can be stored in the database. For example, in the above snippet, we may want to store colors in DB to allow their customization by the end user. In such case, a module can return a promise of UI instead of UI configuration.
 
 ```js
 export class StatisticsView extends JetView {
