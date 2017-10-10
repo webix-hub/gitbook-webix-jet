@@ -1,4 +1,6 @@
-## Views Communication. Events
+## Views Communication
+
+### Events
 
 Views are separated, but there should be some means of communication between them. Feel free to use the in-app event bus for that. You can attach an event handler to the event bus in one view and trigger the event in another view.
 
@@ -13,14 +15,13 @@ init(){
 }
 ```
 
-```js 
-// ??? from top-start sample ??? //
+<!-- // ??? from top-start sample ??? //
 import "./styles/app.css";
 import {JetApp} from "webix-jet";
 
 webix.ready(() => {
 	var app = new JetApp({
-		id:			APPNAME,
+		id:		APPNAME,
 		version:	VERSION,
 		start:		"/top/start"
 	});
@@ -29,8 +30,7 @@ webix.ready(() => {
 	app.attachEvent("app:error:resolve", function(name, error){
 		window.console.error(error);
 	});
-});
-```
+}); -->
 
 In the other view, there should be code that triggers the event, e.g.:
 
@@ -72,7 +72,7 @@ on:{
 
 ### Declaring and calling methods
 
-One more effective way of connecting views is methods. In one of the views we define a handler that will call some function and in another view we call this handler.
+One more effective way of connecting views is methods. In one of the views we define a handler that will call some function, and in another view we call this handler.
 
 Unlike events, methods both call actions in views and are able to return something useful. However, this option can only be used when we know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
 
@@ -131,15 +131,17 @@ var app = new JetApp({
 
 If you click the button, all the records from the datatable will be deleted.
 
-### consider events
+#### consider events
 
+```js
 { click:() => {
 	this.getSubView().setMode("aaa")
 }}
+```
 
+#### good with methods
 
-## good with methods
-
+```js
 config: (){ return { cols:[ 
 	{ name:"letf", $subview:FileView }, 
 	{ name:"right", $subview:FileView }
@@ -149,3 +151,4 @@ init: (){
 	this.getSibview("left").loadFiles("a")
 	this.getSibview("right").loadFiles("b")
 }
+```
