@@ -7,11 +7,11 @@ A Webix Jet app is single-page and is divided into views. The application struct
 - the *sources/views* folder that contains elements of the interface;
 - the *sources/models* folder that contains data modules.
 
-App represents an application or an application module. It is used to group views and modules which implement some specific scenario. Later you will be able to combine separate app modules in high level apps.
+App represents an application or an application module. It is used to group views and modules which implement some specific scenario. Later you will be able to combine separate app modules in high-level apps.
 
 ### The Syntax of Creation
 
-An app module is created as a new instanse of JetApp class. You are to pass an object with your app configuration like the app name, version, etc as the parameter.
+An app module is created as a new instance of JetApp class. You are to pass an object with your app configuration like the app name, version, etc as the parameter.
 
 ~~~js
 /* myapp.js */
