@@ -1,6 +1,6 @@
 ## App API
 
-Here you can find the list of all the **JetApp** methods, that  you can make use of.
+Here you can find the list of all the **JetApp** methods, that you can make use of.
 
 #### 1. app.render
 
@@ -10,7 +10,7 @@ The **render** method is the method that builds the UI of the application. If ca
 app.render();
 ```
 
-But if you want to render the app inside of a container, you can pass the string parameter to it with the id of the container:
+But if you want to render the app inside of a container, you can pass the string parameter to it with the ID of the container:
 
 ```js
 app.render("mybox");
