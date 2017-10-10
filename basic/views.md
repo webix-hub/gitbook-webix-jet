@@ -19,15 +19,16 @@ index.html#!/MyView
 
 ## Subview
 
-Apps created with Webix Jet are single-page. To manipulate multiple views and app modules, you can nest views and thus create subviews.
+Apps created with Webix Jet are single-page. Interface of your app can be constructed from multiple views. Some parts can be dynamic, so you may change them based on state of the app. Such dynamic views are called - subviews. 
 
-### Direct Injection
+#### Direct including
 
 One of the ways to nest a view is to inject a view class. Let's create a new view in _bigview.js_ and inject the **MyView** class in it:
 
 ```js
 /* views/bigview.js */
-import {MyView} from "myview" //?
+import {MyView} from "myview"
+
 export class BigView extends JetView {
     config() => { 
             rows:[
@@ -44,30 +45,37 @@ export class BigView extends JetView {
 You can open the view with this URL:
 
 ```
-index.html#!/BigView
+index.html#!/bigview
 ```
 
-### URL Navigation
+#### Dynamic including 
 
 You can enable embedding multiple views that will change according to the URL.
 
 ```js
+/* views/bigview.js */
 export class BigView extends JetView {
-    config() => {
-        rows:[
-            MyView,
-            { $subview:true }
-        ]
+    config() => { 
+            rows:[
+                { $subview: true },
+                {
+                    template:"BigView text"
+                }
+            ]   
+        }
     }
 }
 ```
 
-The next segment of the URL that comes after **BigView** will be loaded as a subview. You can view the subviews by changing the URL, for example:
+The next segment of the URL that instruct the app, which view to load. Based on url name the view file will be locaed and related class will be loaded. You can view the subviews by changing the URL, for example:
 
 ```
-index.html#!/BigView/ViewA
-index.html#!/BigView/ViewB
+//load sources/view/myview.js
+index.html#!/bigview/myview
+
+//load sources/view/viewa.js
+index.html#!/bigview/viewa
+
+//load sources/view/viewb.js
+index.html#!/bigview/viewb
 ```
-
-
-

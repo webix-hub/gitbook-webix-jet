@@ -24,6 +24,50 @@ var app = new JetApp({
 
 The app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server side code should be compatible.
 
+```js
+import {JetApp, UrlRouter} from "webix-jet";
+
+const TopView = {
+	type:"space", rows:[
+		{ type:"header", template:"Url router"},
+		{
+			type:"wide", cols:[
+				{ width:200, css:"navblock", template:`
+					<a route="/top/start"> - show start</a>
+					<a route="/top/details"> - show details</a>
+				`},
+				{ $subview: true }
+			]
+		}
+	]
+};
+
+const StartView = {
+	template:"Start page"
+};
+
+const DetailsView = {
+	template:"Details page"
+};
+
+webix.ready(() => {
+	const app = new JetApp({
+		id:			"plugins-themes",
+
+		router:		UrlRouter,
+		routerPrefix: "/routers-url",
+
+		start:		"/top/start",
+		views:{
+			top:		TopView,
+			start:		StartView,
+			details:	DetailsView
+		}
+	});
+	app.render();
+});
+```
+
 ### 3. Store Router
 
 With this guy, the app URL isn't displayed at all, but it is stored in the session storage. So no worries, you can still return to the previous and next views as if they are in the URL. This can be useful if you have a multilevel application \(apps are subviews of other apps\). The Store router is set for the enclosed apps because there's only one address bar and it's already taken by the outer app. Suppose you have have closed an app module with a deep level of subviews and expect to be in the same place of this app when you switch to it again. The Store router allows this.

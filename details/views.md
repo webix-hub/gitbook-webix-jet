@@ -2,14 +2,16 @@
 
 After reading the first chapter of this guide, you are familiar with the concept of _view_. Now it's time to find out all the ways of creating views. You can create views in three ways.
 
-### 1. Object Views
-
-#### Pure Objects
+### 1. Simple Views
 
 Views can be created as objects.
 
++ simple
+
 * **Disadvantages**
-  if you prefer OOP, the syntax gets convoluted
+ 
+- static
+- had no init and other handlers
 
 Here's a simple template object:
 
@@ -18,9 +20,17 @@ Here's a simple template object:
 const DashView = { template:"Dash" };
 ```
 
-#### Object "Factory Pattern"
+export default {
+	view:"list"
+}
+
+### 2. Object "Factory Pattern"
 
 View objects can also be returned by a factory function.
+
++ still simple
++ dynamic
+- had no init
 
 Here's a simple template view returned by a factory:
 
@@ -29,15 +39,40 @@ Here's a simple template view returned by a factory:
 const DetailsView = () => ({ template:"App" });
 ```
 
-### 2. Class Views
+export default () => {
+	var data = [];
+	for (var i=0; i<10; i++) data.push({ value:i });
+
+	return {
+		view:"list", options:data
+	}
+}
+
+export const Form = () => ({
+    view:"form", elements:[
+        { view:"text", name:"email", required:true, label:"Email" },
+        { view:"button", value:"save", click:() => this.show("Details") }
+    ]
+})
+
+something like inheritance
+
+const DetailsView = (n) => ({ template:"App", data:mydata });
+...
+export DetailsView(200)
+
+### 3. Class Views
 
 Views can be defined as JS6 classes.
 
 #### Advantages of classes
 
++ dynamic
++ has init and other methods that can be redefined by users
+
 * Multiple instances
 
-All instances have their individual states. E.g. if you use the same Toolbar class for to add identical toolbars, there are two instances of a Toolbar class and the toolbars will behave independently.
+All instances have their individual inner states. E.g. if you use the same Toolbar class for to add identical toolbars, there are two instances of a Toolbar class and the toolbars will behave independently.
 
 * **this**
 
@@ -151,7 +186,7 @@ The method receives two parameters:
 * the view UI
 * the URL
 
-* destroy
+* **destroy**
 
 **destroy** is called only once for each instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL. **destroy** also can be used to destroy temporary objects like popups and other child components to prevent memory leaks.
 
@@ -186,5 +221,15 @@ class ToolbarView extends JetView{
 }
 ```
 
+### ready
 
+
+config
+init
+urlChange
+	config
+	init
+	urlChange
+	ready
+ready
 

@@ -2,6 +2,27 @@
 
 Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed. The framework reacts to the URL change and rebuilds the interface from the elements after the hashbang. In the previous section you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
 
+Url of the page reflects current state of the app. By default, it is stored as part after hashband. When we chaging the url, app updates self accordingly. 
+
+> from the elements after the hashbang
+based on the url
+
+
+
+{ view:"segmented", options:["Toolbar", "Demo", "Task"], click: () => {
+        this.show("/Toolbar");
+}},
+
+
+/App/Demo/Toolbar
+Toolbar
+./Toolbar
+../../Toolbar
+
+
+/LAyout/Details
+Details
+
 ### 1. Jet Links
 
 You can add links with the **route** attribute instead of the usual **href** and provide the URL to the desired views, e.g.:

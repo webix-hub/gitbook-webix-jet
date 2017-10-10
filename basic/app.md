@@ -20,3 +20,27 @@ var app = new JetApp({
 ~~~
 
 You can open the needed URL and the UI will be rendered from the URL elements. The app splits the URL into parts, finds the corresponding files in the **views** folder and creates an interface by combining UI modules from those files.
+
+2. App
+
+var app = new JetApp({
+	start:"/top/layout"
+})
+app.render(); //mandatory!
+
+
+new JetApp({
+	mode:"readonly",  //application wide configuration
+	start:"/top/layout"
+});
+
+...
+if (this.app.config.readonly){
+	
+}
+
+//StoreRouter, EmptyRouter, HashRouter
+import {UrlRouter} from  "webix-jet"
+new JetApp({
+	router: UrlRouter
+});

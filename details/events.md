@@ -1,6 +1,6 @@
 ## Views Communication. Events
 
-The views are separated, but there should be some means of communication between them. Feel free to use the in-app event bus for that. You can attach an event handler to the event bus in one view and trigger the event in another view.
+Views are separated, but there should be some means of communication between them. Feel free to use the in-app event bus for that. You can attach an event handler to the event bus in one view and trigger the event in another view.
 
 First, attach an event to one view:
 
@@ -11,6 +11,25 @@ init(){
         this.show(something);
     });
 }
+```
+
+```js 
+// ??? from top-start sample ??? //
+import "./styles/app.css";
+import {JetApp} from "webix-jet";
+
+webix.ready(() => {
+	var app = new JetApp({
+		id:			APPNAME,
+		version:	VERSION,
+		start:		"/top/start"
+	});
+	app.render();
+
+	app.attachEvent("app:error:resolve", function(name, error){
+		window.console.error(error);
+	});
+});
 ```
 
 In the other view, there should be code that triggers the event, e.g.:
@@ -112,3 +131,21 @@ var app = new JetApp({
 
 If you click the button, all the records from the datatable will be deleted.
 
+### consider events
+
+{ click:() => {
+	this.getSubView().setMode("aaa")
+}}
+
+
+## good with methods
+
+config: (){ return { cols:[ 
+	{ name:"letf", $subview:FileView }, 
+	{ name:"right", $subview:FileView }
+]]
+
+init: (){
+	this.getSibview("left").loadFiles("a")
+	this.getSibview("right").loadFiles("b")
+}

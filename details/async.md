@@ -18,6 +18,40 @@ export class StatisticsView extends JetView {
 });
 ```
 
+export class StatisticsView extends JetView {
+    config() { 
+        return webix.ajax("server/colors.php").then(function(data){
+            /* view creation */
+            data = data.json();
+            return {
+                view:"chart",
+                series:[
+                    { value:"#sales#", color:data[0].color},
+                    { value:"#sales2#", color:data[1].color}
+                ]
+            }
+        });
+    }
+};
+
+
+
+===
+
+
+
+export default webix.ajax("server/colors.php").then(function(data){
+            /* view creation */
+            data = data.json();
+            return {
+                view:"chart",
+                series:[
+                    { value:"#sales#", color:data[0].color},
+                    { value:"#sales2#", color:data[1].color}
+                ]
+            };
+}
+
 However, in practice some configuration settings in our UI can be stored in the database. For example in the above snippet we may want to store colors in DB to allow their customization by the end user. In such case, a module can return a promise of UI instead of UI configuration.
 
 ```js
@@ -47,4 +81,22 @@ There are several ways to implement asynchronous data loading:
 * **webix.promise** that allows treating the result of asynchronous operations without callbacks.
 
 
+const data = webix.ajax("data").then(res => {
+	return {
+		view:"list", options:res.json()
+	}
+});
+
+export default data;
+
+===
+
+expor default new Promise((res, rej) => {
+	webix.ajax("data", function(text, res){
+		const ui = {
+			view:"list", options:res.json()
+		};
+		res(ui);
+	})
+});
 
