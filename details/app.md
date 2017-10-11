@@ -30,8 +30,8 @@ For more info about showing UI components, [visit the section on view referencin
 
 The **use** method is used to include plugins. The method takes two parameters:
 
-- the name of the plug-in 
-- the plug-in configuration
+- the name of the plugin 
+- the plugin configuration
 
 ~~~js
 this.use(JetApp.plugins.PluginName, {
