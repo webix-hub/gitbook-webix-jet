@@ -8,7 +8,7 @@ this.use(JetApp.plugins.PluginName, {
 });
 ~~~
 
-After the plugin name, you are to specify the ID of the control you want to use the plugin for and the configuration of the plugin if necessary.
+After the plugin name, you are to specify the configuration for the plugin, e.g a control ID.
 
 ## 1. Default Plugins
 
@@ -16,7 +16,7 @@ After the plugin name, you are to specify the ID of the control you want to use 
 
 This plugin simplifies your life if you plan to create a menu. The plugin sets URLs for menu options, buttons or other controls you plan to use for showing subviews. Also, there's no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
 
-Let's create a familiar toolbar with a segmented button and use the plugin:
+Let's create a toolbar with a segmented button and use the plugin:
 
 ~~~js
 /* sources/views/toolbar.js */
@@ -29,8 +29,7 @@ export default class ToolbarView extends JetView{
 					"Details",
 					"Dash"
 				]}
-			]
-		};
+		]};
 	}
 	init(ui, url){
 		this.use(JetApp.plugins.Menu, {
@@ -43,7 +42,7 @@ export default class ToolbarView extends JetView{
 The plugin config contains the ID of the view element that's going to serve as a menu. If you click the buttons and reload the page, the app will behave as expected. The **menu** plugin has one more good part. You can change the URLs for every menu item. Let's add two more buttons and set URLs for them in the plugin config:
 
 ~~~js
-class ToolbarView extends JetView {
+export default class ToolbarView extends JetView {
 	config(){
 		return { 
 			view:"toolbar", elements:[
@@ -54,8 +53,7 @@ class ToolbarView extends JetView {
 					"Demo",
 					"Other"
 				]}
-			]
-		};
+		]};
 	}
 	init(ui, url){
 		this.use(JetApp.plugins.Menu, {
@@ -73,7 +71,7 @@ class ToolbarView extends JetView {
 
 #### UnloadGuard Plugin
 
-The **Unload** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and going to the next and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
+The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and going to the next and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
 
 The plugin reacts to an attempt of changing the URL. The syntax for using a plugin is _this.use\(plugin,handler\)_. Use takes two parameters:
 
@@ -83,7 +81,7 @@ The plugin reacts to an attempt of changing the URL. The syntax for using a plug
 You can move validation from the **Save** button handler to the plugin handler:
 
 ```js
-class FormView extends JetView {
+export default class FormView extends JetView {
     config(){
         return { 
             view:"form", elements:[
@@ -114,235 +112,176 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 
 #### Login Plugin
 
+This plugin is useful if you create apps that need authorization.
+
 - login through a custom script
 - login with external OATH service ( Google, Github, etc. )
 
-<!-- 
-getUser(){
-	return user;
-},
-getStatus(server? : boolean){
-	if (!server)
-		return user !== null;
+**Login** has several useful methods.
 
-	return model.status().catch(() => null).then(data => {
-		user = data;
-	});
-},
-login(name:string, pass:string){
-	return model.login(name, pass).then((data) => {
-		user = data;
-		if (!data) throw("Access denied");
+- getUser()
 
-		app.show(afterLogin);
-	});
-},
-logout(){
-	user = null;
-	return model.logout();
-}
+**getUser** returns the data of the currently logged user.
 
-app.setService("user", service);
- -->
+- getStatus()
 
-```js
+**getStatus** returns the current status of the user. It can receive an optional boolean parameter *server*.
 
-```
+- login(name, password)
+
+**login** receives the username and the password, verifies them and if everything's fine, shows the afterLogin page. Otherwise, it shows an error message.
+
+- logout()
+
+**logout** ends the current session and shows an afterLogout page, usually it's the login form.
+
+When the plugin is included, the **user** service is launched. The service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
 
 ## Theme plugin
 
-<!-- getTheme(){ return theme; },
-		setTheme(name:string, silent?:boolean){ -->
+This is a plugin to change app themes. There are two methods that the **theme** service provides:
 
-<!-- app.setService("theme", service);
-	service.setTheme(theme, true); -->
+- getTheme()
 
-<!-- ```js
-import {JetApp, JetView, plugins} from "webix-jet";
+returns the name of the current theme
 
-export default class SettingsView extends JetView {
+- setTheme(name)
+
+takes one obligatory parameter - the name of the theme - and sets the theme for the app
+
+Consider an example:
+
+```js
+class SettingsView extends JetView {
 	config(){
-		const _ = this.app.getService("locale")._;
-		const lang = this.app.getService("locale").getLang();
-
+		const theme = this.app.getService("theme").getTheme();
 
 		return {
 			type:"space", rows:[
-				{ template:_("Settings"), type:"header" },
-				{ name:"lang", optionWidth: 120, view:"segmented", label:_("Language"), options:[
-					{id:"en", value:"English"},
-					{id:"es", value:"Spanish"}
-				], click:() => this.toggleLanguage(), value:lang },
+				{ template:"Settings", type:"header" },
+				{ name:"skin", optionWidth: 120, view:"segmented", label:"Theme", options:[
+					{id:"flat-default", value:"Default"},
+					{id:"flat-shady", value:"Shady"},
+					{id:"compact-default", value:"Compact"}
+				], click:() => this.toggleTheme(), value:theme },
 				{}
 			]
 		};
 	}
-	toggleLanguage(){
-		const langs = this.app.getService("locale");
-		const value = this.getRoot().queryView({ name:"lang" }).getValue();
-		langs.setLang(value);
+	toggleTheme(){
+		const themes = this.app.getService("theme");
+		const value = this.getRoot().queryView({ name:"skin" }).getValue();
+		themes.setTheme(value);
 	}
 }
+```
 
-
-webix.ready(() => {
-	const app = new JetApp({
-		id:			"plugins-themes",
-		start:		"/start",
-		views:{
-			start: SettingsView
-		}
-	});
-	app.use(plugins.Locale);
-	app.render();
-});
-``` -->
-
-## Locale plugin
-
-<!-- _:null,
-	polyglot: null,
-	getLang(){ return lang; },
-	setLang(name:string, silent? : boolean){
-		let data = require("jet-locales/"+name);
-		if (data.__esModule) {
-			data = data.default;
-		}
-
-		const poly = service.polyglot = new Polyglot({ phrases:data });
-		poly.locale(name);
-
-		service._ = webix.bind(poly.t, poly);
-		lang = name;
-
-		if (storage){
-			storage.put("lang", lang);
-		}
-		if (!silent){
-			app.refresh();
-		}
-	}
-};
-
-app.setService("locale", service);
-service.setLang(lang, true); -->
-
-<!-- ```js
-import {JetApp, JetView, plugins} from "webix-jet";
-
-export default class SettingsView extends JetView {
-	config(){
-		const _ = this.app.getService("locale")._;
-		const lang = this.app.getService("locale").getLang();
-
-
-		return {
-			type:"space", rows:[
-				{ template:_("Settings"), type:"header" },
-				{ name:"lang", optionWidth: 120, view:"segmented", label:_("Language"), options:[
-					{id:"en", value:"English"},
-					{id:"es", value:"Spanish"}
-				], click:() => this.toggleLanguage(), value:lang },
-				{}
-			]
-		};
-	}
-	toggleLanguage(){
-		const langs = this.app.getService("locale");
-		const value = this.getRoot().queryView({ name:"lang" }).getValue();
-		langs.setLang(value);
-	}
-}
-
-
-webix.ready(() => {
-	const app = new JetApp({
-		id:			"plugins-themes",
-		start:		"/start",
-		views:{
-			start: SettingsView
-		}
-	});
-	app.use(plugins.Locale);
-	app.render();
-});
-``` -->
-
-## Status plugin
-
-
-<!-- const basetext = {
-	"good":	"Ok",
-	"error": "Error",
-	"saving": "Connecting..."
-};
-
-app.setService("status", {
-		getStatus,
-		setStatus,
-		track
-	}); -->
-
-<!-- ```js
-import {JetApp, JetView, plugins} from "webix-jet";
-
-export default class StartView extends JetView {
-	config(){
-		return {
-			type:"space", rows:[
-				{ template:"Some Data", type:"header" },
-				{ view:"datatable", id:"table", autoConfig:true, editable:true },
-				{ view:"template", id:"app:status", height: 30 }
-			]
-		};
-	}
-	init(){
-		this.use(plugins.Status, { 
-			target: "app:status",
-			ajax:true,
-			expire: 5000
-		});
-
-		const data = new webix.DataCollection({
-			url:"/assets/data.json",
-			save:"//docs.webix.com/wrongurl"
-		});
-		webix.$$("table").parse(data);
-	}
-}
-
-
-webix.ready(() => {
-	const app = new JetApp({
-		id:			"plugins-themes",
-		start:		"/start",
-		views:{
-			start: StartView
-		}
-	});
-
-	app.render();
-
-	app.attachEvent("app:error:server", function(){
-		webix.alert({
-			title:"Data Saving Error",
-			width: 480,
-			text:"This sample has not server side,<br> so any attempt to save data will result in an error."
-		});
-	});
-});
-``` -->
-
-<!-- status
-	- ajax:true, data, remote:true ( webix.remote )
-
-theme
+<!-- theme
 	flat-shady
 		title:"flat"
 		document.body.className += " .theme-flat-shady"
-		webix.setSkin("flat")
- -->
+		webix.setSkin("flat") -->
 
-**2.Custom Plugins**
+The **theme** service gets the theme name, chosen by a user, locates the correct stylesheet and sets the theme. Note that option IDs should have two parts, the first of them must be the same as the *title* attribute of the link to a stylesheet. The service locates links to stylesheets by this attribute. Here are the stylesheets for the example:
+
+```html
+<link rel="stylesheet" title="flat" type="text/css" href="//cdn.webix.com/edge/webix.css">
+<link rel="stylesheet" title="compact" type="text/css" href="//cdn.webix.com/edge/skins/compact.css">
+```
+
+**getTheme** is also needed in config to restore the state of the segmented button after the new theme is applied.
+
+[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js).
+
+## Locale plugin
+
+This is a plugin for localizing apps. Locale files are usually created in the *locales* folder. This is an example of the Spanish locale file:
+
+```js
+/* sources/locales/es.js */
+export default {
+	"Settings" : "Ajustes",
+	"Language" : "Idioma",
+	"Theme" : "Tema"
+};
+```
+
+The Locale service has several methods for localizing.
+
+- the _(value) helper
+
+This helper looks for the field in a locale file and returns the translated value. E.g. *this.app.getService("locale")._("Settings")* will return *"Ajustes"*, if Spanish is chosen.
+
+- getLang()
+
+The method returns the current language.
+
+- setLang(name)
+
+The method changes the language.
+
+Consider an example:
+
+```js
+import {JetApp, JetView, plugins} from "webix-jet";
+
+export default class SettingsView extends JetView {
+	config(){
+		const _ = this.app.getService("locale")._; 				//alias
+		const lang = this.app.getService("locale").getLang();
+
+		return {
+			type:"space", rows:[
+				{ template:_("Settings"), type:"header" },
+				{ name:"lang", optionWidth: 120, view:"segmented", label:_("Language"), options:[
+					{id:"en", value:"English"},
+					{id:"es", value:"Spanish"}
+				], click:() => this.toggleLanguage(), value:lang },
+				{}
+			]
+		};
+	}
+	toggleLanguage(){
+		const langs = this.app.getService("locale");
+		const value = this.getRoot().queryView({ name:"lang" }).getValue();
+		langs.setLang(value);
+	}
+}
+```
+
+When a user chooses a language, a corresponding file is located and the app language is changed. IDs of the language options should be the same as the locale file names. **getLang** in config restores the value of the segmented button.
+
+[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js).
+
+## Status Plugin
+
+This plugin is useful if you want to show the status of data loading in case it takes time, to confirm succes or to show an error message. These are the status messages that you can see:
+
+- "Ok"
+- "Error"
+- "Connecting..."
+
+This is how you can include the plugin:
+
+```js
+init(){
+	this.use(plugins.Status, { 
+		target: "app:status",
+		ajax:true,
+		expire: 5000
+	});
+}
+```
+
+The **target** property is the ID of the view component where you want to display the message. *ajax:true* enables asynchronous requests. *expire* defines the time after which the status message disappears (5 seconds in this case). By default, the time is set to 3 seconds, and if you set it to 0, the message will stay as long as the page is open.
+
+**Status** can have two more properties in its config:
+
+- **data** - a property that defines the ID of the data component to track.
+- **remote** - a boolean property that enables *webix.remote* - a special protocol that allows the client component to call functions on the server directly.
+
+[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js).
+
+## 2.Custom Plugins
 
 You can define your own plugins.
