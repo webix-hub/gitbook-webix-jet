@@ -1,6 +1,6 @@
-## Plugins
+# Plugins
 
-The new version of Webix Jet provides both predefined plugins and the ability to create your own. This is the syntax to use a plugin:
+The new version of Webix Jet provides both predefined plugins and the ability to create your own. This is the general syntax to use a plugin:
 
 ~~~js
 this.use(JetApp.plugins.PluginName, {
@@ -8,9 +8,9 @@ this.use(JetApp.plugins.PluginName, {
 });
 ~~~
 
-After the plugin name, you are to specify the configuration of the plugin.
+After the plugin name, you are to specify the ID of the control you want to use the plugin for and the configuration of the plugin if necessary.
 
-### 1. Default Plugins
+## 1. Default Plugins
 
 #### Menu Plugin
 
@@ -19,7 +19,8 @@ This plugin simplifies your life if you plan to create a menu. The plugin sets U
 Let's create a familiar toolbar with a segmented button and use the plugin:
 
 ~~~js
-class ToolbarView extends JetView{
+/* sources/views/toolbar.js */
+export default class ToolbarView extends JetView{
 	config(){
 		return { 
 			view:"toolbar", elements:[
@@ -116,13 +117,47 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 - login through a custom script
 - login with external OATH service ( Google, Github, etc. )
 
+<!-- 
+getUser(){
+	return user;
+},
+getStatus(server? : boolean){
+	if (!server)
+		return user !== null;
+
+	return model.status().catch(() => null).then(data => {
+		user = data;
+	});
+},
+login(name:string, pass:string){
+	return model.login(name, pass).then((data) => {
+		user = data;
+		if (!data) throw("Access denied");
+
+		app.show(afterLogin);
+	});
+},
+logout(){
+	user = null;
+	return model.logout();
+}
+
+app.setService("user", service);
+ -->
+
 ```js
 
 ```
 
 ## Theme plugin
 
-```js
+<!-- getTheme(){ return theme; },
+		setTheme(name:string, silent?:boolean){ -->
+
+<!-- app.setService("theme", service);
+	service.setTheme(theme, true); -->
+
+<!-- ```js
 import {JetApp, JetView, plugins} from "webix-jet";
 
 export default class SettingsView extends JetView {
@@ -161,11 +196,38 @@ webix.ready(() => {
 	app.use(plugins.Locale);
 	app.render();
 });
-```
+``` -->
 
 ## Locale plugin
 
-```js
+<!-- _:null,
+	polyglot: null,
+	getLang(){ return lang; },
+	setLang(name:string, silent? : boolean){
+		let data = require("jet-locales/"+name);
+		if (data.__esModule) {
+			data = data.default;
+		}
+
+		const poly = service.polyglot = new Polyglot({ phrases:data });
+		poly.locale(name);
+
+		service._ = webix.bind(poly.t, poly);
+		lang = name;
+
+		if (storage){
+			storage.put("lang", lang);
+		}
+		if (!silent){
+			app.refresh();
+		}
+	}
+};
+
+app.setService("locale", service);
+service.setLang(lang, true); -->
+
+<!-- ```js
 import {JetApp, JetView, plugins} from "webix-jet";
 
 export default class SettingsView extends JetView {
@@ -204,11 +266,24 @@ webix.ready(() => {
 	app.use(plugins.Locale);
 	app.render();
 });
-```
+``` -->
 
 ## Status plugin
 
-```js
+
+<!-- const basetext = {
+	"good":	"Ok",
+	"error": "Error",
+	"saving": "Connecting..."
+};
+
+app.setService("status", {
+		getStatus,
+		setStatus,
+		track
+	}); -->
+
+<!-- ```js
 import {JetApp, JetView, plugins} from "webix-jet";
 
 export default class StartView extends JetView {
@@ -256,9 +331,9 @@ webix.ready(() => {
 		});
 	});
 });
-```
+``` -->
 
-status
+<!-- status
 	- ajax:true, data, remote:true ( webix.remote )
 
 theme
@@ -266,7 +341,7 @@ theme
 		title:"flat"
 		document.body.className += " .theme-flat-shady"
 		webix.setSkin("flat")
-
+ -->
 
 **2.Custom Plugins**
 
