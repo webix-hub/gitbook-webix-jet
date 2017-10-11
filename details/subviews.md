@@ -1,4 +1,4 @@
-# Views
+## Views
 
 After reading the first chapter of this guide, you are familiar with the concept of a _view_. Now it's time to find out all the ways of creating views. You can create views in three ways.
 
@@ -65,7 +65,7 @@ Views can be defined as JS6 classes.
 
 - Classes have the **this** pointer that references the view inside methods and handlers.
 
-- With JS6 classes, **inheritance** is closer to classic OOP and the syntax is nicer. Inheritance can help you reuse old components for creating slightly different ones. For example, if you already have a toolbar and want to create a similar one, but with one additional button, define a new class and inherite from the old toolbar.
+- With JS6 classes, **inheritance** is closer to classic OOP and the syntax is nicer. Inheritance can help you reuse old components for creating slightly different ones. For example, if you already have a toolbar and want to create a similar one, but with one additional button, define a new class and inherit from the old toolbar.
 
 ### JetView Methods
 
@@ -93,10 +93,10 @@ class ToolbarView extends JetView{
 
 #### init\(view, url\)
 
-The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view. For instance, the above defined toolbar will be always rendered with the first segment active regardless of the URL. You can link the control state to the URL:
+The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view. For instance, the above-defined toolbar will be always rendered with the first segment active regardless of the URL. You can link the control state to the URL:
 
 ```js
-class ToolbarView extends JetView{
+export default class ToolbarView extends JetView{
     config(){
         return { 
             view:"toolbar", elements:[
@@ -328,7 +328,7 @@ export default BigView = {
 
 ### 2. App Inclusion
 
-App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level appications.
+App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level applications.
 
 ```js
 /* views/form.js */
