@@ -119,33 +119,33 @@ This plugin is useful if you create apps that need authorization.
 
 **Login** has several useful methods.
 
-- getUser()
+###### getUser()
 
 **getUser** returns the data of the currently logged user.
 
-- getStatus()
+###### getStatus()
 
 **getStatus** returns the current status of the user. It can receive an optional boolean parameter *server*.
 
-- login(name, password)
+###### login(name, password)
 
 **login** receives the username and the password, verifies them and if everything's fine, shows the afterLogin page. Otherwise, it shows an error message.
 
-- logout()
+###### logout()
 
 **logout** ends the current session and shows an afterLogout page, usually it's the login form.
 
 When the plugin is included, the **user** service is launched. The service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
 
-## Theme plugin
+#### Theme plugin
 
 This is a plugin to change app themes. There are two methods that the **theme** service provides:
 
-- getTheme()
+###### getTheme()
 
 returns the name of the current theme
 
-- setTheme(name)
+###### setTheme(name)
 
 takes one obligatory parameter - the name of the theme - and sets the theme for the app
 
@@ -189,11 +189,11 @@ The **theme** service gets the theme name, chosen by a user, locates the correct
 <link rel="stylesheet" title="compact" type="text/css" href="//cdn.webix.com/edge/skins/compact.css">
 ```
 
-**getTheme** is also needed in config to restore the state of the segmented button after the new theme is applied.
+**getTheme** is also needed in the config to restore the state of the segmented button after the new theme is applied.
 
 [Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js).
 
-## Locale plugin
+#### Locale plugin
 
 This is a plugin for localizing apps. Locale files are usually created in the *locales* folder. This is an example of the Spanish locale file:
 
@@ -208,15 +208,15 @@ export default {
 
 The Locale service has several methods for localizing.
 
-- the _(value) helper
+###### the _(value) helper
 
 This helper looks for the field in a locale file and returns the translated value. E.g. *this.app.getService("locale")._("Settings")* will return *"Ajustes"*, if Spanish is chosen.
 
-- getLang()
+###### getLang()
 
 The method returns the current language.
 
-- setLang(name)
+###### setLang(name)
 
 The method changes the language.
 
@@ -253,7 +253,7 @@ When a user chooses a language, a corresponding file is located and the app lang
 
 [Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js).
 
-## Status Plugin
+#### Status Plugin
 
 This plugin is useful if you want to show the status of data loading in case it takes time, to confirm succes or to show an error message. These are the status messages that you can see:
 
