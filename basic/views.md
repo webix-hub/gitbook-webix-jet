@@ -61,12 +61,8 @@ export default class BigView extends JetView {
     config() => { 
             rows:[
                 { $subview: true },
-                {
-                    template:"BigView text"
-                }
-            ]   
-        }
-    }
+                { template:"BigView text" }
+    ]}
 }
 ```
 
