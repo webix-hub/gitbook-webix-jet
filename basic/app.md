@@ -43,7 +43,7 @@ if (this.app.config.readonly){
 }
 ```
 
-New Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is *HashRouter*. If you don't want to display the hashbang in the URL, you can change the route to type to URLRouter:
+New Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is *HashRouter*. If you don't want to display the hashbang in the URL, you can change the route to type to UrlRouter:
 
 ```js
 import {UrlRouter} from "webix-jet";
