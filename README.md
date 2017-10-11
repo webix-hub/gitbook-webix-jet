@@ -46,7 +46,7 @@ For example, there are 2 files in the *views* folder of our app:
 - top.js
 - start.js
 
-If you set the path to *index.html#!/top/start*, the interface described in the *views/top.js* file will be rendered first. Then the interface from *views/start* will be added in some cell of top level interface:
+If you set the path to *index.html#!/top/start*, the interface described in the *views/top.js* file will be rendered first. Then the interface from *views/start* will be added in some cell of top-level interface:
 
 **index.html#!/top/start**
 
@@ -158,7 +158,7 @@ export default class DataView extends JetView{
 As you can see, this module returns an object that differs from those we described earlier. There are two variants of the return object. It can be simply a description of interface or a JetView based class, which can have:
 
 - the *config* method, that returns the interface of the component that will be initialized. In our example it’s a datatable;
-- the *init* method specifies the component initialization behavior, in our case data from the records model will be loaded into the view after its creation. 
+- the *init* method specifies the component initialization behavior, in our case data from the *records* model will be loaded into the view after its creation. 
 
 For more details on view classes, [go to the advanced chapter on views](details/views.md).
 
