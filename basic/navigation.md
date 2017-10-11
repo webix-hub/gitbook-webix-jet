@@ -2,7 +2,7 @@
 
 Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed[^1]. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
 
-The URL of the page reflects the current state of the app. By default, it is stored as a part after the hashbang. When we chage the URL, the app updates itself accordingly. 
+The URL of the page reflects the current state of the app. By default, it is stored as a part after the hashbang. When we change the URL, the app updates itself accordingly. 
 
 
 ### 1. Jet Links
@@ -21,15 +21,15 @@ The **app.show\(\)** method is applied to the whole application. You can call th
 
 ```js
 { view:"button", value:"Details", click: () => {
-    this.app.show("/demo/"+this.getValue())
+    this.app.show("/demo/"+this.getValue().toLowerCase());
 }}
 ```
 
-After a button click, the URL will change, and the whole app will be rebuilt according to it.
+After a button click, the URL will change, and the app UI will be rebuilt according to it.
 
 ### 3. view.show\(\)
 
-You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this.$scope**. This way gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app. For example, suppose you have a view like this:
+You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this.$scope**. This way gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
 ```js
 [
@@ -65,7 +65,7 @@ To replace the current subview with a different one, specify the name as it is o
 
 The resulting URL is going to be */layout/demo*.
 
-URL syntax resembles the way you navigate through directories. So you can move some levels up, for example:
+This syntax resembles the way you navigate through directories. So you can move some levels up, for example:
 
 ```js
 { view:"button", value:"demo", click: () => {

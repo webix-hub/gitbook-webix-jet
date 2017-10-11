@@ -1,11 +1,11 @@
 ## View Concept
 
-Views are modules for interface elements that are usually kept in separate files. This makes the code loosely coupled. If some part of the app is messed up, the rest of it works. All visual components of the UI are separated from each other and can be reused. Parts of an app can be developed and tested independently. All the above said is critical for large and huge apps. Besides, the code looks neater.
+Views are modules for interface elements that are usually kept in separate files. This makes the code loosely coupled. If some part of the app is messed up, the rest of it works. Parts of an app can be developed and tested independently. All visual components of the UI are separated from each other and can be reused. All the above said is critical for large and huge apps. Besides, the code looks neater.
 
-All views should be stored in the **views** folder: one view per file. For example, this is how a view module is defined in _myview.js_:
+All views should be stored in the **views** folder: one view per file. For example, this is how a view module is defined in _sources/views/myview.js_:
 
 ```js
-/* views/myview.js */
+/* sources/views/myview.js */
 import {JetView} from "webix-jet";
 
 export default class MyView extends JetView{
@@ -25,14 +25,14 @@ Apps created with Webix Jet are single-page. The interface of your app can be co
 
 #### Direct Including
 
-One of the ways to nest a view is to include a view class. Let's create a new view in _bigview.js_ and include the **MyView** class in it:
+One of the ways to nest a view is to directly include a view class. Let's create a new view in _bigview.js_ and include the **MyView** class into it:
 
 ```js
 /* views/bigview.js */
 import {JetView} from "webix-jet";
-import {MyView} from "myview";
+import MyView from "myview";
 
-export class BigView extends JetView{
+export default class BigView extends JetView{
     config() => { 
             rows:[
                 MyView,
@@ -57,7 +57,7 @@ You can enable embedding multiple views that will change according to the URL. I
 
 ```js
 /* views/bigview.js */
-export class BigView extends JetView {
+export default class BigView extends JetView {
     config() => { 
             rows:[
                 { $subview: true },
@@ -83,4 +83,4 @@ index.html#!/bigview/viewa
 index.html#!/bigview/viewb
 ```
 
-For more information on other ways to define views, [go to the corresponding advanced section](../details/views.md).
+For more information on other ways to define views and include subviews, [go to the corresponding advanced section](../details/subviews.md).
