@@ -77,6 +77,8 @@ As a result, the app URL will be */bigview*.
 
 [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see how the described ways of navigation are used in an application.
 
+You can read a section in the next chapter on [HTML links for navigation](../details/navigation.md).
+
 This is all about Webix Jet in a nutshell. For more details, go on to the next chapter.
 
 <!-- footnotes -->
