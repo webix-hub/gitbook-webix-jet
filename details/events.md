@@ -15,23 +15,6 @@ init(){
 }
 ```
 
-<!-- // ??? from top-start sample ??? //
-import "./styles/app.css";
-import {JetApp} from "webix-jet";
-
-webix.ready(() => {
-	var app = new JetApp({
-		id:		APPNAME,
-		version:	VERSION,
-		start:		"/top/start"
-	});
-	app.render();
-
-	app.attachEvent("app:error:resolve", function(name, error){
-		window.console.error(error);
-	});
-}); -->
-
 In the other view, there should be code that triggers the event, e.g.:
 
 ```js
@@ -48,7 +31,7 @@ To make your life happier, there are aliases for methods used to trigger events.
 
 **1.**_**trigger**_
 
-Instead of using
+Instead of using **callEvent**
 
 ```js
 app.callEvent("eventName", [some_value]);
@@ -62,7 +45,7 @@ app.trigger("eventName", [some_value]);
 
 **2.**_**action**_
 
-This alias unites both the click handler and the callEvent method. So the same code transforms into:
+This alias unites both the click handler and the **callEvent** method. So the same code transforms into:
 
 ```js
 on:{
@@ -70,85 +53,70 @@ on:{
 }
 ```
 
-### Declaring and calling methods
+### Declaring and Calling Methods
 
 One more effective way of connecting views is methods. In one of the views we define a handler that will call some function, and in another view we call this handler.
 
 Unlike events, methods both call actions in views and are able to return something useful. However, this option can only be used when we know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
 
-Let's have a look at the example below:
+#### Events vs Methods
+
+Have a look at the example. Here's a view that has a method *setMode("mode")*:
 
 ```js
-/* views/actions.js */
-export class Actions extends JetView {
-    config() {
+/* sources/views/child.js */
+export default class ChildView extends JetView{
+    cofig(){
         return {
-            view:"datatable", localId:"actions", autoConfig:true, autoheight:true, scroll:false,
-            data:[
-                { action:"UnSubscribed from all lists", date: "2017-07-12" },
-                { action:"Subscribed to the News list", date: "2017-06-08" },
-                { action:"Subscribed to the Marketing list", date: "2017-06-04" }
-            ]
+            { view:"spreadsheet" }
         }
     }
-    truncateAll(){
-        this.$$("actions").clearAll();
-    }
-};
-```
-
-The code of a view creates a datatable. It this view we declare the **truncateAll\(\)** method for clearing the table. Its parent view should call this method:
-
-```js
-/* views/demo.js */
-import {Actions} from "actions"
-export class DemoView extends JetView {
-    config(){
-        return {
-            rows: [
-                { view:"toolbar", elements: [
-                    { view:"button", value:"Clear all",
-                    click:()=>{
-                        //same as this.app.$$("actions").clearAll();
-                        Actions.truncateAll();
-                    } }
-                ] },
-                Actions
-            ]
-        }
+    setMode("mode"){
+        //sets the mode of the view
     }
 }
-/* app.js */
-import {DemoView} from "demo"
-var app = new JetApp({
-    start: "/Demo",
-    views: {
-        "Demo": DemoView,
-        "Actions": Actions
-    }
-}).render();
 ```
 
-If you click the button, all the records from the datatable will be deleted.
-
-#### consider events
+And here's a parent view than will enclose *SubView*:
 
 ```js
-{ click:() => {
-	this.getSubView().setMode("aaa")
+/* sources/views/parent.js */
+import child from "child"
+export default class ParentView extends JetView{
+    config() {
+        return {
+            rows:[
+                { view:"button", value:"Set mode", click:() => {
+                    this.getSubView().setMode("readonly")}
+                }, 
+                { subview: child }]
+    }}
+}
+```
+
+**this.getSubview()** refers to *child* and calls the method. It can take a parameter with the name of a subview if there are several subviews.
+
+You can use methods for view communication in similar use-cases, but still events are more advisable here. Now let's have a look at the example where methods are better.
+
+#### Methods vs Events
+
+Suppose you want to create a filemanager resembling TotalCommander. The parent view will have two file views as subviews:
+
+```js
+config() { 
+    return { 
+        cols:[ 
+            { name:"left", $subview:FileView }, 
+            { name:"right", $subview:FileView }
+        ]
 }}
 ```
 
-#### good with methods
+Here each subview has a name. *FileView* has the *loadFiles* method. Next, let's tell the filemanager which paths to open in each file view:
 
 ```js
-config: (){ return { cols:[ 
-	{ name:"letf", $subview:FileView }, 
-	{ name:"right", $subview:FileView }
-]]
-
-init: (){
-	this.getSibview("left").loadFiles("a")
-	this.getSibview("right").loadFiles("b")
+init() {
+	this.getSubview("left").loadFiles("a");
+	this.getSubview("right").loadFiles("b");
 }
 ```

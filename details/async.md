@@ -18,41 +18,7 @@ export class StatisticsView extends JetView {
 });
 ```
 
-<!-- export class StatisticsView extends JetView {
-    config() { 
-        return webix.ajax("server/colors.php").then(function(data){
-            /* view creation */
-            data = data.json();
-            return {
-                view:"chart",
-                series:[
-                    { value:"#sales#", color:data[0].color},
-                    { value:"#sales2#", color:data[1].color}
-                ]
-            }
-        });
-    }
-};
-
-
-
-===
-
-
-
-export default webix.ajax("server/colors.php").then(function(data){
-            /* view creation */
-            data = data.json();
-            return {
-                view:"chart",
-                series:[
-                    { value:"#sales#", color:data[0].color},
-                    { value:"#sales2#", color:data[1].color}
-                ]
-            };
-} -->
-
-However, in practice, some configuration settings in our UI can be stored in the database. For example, in the above snippet, we may want to store colors in DB to allow their customization by the end user. In such case, a module can return a promise of UI instead of UI configuration.
+However, in practice, some configuration settings in our UI can be stored in the database. For example, in the above snippet, we may want to store colors in DB to allow their customization by the end user. In such case, a module can return a promise of UI instead of UI configuration. Let's use **webix.ajax** that makes an asynchronous request to a PHP script and shows its response through a callback function.
 
 ```js
 export class StatisticsView extends JetView {
@@ -74,29 +40,48 @@ export class StatisticsView extends JetView {
 
 The **webix.ajax\(\)** call sends an asynchronous request to the _server/colors.php_ script on the server and returns a promise of data instead of real data. First, all the data should come to the client side and only after that the final view configuration will be constructed and the view will be rendered.
 
-There are several ways to implement asynchronous data loading:
+The same view can be defined in a simpler way. You can define is as a promise of object:
 
-* **webix.ajax** that makes an asynchronous request to a PHP script and shows its response through a callback function;
-* **data.waitData** that is used for data components, such as DataCollection, List, Tree, DataTable, etc;
-* **webix.promise** that allows treating the result of asynchronous operations without callbacks.
+```js
+export default webix.ajax("server/colors.php").then(function(data){
+    /* view creation */
+    data = data.json();
+    return {
+        view:"chart",
+        series:[
+            { value:"#sales#", color:data[0].color},
+            { value:"#sales2#", color:data[1].color}
+        ]
+    };
+}
+```
 
+Have a look at a list view defined as a promise:
 
-<!-- const data = webix.ajax("data").then(res => {
+```js 
+const data = webix.ajax("data").then(res => {
 	return {
 		view:"list", options:res.json()
 	}
 });
-
 export default data;
+```
 
-===
+More explicitly, the same list view can be defined like this:
 
-expor default new Promise((res, rej) => {
+```js
+export default new Promise((res, rej) => {
 	webix.ajax("data", function(text, res){
 		const ui = {
 			view:"list", options:res.json()
 		};
 		res(ui);
 	})
-}); -->
+});
+```
+
+There are two more ways to implement asynchronous data loading:
+
+* **data.waitData** that is used for data components, such as DataCollection, List, Tree, DataTable, etc;
+* **webix.promise** that allows treating the result of asynchronous operations without callbacks.
 
