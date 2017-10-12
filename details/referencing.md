@@ -8,32 +8,34 @@ Any Webix component created inside of view has the **$scope** property, which po
 
 ```js
 /* sources/views/toolbar.js */
-export const Toolbar = {
+const Toolbar = {
     view: "toolbar",
     elements: [
         { view: "label", label: "Demo" },
         { view: "button", value:"Details",
             click: function() {
-                this.$scope.show(this.getValue())
+                this.$scope.show(this.getValue().toLowerCase());
             }
     }]
 };
+export default Toolbar;
 ```
 
 If you prefer a shorter syntax, let the handler be an arrow function. Then simply use **this** for view reference:
 
 ```js
 /* sources/views/toolbar.js */
-export const Toolbar = {
+const Toolbar = {
     view: "toolbar",
     elements: [
         { view: "label", label: "Demo" },
         { view: "button", value:"Details",
             click: () => {
-                this.show(this.getValue())
+                this.show(this.getValue().toLowerCase());
             }
     }]
 };
+export default Toolbar;
 ```
 
 #### 2.Reference to the app
@@ -42,7 +44,7 @@ export const Toolbar = {
 
 ```js
 /* sources/views/toolbar.js */
-export class ToolbarView extends JetView {
+export default class ToolbarView extends JetView {
     config() {
         return {
             view: "toolbar",
@@ -72,7 +74,7 @@ Suppose you have a view with a form and you want to validate its input when user
 
 ```js
 /* sources/views/form.js */
-export class FormView extends JetView{
+export default class FormView extends JetView{
     config(){
         return { 
             view:"form", elements:[
@@ -89,13 +91,13 @@ export class FormView extends JetView{
 
 After the form is validated, the form will be replaced with the **details** view. 
 
-**4.Referencing nested views and controls**
+#### 4.Referencing nested views and controls
 
 You already know how to change the URL by controls. Now have a look how the state of controls can be changed by the URL. For example, if you have a toolbar with a segmented button that is used to switch between two views:
 
 ```js
 /* sources/views/toolbar.js */
-class ToolbarView extends JetView {
+export default class ToolbarView extends JetView {
     config() {
         return {
             view: "toolbar",
@@ -141,7 +143,7 @@ export default class FormView extends JetView{
                     click: () => {
                         var text = this.getRoot().queryView({ name: "email" })
                         if (text.getValue())
-                            this.show("Details");
+                            this.show("details");
                     } 
                 }
             ]
@@ -150,16 +152,5 @@ export default class FormView extends JetView{
 }
 ```
 
-**queryView** will look for a view or a control with the *email* name. The same control can be found by its view type *text* or its label *Email*. The syntax is longer, but it works as fine as the search by its local ID.
+**queryView** will look for a view or a control with the *email* name inside the form. The same control can be found by its view type *text* or its label *Email*. The syntax is longer, but it works as fine as the search by its local ID.
 
-<!-- from admin app orders.js
-export default class OrdersView extends JetView{
-	config(){
-		return layout;
-	}
-	init(view){
-		view.queryView({ view:"datatable" }).parse(data);
-		this._form = this.ui(orderform);
-	}
-}
- -->

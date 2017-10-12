@@ -77,13 +77,13 @@ This method returns the initial UI configuration of a view. Have a look at a too
 
 ```js
 /* views/toolbar.js */
-class ToolbarView extends JetView{
+export default class ToolbarView extends JetView{
     config(){
         return { 
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
                 { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){
-                    this.$scope.app.show("/Demo/"+this.getValue())
+                    this.$scope.app.show("/demo/"+this.getValue().toLowerCase());
                 }}
             ]
         };
@@ -91,9 +91,11 @@ class ToolbarView extends JetView{
 }
 ```
 
+When a user clicks the segmented button, a subview will be changed by **this.$scope.app.show**. For more details on app and view referencing, [go to the dedicated section](referencing.md).
+
 #### init\(view, url\)
 
-The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view. For instance, the above-defined toolbar will be always rendered with the first segment active regardless of the URL. You can link the control state to the URL:
+The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view. For instance, the above-defined toolbar will be always rendered with the first segment of the button active regardless of the URL. You can link the control state to the URL in **init**:
 
 ```js
 export default class ToolbarView extends JetView{
@@ -102,7 +104,7 @@ export default class ToolbarView extends JetView{
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
                 { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){
-                    this.$scope.app.show("/Demo/"+this.getValue())
+                    this.$scope.app.show("/demo/"+this.getValue().toLowerCase());
                 }}
             ]
         };
@@ -114,7 +116,9 @@ export default class ToolbarView extends JetView{
 }
 ```
 
-The method receives two parameters:
+The segmented button is referenced by its local ID. For more details on referencing, [read the section in this chapter](referencing.md).
+
+The **init** method receives two parameters:
 
 * the view UI
 * the URL
@@ -138,13 +142,13 @@ If you change it to
 The **urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right menu item.
 
 ```js
-class ToolbarView extends JetView{
+export default class ToolbarView extends JetView{
     config(){
         return { 
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
                 { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){
-                    this.$scope.app.show("/Demo/"+this.getValue())
+                    this.$scope.app.show("/demo/"+this.getValue().toLowerCase())
                 }}
             ]
         };
@@ -160,14 +164,14 @@ class ToolbarView extends JetView{
 }
 ```
 
-The method receives two parameters:
+The **urlChange** method receives two parameters:
 
 * the view UI
 * the URL
 
 #### ready(view,url)
 
-**ready** is called when the current view and all its subviews are rendered. For instance, if the URL is changed to *a/b*, the order in which view class methods are called is the following:
+**ready** is called when the current view and all its subviews have been rendered. For instance, if the URL is changed to *a/b*, the order in which view class methods are called is the following:
 
 ```
 config a
@@ -237,7 +241,8 @@ The method also receives two parameters:
 **destroy** is called only once for each instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL. **destroy** also can be used to destroy temporary objects like popups and other child components to prevent memory leaks.
 
 ```js
-class ToolbarView extends JetView{
+/* views/toolbar.js */
+export default class ToolbarView extends JetView{
     config(){
         return { 
             view:"toolbar", elements:[
@@ -267,15 +272,15 @@ class ToolbarView extends JetView{
 }
 ```
 
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see the order of the life stages of each view.
+This is all on view class methods. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see the order of the life stages of each view.
 
 ## Subview Including
 
-Apart from direct inclusion, there are two more ways of creating subviews.
+Apart from direct inclusion [described in the second chapter](../basic/views.md), there are two more ways of creating subviews.
 
 ### 1. View Inclusion
 
-You can inject views into other views. For example, here are three views created in different ways:
+You can include views into other views. For example, here are three views created in different ways:
 
 - a class view
 
@@ -314,21 +319,32 @@ Let's group them into a bigger view:
 
 ```js
 /* views/bigview.js */
-import {MyView} from "myview"
+import {myview} from "myview"
 import {details} from "details"
 import {form} from "form"
 
 export default BigView = {
     rows:[
-        MyView,
+        myview,
         { $subview:"/details/form" }
+    ]
+}
+```
+
+Mind that all these views could be put in any order you want and it doesn't depend on the way they have been defined, e.g.:
+
+```js
+export default BigView = {
+    rows:[
+        details,
+        { $subview:"/myview/form" }
     ]
 }
 ```
 
 ### 2. App Inclusion
 
-App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level applications.
+App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level applications. E.g. here are two views:
 
 ```js
 /* views/form.js */
@@ -338,7 +354,7 @@ export defaulst class FormView extends JetView {
             view: "form",
             elements: [
                 { view: "text", name: "email", required: true, label: "Email" },
-                { view: "button", value: "save", click: () => this.show("Details") }
+                { view: "button", value: "save", click: () => this.show("details") }
             ]
         };
     }
@@ -356,13 +372,13 @@ Let's group these views into an app module:
 import {FormView} from "form"
 import {DetailsView} from "details"
 export var app1 = new JetApp({
-    start: "/Form",
-    router: JetApp.routers.EmptyRouter,
+    start: "/form",
+    router: JetApp.routers.EmptyRouter, //!
     views: {
-        "Form": FormView,
-        "Details": DetailsView
+        "form": FormView,
+        "details": DetailsView
     }
-}); //no render
+}); //no render!
 ```
 
 Note that this app module isn't rendered. The second important thing is the choice of the router. As this is the inner level, it can't have URL of its own. That's why *EmptyRouter* is chosen. [Go to the section on routers](routers.md) for details. 
@@ -371,9 +387,10 @@ Next, the app module is included into another view:
 
 ```js
 /* views/page.js */
-import {app1} from "app1"
+import {app1} from "app1";
+import {toolbar} from "toolbar";
 export default PageView = () => ({
-    rows: [ Toolbar, app1 ]
+    rows: [ toolbar, app1 ]
 });
 ```
 
@@ -383,10 +400,10 @@ Finally, the view can also be put into another app:
 /* app2.js */
 import {PageView} from "page"
 var app2 = new JetApp({
-    start: "/Page",
+    start: "/page",
     router: JetApp.routers.HashRouter,
     views: {
-        "Page": PageView
+        "page": PageView
     }
 }).render();
 ```
