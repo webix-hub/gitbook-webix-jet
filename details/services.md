@@ -5,7 +5,7 @@ JetApp provides the means to initialize services. To set a service, call the **s
 ```js
 init() => {
 	this.app.setService("masterTree", {
-		getSelected : () => this.getRoot().getSelectedId()
+		getSelected : () => this.getRoot().getSelectedId();
 	})
 ```
 

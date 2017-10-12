@@ -1,8 +1,8 @@
-## Referencing Views from Webix UI Events
+# Referencing Views from Webix UI Events
 
 In the new version of Webix Jet, there is a convenient reference to a view from Webix UI events with the **this** pointer. Consider the following use-cases.
 
-#### 1.Reference to the view
+### 1.Reference to the view
 
 Any Webix component created inside of view has the **$scope** property, which points to the instance of the view class. If you want to change the URL from controls of the view, reference the view with **this.$scope**:
 
@@ -38,7 +38,7 @@ const Toolbar = {
 export default Toolbar;
 ```
 
-#### 2.Reference to the app
+### 2.Reference to the app
 
 **this.$scope.app** references the app that encloses the view. This is useful if you want to rebuild the app UI.
 
@@ -68,7 +68,7 @@ click: () => {
 }
 ```
 
-#### 3.Reference to the root UI element of the view
+### 3.Reference to the root UI element of the view
 
 Suppose you have a view with a form and you want to validate its input when users click **Submit**. To refer to the form itself and not the whole view, use **this.$scope.getRoot\(\)**. It references the root UI element returned by config. In an arrow function the reference is **this.getRoot\(\)**:
 
@@ -91,7 +91,7 @@ export default class FormView extends JetView{
 
 After the form is validated, the form will be replaced with the **details** view. 
 
-#### 4.Referencing nested views and controls
+### 4.Referencing nested views and controls
 
 You already know how to change the URL by controls. Now have a look how the state of controls can be changed by the URL. For example, if you have a toolbar with a segmented button that is used to switch between two views:
 

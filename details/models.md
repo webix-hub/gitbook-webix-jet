@@ -1,4 +1,4 @@
-## Models
+# Models
 
 Data can be loaded inside view modules. It's also possible to create separate modules for data. While views contain the code of interface components, models can be used to control the data. This is useful in some cases, for example:
 

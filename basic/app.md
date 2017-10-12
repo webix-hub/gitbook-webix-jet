@@ -55,3 +55,5 @@ var app = new JetApp({
 ```
 
 The rest of the routers are *StoreRouter* and *EmptyRouter*. For more information about routers, [go to the dedicated section](../details/routers.md) of the advanced chapter.
+
+To read about JetApp API, [go to the related section](../details/app.md).

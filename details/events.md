@@ -1,4 +1,4 @@
-## Views Communication
+# Views Communication
 
 ### Events
 
@@ -59,7 +59,7 @@ One more effective way of connecting views is methods. In one of the views we de
 
 Unlike events, methods both call actions in views and are able to return something useful. However, this option can only be used when we know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
 
-#### Events vs Methods
+##### Events vs Methods
 
 Have a look at the example. Here's a view that has a method *setMode("mode")*:
 
@@ -98,7 +98,7 @@ export default class ParentView extends JetView{
 
 You can use methods for view communication in similar use-cases, but still events are more advisable here. Now let's have a look at the example where methods are better.
 
-#### Methods vs Events
+##### Methods vs Events
 
 Suppose you want to create a filemanager resembling TotalCommander. The parent view will have two file views as subviews:
 
