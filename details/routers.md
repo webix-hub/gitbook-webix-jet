@@ -4,18 +4,18 @@ To manipulate the URL, views have Routers. Webix Jet has four predefined types o
 
 ## 1. Hash Router \(default\)
 
-The app URL is displayed after a hashbang.
+The app URL is displayed after a hashbang. As this router is set by default, there's no need to to define it in the config.
 
 ```js
 /* app.js */
 var app = new JetApp({
-    start: "/Demo/Details",
-    router: JetApp.routers.HashRouter,
+    start: "/demo/details",
+    router: JetApp.routers.HashRouter, //optional
     views: {
-        "Demo": DemoView,
-        "Details": DetailsView,
-        "Dash": DashView,
-        "Toolbar": ToolbarView
+        "demo": DemoView,
+        "details": DetailsView,
+        "dash": DashView,
+        "toolbar": ToolbarView
     }
 }).render();
 ```
@@ -24,9 +24,9 @@ var app = new JetApp({
 
 The app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server-side code should be compatible.
 
-```js
-import {JetApp, UrlRouter} from "webix-jet";
+Have a look at the example. Here are three views: one parent and two child views that are dynamically included by a click on jet links in the parent view:
 
+```js
 const TopView = {
 	type:"space", rows:[
 		{ type:"header", template:"Url router"},
@@ -49,13 +49,18 @@ const StartView = {
 const DetailsView = {
 	template:"Details page"
 };
+```
 
+Let's create an app from these views and choose UrlRouter:
+
+```js
+import {JetApp, UrlRouter} from "webix-jet";
 webix.ready(() => {
 	const app = new JetApp({
-		id:			"plugins-themes",
+		id:			"routers-url",
 
 		router:		UrlRouter,
-		routerPrefix: "/routers-url",
+		routerPrefix: "/routers-url", //!
 
 		start:		"/top/start",
 		views:{
@@ -68,36 +73,66 @@ webix.ready(() => {
 });
 ```
 
+Note that there is a router prefix that is present in the URL instead of a hashbang. In your *index.html* you should set the relative URL with the same prefix:
+
+```html
+<script type="text/javascript">
+	if(document.location.pathname == "/index.html")
+		document.location.href = "/routers-url/";
+</script>
+```
+
+[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js).
+
 ## 3. Store Router
 
 With this guy, the app URL isn't displayed at all, but it is stored in the session storage. So no worries, you can still return to the previous and next views as if they are in the URL. This can be useful if you have a multilevel application \(apps are subviews of other apps\). The Store router is set for the enclosed apps because there's only one address bar and it's already taken by the outer app. Suppose you have closed an app module with a deep level of subviews and expect to be in the same place of this app when you switch to it again. The Store router allows this.
 
+Here's an app module with a form view:
+
 ```js
 var app1 = new JetApp({
-    start: "/Form",
+    start: "/form",
     router: JetApp.routers.StoreRouter,
     views: {
-        "Form": FormView,
-        "Details": DetailsView
+        "form": FormView,
+        "details": DetailsView
     }
 });
+```
 
+Next, the app module is included into a view and the view is included into another app:
+
+```js
 const PageView = () => ({
     rows: [app1]
 });
 
 var app2 = new JetApp({
-    start: "/Page",
+    start: "/page",
     router: JetApp.routers.HashRouter,
     views: {
-        "Page": PageView
+        "page": PageView
     }
 }).render();
 ```
 
 ## 4. Empty Router
 
-If you don't want this behavior from the app, there's the EmptyRouter for you. The app URL isn't displayed and isn't stored. It's used for nested apps because there is only one address bar. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html).
+If you don't want this behavior from the app, there's the EmptyRouter for you. The app URL isn't displayed and isn't stored. It's used for nested apps because there is only one address bar. 
+
+```js
+var app1 = new JetApp({
+    start: "/form",
+    router: JetApp.routers.EmptyRouter,
+    views: {
+        "form": FormView,
+        "details": DetailsView
+    }
+});
+```
+
+[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html).
 
 ## 5. Custom Routers
 

@@ -8,7 +8,7 @@ this.use(JetApp.plugins.PluginName, {
 });
 ~~~
 
-After the plugin name, you are to specify the configuration for the plugin, e.g a control ID.
+After the plugin name, you are to specify the configuration for the plugin, e.g. a control ID.
 
 ## 1. Default Plugins
 
@@ -39,7 +39,7 @@ export default class ToolbarView extends JetView{
 }
 ~~~
 
-The plugin config contains the ID of the view element that's going to serve as a menu. If you click the buttons and reload the page, the app will behave as expected. The **menu** plugin has one more good part. You can change the URLs for every menu item. Let's add two more buttons and set URLs for them in the plugin config:
+The plugin config contains the ID of the view element that's going to serve as a menu. If you click the buttons and reload the page, the app will behave as expected. The **menu** plugin has one more good part. You can change the URLs for every menu item. Let's set URLs for the buttons in the plugin config:
 
 ~~~js
 export default class ToolbarView extends JetView {
@@ -49,9 +49,7 @@ export default class ToolbarView extends JetView {
 				{ view:"label", label:"Demo" },
 				{ view:"segmented", localId:"control", options:[
 					"Details",
-					"Dash", 
-					"Demo",
-					"Other"
+					"Dash"
 				]}
 		]};
 	}
@@ -59,8 +57,8 @@ export default class ToolbarView extends JetView {
 		this.use(JetApp.plugins.Menu, {
 			id:"control",
 			urls:{
-				Demo  : "demo/dash",
-				Other : "demo/details"
+				Details  : "demo/details",
+				Dash : "demo/dash"
 			}
 		});
 	}
@@ -71,14 +69,14 @@ export default class ToolbarView extends JetView {
 
 #### UnloadGuard Plugin
 
-The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and going to the next and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
+The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
 
 The plugin reacts to an attempt of changing the URL. The syntax for using a plugin is _this.use\(plugin,handler\)_. Use takes two parameters:
 
 * a plugin name
 * a function that will handle the **Unload** event
 
-You can move validation from the **Save** button handler to the plugin handler:
+You can move validation from the **Save** button handler to the plugin handler. Let's have a look at a form with one input field:
 
 ```js
 export default class FormView extends JetView {
@@ -139,23 +137,29 @@ When the plugin is included, the **user** service is launched. The service check
 
 #### Theme plugin
 
-This is a plugin to change app themes. There are two methods that the **theme** service provides:
+This is a plugin to change app themes. The plugin launches the **theme** service. There are two methods that the service provides:
 
 ###### getTheme()
 
-returns the name of the current theme
+The method returns the name of the current theme.
 
 ###### setTheme(name)
 
-takes one obligatory parameter - the name of the theme - and sets the theme for the app
+The method takes one obligatory parameter - the name of the theme - and sets the theme for the app.
 
-Consider an example:
+Consider an example. The service locates links to stylesheets by this attribute. Here are the stylesheets for the app:
+
+```html
+/* index.html */
+<link rel="stylesheet" title="flat" type="text/css" href="//cdn.webix.com/edge/webix.css">
+<link rel="stylesheet" title="compact" type="text/css" href="//cdn.webix.com/edge/skins/compact.css">
+```
+
+Each link has the **title** attribute with the theme name. Next you need to provide a way for users to choose themes. Here's a view with a segmeted button:
 
 ```js
-class SettingsView extends JetView {
+export default class SettingsView extends JetView {
 	config(){
-		const theme = this.app.getService("theme").getTheme();
-
 		return {
 			type:"space", rows:[
 				{ template:"Settings", type:"header" },
@@ -163,11 +167,19 @@ class SettingsView extends JetView {
 					{id:"flat-default", value:"Default"},
 					{id:"flat-shady", value:"Shady"},
 					{id:"compact-default", value:"Compact"}
-				], click:() => this.toggleTheme(), value:theme },
+				], click:() => this.toggleTheme() /* not implemented yet */},
 				{}
 			]
 		};
 	}
+}
+```
+
+Note that option IDs should have two parts, the first of them must be the same as the *title* attribute of the link to a stylesheet. The **theme** service must get the theme name, chosen by a user, locates the correct stylesheet and sets the theme. Let's add a handler for the segmeted button and define it as a class method:
+
+```js
+export default class SettingsView extends JetView {
+	//config()
 	toggleTheme(){
 		const themes = this.app.getService("theme");
 		const value = this.getRoot().queryView({ name:"skin" }).getValue();
@@ -176,22 +188,29 @@ class SettingsView extends JetView {
 }
 ```
 
+Inside the method, the **theme** service is launched. Then **queryView** located the segmented by its name and gets the user choice. After that, the service sets the chosen theme by adding a corresponding CSS class name to the body of the html page.  
+
 <!-- theme
 	flat-shady
 		title:"flat"
 		document.body.className += " .theme-flat-shady"
-		webix.setSkin("flat") -->
+		webix.setSkin("flat") 
+-->
 
-The **theme** service gets the theme name, chosen by a user, locates the correct stylesheet and sets the theme. Note that option IDs should have two parts, the first of them must be the same as the *title* attribute of the link to a stylesheet. The service locates links to stylesheets by this attribute. Here are the stylesheets for the example:
+To restore the state of the segmented button after the new theme is applied, you need to get the current theme in the class **config** and add the **value** property of the segmented setting it to the correct value:
 
-```html
-<link rel="stylesheet" title="flat" type="text/css" href="//cdn.webix.com/edge/webix.css">
-<link rel="stylesheet" title="compact" type="text/css" href="//cdn.webix.com/edge/skins/compact.css">
+```js
+const theme = this.app.getService("theme").getTheme();
+...
+	{ name:"skin", optionWidth: 120, view:"segmented", label:"Theme", options:[
+		{id:"flat-default", value:"Default"},
+		{id:"flat-shady", value:"Shady"},
+		{id:"compact-default", value:"Compact"}
+	], click:() => this.toggleTheme(), value:theme },
+...
 ```
 
-**getTheme** is also needed in the config to restore the state of the segmented button after the new theme is applied.
-
-[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js).
+[Check out the complete code](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js).
 
 #### Locale plugin
 
@@ -206,11 +225,15 @@ export default {
 };
 ```
 
-The Locale service has several methods for localizing.
+The Locale plugin launches a service. The **locale** service has several methods for localizing apps.
 
 ###### the _(value) helper
 
-This helper looks for the field in a locale file and returns the translated value. E.g. *this.app.getService("locale")._("Settings")* will return *"Ajustes"*, if Spanish is chosen.
+This helper looks for the field in a locale file and returns the translated value. E.g. *this.app.getService("locale")._("Settings")* will return *"Ajustes"*, if Spanish is chosen. If you need to localize a lot of text, it's reasonable to create a shorthand for the method:
+
+```js
+const _ = this.app.getService("locale")._;
+```
 
 ###### getLang()
 
@@ -218,7 +241,7 @@ The method returns the current language.
 
 ###### setLang(name)
 
-The method changes the language.
+The method sets the language passed by the name of the locale file.
 
 Consider an example:
 
@@ -227,7 +250,7 @@ import {JetApp, JetView, plugins} from "webix-jet";
 
 export default class SettingsView extends JetView {
 	config(){
-		const _ = this.app.getService("locale")._; 				//alias
+		const _ = this.app.getService("locale")._; 				//shorthand
 		const lang = this.app.getService("locale").getLang();
 
 		return {
@@ -273,7 +296,7 @@ init(){
 }
 ```
 
-The **target** property is the ID of the view component where you want to display the message. *ajax:true* enables asynchronous requests. *expire* defines the time after which the status message disappears (5 seconds in this case). By default, the time is set to 3 seconds, and if you set it to 0, the message will stay as long as the page is open.
+The **target** property is the ID of the view component where you want to display the message. *ajax:true* enables asynchronous requests. *expire* defines the time after which the status message disappears (5 seconds in this case). By default, the time is set to 3 seconds, and if you set it to 0, the status message will stay as long as the page is open.
 
 **Status** can have two more properties in its config:
 

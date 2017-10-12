@@ -144,13 +144,14 @@ The *views/data* module has the following code:
 ```js
 //views/data.js
 import {JetView} from "webix-jet";
+import {data} from "models/records";
 
 export default class DataView extends JetView{
 	config(){
 		return { view:"datatable", autoConfig:true }
 	}
 	init(view){
-		view.parse(records.data);
+		view.parse(data);
 	}
 };
 ```
