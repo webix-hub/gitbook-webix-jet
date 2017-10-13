@@ -155,7 +155,7 @@ Consider an example. The service locates links to stylesheets by this attribute.
 <link rel="stylesheet" title="compact" type="text/css" href="//cdn.webix.com/edge/skins/compact.css">
 ```
 
-Each link has the **title** attribute with the theme name. Next you need to provide a way for users to choose themes. Here's a view with a segmeted button:
+Each link has the **title** attribute with the theme name. Next, you need to provide a way for users to choose themes. Here's a view with a segmented button:
 
 ```js
 export default class SettingsView extends JetView {
@@ -278,7 +278,7 @@ When a user chooses a language, a corresponding file is located and the app lang
 
 #### Status Plugin
 
-This plugin is useful if you want to show the status of data loading in case it takes time, to confirm succes or to show an error message. These are the status messages that you can see:
+This plugin is useful if you want to show the status of data loading in case it takes time, to confirm success or to show an error message. These are the status messages that you can see:
 
 - "Ok"
 - "Error"
