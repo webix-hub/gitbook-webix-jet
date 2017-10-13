@@ -7,7 +7,7 @@ A Webix Jet app is single-page and is divided into views. The application struct
 - the *sources/views* folder that contains elements of the interface;
 - the *sources/models* folder that contains data modules.
 
-App represents an application or an application module. It is used to group views and modules which implement some specific scenario. Later you will be able to combine separate app modules in high-level apps.
+An app represents an application or an application module. It is used to group views and modules which implement some specific scenario. Later you will be able to combine separate app modules in high-level apps.
 
 ### The Syntax of Creation
 
