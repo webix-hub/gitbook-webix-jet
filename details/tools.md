@@ -1,6 +1,6 @@
 # Tools
 
-[wjet](https://github.com/webix-hub/wjet) is a Webix Jet command like tool that can help you begin working.
+[wjet](https://github.com/webix-hub/wjet) is a Webix Jet command-like tool that can help you begin working.
 
 ### How to install
 
@@ -11,7 +11,7 @@ npm install -g wjet
 ```
 ### How to use
 
-To create a sceleton app, run the following commands:
+To create a skeleton app, run the following commands:
 
 ```
 mkdir myapp
