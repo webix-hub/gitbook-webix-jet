@@ -39,7 +39,7 @@ For more details on view navigation, [read the dedicated article](../basic/navig
 
 ### this.ui
 
-**this.ui** call is equivalent to **webix.ui**. It creats a new instance of the view passed to it as a parameter. For example, you want to create a view with a list of orders and a form for editing records in the list. Here's the view with a form:
+**this.ui** call is equivalent to **webix.ui**. It creates a new instance of the view passed to it as a parameter. For example, you want to create a view with a list of orders and a form for editing records in the list. Here's the view with a form:
 
 ```js
 const ui = {
