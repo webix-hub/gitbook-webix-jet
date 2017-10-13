@@ -348,7 +348,7 @@ App is a part of the whole application that implements some scenario and is quit
 
 ```js
 /* views/form.js */
-export defaulst class FormView extends JetView {
+export default class FormView extends JetView {
     config() {
         return {
             view: "form",
