@@ -46,7 +46,7 @@ For example, there are 2 files in the *views* folder of our app:
 - top.js
 - start.js
 
-If you set the path to *index.html#!/top/start*, the interface described in the *views/top.js* file will be rendered first. Then the interface from *views/start* will be added in some cell of top-level interface:
+If you set the path to *index.html#!/top/start*, the interface described in the *views/top.js* file will be rendered first. Then the interface from *views/start* will be added in some cell of the top-level interface:
 
 **index.html#!/top/start**
 
