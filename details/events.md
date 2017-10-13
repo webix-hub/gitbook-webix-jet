@@ -77,7 +77,7 @@ export default class ChildView extends JetView{
 }
 ```
 
-And here's a parent view than will enclose *SubView*:
+And here's a parent view that will enclose *SubView*:
 
 ```js
 /* sources/views/parent.js */
@@ -100,7 +100,7 @@ You can use methods for view communication in similar use-cases, but still event
 
 ##### Methods vs Events
 
-Suppose you want to create a filemanager resembling TotalCommander. The parent view will have two file views as subviews:
+Suppose you want to create a file manager resembling TotalCommander. The parent view will have two file views as subviews:
 
 ```js
 config() { 
@@ -112,7 +112,7 @@ config() {
 }}
 ```
 
-Here each subview has a name. *FileView* has the *loadFiles* method. Next, let's tell the filemanager which paths to open in each file view:
+Here each subview has a name. *FileView* has the *loadFiles* method. Next, let's tell the file manager which paths to open in each file view:
 
 ```js
 init() {
