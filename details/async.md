@@ -1,8 +1,8 @@
 # Promised views
 
-Sometimes data can be loaded directly from a JSON file or a variable, this is so-called hard-coded data. But data is more often stored in a database on the server side. It's a good idea to make use of promises to load the data. This is especially relevant in case the UI is built much faster than the data is loaded. To make the UI wait for data, you can make an asynchronous request to a PHP script and give the UI a promise. Thus an app will wait for data from a database, and only after a promise resolves, it will render the view with the data.
+Data is usually stored in a database on the server side. If the UI is built much faster than the data is loaded, it's a good idea to make use of promises to load the data. To make the UI wait for data, you can make an asynchronous request to a PHP script and give the UI a promise. Thus an app will wait for data from a database, and only after a promise resolves, it will render the view with the data.
 
-For example, there's a chart on the start page and you need to define the colors of its lines, specified in the **series** parameter:
+For example, there's a chart on the start page and you need to define the colors of its lines, specified in the **series** parameter. Colors can be stored as inline data:
 
 ```js
 //views/statistics.js
@@ -18,7 +18,7 @@ export class StatisticsView extends JetView {
 });
 ```
 
-However, in practice, some configuration settings in our UI can be stored in the database. For example, in the above snippet, we may want to store colors in DB to allow their customization by the end user. In such case, a module can return a promise of UI instead of UI configuration. Let's use **webix.ajax** that makes an asynchronous request to a PHP script and shows its response through a callback function.
+However, in practice, some UI configuration settings can be stored in the database. For example, in the above snippet, you may want to store colors in a DB to allow the end user to change them. In such case, a module can return a promise of UI instead of the UI configuration. Let's use **webix.ajax** that makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, and the response is passed to a callback function:
 
 ```js
 export class StatisticsView extends JetView {

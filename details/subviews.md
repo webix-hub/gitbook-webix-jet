@@ -125,7 +125,7 @@ The **init** method receives two parameters:
 
 #### urlChange\(view,url\)
 
-This method is called every time the URL is changed. It reacts to the change in the URL after **!\#**[^1]. **urlChange** is only called for the view that is rendered and for its parent. Consider the following example. The initial URL is:
+This method is called every time the URL is changed. It reacts to the change in the URL after **!\#**<sup><a href="#footnote1" id="origin">1</a></sup>. **urlChange** is only called for the view that is rendered and for its parent. Consider the following example. The initial URL is:
 
 ```
 /Layout/Demo/Details
@@ -411,5 +411,5 @@ var app2 = new JetApp({
 As a result, this is a two-level app. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html).
 
 <!-- footnotes -->
-[^1]:
+<a href="#origin" id="footnote1">1</a>:
 This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for EmptyRouter. For details, [go to the dedicated section](routers.md).

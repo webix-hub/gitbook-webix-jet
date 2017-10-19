@@ -14,7 +14,7 @@ After you click on the link, the app UI will be rebuilt and will consist of the 
 
 ## 2. Navigation with HTML links
 
-Apart from navigating with [links with the **route** attribute](../basic/navigation.md), you can create HTML links. This way is not so convenient, as the first one. You cannot prevent users from leaving the current view through an HTML link. In case there's no worries and you don't plan to guard users' unsaved data, you can create links with the **href** attribute. Suppose you have these view modules:
+Apart from navigating with links with the **route** attribute, you can create HTML links. This way is not so convenient, as the first one. You cannot prevent users from leaving the current view through an HTML link. In case there's no worries and you don't plan to guard users' unsaved data, you can create links with the **href** attribute. Suppose you have these view modules:
 
 ~~~js
 /* views/demo.js */

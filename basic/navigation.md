@@ -38,7 +38,7 @@ You can also change the URL by calling the **show\(\)** method from a specific v
 ]
 ```
 
-The current URL is _"/layout/details"_, so the subview is **details**.To replace the current subview with a different one, specify the name as it is or with *./*:
+The current URL is _"/layout/details"_, so the subview is **details**.To replace the current subview with a different one, specify the name as it is or with *"./"*:
 
 ```js
 { view:"button", value:"demo", click: () => {
