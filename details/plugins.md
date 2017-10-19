@@ -175,7 +175,7 @@ export default class SettingsView extends JetView {
 }
 ```
 
-Note that option IDs should have two parts, the first of them must be the same as the *title* attribute of the link to a stylesheet. The **theme** service must get the theme name, chosen by a user, locates the correct stylesheet and sets the theme. Let's add a handler for the segmeted button and define it as a class method:
+Note that option IDs should have two parts, the first of them must be the same as the *title* attribute of the link to a stylesheet. The **theme** service must get the theme name, chosen by a user, locates the correct stylesheet and sets the theme. Let's add a handler for the segmented button and define it as a class method:
 
 ```js
 export default class SettingsView extends JetView {
