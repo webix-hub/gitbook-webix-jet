@@ -1,6 +1,6 @@
 ## Navigation
 
-Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">[1]</a></sup>. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
+Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">1</a></sup>. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
 
 The URL of the page reflects the current state of the app. By default, it is stored as a part after the hashbang. When we change the URL, the app updates itself accordingly. 
 
