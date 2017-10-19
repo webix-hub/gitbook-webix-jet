@@ -1,6 +1,6 @@
 ## Navigation
 
-Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed[^1]. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
+Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is [^changed]. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
 
 The URL of the page reflects the current state of the app. By default, it is stored as a part after the hashbang. When we change the URL, the app updates itself accordingly. 
 
@@ -38,18 +38,7 @@ You can also change the URL by calling the **show\(\)** method from a specific v
 ]
 ```
 
-The current URL is _"/layout/details"_, so the subview is **details**. If you want to rebuild the whole app and load the **details** view as the only view, specify the name of the view with a slash:
-
-```js
-/* toolbar.js*/
-...
-{ view:"button", value:"Details", click: () => {
-    this.show("/details");
-}}
-...
-```
-
-To replace the current subview with a different one, specify the name as it is or with *./*:
+The current URL is _"/layout/details"_, so the subview is **details**.To replace the current subview with a different one, specify the name as it is or with *./*:
 
 ```js
 { view:"button", value:"demo", click: () => {
@@ -65,19 +54,20 @@ To replace the current subview with a different one, specify the name as it is o
 
 The resulting URL is going to be */layout/demo*.
 
-This syntax resembles the way you navigate through directories. So you can move some levels up, for example:
+ If you want to rebuild the whole app and load the **details** view as the only view, specify the name of the view with a slash:
 
 ```js
-{ view:"button", value:"demo", click: () => {
-    this.show("../../bigview");
+/* toolbar.js*/
+...
+{ view:"button", value:"Details", click: () => {
+    this.show("/details");
 }}
+...
 ```
-
-As a result, the app URL will be */bigview*.
 
 [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see how the described ways of navigation are used in an application.
 
-You can read a section in the next chapter on [HTML links for navigation](../details/navigation.md).
+You can also read [a section on navigation](../details/navigation.md) in the advanced chapter.
 
 This is all about Webix Jet in a nutshell. For more details, go on to the next chapter.
 
