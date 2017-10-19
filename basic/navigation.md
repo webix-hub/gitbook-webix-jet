@@ -1,6 +1,6 @@
 ## Navigation
 
-Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed[^1]. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
+Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed<sup>[1](#myfootnote1)</sup>. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
 
 The URL of the page reflects the current state of the app. By default, it is stored as a part after the hashbang. When we change the URL, the app updates itself accordingly. 
 
@@ -72,5 +72,5 @@ You can also read [a section on navigation](../details/navigation.md) in the adv
 This is all about Webix Jet in a nutshell. For more details, go on to the next chapter.
 
 <!-- footnotes -->
-[^1]:
+<a name="myfootnote1">1</a>:
 This is relevant for HashRouter, which is the default router. There is no hashbang if you use UrlRouter. The app URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except EmptyRouter and the behavior is the same as if the URL were displayed.  for more details, [see the section on routers](../details/routers.md).
