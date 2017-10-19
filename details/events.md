@@ -4,43 +4,40 @@
 
 Views are separated, but there should be some means of communication between them. Feel free to use the in-app event bus for that. You can attach an event handler to the event bus in one view and trigger the event in another view.
 
-First, attach an event to one view:
+First, attach an event to a Jet view:
 
 ```js
 init(){
-    on(app, "eventName", function(something){
-        //handler
-        this.show(something);
+    on(app, "SaveForm", function(){
+        this.show("aftersave");
     });
 }
 ```
 
-In the other view, there should be code that triggers the event, e.g.:
+Some other Webix view can trigger the event, e.g.:
 
 ```js
-on:{
-    onEvent:function(){
-        app.callEvent("eventName", [some_value]);
-    }
-}
+{ view:"button", click:() => {
+    this.app.callEvent("SaveForm", []);
+}}
 ```
 
 ### Aliases
 
-To make your life happier, there are aliases for methods used to trigger events.
+To make your life happier by shortening the syntax a bit, there are aliases for methods used to trigger events.
 
 **1.**_**trigger**_
 
-Instead of using **callEvent**
+Instead of using **callEvent** you can use **trigger**. So this code:
 
 ```js
-app.callEvent("eventName", [some_value]);
+this.app.callEvent("SaveForm", []);
 ```
 
-you can write
+turns into this:
 
 ```js
-app.trigger("eventName", [some_value]);
+this.app.trigger("SaveForm", []);
 ```
 
 **2.**_**action**_
@@ -48,9 +45,7 @@ app.trigger("eventName", [some_value]);
 This alias unites both the click handler and the **callEvent** method. So the same code transforms into:
 
 ```js
-on:{
-    onEventName:app.action("eventName", [some_value]);
-}
+{ view:"button", click:app.action("SaveForm", []) }}
 ```
 
 ### Declaring and Calling Methods
@@ -100,7 +95,7 @@ You can use methods for view communication in similar use-cases, but still event
 
 ##### Methods vs Events
 
-Suppose you want to create a file manager resembling TotalCommander. The parent view will have two file views as subviews:
+Suppose you want to create a file manager resembling Total Commander. The parent view will have two file views as subviews:
 
 ```js
 config() { 
