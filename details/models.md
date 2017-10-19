@@ -1,6 +1,6 @@
 # Models
 
-View modules return the UI configuration of the components. They describe the visual aspect of an application and shouldn't contain any data. For data, there is another type of modules - a **model**. Models are JS files that are placed in a separate folder. This division of UI and data is an advantage, because if the data changes, all you have to do is change the data model. There's no need to modify view files. 
+View modules return the UI configuration of the components. They describe the visual aspect of an application and shouldn't contain any data. For data, there is another type of modules - a **model**. Models are JS files that are placed in a separate folder. This division of UI and data is an advantage because if the data changes, all you have to do is change the data model. There's no need to modify view files. 
 
 There are several ways of loading data in Webix Jet.
 
