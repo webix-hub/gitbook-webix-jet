@@ -23,6 +23,7 @@ var config = {
 To create multiple entry files, pass an object to **entry** and use the *[name]* substitution for output filenames to ensure that each file has a unique name:
 
 ```js
+/* webpack.config.js */
 {
     entry: {
         admin: "./sources/admin.js",
@@ -37,9 +38,10 @@ To create multiple entry files, pass an object to **entry** and use the *[name]*
 
 - Turning off Localization and Views
 
-If you aren't planning to localize the app, there's a way to do it without creating and empty folder for locales. Without changes in webpack config, you would have to do that to get the app compiled. webpack config has the **resolve** property that presents options affecting the resolving of modules. Delete *"jet-locales"* key pairs from **resolve.alias**.
+If you aren't planning to localize the app, there's a way to do it without creating and empty folder for locales. Without changes in webpack config, you would have to do that to get the app compiled. webpack config has the **resolve** property that presents options affecting the resolving of modules. Change the path in the *"jet-locales"* key pair from **resolve.alias**.
 
 ```js
+/* webpack.config.js */
 var config = {
     ...
     resolve: {
@@ -47,7 +49,7 @@ var config = {
         modules: ["./sources", "node_modules"],
         alias:{
             "jet-views":path.resolve(__dirname, "sources/views"),
-            "jet-locales":path.resolve(__dirname, "sources/locales") //delete me
+            "jet-locales":path.resolve(__dirname, "sources/locales") //change me
         }
     },
     ...
