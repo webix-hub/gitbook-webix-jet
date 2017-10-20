@@ -194,7 +194,7 @@ The **User** plugin has other useful methods.
 
 
 
-#### Theme plugin
+### Theme plugin
 
 This is a plugin to change app themes. The plugin launches the **theme** service. There are two methods that the service provides:
 
@@ -271,7 +271,7 @@ const theme = this.app.getService("theme").getTheme();
 
 [Check out the complete code](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js).
 
-#### Locale plugin
+### Locale plugin
 
 This is a plugin for localizing apps. Locale files are usually created in the *locales* folder. This is an example of the Spanish locale file:
 
@@ -335,7 +335,7 @@ When a user chooses a language, a corresponding file is located and the app lang
 
 [Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js).
 
-#### Status Plugin
+### Status Plugin
 
 This plugin is useful if you want to show the status of data loading in case it takes time, to confirm success or to show an error message. These are the status messages that you can see:
 
