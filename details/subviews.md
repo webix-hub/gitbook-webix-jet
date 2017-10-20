@@ -272,37 +272,16 @@ export default class ToolbarView extends JetView{
 }
 ```
 
-<!-- In case you want to let Jet correctly destroy popups and windows, create them with *this.ui*:
+In case you want to let Jet correctly destroy popups and windows, create them with *this.ui*:
 
 ```js
-var popup = webix.ui({
+var popup = this.ui({
     view:"popup", 
     body:"Toolbar is created"
 });
 ```
- 
-You can include a view into a popup or a window:
 
-```js
-init(){
-    this.win1 = this.ui(WindowView)
-    //this.win1.show();
-}
-```
-
-where WindowView is like next:
-
-```js
-class WindowView extends JetView{
-  config(){
-           return { view:"window", body:{} };
-  }
-  show(target){
-       this.getRoot().show(target);
-  }
-}
-```
- -->
+*this.ui* works similarly to *webix.ui* with one difference. *this.ui* will destroy the popup object automatically when master view is destroyed. So you don't need to destroy the popup manually.
 
 This is all on view class methods. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see the order of the life stages of each view.
 
@@ -374,7 +353,7 @@ export default BigView = {
 }
 ```
 
-<!-- You can include a view into a **popup or a window**:
+You can also include a view into a **popup or a window**:
 
 ```js
 init(){
@@ -395,7 +374,6 @@ class WindowView extends JetView{
   }
 }
 ```
--->
 
 ### 2. App Inclusion
 
