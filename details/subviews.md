@@ -374,7 +374,7 @@ export default BigView = {
 }
 ```
 
-<!-- You can include a view into a popup or a window:
+<!-- You can include a view into a **popup or a window**:
 
 ```js
 init(){
@@ -383,7 +383,7 @@ init(){
 }
 ```
 
-where WindowView is like next:
+where *WindowView* is a view class like the following:
 
 ```js
 class WindowView extends JetView{
