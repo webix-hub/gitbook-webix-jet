@@ -12,7 +12,7 @@ After the plugin name, you are to specify the configuration for the plugin, e.g.
 
 ## 1. Default Plugins
 
-#### Menu Plugin
+### Menu Plugin
 
 This plugin simplifies your life if you plan to create a menu. The plugin sets URLs for menu options, buttons or other controls you plan to use for showing subviews. Also, there's no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
 
@@ -67,7 +67,7 @@ export default class ToolbarView extends JetView {
 
 [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/04_plugins.html).
 
-#### UnloadGuard Plugin
+### UnloadGuard Plugin
 
 The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
 
@@ -108,14 +108,69 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 
 [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html).
 
-#### Login Plugin
+### User Plugin
 
-This plugin is useful if you create apps that need authorization.
+The *User* plugin is useful if you create apps that need authorization. When the plugin is included, the **user** service is launched. Let's look how you can use the plugin with a custom script.
 
-- login through a custom script
-- login with external OATH service ( Google, Github, etc. )
+#### Login through a custom script
 
-**Login** has several useful methods.
+To use a plugin, call *app.use*:
+
+```js
+/* sources/myapp.js */
+import session from "models/session";
+...
+app.use(plugins.User, { model: session });
+```
+
+Here's an example of a form for logging in, which can be included into a view class:
+
+```js
+/* sources/views/login.js */
+const login_form = {
+	view:"form",
+	rows:[
+		{ view:"text", name:"login", label:"User Name", labelPosition:"top" },
+		{ view:"text", type:"password", name:"pass", label:"Password", labelPosition:"top" },
+		{ view:"button", value:"Login", click:function(){
+			this.$scope.do_login();
+		}, hotkey:"enter" }
+	],
+	rules:{
+		login:webix.rules.isNotEmpty,
+		pass:webix.rules.isNotEmpty
+	}
+};
+```
+
+The form has validation rules. To implement the way to log in, you can use the **login** method of the *User* plugin.
+
+###### login(name, password)
+
+**login** receives the username and the password, verifies them and if everything's fine, shows the *afterLogin* page. Otherwise, it shows an error message. Here's how the **do_login** method is implemented:
+
+```js
+/* sources/views/login.js */
+export default class LoginView extends JetView{
+	...
+	do_login(){
+		const user = this.app.getService("user");
+		const form = this.getRoot().queryView({ view:"form" });
+
+		if (form.validate()){
+			const data = form.getValues();
+			user.login(data.login, data.pass).catch(function(){
+				//error handler
+			});
+		}
+	}
+	...
+}
+```
+
+If users typed their name and password, *user.login* is called. You can add an error handler for an invalid username and password.
+
+[Check out the demo](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js).
 
 ###### getUser()
 
@@ -125,15 +180,19 @@ This plugin is useful if you create apps that need authorization.
 
 **getStatus** returns the current status of the user. It can receive an optional boolean parameter *server*.
 
-###### login(name, password)
 
-**login** receives the username and the password, verifies them and if everything's fine, shows the afterLogin page. Otherwise, it shows an error message.
 
 ###### logout()
 
 **logout** ends the current session and shows an afterLogout page, usually it's the login form.
 
-When the plugin is included, the **user** service is launched. The service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
+The service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
+
+
+
+#### Login with an external OATH service ( Google, Github, etc. )
+
+
 
 #### Theme plugin
 
