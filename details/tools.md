@@ -1,6 +1,6 @@
 # Tools
 
-[wjet](https://github.com/webix-hub/wjet) is a Webix Jet command-like tool that can help you begin working.
+<!-- [wjet](https://github.com/webix-hub/wjet) is a Webix Jet command-like tool that can help you begin working.
 
 ### How to install
 
@@ -18,4 +18,4 @@ mkdir myapp
 cd myapp
 wjet init
 ```
-
+ -->

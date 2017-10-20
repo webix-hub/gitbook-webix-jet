@@ -73,7 +73,7 @@ webix.ready(() => {
 });
 ```
 
-Note that there is a router prefix that is present in the URL instead of a hashbang. In your *index.html* you should set the relative URL with the same prefix:
+Note that there is a router prefix that is present in the URL instead of a hashbang. You must provide it if the app is hosted in a folder. In your *index.html* you should set the relative URL with the same prefix:
 
 ```html
 <script type="text/javascript">
@@ -81,6 +81,18 @@ Note that there is a router prefix that is present in the URL instead of a hashb
 		document.location.href = "/routers-url/";
 </script>
 ```
+
+Next, configure http redirects so that requests to all URLs triggered the html file of the app. This can be done through the webpack config:
+
+```js
+/* webpack.config.js */
+devServer:{
+	historyApiFallback:{
+		index : "routers-url.html"
+	}
+}
+```
+In the production app, it can be done through *apache/nginx* configuration.
 
 [Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js).
 
