@@ -172,7 +172,7 @@ export default class LoginView extends JetView{
 
 If users typed their name and password, *user.login* is called. You can add an error handler for an invalid username and password.
 
-[Check out the demo](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js).
+[Have a look at the complete *login.js* file](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js). And here is the [demo on logging in with custom scripts](https://github.com/webix-hub/jet-start/tree/php).
 
 The **User** plugin has other useful methods.
 
@@ -187,6 +187,7 @@ The **User** plugin has other useful methods.
 ###### logout()
 
 **logout** ends the current session and shows an afterLogout page, usually it's the login form.
+
 
 
 #### Login with an external OATH service ( Google, Github, etc. )
