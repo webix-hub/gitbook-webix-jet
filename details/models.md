@@ -237,26 +237,34 @@ webix.ready(() => {
 
 ### 5. Using Webix Remote with Webix Jet
 
-You can use [webix.remote](https://docs.webix.com/desktop__webix_remote_php.html) instead of sending AJAX requests. You must have a server-side script:
+You can use [webix.remote](https://docs.webix.com/desktop__webix_remote_php.html) instead of sending AJAX requests. You must have a server-side script, e.g.:
 
 ```html
 <script src="api.php"></script>
 ```
 
-with a *nm* class like this:
+The script can contain a *nm* class like this:
 
 ```php
 class Nomencl {
-	public function getNomenclature(id) { /*...*/}
+	public function getData(id) { /*...*/}
 }
 $api->setClass("nm", new Nomencl());
 ```
 
-Here's a model:
+Here's a model that gets the class and all its methods:
 
 ```js
 /* sources/models/nomencl.js */
-export webix.remote.nm;
+export default webix.remote.nm;
+```
+
+You can create a DataCollection:
+
+```js
+var data = new DataCollection({
+	url: webix.remote.nm.getData
+})
 ```
 
 You can import the model and parse it into a view component:
@@ -266,11 +274,11 @@ You can import the model and parse it into a view component:
 import records from "../models/nomencl"
 ...
 init(view){
-	view.parse(records.getNomenclature(id));
+	view.parse(records.getData(id));
 }
 ```
 
-**remote** is better then an AJAX request for several reasons. First, you don't need to serialize data after loading. Compare the results of these two requests:
+**webix.remote** is better then an AJAX request for several reasons. First, you don't need to serialize data after loading. Compare the results of these two requests:
 
 ```js
 var data1 = webix.ajax("data/nomencl/154"); 		//"{id:154,name:"John"}"
