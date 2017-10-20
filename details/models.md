@@ -179,6 +179,62 @@ A better and shorter way is:
 var data = service.getNomenclature();
 ```
 
+<!--
+/* data.js */
+import {JetView} from "webix-jet";
+import {records} from "../models/records"
+
+export default class DataView extends JetView {
+    config(){
+        return {
+            view:"datatable", autoConfig:true
+        };
+    }
+    init(view){
+        view.parse(records);
+        this.app.setService("masterData", {
+            getSelected : () => this.getRoot().getSelectedItem()
+        });
+        view.select(1);
+    }
+}
+/* services.js */
+import {JetApp, JetView} from "webix-jet";
+import DataView from "views/data";
+
+class SmallData extends JetView {
+    config(){
+        return {
+            view:"datatable", autoConfig:true
+        };
+    }
+    init(view){
+        var item = this.app.getService("masterData").getSelected();
+        view.parse(item);
+    }
+}
+
+class Layout extends JetView {
+    config(){
+        return {
+            cols:[
+                {$subview: DataView},
+                {$subview: SmallData}
+            ]
+        };
+    }
+}
+
+webix.ready(() => {
+	const app = new JetApp({
+		start:		"/start",
+		views:{
+			start: Layout
+		}
+	}).render();
+});
+-->
+
 ### 5. Using Webix Remote with Webix Jet
 
 You can use [webix.remote](https://docs.webix.com/desktop__webix_remote_php.html) instead of sending AJAX requests. You must have a server-side script:
