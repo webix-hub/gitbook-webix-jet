@@ -20,4 +20,60 @@ init() {
 this.app.getService("masterTree").getSelected();
 ```
 
+<!-- example
+/* data.js */
+import {JetView} from "webix-jet";
+import {records} from "../models/records"
+
+export default class DataView extends JetView {
+    config(){
+        return {
+            view:"datatable", autoConfig:true
+        };
+    }
+    init(view){
+        view.parse(records);
+        this.app.setService("masterData", {
+            getSelected : () => this.getRoot().getSelectedItem()
+        });
+        view.select(1);
+    }
+}
+/* services.js */
+import {JetApp, JetView} from "webix-jet";
+import DataView from "views/data";
+
+class SmallData extends JetView {
+    config(){
+        return {
+            view:"datatable", autoConfig:true
+        };
+    }
+    init(view){
+        var item = this.app.getService("masterData").getSelected();
+        view.parse(item);
+    }
+}
+
+class Layout extends JetView {
+    config(){
+        return {
+            cols:[
+                {$subview: DataView},
+                {$subview: SmallData}
+            ]
+        };
+    }
+}
+
+webix.ready(() => {
+	const app = new JetApp({
+		start:		"/start",
+		views:{
+			start: Layout
+		}
+	}).render();
+});
+-->
+
 Apart from view communication, services can be used for [loading and saving data](models.md).
