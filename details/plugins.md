@@ -241,7 +241,7 @@ The method returns the current language.
 
 ###### setLang(name)
 
-The method sets the language passed by the name of the locale file.
+The method sets the language passed by the name of the locale file. It also calls **app.refresh** and re-renders all the views.
 
 Consider an example:
 
