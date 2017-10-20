@@ -10,7 +10,7 @@ If you have some relatively small data and plan to use them in many components, 
 
 ```js
 /* sources/models/records.js */
-export const data = new webix.DataCollection({ data:[
+export const records = new webix.DataCollection({ data:[
 	{ id:1, title:"The Shawshank Redemption", year:1994, votes:678790, rating:9.2, rank:1},
 	{ id:2, title:"The Godfather", year:1972, votes:511495, rating:9.2, rank:2},
 	//...other records
@@ -21,7 +21,7 @@ This is how the data is loaded and saved to the server:
 
 ```js
 /* sources/models/records.js */
-export const data = new webix.DataCollection({ 
+export const records = new webix.DataCollection({ 
 	url:"data.php",
 	save:"data.php"
 });
@@ -32,7 +32,7 @@ To use the data in a component, you need to parse it. You must parse data in **i
 ```js
 /* sources/views/data.js */
 import {JetView} from "webix-jet";
-import {records} from "models/records";
+import {records} from "../models/records";
 
 export default class DataView extends JetView{
 	config(){
