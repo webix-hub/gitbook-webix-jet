@@ -123,6 +123,8 @@ import session from "models/session";
 app.use(plugins.User, { model: session });
 ```
 
+The plugin receives a **session** model, [check it out](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js). It contains requests to *php* scripts for logging in, getting the current status, and logging out. 
+
 Here's an example of a form for logging in, which can be included into a view class:
 
 ```js
@@ -172,22 +174,19 @@ If users typed their name and password, *user.login* is called. You can add an e
 
 [Check out the demo](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js).
 
+The **User** plugin has other useful methods.
+
 ###### getUser()
 
 **getUser** returns the data of the currently logged user.
 
 ###### getStatus()
 
-**getStatus** returns the current status of the user. It can receive an optional boolean parameter *server*.
-
-
+**getStatus** returns the current status of the user. It can receive an optional boolean parameter *server*. The **User** service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
 
 ###### logout()
 
 **logout** ends the current session and shows an afterLogout page, usually it's the login form.
-
-The service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
-
 
 
 #### Login with an external OATH service ( Google, Github, etc. )

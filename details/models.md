@@ -93,7 +93,7 @@ export default {
 		return webix.ajax("data.php");
 	},
 	saveData: function(){
-		//...
+		return webix.ajax().post("data.php", { data });
 	}
 }
 ```
