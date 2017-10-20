@@ -9,7 +9,7 @@ JetApp provides a means to initialize services. For example, you have a *masterT
 ```js
 init() {
 	this.app.setService("masterTree", {
-		getSelected : () => this.getRoot().getSelectedId();
+		getSelected : () => this.getRoot().getSelectedId()
 	})
 }
 ```
