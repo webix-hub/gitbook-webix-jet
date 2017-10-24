@@ -12,6 +12,7 @@
   * [Views and SubViews](details/subviews.md)
   * [JetView API](details/views.md)
   * [Navigation](details/navigation.md)
+  * [Popups and Windows](details/popups.md)
   * [Async views](details/async.md)
   * [Referencing views](details/referencing.md)
   * [Models](details/models.md)

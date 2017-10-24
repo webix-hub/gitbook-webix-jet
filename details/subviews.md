@@ -367,13 +367,15 @@ where *WindowView* is a view class like the following:
 ```js
 class WindowView extends JetView{
   config(){
-           return { view:"window", body:{} };
+      return { view:"window", body:{} };
   }
   show(target){
-       this.getRoot().show(target);
+      this.getRoot().show(target);
   }
 }
 ```
+
+For more details about popups and windows, [go to the related section](popups.md).
 
 ### 2. App Inclusion
 
