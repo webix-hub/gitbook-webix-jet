@@ -108,6 +108,64 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 
 [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html).
 
+#### *app:guard* Event
+
+A guard can also be used to block some views and redirect users somewhere else. The UnloadGuard plugin attaches the **app:guard** event to a view. You also can attach **app:guard** to create the guard with *app.attachEvent("app:guard", callback)*. Suppose you have a layout with three views, one parent and two subviews (simple template views for the example). This is the parent view that has two buttons that call **show** to render subviews:
+
+```js
+//import subviews
+import allowed1 from "allowed";
+import blocked from "blocked";
+export default class TopView extends JetView {
+	config(){
+		return {
+			rows:[
+				{ type:"wide",cols:[
+						{ view:"form",  width: 200, rows:[
+							{ view:"button", value:"Allowed page", click:() =>
+								this.show("allowed") },
+							{ view:"button", value:"Blocked page", click:() =>
+								this.show("blocked") }
+						]},
+						{ $subview: true }
+					]
+			}]
+};}}
+```
+
+One of the subviews is supposed to be blocked, let's create a guard that will block it and redirect users to the *allowed* subview. Group the views into app and attach the **app:guard** event:
+
+```js
+const app = new JetApp({
+	start:		"/top/blocked",
+	views:{
+		top:		TopView,
+		allowed:	allowed,
+		blocked:	blocked
+	}
+});
+app.attachEvent("app:guard", function(url, view, nav){
+	if (url.indexOf("/blocked") !== -1){
+		nav.redirect = "/top/allowed";
+	}
+});
+app.render();
+```
+
+**app:guard** fires when the URL is about to change. The event handler receives three parameters:
+
+- *url* - a string with the attempted URL
+- *view* - the parent view that contains subviews that are being changed
+- *nav* - an object that defines navigation to the next view
+
+**nav** has three properties:
+
+- *redirect* is the new URL; in the example above it's corrected by the guard
+- *url* is the URL split into an array of views
+- *confirm* is a promise that is resolved when the **app:guard** event is called
+
+[The demo is available on Github](https://github.com/webix-hub/jet-demos/blob/master/sources/guards.js).
+
 ### User Plugin
 
 The *User* plugin is useful if you create apps that need authorization. When the plugin is included, the **user** service is launched. Let's look how you can use the plugin with a custom script.
