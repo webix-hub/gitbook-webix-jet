@@ -423,5 +423,6 @@ var app2 = new JetApp({
 As a result, this is a two-level app. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html).
 
 <!-- footnotes -->
+- - -
 <a href="#origin" id="footnote1">1</a>:
 This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for EmptyRouter. For details, [go to the dedicated section](routers.md).

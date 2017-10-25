@@ -72,5 +72,6 @@ You can also read [a section on navigation](../details/navigation.md) in the adv
 This is all about Webix Jet in a nutshell. For more details, go on to the next chapter.
 
 <!-- footnotes -->
+- - -
 <a id="myfootnote1" href="#origin">1</a>:
 This is relevant for HashRouter, which is the default router. There is no hashbang if you use UrlRouter. The app URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except EmptyRouter and the behavior is the same as if the URL were displayed.  for more details, [see the section on routers](../details/routers.md).
