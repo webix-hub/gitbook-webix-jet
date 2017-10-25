@@ -8,6 +8,16 @@ First, attach an event to a Jet view:
 
 ```js
 init(){
+    this.app.attachEvent("SaveForm", function(){
+        this.show("aftersave");
+    });
+}
+```
+
+One more way to attach event is **this.on**. This way is better because it automatically detaches the event when the view that called it is destroyed.
+
+```js
+init(){
     this.on(this.app, "SaveForm", function(){
         this.show("aftersave");
     });
@@ -20,32 +30,6 @@ Some other Webix view can trigger the event, e.g.:
 { view:"button", click:() => {
     this.app.callEvent("SaveForm", []);
 }}
-```
-
-### Aliases
-
-To make your life happier by shortening the syntax a bit, there are aliases for methods used to trigger events.
-
-**1.**_**trigger**_
-
-Instead of using **callEvent** you can use **trigger**. So this code:
-
-```js
-this.app.callEvent("SaveForm", []);
-```
-
-turns into this:
-
-```js
-this.app.trigger("SaveForm", []);
-```
-
-**2.**_**action**_
-
-This alias unites both the click handler and the **callEvent** method. So the same code transforms into:
-
-```js
-{ view:"button", click:app.action("SaveForm", []) }}
 ```
 
 ### Declaring and Calling Methods
