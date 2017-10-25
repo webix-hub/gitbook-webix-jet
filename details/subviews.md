@@ -238,7 +238,8 @@ The method also receives two parameters:
 
 #### destroy
 
-**destroy** is called only once for each instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL. **destroy** also can be used to destroy temporary objects like popups and other child components to prevent memory leaks.
+**destroy** is called only once for each instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL.
+<!-- **destroy** also can be used to destroy temporary objects like popups and other child components to prevent memory leaks. -->
 
 ```js
 /* views/toolbar.js */
@@ -253,35 +254,11 @@ export default class ToolbarView extends JetView{
             ]
         };
     }
-    init(view, url){
-        var popup = webix.ui({
-            view:"popup", 
-            body:"Toolbar is created"
-        });
-
-        if (url.length)
-            this.$$("control").setValue(url[1].page);
-    }
-    urlChange(view, url){
-        if (url.length > 1)
-            this.$$("control").setValue(url[1].page);
-    }
     destroy(){
-        popup.destructor();
+        webix.message("I'm dying!");
     }
 }
 ```
-
-In case you want to let Jet correctly destroy popups and windows, create them with *this.ui*:
-
-```js
-var popup = this.ui({
-    view:"popup", 
-    body:"Toolbar is created"
-});
-```
-
-*this.ui* works similarly to *webix.ui* with one difference. *this.ui* will destroy the popup object automatically when master view is destroyed. So you don't need to destroy the popup manually.
 
 This is all on view class methods. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see the order of the life stages of each view.
 
