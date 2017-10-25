@@ -8,7 +8,7 @@ First, attach an event to a Jet view:
 
 ```js
 init(){
-    on(app, "SaveForm", function(){
+    this.on(this.app, "SaveForm", function(){
         this.show("aftersave");
     });
 }

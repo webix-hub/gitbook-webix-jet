@@ -79,7 +79,7 @@ This method returns the initial UI configuration of a view. Have a look at a too
 /* views/toolbar.js */
 export default class ToolbarView extends JetView{
     config(){
-        return { 
+        return {
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
                 { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){

@@ -17,7 +17,7 @@
   * [Referencing views](details/referencing.md)
   * [Models](details/models.md)
   * [Routers](details/routers.md)
-  * [Events](details/events.md)
+  * [Events and Methods](details/events.md)
   * [Services](details/services.md)
   * [Tools](details/tools.md)
   * [Plugins](details/plugins.md)

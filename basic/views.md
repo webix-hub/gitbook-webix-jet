@@ -34,14 +34,12 @@ import MyView from "myview";
 
 export default class BigView extends JetView{
     config() => { 
-            rows:[
-                MyView,
-                {
-                    template:"BigView text"
-                }
-            ]   
-        }
-    }
+        rows:[
+            MyView,
+            {
+                template:"BigView text"
+            }
+    ]}
 }
 ```
 

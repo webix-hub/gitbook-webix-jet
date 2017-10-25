@@ -12,7 +12,7 @@ Jet links are created with the **route** attribute instead of the usual **href**
 
 After you click on the link, the app UI will be rebuilt and will consist of the main view _Details_ and a subview _Data_. Note that there's no hashbang in the path.
 
-## 2. Navigation with HTML links
+### 2. Navigation with HTML links
 
 Apart from navigating with links with the **route** attribute, you can create HTML links. This way is not so convenient, as the first one. You cannot prevent users from leaving the current view through an HTML link. In case there's no worries and you don't plan to guard users' unsaved data, you can create links with the **href** attribute. Suppose you have these view modules:
 
