@@ -172,7 +172,40 @@ The *User* plugin is useful if you create apps that need authorization. When the
 
 #### Login through a custom script
 
-To use a plugin, call *app.use*:
+The plugin uses a **session** model, [check it out](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js). It contains requests to *php* scripts for logging in, getting the current status, and logging out. In the code there are following functions:
+
+- **status** - returns the status of the current user:
+
+```js
+function status(){
+	return webix.ajax().post("server/login.php?status")
+		.then(a => a.json());
+}
+```
+
+- **login** - logs the user in, returns an object with his/her access rights settings or a promise of this object or *null* if something went wrong. The parameters are:
+
+- *user* - username;
+- *pass* - password.
+
+```js
+function login(user, pass){
+	return webix.ajax().post("server/login.php", {
+		user, pass
+	}).then(a => a.json());
+}
+```
+
+- **logout** - logs the user out:
+
+```js
+function logout(){
+	return webix.ajax().post("server/login.php?logout")
+		.then(a => a.json());
+}
+```
+
+To use a plugin, call *app.use* and pass the **session** model to it:
 
 ```js
 /* sources/myapp.js */
@@ -181,7 +214,6 @@ import session from "models/session";
 app.use(plugins.User, { model: session });
 ```
 
-The plugin receives a **session** model, [check it out](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js). It contains requests to *php* scripts for logging in, getting the current status, and logging out. 
 
 Here's an example of a form for logging in, which can be included into a view class:
 
