@@ -183,8 +183,112 @@ app.render();
 
 ## Responsive UI - Sizing UI to Device
 			
-- responsive !
-    - partly from the box ( Webix UI)
-    - webix jet - just add check in config 
-    
+**Task**: You want to create a responsive UI.
+
+**Solution**: 
+
+1. ...is partly available out of the box (by Webix UI)
+
+Webix UI resizes components automatically if you don't set fixed sizes. If you minimise your browser window or open the app from a smartphone, components will shrink. However, this is not enough if you want to reorganize your components, e.g. if for wide screens you want to display the layout in columns and for narrower screens in rows or in tabs or simply display less content.
+
+2. Just add a check in config :)
+
+Okay, suppose you want to distinguish two types of screens: *small* (less then 800px) and *wide*. (800 is just a number, you can choose the one you suppose is right). And there are two datatables (ListA and ListB) you want to display in two columns for *wide* screens and in two tabs for *small* screens. *StartView* is the layout. Add a property to app config and initialize it with a function that will count the width of the screen:
+
+```js
+webix.ready(() => {
+	const app = new JetApp({
+		start:		"/start",
+		views:{
+			start: StartView
+		}
+    });
+    const size =  () => document.body.offsetWidth > 800 ? "wide" : "small";
+	app.config.size = size();
+    app.render();
+});
+```
+
+This ensures that when the app is rendered, the right size is calculated. This, nevertheless, doesn't solve dynamic resizing. Yet. This is what will make the app UI responsive and dynamic:
+
+```js
+webix.ready(() => {
+	const app = new JetApp({
+		//config
+	});
+
+	const size =  () => document.body.offsetWidth > 800 ? "wide" : "small";
+	app.config.size = size();
+	webix.event(window, "resize", function(){
+		var newSize = size();
+		if (newSize != app.config.size){
+			app.config.size = newSize;
+			app.refresh();
+		}
+	});
+	
+	app.render();
+});
+```
+
+#### Responsive Layout
+
+Here's how **size** defines the layout (**StartView**):
+
+```js
+export class StartView extends JetView {
+	config(){
+		switch(this.app.config.size){
+			case "small":
+				return {
+					view:"tabview", tabbar:{ optionWidth:100 }, cells:[
+						{ body: { rows:[ ListA ]}, header:"Table 1" },
+						{ body: { rows:[ ListB ]}, header:"Table 2" }
+					]
+				};
+			case "wide":
+				return {
+					type:"space", cols:[
+						ListA,
+						ListB
+					]
+				};
+	}}
+}
+```
+
+*webix.event* attaches an event handler to a browser window. On window resize, the screen type will be recalculated and changed if necessary. Don't forget to **refresh** the app.
+
+#### Responsive Content
+
+One more way to make your app responsive is to display smaller content for small screens. Let's leave only two columns in one of the datatables for small screens:
+
+```js
+export class ListB extends JetView {
+	config(){
+		var config = {
+			view:"datatable",
+			editable:true
+		};
+
+		switch(this.app.config.size){
+			case "small":
+				config.columns = [
+					{ id:"id" },
+					{ id:"title", fillspace:true }
+				];
+				break;
+			default:
+				config.autoConfig = true;
+				break;
+		}
+
+		return config;
+	}
+	init(view){
+		view.parse(data); //a data collection
+	}
+}
+```
+
 [Check out the solution on GitHub](https://github.com/webix-hub/jet-demos/blob/master/sources/screensize.js)
