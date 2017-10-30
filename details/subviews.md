@@ -1,4 +1,4 @@
-## Views
+# Views
 
 After reading the first chapter of this guide, you are familiar with the concept of a _view_. Now it's time to find out all the ways of creating views. You can create views in three ways.
 
@@ -22,6 +22,15 @@ Here's a simple view with a list:
 export default {
 	view:"list"
 }
+```
+
+or 
+
+```js
+const list = {
+    view:"list"
+};
+export default list;
 ```
 
 ## 2. Object "Factory Pattern"
@@ -55,7 +64,7 @@ export default () => {
 
 Views can be defined as JS6 classes.
 
-### Advantages of classes
+### Advantages of Classes
 
 - Views defined as classes are **dynamic** and each new instance can be changed when it's created.
 
@@ -261,6 +270,22 @@ export default class ToolbarView extends JetView{
 ```
 
 This is all on view class methods. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see the order of the life stages of each view.
+
+## Which Way is Better?
+
+If you still doubt which way to choose for defining views, here's a summary.
+
+All three methods provide nearly the same result.
+
+When you are using the **"class"** approach, you can define UI config and *init|ready|change|destroy* handlers.
+
+When you are using the **factory function** approach, you can define a dynamic UI config without handlers.
+
+When you are using **const** *(simple view objects)*, you can define UI config only.
+
+So if you are choosing between **classes** and **const**, it is a flexibility VS brevity.
+
+If you are not sure which one to use, use classes. A class with the **config** method works exactly the same as the "const" declaration.
 
 ## Subview Including
 
