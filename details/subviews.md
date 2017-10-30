@@ -277,7 +277,7 @@ If you still doubt which way to choose for defining views, here's a summary.
 
 All three methods provide nearly the same result.
 
-When you are using the **"class"** approach, you can define UI config and *init|ready|change|destroy* handlers.
+When you are using the **"class"** approach, you can define UI config and *init|ready|urlChange|destroy* handlers.
 
 When you are using the **factory function** approach, you can define a dynamic UI config without handlers.
 
@@ -299,7 +299,7 @@ You can include views into other views. For example, here are three views create
 
 ```js
 /* views/myview.js */
-export class MyView extends JetView {
+export default class MyView extends JetView {
     config() => { template:"MyView text" };
 }
 ```
@@ -332,9 +332,9 @@ Let's group them into a bigger view:
 
 ```js
 /* views/bigview.js */
-import {myview} from "myview"
-import {details} from "details"
-import {form} from "form"
+import myview from "myview"
+import details from "details"
+import form from "form"
 
 export default BigView = {
     rows:[
