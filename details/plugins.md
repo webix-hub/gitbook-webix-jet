@@ -108,7 +108,7 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 
 [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html).
 
-### User Plugin
+### User Plugin <h3 id="user"></h3>
 
 The *User* plugin is useful if you create apps that need authorization. When the plugin is included, the **user** service is launched. Let's look how you can use the plugin with a custom script.
 

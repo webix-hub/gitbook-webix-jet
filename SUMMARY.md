@@ -22,4 +22,6 @@
   * [Services](details/services.md)
   * [Tools](details/tools.md)
   * [Plugins](details/plugins.md)
+  * [Inner Events and Error Handling](details/inner_events.md)
+  * [Jet Recipes](details/recipes.md)
 

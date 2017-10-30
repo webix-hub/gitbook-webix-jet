@@ -1,6 +1,6 @@
 # Working with Popups and Windows
 
-Temporary views like popups and windows can be created with **this.ui**. <!-- This method is equivalent to **webix.ui** with one useful difference.--> **this.ui** takes care of the windows it creates and destroys them when their parent views are destroyed.
+Temporary views like popups and windows can be created with **this.ui**. **this.ui** takes care of the windows it creates and destroys them when their parent views are destroyed.
 
 Consider a simple popup view:
 

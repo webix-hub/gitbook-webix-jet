@@ -43,7 +43,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 The event handler receives three parameters:
 
 - *url* - a string with the attempted URL
-- *view* - the parent view that contains subviews that are being changed
+- *view* - the parent view that contains a subview from the URL
 - *nav* - an object that defines navigation to the next view
 
 **nav** has three properties:
@@ -94,11 +94,10 @@ app.attachEvent("app:guard", function(url, view, nav){
 app.render();
 ```
 
-[The demo is available on Github](https://github.com/webix-hub/jet-demos/blob/master/sources/guards.js).
+[The demo is available on Github](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js).
 
-<!-- SECOND DEMO ABOUT LEVELS -->
 
-## Error handling
+## Error handling and Debugging
 
 There are four events that can be used to handle errors.
 
@@ -111,6 +110,8 @@ var app = new JetApp({
     debug: true // console.log and debugger on error
 });
 ```
+
+Besides logging errors, this will enable a debugger.
 
 You can also do something else, for example, show an error message in an alert box:
 
