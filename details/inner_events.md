@@ -14,9 +14,9 @@ app.attachEvent("app:render", function(view,url,result){
 
 The event receives three parameters:
 
-**view** - the view for which the event is called (this.$scope)
-**url** - the URL as an array of URL elements
-**result** - a wrapper object used to change the UI from the *app:render* event
+- **view** - the view for which the event is called (this.$scope)
+- **url** - the URL as an array of URL elements
+- **result** - a wrapper object used to change the UI from the *app:render* event
 
 ### app:route
 
@@ -36,7 +36,7 @@ The **app:guard** event is triggered before navigation to another view. One of t
 
 ```js
 app.attachEvent("app:guard", function(url, view, nav){
-
+	//...
 })
 ```
 
