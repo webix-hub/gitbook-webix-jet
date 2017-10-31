@@ -16,7 +16,7 @@ webpack --env.production true
 
 Any of this commands will compile the whole app in two files, **myapp.css** and **myapp.js**, which will be stored in the **codebase** folder (names may differ, based on the webpack config).
 
-Now, you need to upload the files from **codebase** and **index.html** (the html page which is stored at the root of the project) and that is all.
+Now, you need to upload the files from **codebase** and **index.html** (the html page which is stored at the root of the project) to the production server.
 
 By default, **index.html** uses the CDN version of Webix. If you are using Webix PRO, you need to change paths in **index.html** to the place where *webix.js* and *webix.css* are stored on the production server. 
 

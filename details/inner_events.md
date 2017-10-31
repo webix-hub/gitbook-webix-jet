@@ -4,11 +4,12 @@ Apart from using built-in means like plugins, you can use a number of inner even
 
 ### app:render
 
-The event is triggered before each view of an app is rendered. You can use it to change the UI config that you defined and add properties to UI controls, for instance, if you want to disable a button for some users.
+The event is triggered before each view of an app is rendered. You can use it to change the UI config that you defined and add properties to UI controls, for instance, if you want to disable buttons:
 
 ```js
 app.attachEvent("app:render", function(view,url,result){
-    //...
+ if (result.ui.view === "button")
+     result.ui.disabled = true;
 });
 ```
 
@@ -16,19 +17,28 @@ The event receives three parameters:
 
 - **view** - the view for which the event is called (this.$scope)
 - **url** - the URL as an array of URL elements
-- **result** - a wrapper object used to change the UI from the *app:render* event
+- **result** - a wrapper object used to change the UI (e.g. to put it into some other view)
+
+```js
+app.attachEvent("app:render", function(view,url,result){
+	if (result.ui.view === "button")
+		result.ui = {
+			view:"toolbar", rows:[ result.ui ]
+		};
+});
+```
 
 ### app:route
 
-Handling the **app:route** event is equivalent to handling the **urlChange** of a class view. The event fires after navigation to a view. **app:route** is used by the menu plugin to highlight menu options according to the URL.
+Handling the **app:route** event is resembles handling the **urlChange** of a class view. The event fires after navigation to a view and can be used to send notifications. **app:route** is used by the menu plugin to highlight menu options according to the URL.
 
 ```js
 app.attachEvent("app:route", function(url){
-    //...
+    webix.ajax("log.php", url);
 })
 ```
 
-It receives one parameter - the URL as an array of URL elements.
+**app:route** receives one parameter - the URL as an array of URL elements.
 
 ### app:guard
 
