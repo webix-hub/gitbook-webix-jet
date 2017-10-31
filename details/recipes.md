@@ -193,7 +193,7 @@ Webix UI resizes components automatically if you don't set fixed sizes. If you m
 
 2. Just add a check in config :)
 
-Okay, suppose you want to distinguish two types of screens: *small* (less then 800px) and *wide*. (800 is just a number, you can choose the one you suppose is right). And there are two datatables (ListA and ListB) you want to display in two columns for *wide* screens and in two tabs for *small* screens. *StartView* is the layout. Add a property to app config and initialize it with a function that will count the width of the screen:
+Okay, suppose you want to distinguish two types of screens: *small* (less than 800px) and *wide*. (800 is just a number, you can choose the one you suppose is right). And there are two datatables (ListA and ListB) you want to display in two columns for *wide* screens and in two tabs for *small* screens. *StartView* is the layout. Add a property to app config and initialize it with a function that will count the width of the screen:
 
 ```js
 webix.ready(() => {
