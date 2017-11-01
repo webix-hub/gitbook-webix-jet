@@ -88,4 +88,4 @@ export default class TopView extends JetView {
 }
 ```
 
-[Check out the demo on GitHub](https://github.com/webix-hub/jet-demos/blob/master/sources/windows.js).
+[Check out the demo on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/windows.js)

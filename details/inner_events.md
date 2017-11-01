@@ -104,10 +104,10 @@ app.attachEvent("app:guard", function(url, view, nav){
 app.render();
 ```
 
-[The demo is available on Github](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js).
+[The demo is available on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
 
-## Error handling and Debugging
+## Error Handling and Debugging
 
 There are four events that can be used to handle errors.
 
@@ -137,7 +137,7 @@ The event takes one parameter - the error object.
 
 Besides the common error event, there are three events for specific error types.
 
-#### Useful for end-users
+#### Useful for End-Users
 
 **app:error:resolve** fires when Jet can't find a module by its name. If this happens, it would be useful to redirect users somewhere else instead of showing them an empty screen:
 
@@ -152,7 +152,7 @@ app.attachEvent("app:error:resolve", function(err, url) {
 - **err** - an error object
 - **url** - the URL
 
-#### Useful for developers:
+#### Useful for Developers
 
 These error events are more useful for developers as they inform about errors related to the UI.
 

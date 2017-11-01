@@ -65,7 +65,7 @@ export default class ToolbarView extends JetView {
 }
 ~~~
 
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/04_plugins.html).
+[Check out the demo >>](https://github.com/webix-hub/jet-core/blob/master/samples/04_plugins.html)
 
 ### UnloadGuard Plugin
 
@@ -106,7 +106,7 @@ export default class FormView extends JetView {
 
 If the input isn't valid, the function returns a promise with a dialogue window. Depending on the answer, the promise either resolves and the Guard lets the user go to the next view, or it rejects. No pasaran.
 
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html).
+[Check out the demo >>](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html)
 
 ### User Plugin <h3 id="user"></h3>
 
@@ -155,7 +155,6 @@ import session from "models/session";
 ...
 app.use(plugins.User, { model: session });
 ```
-
 
 Here's an example of a form for logging in, which can be included into a view class:
 
@@ -221,10 +220,9 @@ The **User** plugin has other useful methods.
 **logout** ends the current session and shows an afterLogout page, usually it's the login form.
 
 
+#### Login with an external OAuth service ( Google, Github, etc. )
 
-#### Login with an external OATH service ( Google, Github, etc. )
-
-
+<!-- to be continued -->
 
 ### Theme plugin
 
@@ -301,7 +299,7 @@ const theme = this.app.getService("theme").getTheme();
 ...
 ```
 
-[Check out the complete code](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js).
+[Check out the complete code >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js)
 
 ### Locale plugin
 
@@ -365,7 +363,7 @@ export default class SettingsView extends JetView {
 
 When a user chooses a language, a corresponding file is located and the app language is changed. IDs of the language options should be the same as the locale file names. **getLang** in config restores the value of the segmented button.
 
-[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js).
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js)
 
 ### Status Plugin
 
@@ -394,7 +392,7 @@ The **target** property is the ID of the view component where you want to displa
 - **data** - a property that defines the ID of the data component to track.
 - **remote** - a boolean property that enables *webix.remote* - a special protocol that allows the client component to call functions on the server directly.
 
-[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js).
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js)
 
 ## 2.Custom Plugins
 

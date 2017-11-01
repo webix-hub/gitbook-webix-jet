@@ -131,7 +131,7 @@ export default class blocked extends JetView{
 
 You can show this view via *top/blocked*.
 
-[Check out this solution on GitHub](https://github.com/webix-hub/jet-demos/blob/master/sources/viewguard.js).
+[Check out this solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewguard.js)
 
 ## Access Guard -- App Level
 
@@ -179,7 +179,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 app.render();
 ```
 
-[Check out the solution on Github](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js).
+[Check out the solution on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
 ## Responsive UI - Sizing UI to Device
 			
@@ -231,9 +231,11 @@ webix.ready(() => {
 });
 ```
 
+*webix.event* attaches an event handler to a browser window. On window resize, the screen type will be recalculated and changed if necessary. Don't forget to **refresh** the app.
+
 #### Responsive Layout
 
-Here's how **size** defines the layout (**StartView**):
+Here's how **size** defines the layout (**StartView**). For small screens, the grids will be put in tabs, and for wide screens they will be put side by side:
 
 ```js
 export class StartView extends JetView {
@@ -256,8 +258,6 @@ export class StartView extends JetView {
 	}}
 }
 ```
-
-*webix.event* attaches an event handler to a browser window. On window resize, the screen type will be recalculated and changed if necessary. Don't forget to **refresh** the app.
 
 #### Responsive Content
 
@@ -291,4 +291,4 @@ export class ListB extends JetView {
 }
 ```
 
-[Check out the solution on GitHub](https://github.com/webix-hub/jet-demos/blob/master/sources/screensize.js)
+[Check out the solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/screensize.js)

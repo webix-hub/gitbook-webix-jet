@@ -94,7 +94,7 @@ devServer:{
 ```
 In the production app, it can be done through *apache/nginx* configuration.
 
-[Check out the demo](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js).
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js)
 
 ## 3. Store Router
 
@@ -144,7 +144,7 @@ var app1 = new JetApp({
 });
 ```
 
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html).
+[Check out the demo >>](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html)
 
 ## 5. Custom Routers
 

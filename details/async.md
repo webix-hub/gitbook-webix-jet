@@ -1,4 +1,4 @@
-# Promised views
+# Promised Views
 
 Data is usually stored in a database on the server side. If the UI is built much faster than the data is loaded, it's a good idea to make use of promises to load the data. To make the UI wait for data, you can make an asynchronous request to a PHP script and give the UI a promise. Thus an app will wait for data from a database, and only after a promise resolves, it will render the view with the data.
 
