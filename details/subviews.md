@@ -60,7 +60,7 @@ export default () => {
 }
 ```
 
-## 3. Class Views
+## <span id="class_views">3. Class Views</span>
 
 Views can be defined as JS6 classes.
 
@@ -287,7 +287,7 @@ When you are using the **factory function** approach, you can define a dynamic U
 
 When you are using **const** *(simple view objects)*, you can define UI config only.
 
-So if you are choosing between **classes** and **const**, it is a flexibility VS brevity.
+So if you are choosing between **classes** and **const**, it is flexibility VS brevity.
 
 If you are not sure which one to use, use classes. A class with the **config** method works exactly the same as the "const" declaration.
 
@@ -383,7 +383,7 @@ class WindowView extends JetView{
 
 For more details about popups and windows, [go to the related section](popups.md).
 
-### 2. App Inclusion
+### <span id="app\_as\_subview">2. App Inclusion</span>
 
 App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level applications. E.g. here are two views:
 

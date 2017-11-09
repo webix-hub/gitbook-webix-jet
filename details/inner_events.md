@@ -107,7 +107,7 @@ app.render();
 [The demo is available on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
 
-## Error Handling and Debugging
+## <span id="errors">Error Handling and Debugging</span>
 
 There are four events that can be used to handle errors.
 
