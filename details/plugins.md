@@ -73,6 +73,8 @@ export default class ToolbarView extends JetView {
 
 The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
 
+![](../images/unload.png)
+
 The plugin reacts to an attempt of changing the URL. The syntax for using a plugin is _this.use\(plugin,handler\)_. Use takes two parameters:
 
 * a plugin name
