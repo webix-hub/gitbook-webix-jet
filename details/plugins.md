@@ -16,6 +16,8 @@ After the plugin name, you are to specify the configuration for the plugin, e.g.
 
 This plugin simplifies your life if you plan to create a menu. The plugin sets URLs for menu options, buttons or other controls you plan to use for showing subviews. Also, there's no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
 
+![](../images/top_data.png)
+
 Let's create a toolbar with a segmented button and use the plugin:
 
 ~~~js
@@ -65,7 +67,7 @@ export default class ToolbarView extends JetView {
 }
 ~~~
 
-[Check out the demo >>](https://github.com/webix-hub/jet-core/blob/master/samples/04_plugins.html)
+[Check out the demo >>](https://github.com/webix-hub/jet-start/blob/master/sources/views/top.js)
 
 ### UnloadGuard Plugin
 
@@ -106,7 +108,7 @@ export default class FormView extends JetView {
 
 If the input isn't valid, the function returns a promise with a dialogue window. Depending on the answer, the promise either resolves and the Guard lets the user go to the next view, or it rejects. No pasaran.
 
-[Check out the demo >>](https://github.com/webix-hub/jet-core/blob/master/samples/05_guard.html)
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-unload.js)
 
 ### User Plugin <h3 id="user"></h3>
 
@@ -365,6 +367,8 @@ When a user chooses a language, a corresponding file is located and the app lang
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js)
 
+![](../images/plugin_locale.png)
+
 ### Status Plugin
 
 This plugin is useful if you want to show the status of data loading in case it takes time, to confirm success or to show an error message. These are the status messages that you can see:
@@ -393,6 +397,8 @@ The **target** property is the ID of the view component where you want to displa
 - **remote** - a boolean property that enables *webix.remote* - a special protocol that allows the client component to call functions on the server directly.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js)
+
+![webix jet plugin status demo](../images/plugin_status.png)
 
 ## 2.Custom Plugins
 

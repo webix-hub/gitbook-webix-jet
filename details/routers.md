@@ -144,7 +144,7 @@ var app1 = new JetApp({
 });
 ```
 
-[Check out the demo >>](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html)
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/b686944b383745070fc977aa9123f01a36ce2b3c/sources/viewapp.js)
 
 ## 5. Custom Routers
 

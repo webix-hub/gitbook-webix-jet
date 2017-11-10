@@ -148,8 +148,6 @@ If you change it to
 
 **urlChange** will be called for **Preview** and **Demo**.
 
-[Check out the demo >>](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html)
-
 The **urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right menu item.
 
 ```js
@@ -272,8 +270,6 @@ export default class ToolbarView extends JetView{
 ```
 
 This is all on view class methods.
-
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see the order of the life stages of each view.
 
 ## Which Way is Better?
 
@@ -449,7 +445,7 @@ var app2 = new JetApp({
 }).render();
 ```
 
-As a result, this is a two-level app. [Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/06_highlevel.html).
+As a result, this is a two-level app. [Check out the demo](https://github.com/webix-hub/jet-demos/blob/b686944b383745070fc977aa9123f01a36ce2b3c/sources/viewapp.js).
 
 <!-- footnotes -->
 - - -

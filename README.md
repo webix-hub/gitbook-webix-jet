@@ -5,6 +5,8 @@ Introduction to Webix Jet
 
 This guide provides all the information needed to start creating web applications with Webix Jet. Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project, there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix Jet framework.
 
+![webix jet gitbook cover](cover.jpg)
+
 ## Advantages of Webix Jet
 
 Webix Jet allows you to create a flexible, easy maintainable app, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins, and user access levels. 
@@ -50,7 +52,7 @@ If you set the path to *index.html#!/top/start*, the interface described in the 
 
 **index.html#!/top/start**
 
-![](images/how_it_works.png)
+![webix jet start view example](images/how_it_works.png)
 
 ##Defining a View Module
 
@@ -114,13 +116,13 @@ For example, we've got a *data.js* view, which contains a datatable. If you ente
 
 **index.html#!/top/data**
 
-![](images/top_data.png)
+![webix jet subview including example](images/top_data.png)
 
 Then, add one more */top* subdirectory into the path. The URL will look as *index.html#!/top/top/data* and the app will have another menu view inserted into the first one. This view will contain the datatable:
 
 **index.html#!/top/top/data**
 
-![](images/top_top_data.png)
+![webix jet changing subviews example](images/top_top_data.png)
 
 The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.
 

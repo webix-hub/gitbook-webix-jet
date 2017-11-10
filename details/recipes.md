@@ -131,6 +131,8 @@ export default class blocked extends JetView{
 
 You can show this view via *top/blocked*.
 
+![](../images/viewguard.png)
+
 [Check out this solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewguard.js)
 
 ## Access Guard -- App Level
@@ -178,6 +180,8 @@ app.attachEvent("app:guard", function(url, view, nav){
 });
 app.render();
 ```
+
+![](../images/appguard.png)
 
 [Check out the solution on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
@@ -259,6 +263,8 @@ export class StartView extends JetView {
 }
 ```
 
+![](../images/resp_layout.png)
+
 #### Responsive Content
 
 One more way to make your app responsive is to display smaller content for small screens. Let's leave only two columns in one of the datatables for small screens:
@@ -290,5 +296,7 @@ export class ListB extends JetView {
 	}
 }
 ```
+
+![](../images/resp_content.png)
 
 [Check out the solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/screensize.js)

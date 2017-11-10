@@ -97,5 +97,3 @@ The syntax of showing views resembles the way you navigate through directories. 
 ```
 
 As a result, the app URL will be */bigview*.
-
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see how the described ways of navigation are used in an application.

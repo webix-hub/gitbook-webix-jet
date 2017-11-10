@@ -106,6 +106,7 @@ app.render();
 
 [The demo is available on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
+![](../images/appguard.png)
 
 ## <span id="errors">Error Handling and Debugging</span>
 

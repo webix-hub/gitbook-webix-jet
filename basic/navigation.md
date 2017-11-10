@@ -65,8 +65,6 @@ The resulting URL is going to be */layout/demo*.
 ...
 ```
 
-[Check out the demo](https://github.com/webix-hub/jet-core/blob/master/samples/02_life_stages.html) to see how the described ways of navigation are used in an application.
-
 You can also read [a section on navigation](../details/navigation.md) in the advanced chapter.
 
 This is all about Webix Jet in a nutshell. For more details, go on to the next chapter.

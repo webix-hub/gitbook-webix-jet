@@ -66,6 +66,8 @@ class WindowsView extends JetView {
 
 Unlike with a simple view, with a class view you have to redefine **show**. *this.getRoot* refers to the popup UI. So *this.getRoot().show(target)* does the same thing as *this.win1* from the previous example with a simple view **win1**. It shows the popup below the target view or component.
 
+![](../images/window.png)
+
 Here's how you initiate and show this popup (spoiler: exactly the same way as **win1**):
 
 ```js
