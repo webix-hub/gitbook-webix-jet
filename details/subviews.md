@@ -185,11 +185,11 @@ The **urlChange** method receives two parameters:
 ```
 config a
 init a
-urlChange a
 	config b
 	init b
 	urlChange b
 	ready b
+urlChange a
 ready a
 ```
 
