@@ -68,13 +68,15 @@ Views can be defined as JS6 classes.
 
 - Views defined as classes are **dynamic** and each new instance can be changed when it's created.
 
-- View classes have **init** and other **methods** that can be redefined by users.
+- View classes have **init** and other **methods** that can be redefined by users. 
+
+- You can also define **custom methods** and **local variables**.
 
 - All instances have their individual **inner states**. E.g. if you use the same Toolbar class to add identical toolbars at the top and at the bottom, there are two instances of a Toolbar class and the toolbars will behave independently.
 
 - Classes have the **this** pointer that references the view inside methods and handlers.
 
-- With JS6 classes, **inheritance** is closer to classic OOP and the syntax is nicer. Inheritance can help you reuse old components for creating slightly different ones. For example, if you already have a toolbar and want to create a similar one, but with one additional button, define a new class and inherit from the old toolbar.
+- You can **extend** class views. With JS6 classes, inheritance is closer to classic OOP and the syntax is nicer. Inheritance can help you reuse old components for creating slightly different ones. For example, if you already have a toolbar and want to create a similar one, but with one additional button, define a new class and inherit from the old toolbar.
 
 ### JetView Methods
 

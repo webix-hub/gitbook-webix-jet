@@ -1,35 +1,88 @@
 # Views Communication
 
+Views are separated, but there should be some means of communication between them.
+
+### Parameters
+
+You can enable views communications with *parameters*. For instance, you need to open a form with some specific data from another view. Pass the needed parameters to *view.show*:
+
+```js
+// views/data.js
+export default class DataView extends JetView{
+    config(){
+        return { rows:[
+            { $subview:true }
+        ]};
+    }
+    init(){
+        this.show("./form?id=1");
+    }
+}
+```
+
+And here's **form**:
+
+```js
+// views/form.js
+import { getData } from "../models/records";
+
+export default class FormView extends JetView{
+    config(){
+        return {
+            view:"form", elements:[
+                { view:"text", name:"name" },
+                { view:"text", name:"email" }
+            ]
+        };
+    }
+    urlChange(view,url){
+        if(url[0].params.id){
+            this.getRoot().setValues( getData(id) );
+        }
+    }
+}
+```
+
 ### Events
 
-Views are separated, but there should be some means of communication between them. Feel free to use the in-app event bus for that. You can attach an event handler to the event bus in one view and trigger the event in another view.
+Feel free to use the in-app event bus for that. You can attach an event handler to the event bus in one view and trigger the event in another view.
 
 First, attach an event to a Jet view:
 
 ```js
-init(){
-    this.app.attachEvent("SaveForm", function(){
-        this.show("aftersave");
-    });
+export default class FormView extends JetView{
+    init(){
+        this.app.attachEvent("save:form", function(){
+            this.show("aftersave");
+        });
+    }
 }
 ```
 
 One more way to attach event is **this.on**. This way is better because it automatically detaches the event when the view that called it is destroyed.
 
 ```js
-init(){
-    this.on(this.app, "SaveForm", function(){
-        this.show("aftersave");
-    });
+export default class FormView extends JetView{
+    init(){
+        this.on(this.app, "save:form", function(){
+            this.show("aftersave");
+        });
+    }
 }
 ```
 
-Some other Webix view can trigger the event, e.g.:
+Some other view can trigger the event, e.g.:
 
 ```js
-{ view:"button", click:() => {
-    this.app.callEvent("SaveForm", []);
-}}
+export default class DataView extends JetView{
+    config(){
+        return {
+            view:"button", click:() => {
+                this.app.callEvent("save:form");
+            }
+        }
+    }
+}
 ```
 
 ### Declaring and Calling Methods

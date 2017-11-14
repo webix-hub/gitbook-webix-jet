@@ -9,7 +9,7 @@ There are several ways of loading data in Webix Jet.
 If you have some relatively small data and plan to use them in many components, you can create a model, initialize a data collection in it and load the data into the data collection. Here's an example of a data collection with static data:
 
 ```js
-/* sources/models/records.js */
+// sources/models/records.js
 export const records = new webix.DataCollection({ data:[
 	{ id:1, title:"The Shawshank Redemption", year:1994, votes:678790, rating:9.2, rank:1},
 	{ id:2, title:"The Godfather", year:1972, votes:511495, rating:9.2, rank:2},
@@ -20,7 +20,7 @@ export const records = new webix.DataCollection({ data:[
 This is how the data is loaded and saved to the server:
 
 ```js
-/* sources/models/records.js */
+// sources/models/records.js
 export const records = new webix.DataCollection({ 
 	url:"data.php",
 	save:"data.php"
@@ -30,7 +30,7 @@ export const records = new webix.DataCollection({
 To use the data in a component, you need to parse it. You must parse data in **init**, not in **config**. Have a look at an example with a datatable:
 
 ```js
-/* sources/views/data.js */
+// sources/views/data.js
 import {JetView} from "webix-jet";
 import {records} from "../models/records";
 
@@ -51,35 +51,34 @@ All the changes made in the datatable are saved to the server.
 This is the model for big data. These data can be used only once and mustn't be cached. The data can be loaded from a server with an AJAX request:
 
 ```js
-/* sources/models/records.js */
-export default {
-	getData: function(){
-		return webix.ajax("data.php");
-	}
+// sources/models/records.js
+export function getData(){
+	return webix.ajax("data.php");
 }
 ```
 
 or from local storage:
 
 ```js
-/* sources/models/records.js */
-export default {
-	getData: function(){
-		return webix.storage.local.get("data");
-	}
+// sources/models/records.js
+export function getData(){
+	return webix.storage.local.get("data");
 }
 ```
 
 To parse data, use *getData*:
 
 ```js
-/* sources/views/data.js */
+// sources/views/data.js
 import {JetView} from "webix-jet";
-import * as records from "../models/records";
+import {getData} from "../models/records";
+
 export default class DataView extends JetView{
-	config(){ return { view:"datatable", autoConfig:true }; }
-	init(view) { 
-		view.parse(records.getData());
+	config(){ 
+		return { view:"datatable", autoConfig:true };
+	}
+	init(view){ 
+		view.parse(getData());
 	}
 }
 ```
@@ -87,28 +86,29 @@ export default class DataView extends JetView{
 To save data, you can add a function to the *records* model:
 
 ```js
-/* sources/models/records.js */
-export default {
-	getData: function(){
-		return webix.ajax("data.php");
-	},
-	saveData: function(){
-		return webix.ajax().post("data.php", { data });
-	}
+// sources/models/records.js
+export function getData(){
+	return webix.ajax("data.php");
+};
+export function saveData(){
+	return webix.ajax().post("data.php", { data });
 }
 ```
 
 In *init* you need to define a way to save data:
 
 ```js
-/* sources/views/data.js */
+// sources/views/data.js
 import {JetView} from "webix-jet";
-import * as records from "../models/records";
+import {getData, saveData} from "../models/records";
+
 export default class DataView extends JetView{
-	config(){ return { view:"datatable", autoConfig:true, editable:true }; }
+	config(){ 
+		return { view:"datatable", autoConfig:true, editable:true };
+	}
 	init(view) {
-		view.parse(records.getData());
-		view.define("save", records.saveData);
+		view.parse(getData());
+		view.define("save", saveData);
 	}
 }
 ```
@@ -116,23 +116,24 @@ export default class DataView extends JetView{
 Loading and saving data can be done in **config** of the view module:
 
 ```js
-/* sources/views/data.js */
+// sources/views/data.js
 import {JetView} from "webix-jet";
-import * as records from "../models/records";
+import {getData, saveData} from "../models/records";
+
 export default class DataView extends JetView{
 	config() {
 		return {
 			view:"datatable", autoConfig:true,
-			url: records.getData,
-			save: records.saveData
+			url: getData,
+			save: saveData
 		}
 	}
 }
 ```
 
-### 3. Huge Data
+### 3. Remote Models for Huge Data
 
-For really huge data (more than 10K records), you can use dynamic loading of Webix components. Data will be loaded in portions when needed. For that, you must give up models and load data in the view code. You can do it with the **url** property:
+For really huge data (more than 10K records), you can use dynamic loading of Webix components and drop models :) Data will be loaded in portions when needed. For that, you must give up models and load data in the view code. You can do it with the **url** property. For saving data, use the **save** property.
 
 ```js
 /* sources/views/data.js */
@@ -149,7 +150,7 @@ export default class DataView extends JetView{
 }
 ```
 
-or with the **load** method:
+Data can be loaded dynamically with the **load** method:
 
 ```js
 /* sources/views/data.js */
@@ -163,6 +164,15 @@ export default class DataView extends JetView{
 	}
 }
 ```
+
+### Shared vs Dynamic vs Remote models
+
+| Model   | Data Size | Usage                 |
+|---------|-----------|-----------------------|
+| Shared  | Small     | Many times            |
+| Dynamic | Big       | Once                  |
+| Remote  | Huge      | Handy for prototyping |
+
 
 ### 4. Services as Data Sources
 
@@ -179,61 +189,6 @@ A better and shorter way is:
 var data = service.getNomenclature();
 ```
 
-<!--
-/* data.js */
-import {JetView} from "webix-jet";
-import {records} from "../models/records"
-
-export default class DataView extends JetView {
-    config(){
-        return {
-            view:"datatable", autoConfig:true
-        };
-    }
-    init(view){
-        view.parse(records);
-        this.app.setService("masterData", {
-            getSelected : () => this.getRoot().getSelectedItem()
-        });
-        view.select(1);
-    }
-}
-/* services.js */
-import {JetApp, JetView} from "webix-jet";
-import DataView from "views/data";
-
-class SmallData extends JetView {
-    config(){
-        return {
-            view:"datatable", autoConfig:true
-        };
-    }
-    init(view){
-        var item = this.app.getService("masterData").getSelected();
-        view.parse(item);
-    }
-}
-
-class Layout extends JetView {
-    config(){
-        return {
-            cols:[
-                {$subview: DataView},
-                {$subview: SmallData}
-            ]
-        };
-    }
-}
-
-webix.ready(() => {
-	const app = new JetApp({
-		start:		"/start",
-		views:{
-			start: Layout
-		}
-	}).render();
-});
--->
 
 ### 5. Using Webix Remote with Webix Jet
 

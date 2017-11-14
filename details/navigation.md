@@ -12,6 +12,8 @@ Jet links are created with the **route** attribute instead of the usual **href**
 
 After you click on the link, the app UI will be rebuilt and will consist of the main view _Details_ and a subview _Data_. Note that there's no hashbang in the path.
 
+The **route** attribute can be assigned not only to links, but to *any control* like a button or a menu option.
+
 ### 2. Navigation with HTML links
 
 Apart from navigating with links with the **route** attribute, you can create HTML links. This way is not so convenient, as the first one. You cannot prevent users from leaving the current view through an HTML link. In case there's no worries and you don't plan to guard users' unsaved data, you can create links with the **href** attribute. Suppose you have these view modules:
@@ -38,6 +40,12 @@ This is a link to the **Details** view as a subview of **DemoView**:
 <a href="#!/Demo/Details">Data</a>
 ~~~
 
+You can pass parameters in the link, e.g.:
+
+```html
+<a href="#!/Demo/Details?=2">Data</a>
+```
+
 ### 3. app.show\(\)
 
 Apart from links, you can use the **show** method to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. You can call the method from control handlers, for instance:
@@ -55,6 +63,7 @@ After a button click, the URL will change, and the app UI will be rebuilt accord
 You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this.$scope**. Calling **show** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
 ```js
+// layout.js
 cols:[
     layout,
     { $subview:true }
@@ -80,7 +89,7 @@ The resulting URL is going to be */layout/demo*.
 If you want to rebuild the whole app and load the **details** view as the only view, specify the name of the view with a slash:
 
 ```js
-/* toolbar.js*/
+// toolbar.js
 ...
 { view:"button", value:"Details", click: () => {
     this.show("/details");

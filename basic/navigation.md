@@ -1,9 +1,16 @@
-## Navigation
+## Navigation (Routing)
 
-Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">1</a></sup>. The framework reacts to the URL change and rebuilds the interface based on the URL. In the previous section, you've read about direct URL navigation. There are three more ways to manipulate views and subviews.
+Navigation is implemented by changing the URL of the page. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">1</a></sup>. The framework reacts to the URL change and rebuilds the interface based on the URL. 
 
 The URL of the page reflects the current state of the app. By default, it is stored as a part after the hashbang. When we change the URL, the app updates itself accordingly. 
 
+### Advantages of Jet Navigation
+
+- *Browser Navigation Keys*: You can move backwards and forwards to previously opened subviews.
+- *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before page reload.
+- *Convenient Development*: If you work on some particular subview (*aaa*), you can open it separately with URL like *#!/aaa* and test it.
+
+In the previous section, you've read about direct URL navigation. There are three more ways to show views and subviews.
 
 ### 1. Jet Links
 
@@ -72,4 +79,4 @@ This is all about Webix Jet in a nutshell. For more details, go on to the next c
 <!-- footnotes -->
 - - -
 <a id="myfootnote1" href="#origin">1</a>:
-This is relevant for HashRouter, which is the default router. There is no hashbang if you use UrlRouter. The app URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except EmptyRouter and the behavior is the same as if the URL were displayed.  for more details, [see the section on routers](../details/routers.md).
+This is relevant for HashRouter, which is the default router. There is no hashbang if you use UrlRouter. The app URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except EmptyRouter and the behavior is the same as if the URL were displayed. For more details, [see the section on routers](../details/routers.md).

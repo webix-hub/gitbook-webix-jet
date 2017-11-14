@@ -7,73 +7,49 @@ The same communication can be implemented with events, but this way is much more
 JetApp provides a means to initialize services. For example, you have a *masterTree* view and want other views to get the ID of a selected item. To set a service, call the **setService** method:
 
 ```js
-init() {
-	this.app.setService("masterTree", {
-		getSelected : () => this.getRoot().getSelectedId()
-	})
+// views/tree.js
+export default class treeView extends JetView{
+    config(){
+        return { view:"tree" };
+    }
+    init() {
+        this.app.setService("masterTree", {
+            getSelected : () => this.getRoot().getSelectedId();
+        })
+    }
 }
 ```
 
 *getSelected* of the *masterTree* service returns the ID of the selected node of the tree. To call *getSelected*, use the **getService** method:
 
 ```js
-this.app.getService("masterTree").getSelected();
-```
+// views/form.js
+import {getData} from "../models/records";
 
-<!-- example
-/* data.js */
-import {JetView} from "webix-jet";
-import {records} from "../models/records"
-
-export default class DataView extends JetView {
+export default class FormView extends JetView{
     config(){
         return {
-            view:"datatable", autoConfig:true
-        };
-    }
-    init(view){
-        view.parse(records);
-        this.app.setService("masterData", {
-            getSelected : () => this.getRoot().getSelectedItem()
-        });
-        view.select(1);
-    }
-}
-/* services.js */
-import {JetApp, JetView} from "webix-jet";
-import DataView from "views/data";
-
-class SmallData extends JetView {
-    config(){
-        return {
-            view:"datatable", autoConfig:true
-        };
-    }
-    init(view){
-        var item = this.app.getService("masterData").getSelected();
-        view.parse(item);
-    }
-}
-
-class Layout extends JetView {
-    config(){
-        return {
-            cols:[
-                {$subview: DataView},
-                {$subview: SmallData}
+            view:"form", elements:[
+                { view:"text", name:"name" },
+                { view:"text", name:"email" }
             ]
         };
     }
+    init(){
+        var id = this.app.getService("masterTree").getSelected();
+        this.getRoot().setValues( getData(id) );
+    }
 }
-
-webix.ready(() => {
-	const app = new JetApp({
-		start:		"/start",
-		views:{
-			start: Layout
-		}
-	}).render();
-});
--->
+```
 
 Apart from view communication, services can be used for [loading and saving data](models.md).
+
+### Which Way of Views Communication To Choose?
+
+|            | Used For                     | Direction     | Receivers |
+|------------|------------------------------|---------------|-----------|
+| Parameters | Initialization, Data loading |               | One       |
+| Events     | Actions                      | Child->Parent | Many      |
+| Services   | State Requests               | Any           | Many      |
+
+Also remember that you can't use the same service for two instances of a view class, e.g. if you create a file manager with two identical file views.
