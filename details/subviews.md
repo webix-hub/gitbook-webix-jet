@@ -381,7 +381,7 @@ class WindowView extends JetView{
 
 For more details about popups and windows, [go to the related section](popups.md).
 
-### <span id="app\_as\_subview">2. App Inclusion</span>
+### <span id="app_as_subview">2. App Inclusion</span>
 
 App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level applications. E.g. here are two views:
 
