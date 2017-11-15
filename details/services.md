@@ -52,4 +52,4 @@ Apart from view communication, services can be used for [loading and saving data
 | Events     | Actions                      | Child->Parent | Many      |
 | Services   | State Requests               | Any           | Many      |
 
-Also remember that you can't use the same service for two instances of a view class, e.g. if you create a file manager with two identical file views.
+Also remember that you can't use the same service for two instances of a view class, e.g. if you create a file manager with two identical file views. Use services if other ways aren't possible.
