@@ -3,13 +3,15 @@ Introduction to Webix Jet
 
 *Latest update was made on October 27, 2017*
 
-This guide provides all the information needed to start creating web applications with Webix Jet. Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project, there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix Jet framework.
+This guide provides all the information needed to start creating web applications with Webix Jet. Click [**Read**](https://webix.gitbooks.io/webix-jet/) to read the full book. The book is also [available on GitHub](https://github.com/webix-hub/gitbook-webix-jet).
+
+Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project, there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix Jet framework.
 
 ![webix jet gitbook cover](cover.jpg)
 
 ## Advantages of Webix Jet
 
-Webix Jet allows you to create a flexible, easy maintainable app, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins, and user access levels. 
+Webix Jet allows you to create flexible, easy maintainable apps, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins, and user access levels. 
 
 Webix Jet is a fully client-side solution and can be used with any REST-based data API. So there aren’t any special requirements to the server.
 
@@ -62,6 +64,7 @@ The *start.js* file describes a start page view:
 
 ```js
 //views/start.js
+
 export default {
 	template:"Start page"
 };
@@ -88,19 +91,20 @@ export default {
 };
 ```
 
-In the above code, we have described a layout with two columns.
+In the above code, there is a layout with two columns.
 At the top of the file, we are providing the list of dependencies, which we will use in this layout.
 
-Open the path *index.html#!/top*, and you’ll see the page with *start* view inside of the *top* one.
+Open the path *index.html#!/top*, and you’ll see the page with the *start* view inside of *top*.
 
 ## Creating Subviews
 
-As it’s already been said, our app consists of a single page. How is the process of views manipulation organized?
+As it has already been said, our app consists of a single page. How is the process of views manipulation organized?
 
-Let’s check out the following code:
+Check out the following code:
 
 ```js
 //views/top.js
+
 export default {
 	cols:[
 		{ view:"menu" },
@@ -126,11 +130,13 @@ Then, add one more */top* subdirectory into the path. The URL will look as *inde
 
 The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.
 
+For more details on including subviews, go to the chapters ["Creating views"](basic/views.md) and ["Views and Subviews"](details/subviews.md#subviews).
+
 
 ## Loading Data with Models
 
 While views contain the code of interfaces, models are used to control the data.
-We’ll consider data loading on the example of the *views/data.js* file. It takes data from the *models/records* module.To load data into the view, we’ll use a data collection. Take a look at the content of the *records.js* file:
+Let's consider data loading on the example of the *views/data.js* file. It takes data from the *models/records* module. To load data into the view, let's use a data collection. Take a look at the content of the *records.js* file:
 
 ```js
 //models/records.js
@@ -139,7 +145,7 @@ export const data = new webix.DataCollection({
 });
 ```
 
-In this module, we create a new data collection that loads data from the *data.php* file. The module returns a helper method that provides access to our DataCollection.
+In this module, there is a new data collection that loads data from the *data.php* file. The module returns a helper method that provides access to DataCollection.
 
 The *views/data* module has the following code:
 
@@ -158,10 +164,16 @@ export default class DataView extends JetView{
 };
 ```
 
-As you can see, this module returns an object that differs from those we described earlier. There are two variants of the return object. It can be simply a description of interface or a JetView based class, which can have:
+As you can see, this module returns an object that differs from those described earlier. There are two variants of the return object. It can be simply a description of interface or a JetView-based class, which can have:
 
-- the *config* method, that returns the interface of the component that will be initialized. In our example it’s a datatable;
-- the *init* method specifies the component initialization behavior, in our case data from the *records* model will be loaded into the view after its creation. 
+- the *config* method that returns the interface of the component that will be initialized. In this example, it’s a datatable;
+- the *init* method that specifies the component initialization behavior, in our case data from the *records* model will be loaded into the view after its creation. 
 
-For more details on view classes, [go to the advanced chapter on views](details/views.md).
+For more details on views and view classes, go to the chapters ["Creating views"](basic/views.md) and ["Views and Subviews"](details/subviews.md#class_views).
 
+For more details on models, [read chapter "Models"](details/models.md).
+
+Click to read the full book
+
+| [>> Read <<](https://webix.gitbooks.io/webix-jet/) |
+|----------------------------------------------|

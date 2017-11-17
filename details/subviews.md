@@ -82,31 +82,35 @@ Views can be defined as JS6 classes.
 
 View classes inherit from **JetView**. Webix UI events are implemented through class methods. Here are the methods that you can redefine while defining your class views:
 
-#### config
+- config()
+- init()
+- urlChange()
+- ready()
+- destroy()
+
+#### config()
 
 This method returns the initial UI configuration of a view. Have a look at a toolbar:
 
 ```js
-/* views/toolbar.js */
+// views/toolbar.js
 export default class ToolbarView extends JetView{
     config(){
         return {
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
-                { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){
-                    this.$scope.app.show("/demo/"+this.getValue().toLowerCase());
-                }}
+                { view:"segmented", options:["details", "dash"] }
             ]
         };
     }
 }
 ```
 
-When a user clicks the segmented button, a subview will be changed by **this.$scope.app.show**. For more details on app and view referencing, [go to the dedicated section](referencing.md).
+**config** of *ToolbarView* class returns a simple Webix toolbar.
 
 #### init\(view, url\)
 
-The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view. For instance, the above-defined toolbar will be always rendered with the first segment of the button active regardless of the URL. You can link the control state to the URL in **init**:
+The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view returned by **config**. For instance, the above-defined toolbar will be always rendered with the first segment of the button active. You can change the control state in **init**. Let's link it to the URL:
 
 ```js
 export default class ToolbarView extends JetView{
@@ -114,71 +118,88 @@ export default class ToolbarView extends JetView{
         return { 
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
-                { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){
-                    this.$scope.app.show("/demo/"+this.getValue().toLowerCase());
-                }}
+                { view:"segmented", options:["details", "dash"] }
             ]
         };
     }
     init(view, url){
-        if (url.length)
-            this.$$("control").setValue(url[1].page);
+        if (url.length > 1)
+            view.queryView({view:"segmented"}).setValue(url[1].page);
     }
 }
 ```
 
-The segmented button is referenced by its local ID. For more details on referencing, [read the section in this chapter](referencing.md).
+The **init** method receives two **parameters**:
 
-The **init** method receives two parameters:
+1. **view** - the view UI
 
-* the view UI
-* the URL
+The segmented button is referenced by **view.queryView()**. **view** is received by **init** as one of the two parameters and references a Webix view inside the class instance. **queryView** looks for a view (a segmented button in this case) by its attributes. For more details on referencing nested views, [read the "Referencing views" section](referencing.md).
+
+2. **url** - the app URL as an array
+
+Each array element is an object that contains:
+
+- **page** - the name of the URL element
+- **params** - parameters that you can pass with the URL
+- **index** - the index of the URL element (beginning from 1)
+
+So when **setValue** in the code above was passed *url[1].page*, it received the name of the current subview (*details* or *dash*).
+
+*url.length > 1* checks that a subview is present in the URL.
 
 #### urlChange\(view,url\)
 
 This method is called every time the URL is changed. It reacts to the change in the URL after **!\#**<sup><a href="#footnote1" id="origin">1</a></sup>. **urlChange** is only called for the view that is rendered and for its parent. Consider the following example. The initial URL is:
 
 ```
-/Layout/Demo/Details
+/layout/demo/details
 ```
 
-If you change it to
+If you change it to:
 
 ```
-/Layout/Demo/Preview
+/layout/demo/preview
 ```
 
-**urlChange** will be called for **Preview** and **Demo**.
+**urlChange** will be called for **preview** and **demo**.
 
-The **urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right menu item.
+The **urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right controls.
+
+Let's expand the previous example with a toolbar and add a click handler to the segmented button that will change the URL:
 
 ```js
+// views/toolbar.js
+
 export default class ToolbarView extends JetView{
     config(){
         return { 
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
-                { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){
-                    this.$scope.app.show("/demo/"+this.getValue().toLowerCase())
+                { view:"segmented", options:["details", "dash"], click:function(){
+                    this.$scope.show(this.getValue());
                 }}
             ]
         };
     }
-    init(view, url){
-        if (url.length)
-            this.$$("control").setValue(url[1].page);
-    }
-    urlChange(view, url){
-        if (url.length > 1)
-            this.$$("control").setValue(url[1].page);
-    }
 }
 ```
 
-The **urlChange** method receives two parameters:
+As the click handler is a simple function, you must refer to the Jet view class instance as **this.$scope** to call its **show** method. **this** in simple *function* handler refers to the Webix control, the segmented button in this case. You can read more on ["Referencing views"](referencing.md).
 
-* the view UI
-* the URL
+Here's how you can select the right segment of the button in **urlChange**:
+
+```js
+// views/toolbar.js
+    urlChange(view, url){
+        if (url.length > 1)
+            view.queryView({view:"segmented"}).setValue(url[1].page);
+    }
+```
+
+The **urlChange** method receives the same two **parameters** as **init**:
+
+- **view** - the Webix view inside the Jet view class
+- **url** - the URL as an array of URL elements
 
 #### ready(view,url)
 
@@ -198,19 +219,17 @@ ready a
 Here's how you can use **ready**. There are two simple views, a list and a form for editing the list:
 
 ```js
-/* views/list.js */
+// views/list.js
 const list = {
     view: "list",
-    id: "list",
     select: true,
     template: "#value#",
     data: [{value:"one"},{value:"two"}]
 };
 
-/* views/form.js */
+// views/form.js
 const form = {
 	view: "form",
-	id: "form",
 	elements:[
 		{view: "text", name: "value", label: "Value"},
 		{view: "button", value: "Save", width: 90}
@@ -221,7 +240,8 @@ const form = {
 Let's include these views into one module and bind the list to the form:
 
 ```js
-/* sources/views/listedit.js*/
+// sources/views/listedit.js
+
 import {JetView} from "webix-jet";
 import list from "list";
 import form from "form";
@@ -230,37 +250,40 @@ export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                list, form
+                { $subview:list, name:"list" },
+                { $subview:form, name:"form" }
             ]
 	    }
     }
 	ready(){
-		webix.$$("form").bind(webix.$$("list"));
+		this.getSubview("form").bind(this.getSubview("list"));
 	}
 }
 ```
 
 In the example, the form will be bound to the list only when both the list and the form are rendered.
 
-The method also receives two parameters:
+Note that *subviews* can have **names**. If you give a name to a subview, you can reference it as **this.getSubview("name")**, where **this** is the instance of the class view that includes this subview. You can read more on ["Referencing views"](referencing.md).
 
-* the view UI
-* the URL
+**ready** receives same two **parameters**:
 
-#### destroy
+- **view** - the Webix view inside the Jet view class
+- **url** - the URL as an array of URL elements
 
-**destroy** is called only once for each instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL.
-<!-- **destroy** also can be used to destroy temporary objects like popups and other child components to prevent memory leaks. -->
+#### destroy()
+
+**destroy** is called only once for each class instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL.
 
 ```js
-/* views/toolbar.js */
+// views/toolbar.js
+
 export default class ToolbarView extends JetView{
     config(){
         return { 
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
-                { view:"segmented", localId:"control", options:["Details", "Dash"], click:function(){
-                    this.$scope.app.show("/Demo/"+this.getValue())
+                { view:"segmented", options:["details", "dash"], click:function(){
+                    this.$scope.show(this.getValue())
                 }}
             ]
         };
@@ -273,23 +296,23 @@ export default class ToolbarView extends JetView{
 
 This is all on view class methods.
 
-## Which Way is Better?
+## Which Way to Define Views is Better
 
 If you still doubt which way to choose for defining views, here's a summary.
 
-All three methods provide nearly the same result.
+All ways provide nearly the same result.
 
-When you are using the **"class"** approach, you can define UI config and *init|ready|urlChange|destroy* handlers.
+When you are using the **"class"** approach, you can define UI config and *init|urlChange|ready|destroy* handlers.
 
-When you are using the **factory function** approach, you can define a dynamic UI config without handlers.
+When you are using the **"factory function"** approach, you can define a dynamic UI config without lifetime handlers.
 
-When you are using **const** *(simple view objects)*, you can define UI config only.
+When you are defining views as **const** *(simple view objects)*, you can define UI config only.
 
 So if you are choosing between **classes** and **const**, it is flexibility VS brevity.
 
-If you are not sure which one to use, use classes. A class with the **config** method works exactly the same as the "const" declaration.
+If you are not sure which one to use, use classes. A class with the **config** method works exactly the same as the **const** declaration.
 
-## Subview Including
+## <span id="subviews">Subview Including</span>
 
 Apart from direct inclusion [described in the second chapter](../basic/views.md), there are two more ways of creating subviews.
 
@@ -300,7 +323,8 @@ You can include views into other views. For example, here are three views create
 - a class view
 
 ```js
-/* views/myview.js */
+// views/myview.js
+
 export default class MyView extends JetView {
     config() => { template:"MyView text" };
 }
@@ -309,7 +333,8 @@ export default class MyView extends JetView {
 - a simple view object
 
 ```js
-/* views/details.js */
+// views/details.js
+
 export default Details = { 
     cols: [
         { template:"Details text" },
@@ -321,11 +346,12 @@ export default Details = {
 - a view returned by a factory
 
 ```js
-/* views/form.js */
+// views/form.js
+
 export default Form = () => {
     view:"form", elements:[
         { view:"text", name:"email", required:true, label:"Email" },
-        { view:"button", value:"save", click:() => this.show("Details") }
+        { view:"button", value:"save", click:() => this.show("details") }
     ]
 }
 ```
@@ -346,7 +372,7 @@ export default BigView = {
 }
 ```
 
-Mind that all these views could be put in any order you want and it doesn't depend on the way they have been defined, e.g.:
+Mind that all these views could be put in any order you want and it doesn't depend whether they are classes or objects, e.g.:
 
 ```js
 export default BigView = {
@@ -361,7 +387,7 @@ You can also include a view into a **popup or a window**:
 
 ```js
 init(){
-    this.win1 = this.ui(WindowView)
+    this.win1 = this.ui(WindowView);
     //this.win1.show();
 }
 ```
@@ -386,7 +412,8 @@ For more details about popups and windows, [go to the related section](popups.md
 App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level applications. E.g. here are two views:
 
 ```js
-/* views/form.js */
+// views/form.js
+
 export default class FormView extends JetView {
     config() {
         return {
@@ -398,7 +425,9 @@ export default class FormView extends JetView {
         };
     }
 }
-/* view/details.js */
+
+// view/details.js
+
 export default DetailsView = () => ({
     template: "Data saved"
 });
@@ -407,27 +436,26 @@ export default DetailsView = () => ({
 Let's group these views into an app module:
 
 ```js
-/* views/app1.js */
-import {FormView} from "form"
-import {DetailsView} from "details"
+// views/app1.js
+
+import {JetApp,EmptyRouter} from "webix-jet";
+
 export var app1 = new JetApp({
     start: "/form",
-    router: JetApp.routers.EmptyRouter, //!
-    views: {
-        "form": FormView,
-        "details": DetailsView
-    }
+    router: EmptyRouter //!
 }); //no render!
 ```
 
-Note that this app module isn't rendered. The second important thing is the choice of the router. As this is the inner level, it can't have URL of its own. That's why *EmptyRouter* is chosen. [Go to the section on routers](routers.md) for details. 
+Note that this app module isn't rendered. The second important thing is the choice of the router. As this is the inner level, it can't have URL of its own. That's why *EmptyRouter* is chosen. [Go to the "Routers" section](routers.md) for details. 
 
 Next, the app module is included into another view:
 
 ```js
-/* views/page.js */
+// views/page.js
+
 import {app1} from "app1";
 import {toolbar} from "toolbar";
+
 export default PageView = () => ({
     rows: [ toolbar, app1 ]
 });
@@ -436,14 +464,13 @@ export default PageView = () => ({
 Finally, the view can also be put into another app:
 
 ```js
-/* app2.js */
-import {PageView} from "page"
+// app2.js
+
+import {JetApp,HashRouter} from "webix-jet";
+
 var app2 = new JetApp({
     start: "/page",
-    router: JetApp.routers.HashRouter,
-    views: {
-        "page": PageView
-    }
+    router: HashRouter
 }).render();
 ```
 
@@ -452,4 +479,4 @@ As a result, this is a two-level app. [Check out the demo](https://github.com/we
 <!-- footnotes -->
 - - -
 <a href="#origin" id="footnote1">1</a>:
-This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for EmptyRouter. For details, [go to the dedicated section](routers.md).
+This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for *EmptyRouter*. For details, [go to the "Routers" section](routers.md).

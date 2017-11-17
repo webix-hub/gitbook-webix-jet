@@ -1,4 +1,4 @@
-## App
+# Creating App
 
 A Webix Jet app is single-page and is divided into views. The application structure consists of the following parts:
 
@@ -11,10 +11,11 @@ An app represents an application or an application module. It is used to group v
 
 ### The Syntax of Creation
 
-An app module is created as a new instance of JetApp class. You are to pass an object with your app configuration like the app name, version, etc as the parameter.
+An app module is created as a new instance of JetApp class. You are to pass an object with your app configuration like the app name, version, start URL, etc as the parameter.
 
 ~~~js
-/* myapp.js */
+// myapp.js
+
 import {JetApp} from "webix-jet";
 
 var app = new JetApp({
@@ -29,6 +30,10 @@ You can open the needed URL and the UI will be rendered from the URL elements. T
 In the app config, for example, you can set the mode in which the app will work:
 
 ```js
+// myapp.js
+
+import {JetApp} from "webix-jet";
+
 var app = new JetApp({
 	mode:"readonly",  //application wide configuration
 	start:"/top/layout"
@@ -38,15 +43,21 @@ var app = new JetApp({
 Later in the code, you can do some actions according to the mode:
 
 ```js
-if (this.app.config.readonly){
-	//...
+// views/games.js
+...
+if (this.app.config.mode === "readonly"){
+	this.show("limited");
 }
+...
 ```
+
+**this.app** refers to the app, while **this** refers to the view. You can read more about ["Referencing views"](../details/referencing.md) and apps.
 
 New Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is *HashRouter*. If you don't want to display the hashbang in the URL, you can change the router to *UrlRouter*:
 
 ```js
-import {UrlRouter} from "webix-jet";
+// myapp.js
+import {UrlRouter,JetApp} from "webix-jet";
 
 var app = new JetApp({
 	router: UrlRouter,
@@ -54,6 +65,6 @@ var app = new JetApp({
 });
 ```
 
-The rest of the routers are *StoreRouter* and *EmptyRouter*. For more information about routers, [go to the dedicated section](../details/routers.md) of the advanced chapter.
+For more information about routers, [go to "Routers"](../details/routers.md) of the advanced chapter.
 
-To read about JetApp API, [go to the related section](../details/app.md). For info on changing the app configuration, [read the section on webpack config](../details/webpackconfig.md).
+To read about JetApp API, [go to "JetApp API" section](../details/app.md). For info on changing the app configuration, [read the "Webpack Configuration" section](../details/webpackconfig.md).

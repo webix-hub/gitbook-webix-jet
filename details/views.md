@@ -1,6 +1,6 @@
 # JetView API
 
-### this.use
+### this.use(plugin, config)
 
 The method includes a plugin, for example,  this is how the **Status** plugin can be added:
 
@@ -90,3 +90,110 @@ export default class OrdersView extends JetView{
 The window is created in **init** of OrdersView and shown on a button click. And note again that there's no need to destroy the window manually.
 
 For more details about popups and windows, [go to the related section](popups.md).
+
+### this.getSubview(name)
+
+Use this method if you want to get to the methods of a subview. It looks for a subview by its name. So you must set the name. You can do it like this:
+
+```js
+// views/listedit.js
+
+import {JetView} from "webix-jet";
+import ChildList from "list";
+import ChildForm from "form";
+
+export default class ListEditView extends JetView{
+	config(){
+		return {
+            cols:[
+                { $subview:list, name:"list" },
+                { $subview:form, name:"form" }
+            ]
+	    }
+	}
+}
+```
+
+After you set the name to a subview, you can refer to it with **this.getSubView(name)** from the methods of the parent:
+
+```js
+// views/listedit.js
+
+import {JetView} from "webix-jet";
+import ChildList from "list";
+import ChildForm from "form";
+
+export default class ListEditView extends JetView{
+	...
+	ready(){
+        var list = this.getSubview("list").getRoot();
+		this.getSubview("form").bind(list);
+	}
+}
+```
+
+For more details on referencing views, [read the "Referencing" section](referencing.md).
+
+### this.getParentView()
+
+Use this method to get to the methods of the parent view.
+
+```js
+// views/form.js
+export default class Child extends JetView{
+    config(){
+        return {
+            view:"form", elements:[
+                { view:"text", name:"name" }
+            ]
+        };
+    }
+    init(view){
+        var item = this.getParentView().getSelected();
+        view.setValues(item);
+    }
+}
+```
+
+The child refers to its parent view with **this.getParentView** and calls its **getSelected** method.
+
+For more details, [read the "Referencing" section](referencing.md).
+
+### this.on(app,"app:event:name",handler)
+
+Use this method to attach events. This way of attatching an event is convenient, because it automatically detaches the event when the view that called it is destroyed.
+
+```js
+export default class FormView extends JetView{
+    init(){
+        this.on(this.app, "save:form", function(){
+            this.show("aftersave");
+        });
+    }
+}
+```
+
+See details in ["Events and Methods"](events.md).
+
+### this.\$\$("controlID")
+
+Use **this.$$** to look for nested views by their IDs.
+
+```js
+// views/toolbar.js
+export default class ToolbarView extends JetView {
+    config() {
+        //...
+        { view: "segmented", localId: "control", options: ["details", "dash"],
+            click: function() {
+                this.$scope.app.show("/demo/" + this.getValue());
+        }}
+    }
+    init(ui, url) {
+        if (url.length > 1)
+            this.$$("control").setValue(url[1].page);
+    }
+}
+```
+
+For details, [read the "Referencing" section](referencing.md).

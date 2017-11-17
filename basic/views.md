@@ -1,11 +1,12 @@
 ## View Concept
 
-Views are modules for interface elements that are usually kept in separate files. This makes the code loosely coupled. If some part of the app is messed up, the rest of it works. Parts of an app can be developed and tested independently. All visual components of the UI are separated from each other and can be reused. All the above said is critical for large and huge apps. Besides, the code looks neater.
+Views are modules for interface elements. Views should be kept in separate files. This makes the code loosely coupled. If some part of the app is messed up, the rest of it works. Parts of an app can be developed and tested independently. All visual components of the UI are separated from each other and can be reused. All the above said is critical for large and huge apps. Besides, the code looks neater.
 
 All views should be stored in the **views** folder: one view per file. For example, this is how a view module is defined in _sources/views/myview.js_:
 
 ```js
-/* sources/views/myview.js */
+// sources/views/myview.js
+
 import {JetView} from "webix-jet";
 
 export default class MyView extends JetView{
@@ -13,22 +14,23 @@ export default class MyView extends JetView{
 }
 ```
 
-You can show the view with this URL:
+You can show the view by opening this path:
 
 ```
-index.html#!/MyView
+index.html#!/myview
 ```
 
 ## Subview
 
-Apps created with Webix Jet are single-page. The interface of your app can be constructed from multiple views. Some parts can be dynamic, so you may change them based on the state of the app. Such dynamic views are called subviews. 
+Apps created with Webix Jet are single-page. The interface of your app can be constructed from multiple views. Some parts can be dynamic, so you may change them based on the state of the app. Such dynamic views are called *subviews*. 
 
 #### Direct Including
 
 One of the ways to nest a view is to directly include a view class. Let's create a new view in _bigview.js_ and include the **MyView** class into it:
 
 ```js
-/* views/bigview.js */
+// views/bigview.js
+
 import {JetView} from "webix-jet";
 import MyView from "myview";
 
@@ -54,7 +56,8 @@ index.html#!/bigview
 You can enable embedding multiple views that will change according to the URL. Instead of the concrete name of the view class, write *{ $subview: true }*:
 
 ```js
-/* views/bigview.js */
+// views/bigview.js
+
 export default class BigView extends JetView {
     config() => { 
             rows:[
@@ -77,4 +80,4 @@ index.html#!/bigview/viewa
 index.html#!/bigview/viewb
 ```
 
-For more information on other ways to define views and include subviews, [go to the corresponding advanced section](../details/subviews.md).
+For more information on other ways to define views and include subviews, [go to the "Views and Subviews"](../details/subviews.md).
