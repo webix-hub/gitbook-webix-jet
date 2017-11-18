@@ -20,11 +20,19 @@ You can add links with the **route** attribute instead of the usual **href** and
 
 After you click on the link, the app UI will be rebuilt and will consist of the main view _details_ and a subview _data_.
 
+You can pass one or more parameters with a Jet link:
+
+```html
+<a route="/details/data?id=2"></a>
+<!-- or several -->
+<a route="/details/data?id=2&name=some"></a>
+```
+
 ### 2. app.show\(\)
 
 The **app.show\(\)** method is applied to the whole application. You can call the method from control handlers, for instance.
 
-A specific instance of the related view class is referenced with **this** if you define handlers as arrow functions. To reference the app, use **this.app**. To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md)
+A specific instance of the related view class is referenced with **this** if you define handlers as arrow functions. To reference the app, use **this.app**. To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
 
 Here is how you can rebuild the UI with **app.show**:
 
@@ -38,6 +46,16 @@ Here is how you can rebuild the UI with **app.show**:
 ```
 
 After a button click, the URL will change, and the app UI will be rebuilt according to it.
+
+You can pass one or more parameters to show alongside the URL:
+
+```js
+// views/layout.js
+
+this.app.show("/demo/details?id=2");
+// or many
+this.app.show("/demo/details?id=2&name=some");
+```
 
 ### 3. view.show\(\)
 
@@ -92,12 +110,21 @@ If you want to rebuild the whole app and load the **demo** view as the only view
 
 ```js
 // views/layout.js
-
 ...
     { view:"button", value:"demo", click: () => {
         this.show("/demo");
     }}
 ...
+```
+
+You can pass one or more parameters to show alongside the URL:
+
+```js
+// views/layout.js
+
+this.show("details?id=2");
+// or many
+this.show("details?id=2&name=some");
 ```
 
 You can also read ["Navigation"](../details/navigation.md) in the advanced chapter.

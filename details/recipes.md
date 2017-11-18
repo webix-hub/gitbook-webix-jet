@@ -2,7 +2,11 @@
 
 In this section you'll find elegant solutions for some common tasks.
 
-## Access Guard - View Level
+- [Access control on view level](#viewguard)
+- [Access control on app level](#appguard)
+- [Responsive UI](#responsive)
+
+## <span id="viewguard">Access Guard - View Level</span>
 
 **Task**: You want to create views with several levels of access for different groups of users.
 
@@ -135,7 +139,7 @@ You can show this view via *top/blocked*.
 
 [Check out this solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewguard.js)
 
-## Access Guard -- App Level
+## <span id="appguard">Access Guard -- App Level</span>
 
 **Task**: You want to create views with several levels of access for different groups of users.
 
@@ -166,12 +170,7 @@ Here's how you can block a view and redirect users to some *allowed* subview:
 
 ```js
 const app = new JetApp({
-	start:		"/top/blocked",
-	views:{
-		top:		TopView,
-		allowed:	allowed,
-		blocked:	blocked
-	}
+	start:		"/top/blocked"
 });
 app.attachEvent("app:guard", function(url, view, nav){
 	if (url.indexOf("/blocked") !== -1){
@@ -185,7 +184,7 @@ app.render();
 
 [Check out the solution on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
-## Responsive UI - Sizing UI to Device
+## <span id="responsive">Responsive UI - Sizing UI to Device</span>
 			
 **Task**: You want to create a responsive UI.
 
@@ -202,10 +201,7 @@ Okay, suppose you want to distinguish two types of screens: *small* (less than 8
 ```js
 webix.ready(() => {
 	const app = new JetApp({
-		start:		"/start",
-		views:{
-			start: StartView
-		}
+		start:		"/start"
     });
     const size =  () => document.body.offsetWidth > 800 ? "wide" : "small";
 	app.config.size = size();

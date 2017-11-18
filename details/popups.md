@@ -5,6 +5,7 @@ Temporary views like popups and windows can be created with **this.ui**. **this.
 Consider a simple popup view:
 
 ```js
+// views/window.js
 const win1 = {
 	view:"popup",
 	body:{ template:"Text 1" }
@@ -15,6 +16,9 @@ export default win1;
 Let's define a view class that will create this popup:
 
 ```js
+// views/top.js
+import {JetView} from "webix-jet";
+
 export default class TopView extends JetView {
 	config(){
 		return {
@@ -32,6 +36,9 @@ export default class TopView extends JetView {
 The popus is created in **init** of *TopView*:
 
 ```js
+// views/top.js
+import win1 from "window";
+...
 init(){
     this.win1 = this.ui(win1);
 }
@@ -40,6 +47,8 @@ init(){
 **this** refers to *TopView*. **win1** becomes its child view. To show **win1**, call **this.win1.show()**. Here's the button click handler:
 
 ```js
+// views/top.js
+
 { view:"form",  width: 200, rows:[
     { view:"button", value:"Show Window 1", click:(id) =>
         this.win1.show($$(id).$view) }
@@ -51,7 +60,10 @@ init(){
 You can create windows and popups with view classes as well. Have a look at a similar popup:
 
 ```js
-class WindowsView extends JetView {
+// views/window2.js
+import {JetView} from "webix-jet";
+
+export class WindowsView extends JetView {
 	config(){
 		return {
 			view:"popup",
@@ -71,6 +83,10 @@ Unlike with a simple view, with a class view you have to redefine **show**. *thi
 Here's how you initiate and show this popup (spoiler: exactly the same way as **win1**):
 
 ```js
+// views/top.js
+import {JetView} from "webix-jet";
+import {win2} from "window2";
+
 export default class TopView extends JetView {
 	config(){
 		return {

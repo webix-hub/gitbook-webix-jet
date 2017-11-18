@@ -9,7 +9,7 @@ There are several ways of loading data in Webix Jet.
 If you have some relatively small data and plan to use them in many components, you can create a model, initialize a data collection in it and load the data into the data collection. Here's an example of a data collection with static data:
 
 ```js
-// sources/models/records.js
+// models/records.js
 export const records = new webix.DataCollection({ data:[
 	{ id:1, title:"The Shawshank Redemption", year:1994, votes:678790, rating:9.2, rank:1},
 	{ id:2, title:"The Godfather", year:1972, votes:511495, rating:9.2, rank:2},
@@ -20,7 +20,7 @@ export const records = new webix.DataCollection({ data:[
 This is how the data is loaded and saved to the server:
 
 ```js
-// sources/models/records.js
+// models/records.js
 export const records = new webix.DataCollection({ 
 	url:"data.php",
 	save:"data.php"
@@ -30,7 +30,7 @@ export const records = new webix.DataCollection({
 To use the data in a component, you need to parse it. You must parse data in **init**, not in **config**. Have a look at an example with a datatable:
 
 ```js
-// sources/views/data.js
+// views/data.js
 import {JetView} from "webix-jet";
 import {records} from "../models/records";
 
@@ -51,7 +51,7 @@ All the changes made in the datatable are saved to the server.
 This is the model for big data. These data can be used only once and mustn't be cached. The data can be loaded from a server with an AJAX request:
 
 ```js
-// sources/models/records.js
+// models/records.js
 export function getData(){
 	return webix.ajax("data.php");
 }
@@ -60,7 +60,7 @@ export function getData(){
 or from local storage:
 
 ```js
-// sources/models/records.js
+// models/records.js
 export function getData(){
 	return webix.storage.local.get("data");
 }
@@ -69,7 +69,7 @@ export function getData(){
 To parse data, use *getData*:
 
 ```js
-// sources/views/data.js
+// views/data.js
 import {JetView} from "webix-jet";
 import {getData} from "../models/records";
 
@@ -86,7 +86,7 @@ export default class DataView extends JetView{
 To save data, you can add a function to the *records* model:
 
 ```js
-// sources/models/records.js
+// models/records.js
 export function getData(){
 	return webix.ajax("data.php");
 };
@@ -98,7 +98,7 @@ export function saveData(){
 In *init* you need to define a way to save data:
 
 ```js
-// sources/views/data.js
+// views/data.js
 import {JetView} from "webix-jet";
 import {getData, saveData} from "../models/records";
 
@@ -116,7 +116,7 @@ export default class DataView extends JetView{
 Loading and saving data can be done in **config** of the view module:
 
 ```js
-// sources/views/data.js
+// views/data.js
 import {JetView} from "webix-jet";
 import {getData, saveData} from "../models/records";
 
@@ -136,7 +136,7 @@ export default class DataView extends JetView{
 For really huge data (more than 10K records), you can use dynamic loading of Webix components and drop models :) Data will be loaded in portions when needed. For that, you must give up models and load data in the view code. You can do it with the **url** property. For saving data, use the **save** property.
 
 ```js
-/* sources/views/data.js */
+// views/data.js
 import {JetView} from "webix-jet";
 
 export default class DataView extends JetView{
@@ -153,7 +153,7 @@ export default class DataView extends JetView{
 Data can be loaded dynamically with the **load** method:
 
 ```js
-/* sources/views/data.js */
+// views/data.js
 import {JetView} from "webix-jet";
 
 export default class DataView extends JetView{
@@ -202,7 +202,7 @@ The script can contain a *nm* class like this:
 
 ```php
 class Nomencl {
-	public function getData(id) { /*...*/}
+	public function getData(id) { /*..*/ }
 }
 $api->setClass("nm", new Nomencl());
 ```
@@ -210,7 +210,7 @@ $api->setClass("nm", new Nomencl());
 Here's a model that gets the class and all its methods:
 
 ```js
-/* sources/models/nomencl.js */
+// models/nomencl.js
 export default webix.remote.nm;
 ```
 
@@ -225,7 +225,7 @@ var data = new DataCollection({
 You can import the model and parse it into a view component:
 
 ```js
-/* sources/views/data.js */
+// views/data.js
 import records from "../models/nomencl"
 ...
 init(view){
@@ -236,7 +236,7 @@ init(view){
 **webix.remote** is better then an AJAX request for several reasons. First, you don't need to serialize data after loading. Compare the results of these two requests:
 
 ```js
-var data1 = webix.ajax("data/nomencl/154"); 		//"{id:154,name:"John"}"
+var data1 = webix.ajax("data/nomencl/154"); 		//"{"id":154,"name":"John"}"
 var data2 = webix.remote.nm.getNomenclature(154);	//{id:154,name:"John"}
 ```
 

@@ -94,6 +94,8 @@ This method returns the initial UI configuration of a view. Have a look at a too
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView{
     config(){
         return {
@@ -113,6 +115,9 @@ export default class ToolbarView extends JetView{
 The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view returned by **config**. For instance, the above-defined toolbar will be always rendered with the first segment of the button active. You can change the control state in **init**. Let's link it to the URL:
 
 ```js
+// views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView{
     config(){
         return { 
@@ -169,6 +174,7 @@ Let's expand the previous example with a toolbar and add a click handler to the 
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
 
 export default class ToolbarView extends JetView{
     config(){
@@ -240,8 +246,7 @@ const form = {
 Let's include these views into one module and bind the list to the form:
 
 ```js
-// sources/views/listedit.js
-
+// views/listedit.js
 import {JetView} from "webix-jet";
 import list from "list";
 import form from "form";
@@ -276,6 +281,7 @@ Note that *subviews* can have **names**. If you give a name to a subview, you ca
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
 
 export default class ToolbarView extends JetView{
     config(){
@@ -312,13 +318,64 @@ So if you are choosing between **classes** and **const**, it is flexibility VS b
 
 If you are not sure which one to use, use classes. A class with the **config** method works exactly the same as the **const** declaration.
 
-## <span id="subviews">Subview Including</span>
+# <span id="subviews">Subview Including</span>
 
-Apart from direct inclusion [described in the second chapter](../basic/views.md), there are two more ways of creating subviews.
+Apart from direct inclusion [described in the second chapter](../basic/views.md), there are two more ways of including subviews. Let's recap all the possible ways in short:
+
+##### 1. Direct Static Including
+
+- plain including:
+
+```js
+import child from "child";
+...
+{
+    rows:[
+        { view:"button" },
+        child
+    ]
+}
+```
+
+- one view including with $subview:view:
+
+```js
+import child from "child";
+...
+{
+    rows:[
+        { view:"button" },
+        { $subview:child }
+    ]
+}
+```
+
+- including a hierarchy of views with $subview:"top/some":
+
+```js
+import child from "child";
+import grandchild from "grandchild";
+
+...
+{
+    rows:[
+        { view:"button" },
+        { $subview:"child/grandchild" }
+    ]
+}
+```
+
+##### 2. Dynamic Including
+    
+- { $subview:true }
+
+## Subview Inclusion in Details
+
+You can include views and apps into other views.
 
 ### 1. View Inclusion
 
-You can include views into other views. For example, here are three views created in different ways:
+For example, here are three views created in different ways:
 
 - a class view
 
@@ -356,13 +413,15 @@ export default Form = () => {
 }
 ```
 
+**{ $subview:true }** is a placeholder for a dynamically included subview.
+
 Let's group them into a bigger view:
 
 ```js
-/* views/bigview.js */
-import myview from "myview"
-import details from "details"
-import form from "form"
+// views/bigview.js
+import myview from "myview";
+import details from "details";
+import form from "form";
 
 export default BigView = {
     rows:[
@@ -375,6 +434,8 @@ export default BigView = {
 Mind that all these views could be put in any order you want and it doesn't depend whether they are classes or objects, e.g.:
 
 ```js
+// views/bigview.js
+
 export default BigView = {
     rows:[
         details,
@@ -383,9 +444,13 @@ export default BigView = {
 }
 ```
 
+#### View Inclusion into popups and Windows
+
 You can also include a view into a **popup or a window**:
 
 ```js
+// views/some.js
+...
 init(){
     this.win1 = this.ui(WindowView);
     //this.win1.show();
@@ -395,7 +460,10 @@ init(){
 where *WindowView* is a view class like the following:
 
 ```js
-class WindowView extends JetView{
+// views/window.js
+import {JetView} from "webix-jet";
+
+export default class WindowView extends JetView{
   config(){
       return { view:"window", body:{} };
   }
@@ -413,6 +481,7 @@ App is a part of the whole application that implements some scenario and is quit
 
 ```js
 // views/form.js
+import {JetView} from "webix-jet";
 
 export default class FormView extends JetView {
     config() {
@@ -427,7 +496,6 @@ export default class FormView extends JetView {
 }
 
 // view/details.js
-
 export default DetailsView = () => ({
     template: "Data saved"
 });
@@ -437,7 +505,6 @@ Let's group these views into an app module:
 
 ```js
 // views/app1.js
-
 import {JetApp,EmptyRouter} from "webix-jet";
 
 export var app1 = new JetApp({
@@ -452,7 +519,6 @@ Next, the app module is included into another view:
 
 ```js
 // views/page.js
-
 import {app1} from "app1";
 import {toolbar} from "toolbar";
 
@@ -465,7 +531,6 @@ Finally, the view can also be put into another app:
 
 ```js
 // app2.js
-
 import {JetApp,HashRouter} from "webix-jet";
 
 var app2 = new JetApp({
@@ -474,7 +539,7 @@ var app2 = new JetApp({
 }).render();
 ```
 
-As a result, this is a two-level app. [Check out the demo](https://github.com/webix-hub/jet-demos/blob/b686944b383745070fc977aa9123f01a36ce2b3c/sources/viewapp.js).
+As a result, this is a two-level app. [Check out the demo](https://github.com/webix-hub/jet-demos/blob/b686944b383745070fc977aa9123f01a36ce2b3c/viewapp.js).
 
 <!-- footnotes -->
 - - -

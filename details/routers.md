@@ -10,13 +10,7 @@ The app URL is displayed after a hashbang. As this router is set by default, the
 /* app.js */
 var app = new JetApp({
     start: "/demo/details",
-    router: JetApp.routers.HashRouter, //optional
-    views: {
-        "demo": DemoView,
-        "details": DetailsView,
-        "dash": DashView,
-        "toolbar": ToolbarView
-    }
+    router: JetApp.routers.HashRouter //optional
 }).render();
 ```
 
@@ -58,16 +52,9 @@ import {JetApp, UrlRouter} from "webix-jet";
 webix.ready(() => {
 	const app = new JetApp({
 		id:			"routers-url",
-
 		router:		UrlRouter,
 		routerPrefix: "/routers-url", //!
-
-		start:		"/top/start",
-		views:{
-			top:		TopView,
-			start:		StartView,
-			details:	DetailsView
-		}
+		start:		"/top/start"
 	});
 	app.render();
 });
@@ -105,11 +92,7 @@ Here's an app module with a form view:
 ```js
 var app1 = new JetApp({
     start: "/form",
-    router: JetApp.routers.StoreRouter,
-    views: {
-        "form": FormView,
-        "details": DetailsView
-    }
+    router: JetApp.routers.StoreRouter
 });
 ```
 
@@ -122,10 +105,7 @@ const PageView = () => ({
 
 var app2 = new JetApp({
     start: "/page",
-    router: JetApp.routers.HashRouter,
-    views: {
-        "page": PageView
-    }
+    router: JetApp.routers.HashRouter
 }).render();
 ```
 
@@ -136,11 +116,7 @@ If you don't want this behavior from the app, there's the EmptyRouter for you. T
 ```js
 var app1 = new JetApp({
     start: "/form",
-    router: JetApp.routers.EmptyRouter,
-    views: {
-        "form": FormView,
-        "details": DetailsView
-    }
+    router: JetApp.routers.EmptyRouter
 });
 ```
 

@@ -7,6 +7,8 @@ Apart from using built-in means like plugins, you can use a number of inner even
 The event is triggered before each view of an app is rendered. You can use it to change the UI config that you defined and add properties to UI controls, for instance, if you want to disable buttons:
 
 ```js
+// myapp.js
+
 app.attachEvent("app:render", function(view,url,result){
  if (result.ui.view === "button")
      result.ui.disabled = true;
@@ -17,9 +19,11 @@ The event receives three parameters:
 
 - **view** - the view for which the event is called (this.$scope)
 - **url** - the URL as an array of URL elements
-- **result** - a wrapper object used to change the UI (e.g. to put it into some other view)
+- **result** - a wrapper object for UI; it's created in case you want to change the UI (e.g. to put it into some other view)
 
 ```js
+// myapp.js
+
 app.attachEvent("app:render", function(view,url,result){
 	if (result.ui.view === "button")
 		result.ui = {
@@ -33,6 +37,8 @@ app.attachEvent("app:render", function(view,url,result){
 Handling the **app:route** event is resembles handling the **urlChange** of a class view. The event fires after navigation to a view and can be used to send notifications. **app:route** is used by the menu plugin to highlight menu options according to the URL.
 
 ```js
+// myapp.js
+
 app.attachEvent("app:route", function(url){
     webix.ajax("log.php", url);
 })
@@ -45,6 +51,8 @@ app.attachEvent("app:route", function(url){
 The **app:guard** event is triggered before navigation to another view. One of the typical cases to use this event is to create a guard: block some views and redirect users somewhere else. The **app:guard** event is called by the *UnloadGuard* plugin. You can attach **app:guard** with:
 
 ```js
+// myapp.js
+
 app.attachEvent("app:guard", function(url, view, nav){
 	//...
 })
@@ -65,9 +73,11 @@ The event handler receives three parameters:
 Suppose you have a layout with three views, one parent and two subviews (simple template views for the example). This is the parent view that has two buttons that call **show** to render subviews:
 
 ```js
-//import subviews
+// views/top.js
+import {JetView} from "webix-jet";
 import allowed1 from "allowed";
 import blocked from "blocked";
+
 export default class TopView extends JetView {
 	config(){
 		return {
@@ -88,13 +98,11 @@ export default class TopView extends JetView {
 One of the subviews is supposed to be blocked. Let's create a guard that will block it and redirect users to the *allowed* subview. Group the views into app and attach the **app:guard** event:
 
 ```js
+// myapp.js
+import {JetApp} from "webix-jet";
+
 const app = new JetApp({
-	start:		"/top/blocked",
-	views:{
-		top:		TopView,
-		allowed:	allowed,
-		blocked:	blocked
-	}
+	start:		"/top/blocked"
 });
 app.attachEvent("app:guard", function(url, view, nav){
 	if (url.indexOf("/blocked") !== -1){
@@ -117,6 +125,9 @@ There are four events that can be used to handle errors.
 This is a common event for all errors. The errors are logged if you set the **debug** property in your app config:
 
 ```js
+// myapp.js
+import {JetApp} from "webix-jet";
+
 var app = new JetApp({
     debug: true // console.log and debugger on error
 });
@@ -127,6 +138,8 @@ Besides logging errors, this will enable a debugger.
 You can also do something else, for example, show an error message in an alert box:
 
 ```js
+// myapp.js
+
 app.attachEvent("app:error", function(err){
     alert("Error");
 });
@@ -143,6 +156,8 @@ Besides the common error event, there are three events for specific error types.
 **app:error:resolve** fires when Jet can't find a module by its name. If this happens, it would be useful to redirect users somewhere else instead of showing them an empty screen:
 
 ```js
+// myapp.js
+
 app.attachEvent("app:error:resolve", function(err, url) {
     webix.delay(() => app.show("/some"));
 });
@@ -162,6 +177,8 @@ These error events are more useful for developers as they inform about errors re
 This event is triggered on errors during view rendering, mostly Webix UI related. It means that some view UI config has been written incorrectly.
 
 ```js
+// myapp.js
+
 app.attachEvent("app:error:render", function(err){
     alert("Check UI config");
 });
@@ -172,6 +189,8 @@ app.attachEvent("app:error:render", function(err){
 This event is triggered in case of an error during view rendering, mostly Webix Jet related. It means that Jet, while rendering Webix UIs, was unable to render the app UI correctly.
 
 ```js
+// myapp.js
+
 app.attachEvent("app:error:initview", function(err,view){
     alert("Jet got lost");
 })

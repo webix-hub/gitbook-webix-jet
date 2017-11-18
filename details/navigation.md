@@ -14,6 +14,14 @@ After you click on the link, the app UI will be rebuilt and will consist of the 
 
 The **route** attribute can be assigned not only to links, but to *any control* like a button or a menu option.
 
+You can pass one or more parameters with a Jet link:
+
+```html
+<a route="/details/data?id=2"></a>
+<!-- or several -->
+<a route="/details/data?id=2&name=some"></a>
+```
+
 ### 2. Navigation with HTML links
 
 Apart from navigating with links with the **route** attribute, you can create HTML links. This way is not so convenient, as the first one. You cannot prevent users from leaving the current view through an HTML link. In case there's no worries and you don't plan to guard users' unsaved data, you can create links with the **href** attribute. Suppose you have these view modules:
@@ -40,27 +48,41 @@ This is a link to the **Details** view as a subview of **DemoView**:
 <a href="#!/Demo/Details">Data</a>
 ~~~
 
-You can pass parameters in the link, e.g.:
+You can pass one or more parameters in the link, e.g.:
 
 ```html
-<a href="#!/Demo/Details?=2">Data</a>
+<a href="#!/Demo/Details?id=2">Data</a>
+<!-- or more -->
+<a href="#!/Demo/Details?id=2&name=some">Data</a>
 ```
 
 ### 3. app.show\(\)
 
-Apart from links, you can use the **show** method to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. You can call the method from control handlers, for instance:
+Apart from links, you can use the **show** method to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function*. For more
+
+Reference app as **this.app** to call the **show** method from control handlers if they are arrow functions, for instance:
 
 ```js
-{ view:"button", value:"Details", click: () => {
-    this.app.show("/demo/"+this.getValue().toLowerCase());
+{ view:"button", value:"details", click: () => {
+    this.app.show("/demo/details");
 }}
 ```
 
 After a button click, the URL will change, and the app UI will be rebuilt according to it.
 
+You can read more about ["Referencing views"](../detailed/referencing.md).
+
+You can pass one or more parameters to show alongside the URL:
+
+```js
+this.app.show("/demo/details?id=2");
+// or many
+this.app.show("/demo/details?id=2&name=some");
+```
+
 ### 4. view.show\(\)
 
-You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this.$scope**. Calling **show** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
+You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this**. Calling **show** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
 ```js
 // layout.js
@@ -106,3 +128,11 @@ The syntax of showing views resembles the way you navigate through directories. 
 ```
 
 As a result, the app URL will be */bigview*.
+
+You can pass one or more parameters to show alongside the URL:
+
+```js
+this.show("details?id=2");
+// or many
+this.show("details?id=2&name=some");
+```

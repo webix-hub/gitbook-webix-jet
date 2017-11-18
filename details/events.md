@@ -24,7 +24,8 @@ And here's **form**:
 
 ```js
 // views/form.js
-import { getData } from "../models/records";
+import {JetView} from "webix-jet";
+import {getData} from "../models/records";
 
 export default class FormView extends JetView{
     config(){
@@ -43,37 +44,24 @@ export default class FormView extends JetView{
 }
 ```
 
+You can also pass several parameters to **show**:
+
+```js
+this.show("./form?id=1&name=some");
+```
+
 ### Events
 
-Feel free to use the in-app event bus for that. You can attach an event handler to the event bus in one view and trigger the event in another view.
+Feel free to use the in-app event bus for view communication.
 
-First, attach an event to a Jet view:
+##### Calling an Event
 
-```js
-export default class FormView extends JetView{
-    init(){
-        this.app.attachEvent("save:form", function(){
-            this.show("aftersave");
-        });
-    }
-}
-```
-
-One more way to attach event is **this.on**. This way is better because it automatically detaches the event when the view that called it is destroyed.
+To trigger an event, call **app.callEvent**. You can do this by referencing the view class with **this** from an *arrow function*:
 
 ```js
-export default class FormView extends JetView{
-    init(){
-        this.on(this.app, "save:form", function(){
-            this.show("aftersave");
-        });
-    }
-}
-```
+// views/data.js
+import {JetView} from "webix-jet";
 
-Some other view can trigger the event, e.g.:
-
-```js
 export default class DataView extends JetView{
     config(){
         return {
@@ -84,6 +72,42 @@ export default class DataView extends JetView{
     }
 }
 ```
+
+##### Attaching an Event
+
+You can attach an event handler to the event bus in one view and trigger the event in another view.
+
+This is how you can attach an event to a Jet view:
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+
+export default class FormView extends JetView{
+    init(){
+        this.app.attachEvent("save:form", function(){
+            this.show("aftersave");
+        });
+    }
+}
+```
+
+One more way to attach an event is **this.on** (view.on, **this** references a Jet view). This way is better because it automatically detaches the event when the view that called it is destroyed.
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+
+export default class FormView extends JetView{
+    init(){
+        this.on(this.app, "save:form", function(){
+            this.show("aftersave");
+        });
+    }
+}
+```
+
+Once an event is attached, any other view can listen to it.
 
 ### Declaring and Calling Methods
 
@@ -96,7 +120,9 @@ Unlike events, methods both call actions in views and are able to return somethi
 Have a look at the example. Here's a view that has a method *setMode("mode")*:
 
 ```js
-/* sources/views/child.js */
+// views/child.js
+import {JetView} from "webix-jet";
+
 export default class ChildView extends JetView{
     cofig(){
         return {
@@ -112,8 +138,10 @@ export default class ChildView extends JetView{
 And here's a parent view that will enclose *SubView*:
 
 ```js
-/* sources/views/parent.js */
-import child from "child"
+// views/parent.js
+import {JetView} from "webix-jet";
+import child from "child";
+
 export default class ParentView extends JetView{
     config() {
         return {
@@ -121,7 +149,7 @@ export default class ParentView extends JetView{
                 { view:"button", value:"Set mode", click:() => {
                     this.getSubView().setMode("readonly")}
                 }, 
-                { subview: child }]
+                { $subview: child }]
     }}
 }
 ```
@@ -135,6 +163,9 @@ You can use methods for view communication in similar use-cases, but still event
 Suppose you want to create a file manager resembling Total Commander. The parent view will have two file views as subviews:
 
 ```js
+// views/manager.js
+import FileView from "files";
+...
 config() { 
     return { 
         cols:[ 
@@ -147,6 +178,8 @@ config() {
 Here each subview has a name. *FileView* has the *loadFiles* method. Next, let's tell the file manager which paths to open in each file view:
 
 ```js
+// views/manager.js
+
 init() {
 	this.getSubview("left").loadFiles("a");
 	this.getSubview("right").loadFiles("b");

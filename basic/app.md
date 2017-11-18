@@ -11,11 +11,10 @@ An app represents an application or an application module. It is used to group v
 
 ### The Syntax of Creation
 
-An app module is created as a new instance of JetApp class. You are to pass an object with your app configuration like the app name, version, start URL, etc as the parameter.
+An app module is created as a new instance of the JetApp class. You must pass an object with your app configuration like the app name, version, start URL, etc as the parameter.
 
 ~~~js
 // myapp.js
-
 import {JetApp} from "webix-jet";
 
 var app = new JetApp({
