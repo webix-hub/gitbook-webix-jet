@@ -38,7 +38,7 @@ To create multiple entry files, pass an object to **entry** and use the *[name]*
 
 ### Turning Off Localization and Views
 
-If you aren't planning to localize the app, there's a way to do it without creating and empty folder for locales. Without changes in webpack config, you would have to do that to get the app compiled. webpack config has the **resolve** property that presents options affecting the resolving of modules. Change the path in the *"jet-locales"* key pair from **resolve.alias**.
+If you aren't planning to localize the app, there's a way to do it without creating and empty folder for locales. Without changes in webpack config, you would have to do that to get the app compiled. webpack config has the **resolve** property that presents options affecting the resolving of modules. It tells webpack where to look for locales or some other files, e.g. views. Change the path in the *"jet-locales"* key pair from **resolve.alias**.
 
 ```js
 /* webpack.config.js */

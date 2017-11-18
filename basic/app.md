@@ -30,7 +30,6 @@ In the app config, for example, you can set the mode in which the app will work:
 
 ```js
 // myapp.js
-
 import {JetApp} from "webix-jet";
 
 var app = new JetApp({

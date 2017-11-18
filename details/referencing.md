@@ -198,19 +198,19 @@ export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                { $subview:list, name:"list" },
-                { $subview:form, name:"form" }
+                { $subview:ChildList, name:"list" },
+                { $subview:ChildForm, name:"form" }
             ]
 	    }
     }
 	ready(){
         var list = this.getSubview("list").getRoot();
-		this.getSubview("form").bind(list);
+		this.getSubview("form").bindWith(list);
 	}
 }
 ```
 
-When all the views are ready (**ready** of the parent view is called after all its subviews are ready), the form is bound to the list. Mind that the parent view must have the **bind** method that calls the **bind** method of a Webix form:
+When all the views are ready (**ready** of the parent view is called after all its subviews are ready), the form is bound to the list. Mind that the parent view must have the **bindWith** method that calls the **bind** method of a Webix form:
 
 ```js
 // views/form.js
@@ -222,7 +222,7 @@ export default class ChildForm extends JetView{
             ]
         };
     }
-    bind(){
+    bindWith(){
         this.getRoot().bind(widget);
     }
 }

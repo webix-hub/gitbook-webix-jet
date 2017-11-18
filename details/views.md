@@ -27,7 +27,7 @@ init(){
 }
 ```
 
-For more details on plugins, check out the [related section](plugins.md).
+For more details on plugins, check out the ["Plugins" section](plugins.md).
 
 ### <span id="show">this.show("path")</span>
 
@@ -48,7 +48,7 @@ const Toolbar = {
 export default Toolbar;
 ```
 
-For more details on view navigation, [read the dedicated article](../basic/navigation.md).
+For more details on view navigation, [read the "Navigation" article](../basic/navigation.md).
 
 ### <span id="ui">this.ui(view)</span>
 
@@ -107,7 +107,7 @@ export default class OrdersView extends JetView{
 
 The window is created in **init** of OrdersView and shown on a button click. And note again that there's no need to destroy the window manually.
 
-For more details about popups and windows, [go to the related section](popups.md).
+For more details about popups and windows, [go to the "popups and Windows" section](popups.md).
 
 ### <span id="on">this.on(app,"app:event:name",handler)</span>
 

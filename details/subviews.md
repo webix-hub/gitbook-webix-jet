@@ -1,6 +1,6 @@
 # Views
 
-After reading the first chapter of this guide, you are familiar with the concept of a _view_. Now it's time to find out all the ways of creating views. You can create views in three ways.
+After reading the "Basics" chapter of this guide, you are familiar with the concept of a _view_. Now it's time to find out all the ways of creating views. You can create views in three ways.
 
 ## 1. Simple Views
 
@@ -80,7 +80,7 @@ Views can be defined as JS6 classes.
 
 ### JetView Methods
 
-View classes inherit from **JetView**. Webix UI events are implemented through class methods. Here are the methods that you can redefine while defining your class views:
+View classes inherit from **JetView**. Webix UI lifetime event handlers are implemented through class methods. Here are the methods that you can redefine while defining your class views:
 
 - config()
 - init()
@@ -136,11 +136,11 @@ export default class ToolbarView extends JetView{
 
 The **init** method receives two **parameters**:
 
-1. **view** - the view UI
+##### 1. **view** - the view UI
 
 The segmented button is referenced by **view.queryView()**. **view** is received by **init** as one of the two parameters and references a Webix view inside the class instance. **queryView** looks for a view (a segmented button in this case) by its attributes. For more details on referencing nested views, [read the "Referencing views" section](referencing.md).
 
-2. **url** - the app URL as an array
+##### 2. **url** - the app URL as an array
 
 Each array element is an object that contains:
 
@@ -168,7 +168,7 @@ If you change it to:
 
 **urlChange** will be called for **preview** and **demo**.
 
-The **urlChange** method can be used to restore the state of the view according to the URL, e.g to highlight the right controls.
+The **urlChange** method can be used to restore the state of the view according to the URL, e.g. to highlight the right controls.
 
 Let's expand the previous example with a toolbar and add a click handler to the segmented button that will change the URL:
 
@@ -473,7 +473,7 @@ export default class WindowView extends JetView{
 }
 ```
 
-For more details about popups and windows, [go to the related section](popups.md).
+For more details about popups and windows, [go to the "Popups and Windows" section](popups.md).
 
 ### <span id="app_subview">2. App Inclusion</span>
 

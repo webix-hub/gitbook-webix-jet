@@ -12,13 +12,13 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 
 ### <span id="render">app.render()</span>
 
-The **render** method is the method that builds the UI of the application. If called without any parameters, it just renders the UI according to the start URL, specified in the app configuration. The app UI takes the whole page.
+The **render** method builds the UI of the application. If called without any parameters, it just renders the UI according to the start URL, specified in the app configuration inside the page.
 
 ```js
 app.render();
 ```
 
-But if you want to render the app inside of a container, you can pass the string parameter to it with the ID of the container:
+But if you want to render the app inside a container, you can pass the string parameter to it with the ID of the container:
 
 ```js
 app.render("mybox");
@@ -32,7 +32,7 @@ The **show** method is used to change the interface. This method rebuilds the wh
 app.show("/demo/details")
 ```
 
-For more info about showing UI components, [visit the section on view referencing](referencing.md).
+For more info about showing UI components, [visit the "Navigation" section](navigation.md).
 
 ### <span id="use">app.use(plugin, config)</span>
 
@@ -47,7 +47,7 @@ this.use(JetApp.plugins.PluginName, {
 });
 ~~~
 
-For more details, [go to the dedicated section](plugins.md) of this chapter.
+For more details, [go to the "Plugins" section](plugins.md) of this chapter.
 
 ### <span id="call">callEvent("event:name")</span>
 
@@ -70,7 +70,7 @@ export default class DataView extends JetView{
 
 ### <span id="attach">attachEvent("event:name", handler) </span>
 
-Use this method to attach an event on the app level.
+Use this method to attach an event:
 
 ```js
 // views/form.js

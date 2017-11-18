@@ -6,7 +6,7 @@ Navigation is implemented by changing the URL of the page. The URL reflects the 
 
 - *Browser Navigation Keys*: You can move backwards and forwards to previously opened subviews.
 - *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before page reload.
-- *Convenient Development*: If you work on some particular subview (*games*), you can open the path to it (*#!/games*) and test it separately from the rest of UI.
+- *Convenient Development*: If you work on some particular subview (*games*), you can open the path to it (*#!/games*) and test it separately from the rest of the UI.
 
 In the previous section ["Creating views"](views.md), you have read about direct URL navigation. There are three more ways to show views and subviews.
 
@@ -18,7 +18,7 @@ You can add links with the **route** attribute instead of the usual **href** and
 <a route="/details/data"></a>
 ```
 
-After you click on the link, the app UI will be rebuilt and will consist of the main view _details_ and a subview _data_.
+After you click on the link, the app UI will be rebuilt and will consist of the parent view _details_ and a subview _data_.
 
 You can pass one or more parameters with a Jet link:
 
@@ -47,6 +47,8 @@ Here is how you can rebuild the UI with **app.show**:
 
 After a button click, the URL will change, and the app UI will be rebuilt according to it.
 
+##### App.show with URL Parameters
+
 You can pass one or more parameters to show alongside the URL:
 
 ```js
@@ -58,6 +60,8 @@ this.app.show("/demo/details?id=2&name=some");
 ```
 
 ### 3. view.show\(\)
+
+##### Rebuilding Part of the App
 
 You can also change the URL by calling the **show\(\)** method of a specific view class. Showing subviews with **view.show** gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
@@ -106,6 +110,8 @@ export default class LayoutView extends JetView {
 
 If you click **demo**, the resulting URL is going to be */layout/demo*.
 
+##### Rebuilding the whole app
+
 If you want to rebuild the whole app and load the **demo** view as the only view, specify the name of the view with a slash:
 
 ```js
@@ -116,6 +122,8 @@ If you want to rebuild the whole app and load the **demo** view as the only view
     }}
 ...
 ```
+
+##### View.show with URL Parameters
 
 You can pass one or more parameters to show alongside the URL:
 

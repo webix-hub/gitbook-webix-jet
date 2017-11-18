@@ -6,7 +6,6 @@ All views should be stored in the **views** folder: one view per file. For examp
 
 ```js
 // sources/views/myview.js
-
 import {JetView} from "webix-jet";
 
 export default class MyView extends JetView{
@@ -30,7 +29,6 @@ One of the ways to nest a view is to directly include a view class. Let's create
 
 ```js
 // views/bigview.js
-
 import {JetView} from "webix-jet";
 import MyView from "myview";
 
