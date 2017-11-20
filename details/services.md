@@ -8,6 +8,8 @@ JetApp provides a means to initialize services. For example, you have a *masterT
 
 ```js
 // views/tree.js
+import {JetView} from "webix-jet";
+
 export default class treeView extends JetView{
     config(){
         return { view:"tree" };
@@ -24,6 +26,7 @@ export default class treeView extends JetView{
 
 ```js
 // views/form.js
+import {JetView} from "webix-jet";
 import {getData} from "../models/records";
 
 export default class FormView extends JetView{

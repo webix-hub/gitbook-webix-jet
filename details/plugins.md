@@ -4,7 +4,7 @@ The new version of Webix Jet provides both predefined plugins and the ability to
 
 ~~~js
 this.use(JetApp.plugins.PluginName, {
-    id:"controlId", /* config */
+    id:"controlId", /* config
 });
 ~~~
 
@@ -12,24 +12,33 @@ After the plugin name, you are to specify the configuration for the plugin, e.g.
 
 ## 1. Default Plugins
 
-### Menu Plugin
+- [the Menu plugin](#menu)
+- [the UnloadGuard plugin](#unload)
+- [the User plugin](#user)
+- [the Theme plugin](#theme)
+- [the Locale plugin](#locale)
+- [the Status plugin](#status)
 
-This plugin simplifies your life if you plan to create a menu. The plugin sets URLs for menu options, buttons or other controls you plan to use for showing subviews. Also, there's no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
+### <span id="menu">Menu Plugin</span>
+
+This plugin simplifies your life if you plan to create a menu. The plugin sets URLs for menu options, buttons or other controls you plan to use for navigation. Also, there is no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
 
 ![](../images/top_data.png)
 
-Let's create a toolbar with a segmented button and use the plugin:
+Let's create a toolbar with a segmented button and use the plugin for it:
 
 ~~~js
-/* sources/views/toolbar.js */
+// views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView{
 	config(){
 		return { 
 			view:"toolbar", elements:[
 				{ view:"label", label:"Demo" },
 				{ view:"segmented", localId:"control", options:[
-					"Details",
-					"Dash"
+					"details",
+					"dash"
 				]}
 		]};
 	}
@@ -41,17 +50,20 @@ export default class ToolbarView extends JetView{
 }
 ~~~
 
-The plugin config contains the ID of the view element that's going to serve as a menu. If you click the buttons and reload the page, the app will behave as expected. The **menu** plugin has one more good part. You can change the URLs for every menu item. Let's set URLs for the buttons in the plugin config:
+The plugin config contains the ID of the view element that is going to serve as a menu. If you click the buttons and reload the page, the app will behave as expected. The **Menu** plugin has one more good part. You can change the URLs for every menu item. Let's set URLs for the buttons in the plugin config:
 
 ~~~js
+// views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView {
 	config(){
 		return { 
 			view:"toolbar", elements:[
 				{ view:"label", label:"Demo" },
 				{ view:"segmented", localId:"control", options:[
-					"Details",
-					"Dash"
+					"details",
+					"dash"
 				]}
 		]};
 	}
@@ -59,8 +71,8 @@ export default class ToolbarView extends JetView {
 		this.use(JetApp.plugins.Menu, {
 			id:"control",
 			urls:{
-				Details  : "demo/details",
-				Dash : "demo/dash"
+				details  : "demo/details",
+				dash : "demo/dash"
 			}
 		});
 	}
@@ -69,20 +81,21 @@ export default class ToolbarView extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-start/blob/master/sources/views/top.js)
 
-### UnloadGuard Plugin
+### <span id="unload">UnloadGuard Plugin</span>
 
-The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved data. The plugin can intercept the event of leaving the current view and, e.g. show the *are you sure* dialogue. Besides, it can be used for input validation.
+The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved or invalid data. The plugin can intercept the event of leaving the current view and, e.g. show the *are you sure* dialogue.
 
 ![](../images/unload.png)
 
-The plugin reacts to an attempt of changing the URL. The syntax for using a plugin is _this.use\(plugin,handler\)_. Use takes two parameters:
+The plugin reacts to an attempt of changing the URL. The syntax for using a plugin is *this.use\(plugin,handler\)*. Use takes two parameters:
 
-* a plugin name
-* a function that will handle the **Unload** event
+- a plugin name
+- a function that will handle the **Unload** event
 
 You can move validation from the **Save** button handler to the plugin handler. Let's have a look at a form with one input field:
 
 ```js
+import {JetView} from "webix-jet";
 export default class FormView extends JetView {
     config(){
         return { 
@@ -112,29 +125,31 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-unload.js)
 
-### User Plugin <h3 id="user"></h3>
+### <span id="user">User Plugin</span>
 
-The *User* plugin is useful if you create apps that need authorization. When the plugin is included, the **user** service is launched. Let's look how you can use the plugin with a custom script.
+The *User* plugin is useful if you create apps that need authorization. When the plugin is included, the **user** service is launched. Let's look how to use the plugin with a custom script.
 
 #### Login through a custom script
 
-The plugin uses a **session** model, [check it out](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js). It contains requests to *php* scripts for logging in, getting the current status, and logging out. In the code there are following functions:
+The plugin uses a **session** model, [check it out](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js). It contains requests to *php* scripts for logging in, getting the current status, and logging out. In the code, there are following functions:
 
 - **status** - returns the status of the current user:
 
 ```js
+// models/session.js
 function status(){
 	return webix.ajax().post("server/login.php?status")
 		.then(a => a.json());
 }
 ```
 
-- **login** - logs the user in, returns an object with his/her access rights settings or a promise of this object or *null* if something went wrong. The parameters are:
+- **login** - logs the user in, returns an object with his/her access rights settings, a promise of this object or *null* if something went wrong. The parameters are:
 
 - *user* - username;
 - *pass* - password.
 
 ```js
+// models/session.js
 function login(user, pass){
 	return webix.ajax().post("server/login.php", {
 		user, pass
@@ -145,6 +160,7 @@ function login(user, pass){
 - **logout** - logs the user out:
 
 ```js
+// models/session.js
 function logout(){
 	return webix.ajax().post("server/login.php?logout")
 		.then(a => a.json());
@@ -154,7 +170,7 @@ function logout(){
 To use a plugin, call *app.use* and pass the **session** model to it:
 
 ```js
-/* sources/myapp.js */
+// myapp.js
 import session from "models/session";
 ...
 app.use(plugins.User, { model: session });
@@ -163,7 +179,7 @@ app.use(plugins.User, { model: session });
 Here's an example of a form for logging in, which can be included into a view class:
 
 ```js
-/* sources/views/login.js */
+// views/login.js
 const login_form = {
 	view:"form",
 	rows:[
@@ -180,14 +196,20 @@ const login_form = {
 };
 ```
 
-The form has validation rules. To implement the way to log in, you can use the **login** method of the *User* plugin.
+The form has two validation rules.
+
+To implement the way to log in, you can use the **login** method of the *User* plugin.
 
 ###### login(name, password)
 
-**login** receives the username and the password, verifies them and if everything's fine, shows the *afterLogin* page. Otherwise, it shows an error message. Here's how the **do_login** method is implemented:
+**login** receives the username and the password, verifies them and if everything's fine, shows the *afterLogin* page. Otherwise, it shows an error message. 
+
+Here's how the **do_login** method is implemented:
 
 ```js
-/* sources/views/login.js */
+// views/login.js
+import {JetView} from "webix-jet";
+
 export default class LoginView extends JetView{
 	...
 	do_login(){
@@ -205,15 +227,18 @@ export default class LoginView extends JetView{
 }
 ```
 
-If users typed their name and password, *user.login* is called. You can add an error handler for an invalid username and password.
+If users submit their name and password, *user.login* is called. You can add an error handler for an invalid username and password.
 
-[Have a look at the complete *login.js* file](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js). And here is the [demo on logging in with custom scripts](https://github.com/webix-hub/jet-start/tree/php).
+**Related demo**:
+
+- The [complete *login.js* file](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js);
+- The [demo on logging in with custom scripts](https://github.com/webix-hub/jet-start/tree/php).
 
 The **User** plugin has other useful methods.
 
 ###### getUser()
 
-**getUser** returns the data of the currently logged user.
+**getUser** returns the data of the currently logged in user.
 
 ###### getStatus()
 
@@ -228,7 +253,7 @@ The **User** plugin has other useful methods.
 
 <!-- to be continued -->
 
-### Theme plugin
+### <span id="theme">Theme plugin</span>
 
 This is a plugin to change app themes. The plugin launches the **theme** service. There are two methods that the service provides:
 
@@ -240,17 +265,20 @@ The method returns the name of the current theme.
 
 The method takes one obligatory parameter - the name of the theme - and sets the theme for the app.
 
-Consider an example. The service locates links to stylesheets by this attribute. Here are the stylesheets for the app:
+Consider an example. The service locates links to stylesheets by the *title* attribute. Here are the stylesheets for the app:
 
 ```html
-/* index.html */
+// index.html
 <link rel="stylesheet" title="flat" type="text/css" href="//cdn.webix.com/edge/webix.css">
 <link rel="stylesheet" title="compact" type="text/css" href="//cdn.webix.com/edge/skins/compact.css">
 ```
 
-Each link has the **title** attribute with the theme name. Next, you need to provide a way for users to choose themes. Here's a view with a segmented button:
+Next, you need to provide a way for users to choose themes. Here's a view with a segmented button:
 
 ```js
+// views/settings.js
+import {JetView} from "webix-jet";
+
 export default class SettingsView extends JetView {
 	config(){
 		return {
@@ -260,7 +288,7 @@ export default class SettingsView extends JetView {
 					{id:"flat-default", value:"Default"},
 					{id:"flat-shady", value:"Shady"},
 					{id:"compact-default", value:"Compact"}
-				], click:() => this.toggleTheme() /* not implemented yet */},
+				], click:() => this.toggleTheme() /* not implemented yet */ }
 				{}
 			]
 		};
@@ -268,11 +296,14 @@ export default class SettingsView extends JetView {
 }
 ```
 
-Note that option IDs should have two parts, the first of them must be the same as the *title* attribute of the link to a stylesheet. The **theme** service must get the theme name, chosen by a user, locates the correct stylesheet and sets the theme. Let's add a handler for the segmented button and define it as a class method:
+Note that option IDs should have two parts, the first of them must be the same as the *title* attribute of the link to a stylesheet. The **theme** service must get the theme name, chosen by a user. Then it locates the correct stylesheet and sets the theme. Let's add a handler for the segmented button and define it as a class method:
 
 ```js
+// views/settings.js
+import {JetView} from "webix-jet";
+
 export default class SettingsView extends JetView {
-	//config()
+	...
 	toggleTheme(){
 		const themes = this.app.getService("theme");
 		const value = this.getRoot().queryView({ name:"skin" }).getValue();
@@ -281,36 +312,30 @@ export default class SettingsView extends JetView {
 }
 ```
 
-Inside the method, the **theme** service is launched. Then **queryView** located the segmented by its name and gets the user choice. After that, the service sets the chosen theme by adding a corresponding CSS class name to the body of the html page.  
-
-<!-- theme
-	flat-shady
-		title:"flat"
-		document.body.className += " .theme-flat-shady"
-		webix.setSkin("flat") 
--->
+Inside the method, the **theme** service is launched. Then **queryView** located the segmented by its name and gets the user a choice. After that, the service sets the chosen theme by adding a corresponding CSS class name to the body of the HTML page.
 
 To restore the state of the segmented button after the new theme is applied, you need to get the current theme in the class **config** and add the **value** property of the segmented setting it to the correct value:
 
 ```js
+// views/settings.js
 const theme = this.app.getService("theme").getTheme();
 ...
 	{ name:"skin", optionWidth: 120, view:"segmented", label:"Theme", options:[
 		{id:"flat-default", value:"Default"},
 		{id:"flat-shady", value:"Shady"},
 		{id:"compact-default", value:"Compact"}
-	], click:() => this.toggleTheme(), value:theme },
+	], click:() => this.toggleTheme(), value:theme }
 ...
 ```
 
 [Check out the complete code >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js)
 
-### Locale plugin
+### <span id=""locale>Locale plugin</span>
 
 This is a plugin for localizing apps. Locale files are usually created in the *locales* folder. This is an example of the Spanish locale file:
 
 ```js
-/* sources/locales/es.js */
+// locales/es.js
 export default {
 	"Settings" : "Ajustes",
 	"Language" : "Idioma",
@@ -365,13 +390,13 @@ export default class SettingsView extends JetView {
 }
 ```
 
-When a user chooses a language, a corresponding file is located and the app language is changed. IDs of the language options should be the same as the locale file names. **getLang** in config restores the value of the segmented button.
+When a user chooses a language, a corresponding file is located and the app language is changed. IDs of the language options should be the same as the locale file names (e.g. "es", "en"). **getLang** in config returns the current locale, which is used to restore the value of the segmented button.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js)
 
 ![](../images/plugin_locale.png)
 
-### Status Plugin
+### <span id="status">Status Plugin</span>
 
 This plugin is useful if you want to show the status of data loading in case it takes time, to confirm success or to show an error message. These are the status messages that you can see:
 
@@ -382,6 +407,15 @@ This plugin is useful if you want to show the status of data loading in case it 
 This is how you can include the plugin:
 
 ```js
+// views/data.js
+...
+config(){
+	return {
+		rows:[
+			{ id:"app:status", view:"label" }
+		]
+	};
+}
 init(){
 	this.use(plugins.Status, { 
 		target: "app:status",
@@ -391,12 +425,12 @@ init(){
 }
 ```
 
-The **target** property is the ID of the view component where you want to display the message. *ajax:true* enables asynchronous requests. *expire* defines the time after which the status message disappears (5 seconds in this case). By default, the time is set to 3 seconds, and if you set it to 0, the status message will stay as long as the page is open.
+The **target** property is the ID of the view component where you want to display the message (a label in this example). *ajax:true* enables asynchronous requests. *expire* defines the time after which the status message disappears (5 seconds in this case). By default, the time is set to 3 seconds, and if you set it to 0, the status message will stay as long as the page is open.
 
 **Status** can have two more properties in its config:
 
 - **data** - a property that defines the ID of the data component to track.
-- **remote** - a boolean property that enables *webix.remote* - a special protocol that allows the client component to call functions on the server directly.
+- **remote** - a boolean property that enables *webix.remote* - a protocol that allows the client component to call functions on the server directly.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js)
 

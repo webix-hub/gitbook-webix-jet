@@ -2,7 +2,13 @@
 
 In the new version of Webix Jet, there is a convenient reference to a Jet view from Webix UI events with the **this** pointer. Consider the following use-cases.
 
-### 1. Reference to the View
+- [Reference to the View](#ref_view)
+- [Reference to the App](#ref_app)
+- [Reference to the Root UI Element of the View](#below)
+- [Referencing Parent Views and Subviews](#parent_sub)
+- [Referencing Webix Views and Controls](#controls)
+
+### <span id="ref_view">1. Reference to the View</span>
 
 Due to ES6 *arrow functions*, you can refer to a Jet view with **this** from click handlers of Webix views. This way is shorter and advisable. For example, **this.show** in the handler of the button refers to **Toolbar**: 
 
@@ -54,12 +60,13 @@ This is one of the cases when arrow functions do not help to shorten the syntax.
 
 **getRoot()** and **queryView()** are discussed <a href="#below">below</a>.
 
-### 2. Reference to the App
+### <span id="ref_app">2. Reference to the App</span>
 
 If you want to rebuild the app UI, you need to use *app.show("/new/url")*. You can shorten the syntax with an **arrow function** and reference the app with **this.app**:
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
 
 export default class ToolbarView extends JetView {
     config() {
@@ -83,6 +90,8 @@ export default class ToolbarView extends JetView {
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView {
     config() {
         return {
@@ -105,6 +114,8 @@ Suppose you have a view with a form and you want to validate its input when user
 
 ```js
 // views/form.js
+import {JetView} from "webix-jet";
+
 export default class FormView extends JetView{
     config(){
         return { 
@@ -133,7 +144,7 @@ If the handler is not an arrow function, refer to the form or any other root UI 
 }}
 ```
 
-### 4. Referencing Parent Views and Subviews
+### <span id="parent_sub">4. Referencing Parent Views and Subviews</span>
 
 JetView class has two methods to reference subviews (kids) and parent views.
 
@@ -143,7 +154,6 @@ JetView class has two methods to reference subviews (kids) and parent views.
 
 ```js
 // views/listedit.js
-
 import {JetView} from "webix-jet";
 import form from "form";
 
@@ -166,6 +176,8 @@ To get to the methods of Parent from the subview, you can use **this.getParentVi
 
 ```js
 // views/form.js
+import {JetView} from "webix-jet";
+
 export default class Child extends JetView{
     config(){
         return {
@@ -189,7 +201,6 @@ Use **getSubview()** to get to the methods of subviews from a parent. Consider a
 
 ```js
 // views/listedit.js
-
 import {JetView} from "webix-jet";
 import ChildList from "list";
 import ChildForm from "form";
@@ -214,6 +225,8 @@ When all the views are ready (**ready** of the parent view is called after all i
 
 ```js
 // views/form.js
+import {JetView} from "webix-jet";
+
 export default class ChildForm extends JetView{
     config(){
         return {
@@ -228,12 +241,14 @@ export default class ChildForm extends JetView{
 }
 ```
 
-### 5. Referencing Webix Views and Controls
+### <span id="controls">5. Referencing Webix Views and Controls</span>
 
 You already know how to change the URL by controls. Now have a look how the state of controls can be changed by the URL. For example, if you have a toolbar with a segmented button that is used to switch between two views:
 
 ```js
-// views/toolbar.js 
+// views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView {
     config() {
         return {
@@ -259,6 +274,8 @@ You can use **queryView** to reference the control. With this method, you can lo
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView {
     config() {
         /* same config with segmented button */
@@ -275,7 +292,9 @@ If you switch to **dash** and reload the page now, the state of the button will 
 **queryView()** is also often used for form validation. Consider also an example of simple form validation:
 
 ```js
-/* views/form.js */
+// views/form.js
+import {JetView} from "webix-jet";
+
 export default class FormView extends JetView{
     config(){
         return { 
@@ -302,6 +321,8 @@ You can also use **this.\$\$("localId")** to reference a control and set its val
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView {
     config() {
         //...
@@ -324,6 +345,8 @@ export default class ToolbarView extends JetView {
 One of the solutions is to give complex IDs, e.g. *"root:control"*:
 
 ```js
+// views/toolbar.js
+...
 {
     view: "toolbar",
     elements: [

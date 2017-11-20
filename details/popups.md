@@ -57,7 +57,7 @@ init(){
 
 **this.win1.show** renders the popup at a position, defined by the parameter. In the code sample, the parameter is the HTML code of the button that calls the method, so the popup appears below the button. If you do not pass a parameter, **win1** will be rendered in the top left corner.
 
-You can create windows and popups with view classes as well. Have a look at a similar popup:
+You can create windows and popups with view classes as well. Have a look at a similar popup, defined as a class:
 
 ```js
 // views/window2.js
@@ -85,7 +85,7 @@ Here's how you initiate and show this popup (spoiler: exactly the same way as **
 ```js
 // views/top.js
 import {JetView} from "webix-jet";
-import {win2} from "window2";
+import WindowView from "window2";
 
 export default class TopView extends JetView {
 	config(){

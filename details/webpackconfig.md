@@ -2,7 +2,10 @@
 
 There are some cases when you might want to change the default webpack configuration.
 
-### Multiple Start Files
+- [Multiple Start Files](#multiple_start)
+- [Turning Off Localization and Views](#turn_off)
+
+### <span id="multiple_start">Multiple Start Files</span>
 
 By default, the app is built with one start file:
 
@@ -36,7 +39,7 @@ To create multiple entry files, pass an object to **entry** and use the *[name]*
 }
 ```
 
-### Turning Off Localization and Views
+### <span id="turn_off">Turning Off Localization and Views</span>
 
 If you aren't planning to localize the app, there's a way to do it without creating and empty folder for locales. Without changes in webpack config, you would have to do that to get the app compiled. webpack config has the **resolve** property that presents options affecting the resolving of modules. It tells webpack where to look for locales or some other files, e.g. views. Change the path in the *"jet-locales"* key pair from **resolve.alias**.
 

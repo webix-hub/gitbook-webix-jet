@@ -2,9 +2,13 @@
 
 Views are separated, but there should be some means of communication between them.
 
-### Parameters
+- [Parameters](#params)
+- [Events](#events)
+- [Methods](#methods)
 
-You can enable views communications with *parameters*. For instance, you need to open a form with some specific data from another view. Pass the needed parameters to *view.show*:
+### <span id="params">Parameters</span>
+
+You can enable view communications with *parameters*. For instance, you need to open a form with some specific data from another view. Pass the needed parameters to *view.show*:
 
 ```js
 // views/data.js
@@ -44,19 +48,21 @@ export default class FormView extends JetView{
 }
 ```
 
+In this simple example, as soon as DataView is initialized, the form is filled with data from a data record with ID 1.
+
 You can also pass several parameters to **show**:
 
 ```js
-this.show("./form?id=1&name=some");
+this.show("./form?name=Jack&email=some");
 ```
 
-### Events
+### <span id="events">Events</span>
 
 Feel free to use the in-app event bus for view communication.
 
 ##### Calling an Event
 
-To trigger an event, call **app.callEvent**. You can do this by referencing the view class with **this** from an *arrow function*:
+To trigger an event, call **app.callEvent**. You can call the method by referencing the app with **this.app** from an *arrow function*<sup><a href="#myfootnote1" id="origin">1</a></sup>:
 
 ```js
 // views/data.js
@@ -92,7 +98,7 @@ export default class FormView extends JetView{
 }
 ```
 
-One more way to attach an event is **this.on** (view.on, **this** references a Jet view). This way is better because it automatically detaches the event when the view that called it is destroyed.
+One more way to attach an event is **this.on** (**this** references a Jet view). This way is better, because the event is automatically detached when the view that called it is destroyed.
 
 ```js
 // views/form.js
@@ -109,11 +115,11 @@ export default class FormView extends JetView{
 
 Once an event is attached, any other view can listen to it.
 
-### Declaring and Calling Methods
+### <span id="methods">Declaring and Calling Methods<span>
 
 One more effective way of connecting views is methods. In one of the views we define a handler that will call some function, and in another view we call this handler.
 
-Unlike events, methods both call actions in views and are able to return something useful. However, this option can only be used when we know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
+Unlike events, methods can call actions in views and can return something useful as well. This option can only be used when we know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
 
 ##### Events vs Methods
 
@@ -135,12 +141,12 @@ export default class ChildView extends JetView{
 }
 ```
 
-And here's a parent view that will enclose *SubView*:
+And here's a parent view that will include *ChildView*:
 
 ```js
 // views/parent.js
 import {JetView} from "webix-jet";
-import child from "child";
+import ChildView from "child";
 
 export default class ParentView extends JetView{
     config() {
@@ -149,12 +155,12 @@ export default class ParentView extends JetView{
                 { view:"button", value:"Set mode", click:() => {
                     this.getSubView().setMode("readonly")}
                 }, 
-                { $subview: child }]
+                { $subview: ChildView }]
     }}
 }
 ```
 
-**this.getSubview()** refers to *child* and calls the method. It can take a parameter with the name of a subview if there are several subviews.
+**this.getSubView()** refers to *ChildView* and calls the method. It can take a parameter with the name of a subview if there are several subviews.
 
 You can use methods for view communication in similar use-cases, but still events are more advisable here. Now let's have a look at the example where methods are better.
 
@@ -181,7 +187,20 @@ Here each subview has a name. *FileView* has the *loadFiles* method. Next, let's
 // views/manager.js
 
 init() {
-	this.getSubview("left").loadFiles("a");
-	this.getSubview("right").loadFiles("b");
+	this.getSubView("left").loadFiles("a");
+	this.getSubView("right").loadFiles("b");
 }
 ```
+
+Both subviews can be referenced with **getSubView(name)**.
+
+## Further reading
+
+For more info on view communications, you can read:
+
+- [Services](services.md)
+
+<!-- footnotes -->
+- - -
+<a id="myfootnote1" href="#origin">2 &uarr;</a>:
+To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

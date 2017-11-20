@@ -15,7 +15,7 @@ JetView class has the following methods:
 
 ### <span id="use">this.use(plugin, config)</span>
 
-The method includes a plugin, for example,  this is how the **Status** plugin can be added:
+The method includes a plugin, for example, this is how the **Status** plugin can be added:
 
 ```js
 init(){

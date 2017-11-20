@@ -1,4 +1,4 @@
-## Navigation (Routing)
+# In-App Navigation (Routing)
 
 Navigation is implemented by changing the URL of the page. The URL reflects the current state of the app. By default, it is stored as a part after the hashbang. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">1</a></sup>. When the URL is changed, the app updates itself accordingly. 
 
@@ -8,9 +8,13 @@ Navigation is implemented by changing the URL of the page. The URL reflects the 
 - *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before page reload.
 - *Convenient Development*: If you work on some particular subview (*games*), you can open the path to it (*#!/games*) and test it separately from the rest of the UI.
 
-In the previous section ["Creating views"](views.md), you have read about direct URL navigation. There are three more ways to show views and subviews.
+In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three more ways to show views and subviews:
 
-### 1. Jet Links
+- [Jet links](#jet_links)
+- [app.show](#app_show)
+- [view.show](#view_show)
+
+### <span id="jet_links">1. Jet Links</span>
 
 You can add links with the **route** attribute instead of the usual **href** and provide the URL to the desired views, e.g.:
 
@@ -20,21 +24,20 @@ You can add links with the **route** attribute instead of the usual **href** and
 
 After you click on the link, the app UI will be rebuilt and will consist of the parent view _details_ and a subview _data_.
 
-You can pass one or more parameters with a Jet link:
+You can pass one or more **parameters** with a Jet link:
 
 ```html
+<!-- one -->
 <a route="/details/data?id=2"></a>
 <!-- or several -->
 <a route="/details/data?id=2&name=some"></a>
 ```
 
-### 2. app.show\(\)
+### <span id="app_show">2. app.show\(\)</span>
 
-The **app.show\(\)** method is applied to the whole application. You can call the method from control handlers, for instance.
+The **app.show\(\)** method is applied to the whole application and rebuilds its UI. You can call the method from control handlers, for instance.
 
-A specific instance of the related view class is referenced with **this** if you define handlers as arrow functions. To reference the app, use **this.app**. To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
-
-Here is how you can rebuild the UI with **app.show**:
+Here is how you can rebuild the app UI with **app.show**. A specific instance of the related view class is referenced with **this** if you define handlers as *arrow functions*. To reference the app and to call its **show** method, use **this.app**<sup><a href="#myfootnote2" id="origin2">2</a></sup>.
 
 ```js
 // views/layout.js
@@ -54,12 +57,13 @@ You can pass one or more parameters to show alongside the URL:
 ```js
 // views/layout.js
 
+// one
 this.app.show("/demo/details?id=2");
 // or many
 this.app.show("/demo/details?id=2&name=some");
 ```
 
-### 3. view.show\(\)
+### <span id="view_show">3. view.show\(\)</span>
 
 ##### Rebuilding Part of the App
 
@@ -80,9 +84,9 @@ export default class LayoutView extends JetView {
 }
 ```
 
-If the current URL is _"/layout/details"_, the subview is **details**. Let's replace **details** with the **demo** subview on a button click. To replace the current subview with a different one, pass the name as it is or with *"./"* to the **show** method of the class view.
+If the current URL is _"/layout/details"_, the subview is **details**. Let's replace **details** with the **demo** subview on a button click. To replace the current subview with a different one, pass the name of the subview as it is or with *"./"* to **show**.
 
-A specific instance of the related view class is referenced with **this** if you define handlers as arrow functions. To read about how you can reference view classes, go to ["Referencing views"](../detailed/referencing.md).
+A specific instance of the related view class is referenced with **this** if you define a handler as an *arrow function*<sup><a href="#myfootnote3" id="origin3">3</a></sup>. To rebuild a part of the UI, call **this.show()**:
 
 ```js
 // views/layout.js
@@ -125,21 +129,30 @@ If you want to rebuild the whole app and load the **demo** view as the only view
 
 ##### View.show with URL Parameters
 
-You can pass one or more parameters to show alongside the URL:
+You can pass one or more parameters with the URL:
 
 ```js
 // views/layout.js
 
-this.show("details?id=2");
+this.show("demo?id=2");
 // or many
-this.show("details?id=2&name=some");
+this.show("demo?id=2&name=some");
 ```
 
-You can also read ["Navigation"](../details/navigation.md) in the advanced chapter.
+## Further reading
 
-This is all about Webix Jet in a nutshell. For more details, go on to the next chapter ["JetApp API"](../details./app.md).
+This is all about Webix Jet in a nutshell. 
+
+You can also read these sections of Part II:
+
+- [Navigation](../details/navigation.md)
+- [JetApp API](../details./app.md)
+- [JetView API](../details/views.md)
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin">1</a>:
+<a id="myfootnote1" href="#origin">1 &uarr;</a>:
 This is relevant for *HashRouter*, which is the default router. Hashbang is not displayed if you use *UrlRouter*. The app part of the URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except *EmptyRouter* and the behavior is the same as if the URL were displayed. For more details, [see section "Routers"](../details/routers.md).
+
+<a id="myfootnote2" href="#origin2">2 &uarr;</a>, <a id="myfootnote3" href="#origin3">3 &uarr;</a>:
+To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

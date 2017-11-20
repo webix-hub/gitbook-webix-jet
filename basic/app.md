@@ -26,6 +26,8 @@ After you specify the app configuration, you must call the **render** method to 
 
 You can open the needed URL and the UI will be rendered from the URL elements. The app splits the URL into parts, finds the corresponding files in the **views** folder and creates an interface by combining UI modules from those files.
 
+### App Configuration
+
 In the app config, for example, you can set the mode in which the app will work:
 
 ```js
@@ -49,7 +51,9 @@ if (this.app.config.mode === "readonly"){
 ...
 ```
 
-**this.app** refers to the app, while **this** refers to the view. You can read more about ["Referencing views"](../details/referencing.md) and apps.
+**this.app** refers to the app, while **this** refers to the view<sup><a href="#myfootnote1" id="origin">1</a></sup>.
+
+### Routers
 
 New Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is *HashRouter*. If you don't want to display the hashbang in the URL, you can change the router to *UrlRouter*:
 
@@ -63,6 +67,15 @@ var app = new JetApp({
 });
 ```
 
-For more information about routers, [go to "Routers"](../details/routers.md) of the advanced chapter.
+## Further reading
 
-To read about JetApp API, [go to "JetApp API" section](../details/app.md). For info on changing the app configuration, [read the "Webpack Configuration" section](../details/webpackconfig.md).
+You can read these sections of Part II:
+
+- [Routers](../details/routers.md)
+- [JetApp API](../details/app.md)
+- [Webpack Configuration](../details/webpackconfig.md)
+
+<!-- footnotes -->
+- - -
+<a id="myfootnote1" href="#origin">1 &uarr;</a>:
+You can read more about ["Referencing views"](../details/referencing.md) and apps.

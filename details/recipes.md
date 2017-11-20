@@ -47,18 +47,22 @@ export default class limited extends JetView{
 The solution is to create one common view and to *configure* its UI depending on the user group. The user group of the current group will be stored in the app config. Let's add a property with a default group name into the app config:
 
 ```js
+// myapp.js
 import limited from "views/limited";
+
 const app = new JetApp({
     access:		"reader",
-    start:		"/top/limited",
-    //...
+    start:		"/top/limited"
 });
 ```
 
 *top* is a view with a side menu and a toolbar that includes *limited* as its subview. Next, let's define the UI for **limited** for default users (*readers*):
 
 ```js
-class limited extends JetView{
+// views/limited.js
+import {JetView} from "webix-jet";
+
+export default class limited extends JetView{
 	config(){
 		var ui = { view:"form", rows:[
 			{ label:"Name", view:"text" },
@@ -74,7 +78,10 @@ class limited extends JetView{
 Next, let's add a check in config and change the view config for *writers*:
 
 ```js
-class limited extends JetView{
+// views/limited.js
+import {JetView} from "webix-jet";
+
+export default class limited extends JetView{
 	config(){
 		var ui = { view:"form", rows:[
 			{ label:"Name", view:"text" },
@@ -96,6 +103,9 @@ class limited extends JetView{
 *this.app.config.access* gets to the access level of the current user. If you use [the **User** plugin](plugins.md#user), you can get the user name with *getUser* and check the group. For the demo, the user group is changed by a control in *top*:
 
 ```js
+// views/top.js
+import {JetView} from "webix-jet";
+
 export class TopView extends JetView {
 	config(){
 		return {
@@ -122,6 +132,9 @@ export class TopView extends JetView {
 Here's an example how to block a view for *readers*: 
 
 ```js
+// views/blocked.js
+import {JetView} from "webix-jet";
+
 export default class blocked extends JetView{
 	config(){
 		if (this.app.config.access != "writer"){
@@ -148,6 +161,8 @@ You can show this view via *top/blocked*.
 The **app:guard** event is triggered before navigation to another view. Here's how you can attach **app:guard**:
 
 ```js
+// myapp.js
+...
 app.attachEvent("app:guard", function(url, view, nav){
     if (url.indexOf("/blocked") !== -1)
         nav.redirect="/somewhere/else";
@@ -169,6 +184,7 @@ The event handler receives three parameters:
 Here's how you can block a view and redirect users to some *allowed* subview:
 
 ```js
+// myapp.js
 const app = new JetApp({
 	start:		"/top/blocked"
 });
@@ -199,6 +215,7 @@ Webix UI resizes components automatically if you don't set fixed sizes. If you m
 Okay, suppose you want to distinguish two types of screens: *small* (less than 800px) and *wide*. (800 is just a number, you can choose the one you suppose is right). And there are two datatables (ListA and ListB) you want to display in two columns for *wide* screens and in two tabs for *small* screens. *StartView* is the layout. Add a property to app config and initialize it with a function that will count the width of the screen:
 
 ```js
+// myapp.js
 webix.ready(() => {
 	const app = new JetApp({
 		start:		"/start"
@@ -212,6 +229,7 @@ webix.ready(() => {
 This ensures that when the app is rendered, the right size is calculated. This, nevertheless, doesn't solve dynamic resizing. Yet. This is what will make the app UI responsive and dynamic:
 
 ```js
+// myapp.js
 webix.ready(() => {
 	const app = new JetApp({
 		//config
@@ -238,7 +256,10 @@ webix.ready(() => {
 Here's how **size** defines the layout (**StartView**). For small screens, the grids will be put in tabs, and for wide screens they will be put side by side:
 
 ```js
-export class StartView extends JetView {
+// views/start.js
+import {JetView} from "webix-jet";
+
+export default class StartView extends JetView {
 	config(){
 		switch(this.app.config.size){
 			case "small":
@@ -266,7 +287,10 @@ export class StartView extends JetView {
 One more way to make your app responsive is to display smaller content for small screens. Let's leave only two columns in one of the datatables for small screens:
 
 ```js
-export class ListB extends JetView {
+// views/listb.js
+import {JetView} from "webix-jet";
+
+export default class ListB extends JetView {
 	config(){
 		var config = {
 			view:"datatable",

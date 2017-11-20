@@ -1,8 +1,17 @@
-# Views
+# Views and SubViews
+
+- Views
+    - [Simple Views](#simple)
+    - [Object "Factory Pattern"](#factory)
+    - [Class Views](#class_views)
+- [SubView Including](#subviews)
+    - [View Inclusion](#view_subview)
+    - [App Inclusion](#app_subview)
+
 
 After reading the "Basics" chapter of this guide, you are familiar with the concept of a _view_. Now it's time to find out all the ways of creating views. You can create views in three ways.
 
-## 1. Simple Views
+## <span id="simple">1. Simple Views</span>
 
 Views can be created as pure objects.
 
@@ -33,7 +42,7 @@ const list = {
 export default list;
 ```
 
-## 2. Object "Factory Pattern"
+## <span id="factory">2. Object "Factory Pattern"</span>
 
 View objects can also be returned by a factory function.
 
@@ -82,13 +91,13 @@ Views can be defined as JS6 classes.
 
 View classes inherit from **JetView**. Webix UI lifetime event handlers are implemented through class methods. Here are the methods that you can redefine while defining your class views:
 
-- config()
-- init()
-- urlChange()
-- ready()
-- destroy()
+- [config()](#config)
+- [init()](#init)
+- [urlChange()](#urlchange)
+- [ready()](#ready)
+- [destroy()](#destroy)
 
-#### config()
+#### <span id="config">config()
 
 This method returns the initial UI configuration of a view. Have a look at a toolbar:
 
@@ -110,7 +119,7 @@ export default class ToolbarView extends JetView{
 
 **config** of *ToolbarView* class returns a simple Webix toolbar.
 
-#### init\(view, url\)
+#### <span id="init">init\(view, url\)</span>
 
 The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view returned by **config**. For instance, the above-defined toolbar will be always rendered with the first segment of the button active. You can change the control state in **init**. Let's link it to the URL:
 
@@ -152,7 +161,7 @@ So when **setValue** in the code above was passed *url[1].page*, it received the
 
 *url.length > 1* checks that a subview is present in the URL.
 
-#### urlChange\(view,url\)
+#### <span id="urlchange">urlChange\(view,url\)</span>
 
 This method is called every time the URL is changed. It reacts to the change in the URL after **!\#**<sup><a href="#footnote1" id="origin">1</a></sup>. **urlChange** is only called for the view that is rendered and for its parent. Consider the following example. The initial URL is:
 
@@ -207,7 +216,7 @@ The **urlChange** method receives the same two **parameters** as **init**:
 - **view** - the Webix view inside the Jet view class
 - **url** - the URL as an array of URL elements
 
-#### ready(view,url)
+#### <span id="ready">ready(view,url)</span>
 
 **ready** is called when the current view and all its subviews have been rendered. For instance, if the URL is changed to *a/b*, the order in which view class methods are called is the following:
 
@@ -275,7 +284,7 @@ Note that *subviews* can have **names**. If you give a name to a subview, you ca
 - **view** - the Webix view inside the Jet view class
 - **url** - the URL as an array of URL elements
 
-#### destroy()
+#### <span id="destroy">destroy()</span>
 
 **destroy** is called only once for each class instance when the view is destroyed. The view is destroyed when the corresponding URL element is no longer present in the URL.
 
@@ -373,7 +382,7 @@ import grandchild from "grandchild";
 
 You can include views and apps into other views.
 
-### 1. View Inclusion
+### <span id="view_subview">1. View Inclusion</span>
 
 For example, here are three views created in different ways:
 

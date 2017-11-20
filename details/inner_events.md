@@ -1,17 +1,26 @@
 # Inner Jet Events and Error Handling
 
+- [Inner Events](#events)
+- [Error Handling](#errors)
+
 Apart from using built-in means like plugins, you can use a number of inner events. You might need this for adding some functionality if the plugins aren't enough or for error handling and debugging.
 
-### app:render
+## <span id="events">Inner Events</span> 
 
-The event is triggered before each view of an app is rendered. You can use it to change the UI config that you defined and add properties to UI controls, for instance, if you want to disable buttons:
+- [*app:render*](#render)
+- [*app:route*](#route)
+- [*app:guard*](#guard)
+
+### <span id="render">app:render</span>
+
+The event is triggered before each view of an app is rendered. You can use it to change the UI config that you defined and add properties to UI controls. For instance, here is how you can disable buttons:
 
 ```js
 // myapp.js
 
 app.attachEvent("app:render", function(view,url,result){
- if (result.ui.view === "button")
-     result.ui.disabled = true;
+ 	if (result.ui.view === "button")
+     	result.ui.disabled = true;
 });
 ```
 
@@ -20,6 +29,8 @@ The event receives three parameters:
 - **view** - the view for which the event is called (this.$scope)
 - **url** - the URL as an array of URL elements
 - **result** - a wrapper object for UI; it's created in case you want to change the UI (e.g. to put it into some other view)
+
+For example, you can put all the buttons on a toolbar:
 
 ```js
 // myapp.js
@@ -32,9 +43,9 @@ app.attachEvent("app:render", function(view,url,result){
 });
 ```
 
-### app:route
+### <span id="route">app:route</span>
 
-Handling the **app:route** event is resembles handling the **urlChange** of a class view. The event fires after navigation to a view and can be used to send notifications. **app:route** is used by the menu plugin to highlight menu options according to the URL.
+Handling the **app:route** event resembles redefining the **urlChange** of a class view. The event fires after navigation to a view and can be used to send notifications or sending messages to a log:
 
 ```js
 // myapp.js
@@ -46,7 +57,9 @@ app.attachEvent("app:route", function(url){
 
 **app:route** receives one parameter - the URL as an array of URL elements.
 
-### app:guard
+**app:route** is used by the *Menu* plugin to highlight menu options according to the URL.
+
+### <span id="guard">app:guard</span>
 
 The **app:guard** event is triggered before navigation to another view. One of the typical cases to use this event is to create a guard: block some views and redirect users somewhere else. The **app:guard** event is called by the *UnloadGuard* plugin. You can attach **app:guard** with:
 
@@ -54,7 +67,9 @@ The **app:guard** event is triggered before navigation to another view. One of t
 // myapp.js
 
 app.attachEvent("app:guard", function(url, view, nav){
-	//...
+	if (url.indexOf("/blocked") !== -1){
+		nav.redirect = "/top/allowed";
+	}
 })
 ```
 
@@ -66,7 +81,7 @@ The event handler receives three parameters:
 
 **nav** has three properties:
 
-- *redirect* is the new URL; in the example above it's corrected by the guard
+- *redirect* is the new URL; in the example above, it's used for redirection
 - *url* is the URL split into an array of views
 - *confirm* is a promise that is resolved when the **app:guard** event is called
 
@@ -120,7 +135,12 @@ app.render();
 
 There are four events that can be used to handle errors.
 
-### app:error
+- [app:error](#error)
+- [app:error:resolve](#err_resolve)
+- [app:error:render](#err_render)
+- [app:error:initview](#err_initview)
+
+### <span id="error">app:error</span>
 
 This is a common event for all errors. The errors are logged if you set the **debug** property in your app config:
 
@@ -145,13 +165,13 @@ app.attachEvent("app:error", function(err){
 });
 ```
 
-The event takes one parameter - the error object.
+The event receives one parameter - the error object.
 
 ### Younger Siblings of *app:error*
 
 Besides the common error event, there are three events for specific error types.
 
-#### Useful for End-Users
+#### <span id="err_resolve">Useful for End-Users</span>
 
 **app:error:resolve** fires when Jet can't find a module by its name. If this happens, it would be useful to redirect users somewhere else instead of showing them an empty screen:
 
@@ -172,7 +192,7 @@ app.attachEvent("app:error:resolve", function(err, url) {
 
 These error events are more useful for developers as they inform about errors related to the UI.
 
-###### app:error:render
+###### <span id="err_render">app:error:render</span>
 
 This event is triggered on errors during view rendering, mostly Webix UI related. It means that some view UI config has been written incorrectly.
 
@@ -184,15 +204,17 @@ app.attachEvent("app:error:render", function(err){
 });
 ```
 
-###### app:error:initview
+The event receives one parameter - the error object.
 
-This event is triggered in case of an error during view rendering, mostly Webix Jet related. It means that Jet, while rendering Webix UIs, was unable to render the app UI correctly.
+###### <span id="err_initview">app:error:initview</span>
+
+This event is triggered in the case of an error during view rendering, mostly Webix Jet related. It means that Jet, while rendering Webix UIs, was unable to render the app UI correctly.
 
 ```js
 // myapp.js
 
 app.attachEvent("app:error:initview", function(err,view){
-    alert("Jet got lost");
+    alert("Unable to render");
 })
 ```
 
