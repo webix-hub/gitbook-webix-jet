@@ -1,9 +1,28 @@
+<style>
+	.gb_btn{
+		background-color:green;
+		width:60px;
+		color:white;
+		text-align:center;
+		border: 1px solid green;
+		border-radius: 2px;
+		box-shadow: 0px 0px 10px #000;
+		padding:5px;
+	}
+	.gb_btn a {
+		color:inherit;
+	}
+	gb_btn a:hover {
+		text-decoration:none;
+	}
+</style>
+
 Introduction to Webix Jet
 =======
 
 *Latest update was made on November 18, 2017*
 
-This guide provides all the information needed to start creating web applications with Webix Jet. Click [** >> Read << **](https://webix.gitbooks.io/webix-jet/) to read the full book. The book is also [available on GitHub](https://github.com/webix-hub/gitbook-webix-jet), so you can watch the repo to get the updates.
+This guide provides all the information needed to start creating web applications with Webix Jet. Click <span class='gb_btn'><a href='https://webix.gitbooks.io/webix-jet/'>Read</a></span> to read the full book. The book is also [available on GitHub](https://github.com/webix-hub/gitbook-webix-jet), so you can watch the repo to get the updates.
 
 Webix is a library of UI components and you don’t need any special techniques to create apps with it. However, while more and more components are added to a project, there’s a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix Jet framework.
 
@@ -173,4 +192,4 @@ For more details on views and view classes, go to the chapters ["Creating views"
 
 For more details on models, [read chapter "Models"](details/models.md).
 
-Click to read the full book | [>> Read <<](https://webix.gitbooks.io/webix-jet/) |
+Click to read the full book <span class='gb_btn'><a href='https://webix.gitbooks.io/webix-jet/'>Read</a></span>
