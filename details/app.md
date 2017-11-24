@@ -14,7 +14,7 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 
 ### <span id="attach">app.attachEvent("event:name", handler) </span>
 
-Use this method to attach an event:
+Use this method to attach a custom event:
 
 ```js
 // views/form.js
@@ -29,7 +29,7 @@ export default class FormView extends JetView{
 }
 ```
 
-or
+or to attach in inner Jet event:
 
 ```js
 // myapp.js
@@ -41,11 +41,13 @@ app.attachEvent("app:guard", function(url, view, nav){
 ...
 ```
 
+Events can be attached both in the app file and in view modules.
+
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
 ### <span id="call">app.callEvent("event:name")</span>
 
-Use this method to call an event:
+Use this method to call a custom event:
 
 ```js
 // views/data.js
@@ -61,6 +63,8 @@ export default class DataView extends JetView{
     }
 }
 ```
+
+Normally, inner events are called automatically, so there is no need to use **callEvent** for them.
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
@@ -92,7 +96,7 @@ You can read more about services in the ["Services"](services.md) chapter.
 
 ### <span id="render">app.render()</span>
 
-The **render** method builds the UI of the application. If called without any parameters, it just renders the UI according to the start URL, specified in the app configuration inside the page.
+The **render** method builds the UI of the application. If called without any parameters, it just renders the UI inside the page according to the start URL, specified in the app configuration.
 
 ```js
 // myapp.js
@@ -128,11 +132,13 @@ export default class treeView extends JetView{
 }
 ```
 
+**this** refers to the instance of the *treeView* class if it is used in an *arrow function*<sup><a href="#myfootnote1" id="origin1">1</a></sup>.
+
 You can read more about services in the ["Services"](services.md) chapter.
 
 ### <span id="show">app.show(url)</span>
 
-The **show** method is used to change the interface. This method rebuilds the whole UI of the app according to the URL passed as a parameter:
+The **show** method is used to change the app interface. This method rebuilds the whole UI of the app according to the URL passed as a parameter:
 
 ```js
 // views/some.js
@@ -149,13 +155,16 @@ The **use** method is used to switch on plugins. The method takes two parameters
 - the name of the plugin 
 - the plugin configuration
 
-~~~js
-//myapp.js
+```js
+// myapp.js
+import session from "models/session";
 ...
-app.use(JetApp.plugins.PluginName, {
-    /* config */
-});
-~~~
+app.use(plugins.User, { model: session });
+```
 
 For more details, go to the ["Plugins"](plugins.md) chapter.
 
+<!-- footnotes -->
+- - -
+<a id="myfootnote1" href="#origin1">1 &uarr;</a>:
+To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

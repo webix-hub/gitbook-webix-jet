@@ -19,8 +19,8 @@ The event is triggered before each view of an app is rendered. You can use it to
 // myapp.js
 
 app.attachEvent("app:render", function(view,url,result){
- 	if (result.ui.view === "button")
-     	result.ui.disabled = true;
+	if (result.ui.view === "button")
+		result.ui.disabled = true;
 });
 ```
 

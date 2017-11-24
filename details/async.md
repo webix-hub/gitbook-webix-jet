@@ -1,8 +1,8 @@
 # Async (Promised) Views
 
-Data is usually stored in a database on the server side. If the UI is built much faster than the data is loaded, it's a good idea to make use of promises to load the data. To make the UI wait for data, you can make an asynchronous request to a PHP script and give the UI a promise. Then the app will wait for data from a database, and only after a promise resolves, it will render the view with the data.
+Data is usually stored in a database on the server side. If the UI is built much faster than the data is loaded, it's a good idea to make use of promises to load the data. To make the UI wait for data, you can make an asynchronous request to a PHP script and give the UI a promise of data. Then the app will wait for data from a database, and only after a promise resolves, it will render the view with the data.
 
-For example, there's a chart on the start page, and you need to define the colors of its lines, specified in the **series** parameter. Colors can be stored as inline data:
+For example, there is a chart on the start page, and you need to define the colors of its lines, specified in the **series** parameter. Colors can be stored as inline data:
 
 ```js
 //views/statistics.js
@@ -24,7 +24,7 @@ In practice, however, some UI configuration settings can be stored in a database
 
 ## A Promise Returned by **config** of a Class View
 
-Let's use **webix.ajax** that makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, the response is passed to a callback function:
+Let's use **webix.ajax** that makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, the response is passed to a callback in **then**:
 
 ```js
 export class StatisticsView extends JetView {

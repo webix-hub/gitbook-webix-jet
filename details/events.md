@@ -1,4 +1,4 @@
-# Views Communication
+# View Communication
 
 Views are separated, but there should be some means of communication between them.
 
@@ -8,7 +8,7 @@ Views are separated, but there should be some means of communication between the
 
 ### <span id="params">Parameters</span>
 
-You can enable view communications with *parameters*. For instance, you need to open a form with some specific data from another view. Pass the needed parameters to *view.show*:
+You can enable view communication with *parameters*. For instance, you need to open a form with some specific data from another view. Pass the needed parameters to *view.show*:
 
 ```js
 // views/data.js
@@ -24,7 +24,7 @@ export default class DataView extends JetView{
 }
 ```
 
-And here's **form**:
+And here is **form**:
 
 ```js
 // views/form.js
@@ -113,17 +113,17 @@ export default class FormView extends JetView{
 }
 ```
 
-Once an event is attached, any other view can listen to it.
+Once an event is attached, any other view can call it.
 
 ### <span id="methods">Declaring and Calling Methods<span>
 
-One more effective way of connecting views is methods. In one of the views we define a handler that will call some function, and in another view we call this handler.
+One more effective way of connecting views is methods. In one of the views, you can define a method, and in another view, we you can call this method.
 
-Unlike events, methods can call actions in views and can return something useful as well. This option can only be used when we know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
+Unlike events, methods can also return something useful. Methods can only be used for view communication when you know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
 
 ##### Events vs Methods
 
-Have a look at the example. Here's a view that has a method *setMode("mode")*:
+Have a look at the example. Here is a view that has the *setMode("mode")* method:
 
 ```js
 // views/child.js
@@ -141,7 +141,7 @@ export default class ChildView extends JetView{
 }
 ```
 
-And here's a parent view that will include *ChildView*:
+And this is a parent view that will include *ChildView* and call its method:
 
 ```js
 // views/parent.js
@@ -160,13 +160,13 @@ export default class ParentView extends JetView{
 }
 ```
 
-**this.getSubView()** refers to *ChildView* and calls the method. It can take a parameter with the name of a subview if there are several subviews.
+**this.getSubView()** refers to *ChildView* and calls the method. **getSubView()** can take a parameter with the name of a subview if there are several subviews, as you will see in the next section.
 
-You can use methods for view communication in similar use-cases, but still events are more advisable here. Now let's have a look at the example where methods are better.
+You can use methods for view communication in similar use-cases, but still events are more advisable here. Now let's have a look at the example where methods are better then events.
 
 ##### Methods vs Events
 
-Suppose you want to create a file manager resembling Total Commander. The parent view will have two file views as subviews:
+Suppose you want to create a file manager resembling Total Commander. The parent view will have two *file* views as subviews:
 
 ```js
 // views/manager.js
@@ -192,7 +192,7 @@ init() {
 }
 ```
 
-Both subviews can be referenced with **getSubView(name)**.
+Both subviews are referenced with **getSubView(name)**.
 
 ## Further reading
 

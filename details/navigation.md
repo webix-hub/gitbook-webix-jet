@@ -17,7 +17,31 @@ Jet links are created with the **route** attribute instead of the usual **href**
 
 After you click on the link, the app UI will be rebuilt and will consist of the main view *details* and a subview *data*. Note that there is no hashbang in the path.
 
-The **route** attribute can be assigned not only to links, but to *any control* like a button or a menu option.
+##### Route for Webix Controls
+
+The **route** attribute can be added not only to links, but also to Webix controls and widgets. **route** refers to the path to the module inside the **views** folder. For instance, if you want to load the *list* module in the *area* subfolder, you can add **route** to a button with *area.list*:
+
+```js
+// views/top
+import {JetView} from "webix-jet";
+
+export default class TopView extends JetView {
+	config(){
+		return {
+			cols:[
+                { view:"button", value:"List", route:"area.list",
+                  click:function(id){
+					var button = this;
+					this.$scope.show(button.route);
+				}},
+				{ $subview: true }
+			]
+		};
+	}
+}
+```
+
+**this** in the button handler refers to the button itself, and **this.$scope** references the Jet view<sup><a href="#myfootnote1" id="origin1">1</a></sup>.
 
 ##### Jet Links with Parameters
 
@@ -68,7 +92,7 @@ You can pass one or more parameters in the link, e.g.:
 
 ### <span id="app_show">3. app.show\(\)</span>
 
-Apart from links, you can use the **show** method of app to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function*<sup><a href="#myfootnote1" id="origin1">1</a></sup>. Reference app as **this.app** to call the **show** method from control handlers, for instance:
+Apart from links, you can use the **show** method of app to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function*<sup><a href="#myfootnote2" id="origin2">2</a></sup>. Reference app as **this.app** to call the **show** method from control handlers, for instance:
 
 ```js
 // views/toolbar.js
@@ -93,7 +117,7 @@ this.app.show("/demo/details?id=2&name=some");
 
 ### <span id="view_show">4. view.show\(\)</span>
 
-You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this** from a handler that is defined as an *arrow function*<sup><a href="#myfootnote2" id="origin2">2</a></sup>. Calling **show** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
+You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this** from a handler that is defined as an *arrow function*<sup><a href="#myfootnote3" id="origin3">3</a></sup>. Calling **show** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
 ```js
 // views/layout.js
@@ -158,5 +182,5 @@ this.show("details?id=2&name=some");
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin1">1 &uarr;</a>, <a id="myfootnote2" href="#origin2">2 &uarr;</a>:
+<a id="myfootnote1" href="#origin1">1 &uarr;</a>, <a id="myfootnote2" href="#origin2">2 &uarr;</a>, <a id="myfootnote3" href="#origin3">3 &uarr;</a>:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

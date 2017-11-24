@@ -9,6 +9,7 @@
   * [In-app navigation](basic/navigation.md)
 * Part II - Webix Jet in details
   * [JetApp API](details/app.md)
+  * [App Config](details/app_config.md)
   * [Webpack Configuration](details/webpackconfig.md)
   * [Views and SubViews](details/subviews.md)
   * [JetView API](details/views.md)
