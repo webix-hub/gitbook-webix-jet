@@ -25,7 +25,7 @@ You can show the view by opening this path:
 index.html#!/myview
 ```
 
-## <span id="stat_subview>Subview</span>
+## <span id="stat_subview">Subview</span>
 
 Apps created with Webix Jet are single-page. The interface of your app can be constructed from multiple views. Some parts can be dynamic, so you may change them based on the state of the app. Such dynamic views are called *subviews*. 
 
@@ -55,7 +55,7 @@ You can open the view with this URL:
 index.html#!/bigview
 ```
 
-#### <span id="dynam_subview>Dynamic Including</span> 
+#### <span id="dynam_subview">Dynamic Including</span> 
 
 You can enable embedding multiple views that will change according to the URL. Instead of the concrete name of the view class, write *{ $subview: true }*:
 
