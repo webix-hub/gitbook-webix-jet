@@ -1,4 +1,4 @@
-# JetView API
+# <span id="contents">JetView API</span>
 
 JetView class has the following methods:
 
@@ -13,7 +13,7 @@ JetView class has the following methods:
 | [this.getParentView()](#getpar)           | call methods of a parent view     |
 | [this.\$\$("controlID")](#id)             | call methods of some Webix view   |
 
-### <span id="use">this.use(plugin, config)</span>
+### [<span id="use">this.use(plugin, config) &uarr;</span>](#contents)
 
 The method includes a plugin, for example, this is how the **Status** plugin can be added:
 
@@ -29,7 +29,7 @@ init(){
 
 For more details on plugins, check out the ["Plugins" section](plugins.md).
 
-### <span id="show">this.show("path")</span>
+### [<span id="show">this.show("path") &uarr;</span>](#contents)
 
 This method is used to reload view modules according to the path specified as a parameter:
 
@@ -50,7 +50,7 @@ export default Toolbar;
 
 For more details on view navigation, [read the "Navigation" article](../basic/navigation.md).
 
-### <span id="ui">this.ui(view)</span>
+### [<span id="ui">this.ui(view) &uarr;</span>](#contents)
 
 **this.ui** call is equivalent to **webix.ui**. It creates a new instance of the view passed to it as a parameter. For example, you can create views inside popups or modal windows with **this.ui**. The good thing about this way is that it correctly destroys the window or popup when its parent view is destroyed. 
 
@@ -109,7 +109,7 @@ The window is created in **init** of OrdersView and shown on a button click. And
 
 For more details about popups and windows, [go to the "popups and Windows" section](popups.md).
 
-### <span id="on">this.on(app,"app:event:name",handler)</span>
+### [<span id="on">this.on(app,"app:event:name",handler) &uarr;</span>](#contents)
 
 Use this method to attach events. This way of attatching an event is convenient, because it automatically detaches the event when the view that called it is destroyed.
 
@@ -125,7 +125,7 @@ export default class FormView extends JetView{
 
 For more details on attaching and calling events, read the ["Events and Methods" section](events.md).
 
-### <span id="getroot">this.getRoot()</span>
+### [<span id="getroot">this.getRoot() &uarr;</span>](#contents)
 
 Use this method to return the Webix view inside a Jet class view and to call Webix view methods.
 
@@ -148,7 +148,7 @@ export default class FormView extends JetView{
 
 For more details on referencing views, [read the "Referencing" section](referencing.md).
 
-### <span id="getsub">this.getSubview(name)</span>
+### [<span id="getsub">this.getSubview(name) &uarr;</span>](#contents)
 
 Use this method if you want to get to the methods of a subview. It looks for a subview by its name. So you must set the name. You can do it like this:
 
@@ -191,7 +191,7 @@ export default class ListEditView extends JetView{
 
 For more details on referencing views, [read the "Referencing" section](referencing.md).
 
-### <span id="getpar">this.getParentView()</span>
+### [<span id="getpar">this.getParentView() &uarr;</span>](#contents)
 
 Use this method to get to the methods of the parent view.
 
@@ -218,7 +218,7 @@ For more details, [read the "Referencing" section](referencing.md).
 
 See details in ["Events and Methods"](events.md).
 
-### <span id="id">this.\$\$("controlID")</span>
+### [<span id="id">this.\$\$("controlID") &uarr;</span>](#contents)
 
 Use **this.$$** to look for nested views by their IDs.
 

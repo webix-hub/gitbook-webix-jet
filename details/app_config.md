@@ -1,4 +1,4 @@
-# App Configuration
+# <span id="contents">App Configuration</span>
 
 An app module is created as a new instance of the JetApp class. You must pass an object with your app configuration to the app constructor. You can include various parameters into the app configuration.
 
@@ -11,7 +11,7 @@ An app module is created as a new instance of the JetApp class. You must pass an
 | [views](#views)     | to change view modules names |
 | [routes](#routes)   | to shorten the app URL |
 
-### <span id="start">Start URL</span>
+### [<span id="start">Start URL &uarr;</span>](#contents)
 
 The app UI will be rendered from the URL elements from **start** when you open the app for the first time. The app splits the URL into parts, finds the corresponding files in the **views** folder and creates an interface by combining UI modules from those files.
 
@@ -24,7 +24,7 @@ const app = new JetApp({
 }).render();
 ~~~
 
-### <span id="debug">Debugging</span>
+### [<span id="debug">Debugging &uarr;</span>](#contents)
 
 You can enable debugging in the app configuration: 
 
@@ -40,7 +40,7 @@ const app = new JetApp({
 
 With *debug:true*, error messages will be logged into console and a debugger will pause the app on errors.
 
-### <span id="other">Various App Parameters</span>
+### [<span id="other">Various App Parameters &uarr;</span>](#contents)
 
 In the app config, for example, you can set the mode in which the app will work:
 
@@ -67,7 +67,7 @@ if (this.app.config.mode === "readonly"){
 
 **this.app** refers to the app, while **this** refers to the view<sup><a href="#myfootnote1" id="origin">1</a></sup>.
 
-### <span id="router">Routers</span>
+### [<span id="router">Routers &uarr;</span>](#contents)
 
 New Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is *HashRouter*. If you don't want to display the hashbang in the URL, you can change the router to *UrlRouter*:
 
@@ -81,7 +81,7 @@ const app = new JetApp({
 }).render();
 ```
 
-### <span id="views">Changing View Names</span>
+### [<span id="views">Changing View Names &uarr;</span>](#contents)
 
 If the module you want to show is in a subfolder and you want to show the module with a shorter name, you can change the view name in app configuration:
 
@@ -122,7 +122,7 @@ export default class TopView extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewresolve.js)
 
-### <span id="routes">Beautifying the URL</span>
+### [<span id="routes">Beautifying the URL &uarr;</span>](#contents)
 
 If you do not want to display some part of the app URL, you can hide it with the help of **routes** in app configuration. For instance, you might want to display only the names of subviews in the URL: 
 

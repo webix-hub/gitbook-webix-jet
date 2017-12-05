@@ -1,4 +1,4 @@
-# Navigation
+# <span id="contents">Navigation</span>
 
 There are several ways to navigate through an app with Webix Jet:
 
@@ -7,7 +7,7 @@ There are several ways to navigate through an app with Webix Jet:
 - [app.show](#app_show)
 - [view.show](#view_show)
 
-### <span id="jet">1. Jet Links</span>
+### [<span id="jet">1. Jet Links &uarr;</span>](#contents)
 
 Jet links are created with the **route** attribute instead of the usual **href**. The **route** attribute allows you to stop users from leaving the current view. This can be useful in the case of unsaved data, for instance. See the details in the [section on plugins](plugins.md). Here's an example of a Jet link:
 
@@ -54,7 +54,7 @@ You can pass one or more parameters with a Jet link:
 <a route="/details/data?id=2&name=some"></a>
 ```
 
-### <span id="html">2. Navigation with HTML links</span>
+### [<span id="html">2. Navigation with HTML links &uarr;</span>](#contents)
 
 Apart from navigating with links with the **route** attribute, you can create HTML links. This way is not so convenient, as the first one. You cannot prevent users from leaving the current view through an HTML link. In case there's no worries and you don't plan to guard users' unsaved data, you can create links with the **href** attribute. Suppose you have these view modules:
 
@@ -90,7 +90,7 @@ You can pass one or more parameters in the link, e.g.:
 <a href="#!/demo/details?id=2&name=some">Data</a>
 ```
 
-### <span id="app_show">3. app.show\(\)</span>
+### [<span id="app_show">3. app.show\(\) &uarr;</span>](#contents)
 
 Apart from links, you can use the **show** method of app to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function*<sup><a href="#myfootnote2" id="origin2">2</a></sup>. Reference app as **this.app** to call the **show** method from control handlers, for instance:
 
@@ -115,7 +115,7 @@ this.app.show("/demo/details?id=2");
 this.app.show("/demo/details?id=2&name=some");
 ```
 
-### <span id="view_show">4. view.show\(\)</span>
+### [<span id="view_show">4. view.show\(\) &uarr;</span>](#contents)
 
 You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this** from a handler that is defined as an *arrow function*<sup><a href="#myfootnote3" id="origin3">3</a></sup>. Calling **show** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 

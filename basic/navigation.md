@@ -10,11 +10,13 @@ Navigation is implemented by changing the URL of the page. The URL reflects the 
 
 In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three more ways to show views and subviews:
 
+<span id="contents"></span>
+
 - [Jet links](#jet_links)
 - [app.show](#app_show)
 - [view.show](#view_show)
 
-### <span id="jet_links">1. Jet Links</span>
+### [<span id="jet_links">1. Jet Links &uarr;</span>](#contents)
 
 You can add links with the **route** attribute instead of the usual **href** and provide the URL to the desired views, e.g.:
 
@@ -33,7 +35,7 @@ You can pass one or more **parameters** with a Jet link:
 <a route="/details/data?id=2&name=some"></a>
 ```
 
-### <span id="app_show">2. app.show\(\)</span>
+### [<span id="app_show">2. app.show\(\) &uarr;</span>](#contents)
 
 The **app.show\(\)** method is applied to the whole application and rebuilds its UI. You can call the method from control handlers, for instance.
 
@@ -63,7 +65,7 @@ this.app.show("/demo/details?id=2");
 this.app.show("/demo/details?id=2&name=some");
 ```
 
-### <span id="view_show">3. view.show\(\)</span>
+### [<span id="view_show">3. view.show\(\) &uarr;</span>](#contents)
 
 ##### Rebuilding Part of the App
 

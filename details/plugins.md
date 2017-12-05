@@ -10,7 +10,7 @@ this.use(JetApp.plugins.PluginName, {
 
 After the plugin name, you are to specify the configuration for the plugin, e.g. a control ID.
 
-## 1. Default Plugins
+## <span id="contents">1. Default Plugins</span>
 
 - [the Menu plugin](#menu)
 - [the UnloadGuard plugin](#unload)
@@ -19,7 +19,7 @@ After the plugin name, you are to specify the configuration for the plugin, e.g.
 - [the Locale plugin](#locale)
 - [the Status plugin](#status)
 
-### <span id="menu">Menu Plugin</span>
+### [<span id="menu">Menu Plugin &uarr;</span>](#contents)
 
 This plugin simplifies your life if you plan to create a menu. The plugin sets URLs for menu options, buttons or other controls you plan to use for navigation. Also, there is no need to provide handlers to restore the state of the menu on page reload or URL change. The right menu item is highlighted automatically.
 
@@ -81,7 +81,7 @@ export default class ToolbarView extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-start/blob/master/sources/views/top.js)
 
-### <span id="unload">UnloadGuard Plugin</span>
+### [<span id="unload">UnloadGuard Plugin &uarr;</span>](#contents)
 
 The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved or invalid data. The plugin can intercept the event of leaving the current view and, e.g. show the *are you sure* dialogue.
 
@@ -125,7 +125,7 @@ If the input isn't valid, the function returns a promise with a dialogue window.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-unload.js)
 
-### <span id="user">User Plugin</span>
+### [<span id="user">User Plugin &uarr;</span>](#contents)
 
 The *User* plugin is useful if you create apps that need authorization. When the plugin is included, the **user** service is launched. Let's look how to use the plugin with a custom script.
 
@@ -253,7 +253,7 @@ The **User** plugin has other useful methods.
 
 <!-- to be continued -->
 
-### <span id="theme">Theme plugin</span>
+### [<span id="theme">Theme plugin &uarr;</span>](#contents)
 
 This is a plugin to change app themes. The plugin launches the **theme** service. There are two methods that the service provides:
 
@@ -330,7 +330,7 @@ const theme = this.app.getService("theme").getTheme();
 
 [Check out the complete code >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js)
 
-### <span id=""locale>Locale plugin</span>
+### [<span id=""locale>Locale plugin &uarr;</span>](#contents)
 
 This is a plugin for localizing apps. Locale files are usually created in the *locales* folder. This is an example of the Spanish locale file:
 
@@ -396,7 +396,7 @@ When a user chooses a language, a corresponding file is located and the app lang
 
 ![](../images/plugin_locale.png)
 
-### <span id="status">Status Plugin</span>
+### [<span id="status">Status Plugin &uarr;</span>](#contents)
 
 This plugin is useful if you want to show the status of data loading in case it takes time, to confirm success or to show an error message. These are the status messages that you can see:
 

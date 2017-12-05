@@ -1,8 +1,15 @@
-# Routing
+# <span id="contents">Routing</span>
 
 To manipulate the URL, views have Routers. Webix Jet has four predefined types of routers.
 
-## 1. Hash Router \(default\)
+| Type            | Displays app URL   | Stored   |
+|-----------------|--------------------|----------|
+| [Hash](#hash)   | &#x2705; (with #!) | &#x2705; |
+| [Url](#url)     | &#x2705; (no #!)   | &#x2705; |
+| [Store](#store) | &#x274C; 		   | &#x2705; |
+| [Empty](#empty) | &#x274C;           | &#x274C; |
+
+## [<span id="hash">1. Hash Router \(default\) &uarr;</span>](#contents)
 
 The app URL is displayed after a hashbang. As this router is set by default, there's no need to to define it in the config.
 
@@ -14,7 +21,7 @@ var app = new JetApp({
 }).render();
 ```
 
-## 2. URL Router
+## [<span id="url">2. URL Router &uarr;</span>](#contents)
 
 The app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server-side code should be compatible.
 
@@ -87,7 +94,7 @@ In the production app, it can be done through *apache/nginx* configuration.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js)
 
-## 3. Store Router
+## [<span id="store">3. Store Router &uarr;</span>](#contents)
 
 With this guy, the app URL isn't displayed at all, but it is stored in the session storage. So no worries, you can still return to the previous and next views as if they are in the URL. This can be useful if you have a multilevel application \(apps are subviews of other apps\). The Store router is set for the enclosed apps because there's only one address bar and it's already taken by the outer app. Suppose you have closed an app module with a deep level of subviews and expect to be in the same place of this app when you switch to it again. The Store router allows this.
 
@@ -115,7 +122,7 @@ var app2 = new JetApp({
 }).render();
 ```
 
-## 4. Empty Router
+## [<span id="empty">4. Empty Router &uarr;</span>](#contents)
 
 If you don't want to store the app part of the URL, there's the EmptyRouter for you. The app URL isn't displayed and isn't stored. It's used for nested apps because there is only one address bar. 
 

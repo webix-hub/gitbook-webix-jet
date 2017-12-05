@@ -1,4 +1,4 @@
-# Referencing Views from Webix UI Events
+# <span id="contents">Referencing Views from Webix UI Events</span>
 
 In the new version of Webix Jet, there is a convenient reference to a Jet view from Webix UI events with the **this** pointer. Consider the following use-cases.
 
@@ -8,7 +8,7 @@ In the new version of Webix Jet, there is a convenient reference to a Jet view f
 - [Referencing Parent Views and Subviews](#parent_sub)
 - [Referencing Webix Views and Controls](#controls)
 
-### <span id="ref_view">1. Reference to the View</span>
+### [<span id="ref_view">1. Reference to the View &uarr;</span>](#contents)
 
 Due to ES6 *arrow functions*, you can refer to a Jet view with **this** from click handlers of Webix views. This way is shorter and advisable. For example, **this.show** in the handler of the button refers to **Toolbar**: 
 
@@ -60,7 +60,7 @@ This is one of the cases when arrow functions do not help to shorten the syntax.
 
 **getRoot()** and **queryView()** are discussed <a href="#below">below</a>.
 
-### <span id="ref_app">2. Reference to the App</span>
+### [<span id="ref_app">2. Reference to the App &uarr;</span>](#contents)
 
 If you want to rebuild the app UI, you need to use *app.show("/new/url")*. You can shorten the syntax with an **arrow function** and reference the app with **this.app**:
 
@@ -108,7 +108,7 @@ export default class ToolbarView extends JetView {
 }
 ```
 
-### <span id="below">3. Reference to the Root UI Element of the View</span>
+### [<span id="below">3. Reference to the Root UI Element of the View &uarr;</span>](#contents)
 
 Suppose you have a view with a form and you want to validate its input when users click **Submit**. To refer to the form itself and not the whole Jet view, use **this.getRoot\(\)** inside an arrow function. **getRoot()** references the root UI element returned by **config**, which is Webix Form in the code below: 
 
@@ -144,7 +144,7 @@ If the handler is not an arrow function, refer to the form or any other root UI 
 }}
 ```
 
-### <span id="parent_sub">4. Referencing Parent Views and Subviews</span>
+### [<span id="parent_sub">4. Referencing Parent Views and Subviews &uarr;</span>](#contents)
 
 JetView class has two methods to reference subviews (kids) and parent views.
 
@@ -241,7 +241,7 @@ export default class ChildForm extends JetView{
 }
 ```
 
-### <span id="controls">5. Referencing Webix Views and Controls</span>
+### [<span id="controls">5. Referencing Webix Views and Controls &uarr;</span>](#contents)
 
 You already know how to change the URL by controls. Now have a look how the state of controls can be changed by the URL. For example, if you have a toolbar with a segmented button that is used to switch between two views:
 
@@ -338,7 +338,7 @@ export default class ToolbarView extends JetView {
 }
 ```
 
-#### Which way to reference controls and Webix views is better?
+#### &#x2753; Which way to reference controls and Webix views is better?
 
 **IDs** must be unique, and the more developers are working on the project, the stronger odds are that someone will give the same IDs to another view.
 

@@ -1,4 +1,4 @@
-# Models
+# <span id="contents">Models</span>
 
 View modules return the UI configuration of the components. They describe the visual aspect of an application and shouldn't contain any data. For data, there is another type of modules - a **model**. Models are JS files that are placed in a separate folder. This division of UI and data is an advantage because if the data changes, all you have to do is change the data model. There's no need to modify view files. 
 
@@ -10,7 +10,7 @@ There are several ways of loading data in Webix Jet:
 - [services for data](#services)
 - [models with webix.remote](#webix_remote)
 
-### 1. <span id="shared">Shared Data</span>
+### [1. <span id="shared">Shared Data &uarr;</span>](#contents)
 
 If you have some *relatively small data* and plan to use them in *many components*, you can create a model, initialize a data collection in it and load the data into the data collection. Here's an example of a data collection with static data:
 
@@ -52,7 +52,7 @@ export default class DataView extends JetView{
 
 All the changes made in the datatable are saved to the server.
 
-### <span id="dynamic">2. Dynamic Data</span>
+### [<span id="dynamic">2. Dynamic Data &uarr;</span>](#contents)
 
 This is the model for *big data* (less than 10K records). These data can be *used only once* and mustn't be cached. The data can be loaded from a server with an AJAX request:
 
@@ -137,7 +137,7 @@ export default class DataView extends JetView{
 }
 ```
 
-### <span id="remote">3. Remote Models for Huge Data</span>
+### [<span id="remote">3. Remote Models for Huge Data &uarr;</span>](#contents)
 
 For really *huge data* (more than 10K records), you can use dynamic loading of Webix components and drop models :) Data will be loaded in portions when needed. For that, load data in the view code. You can do it with the **url** property. For saving data, use the **save** property.
 
@@ -184,7 +184,7 @@ Let's recap main differences of the three ways to load and save data:
 | Remote  | Huge      | Handy for prototyping |
 
 
-### <span id="services">4. Services as Data Sources</span>
+### [<span id="services">4. Services as Data Sources &uarr;</span>](#contents)
 
 You can use services instead of models as data sources. Suppose there's a list of customers and a grid that displays records on a selected customer. Here's how you can use a service that returns the ID of a selected list item:
 
@@ -199,7 +199,7 @@ A better and shorter way is:
 var data = service.getNomenclature();
 ```
 
-### <span id="webix_remote">5. Using Webix Remote with Webix Jet</span>
+### [<span id="webix_remote">5. Using Webix Remote with Webix Jet &uarr;</span>](#contents)
 
 You can use [webix.remote](https://docs.webix.com/desktop__webix_remote_php.html) instead of sending AJAX requests. You must have a server-side script, e.g.:
 

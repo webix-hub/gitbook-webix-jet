@@ -1,17 +1,17 @@
-# Inner Jet Events and Error Handling
+# <span id="contents">Inner Jet Events and Error Handling
 
 - [Inner Events](#events)
 - [Error Handling](#errors)
 
 Apart from using built-in means like plugins, you can use a number of inner events. You might need this for adding some functionality if the plugins aren't enough or for error handling and debugging.
 
-## <span id="events">Inner Events</span> 
+## [<span id="events">Inner Events &uarr;</span>](#contents)
 
 - [*app:render*](#render)
 - [*app:route*](#route)
 - [*app:guard*](#guard)
 
-### <span id="render">app:render</span>
+### [<span id="render">app:render &uarr;</span>](#events)
 
 The event is triggered before each view of an app is rendered. You can use it to change the UI config that you defined and add properties to UI controls. For instance, here is how you can disable buttons:
 
@@ -43,7 +43,7 @@ app.attachEvent("app:render", function(view,url,result){
 });
 ```
 
-### <span id="route">app:route</span>
+### [<span id="route">app:route &uarr;</span>](#events)
 
 Handling the **app:route** event resembles redefining the **urlChange** of a class view. The event fires after navigation to a view and can be used to send notifications or sending messages to a log:
 
@@ -59,7 +59,7 @@ app.attachEvent("app:route", function(url){
 
 **app:route** is used by the *Menu* plugin to highlight menu options according to the URL.
 
-### <span id="guard">app:guard</span>
+### [<span id="guard">app:guard &uarr;</span>](#events)
 
 The **app:guard** event is triggered before navigation to another view. One of the typical cases to use this event is to create a guard: block some views and redirect users somewhere else. The **app:guard** event is called by the *UnloadGuard* plugin. You can attach **app:guard** with:
 
@@ -131,7 +131,7 @@ app.render();
 
 ![](../images/appguard.png)
 
-## <span id="errors">Error Handling and Debugging</span>
+## [<span id="errors">Error Handling and Debugging &uarr;</span>](#contents)
 
 There are four events that can be used to handle errors.
 
@@ -140,7 +140,7 @@ There are four events that can be used to handle errors.
 - [app:error:render](#err_render)
 - [app:error:initview](#err_initview)
 
-### <span id="error">app:error</span>
+### [<span id="error">app:error &uarr;</span>](#errors)
 
 This is a common event for all errors. The errors are logged if you set the **debug** property in your app config:
 
@@ -171,7 +171,7 @@ The event receives one parameter - the error object.
 
 Besides the common error event, there are three events for specific error types.
 
-#### <span id="err_resolve">Useful for End-Users</span>
+#### [<span id="err_resolve">Useful for End-Users &uarr;</span>](#errors)
 
 **app:error:resolve** fires when Jet can't find a module by its name. If this happens, it would be useful to redirect users somewhere else instead of showing them an empty screen:
 
@@ -192,7 +192,7 @@ app.attachEvent("app:error:resolve", function(err, url) {
 
 These error events are more useful for developers as they inform about errors related to the UI.
 
-###### <span id="err_render">app:error:render</span>
+###### [<span id="err_render">app:error:render &uarr;</span>](#errors)
 
 This event is triggered on errors during view rendering, mostly Webix UI related. It means that some view UI config has been written incorrectly.
 
@@ -206,7 +206,7 @@ app.attachEvent("app:error:render", function(err){
 
 The event receives one parameter - the error object.
 
-###### <span id="err_initview">app:error:initview</span>
+###### [<span id="err_initview">app:error:initview &uarr;</span>](#errors)
 
 This event is triggered in the case of an error during view rendering, mostly Webix Jet related. It means that Jet, while rendering Webix UIs, was unable to render the app UI correctly.
 

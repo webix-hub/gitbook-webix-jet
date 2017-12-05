@@ -1,4 +1,4 @@
-# JetApp API
+# <span id="contents">JetApp API</span>
 
 Here you can find the list of all the **JetApp** methods, that you can make use of.
 
@@ -12,7 +12,7 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 | [show(url)](#show)                       | rebuild the app or app module according to the new URL |
 | [use(plugin, config)](#use)              | switch on a plugin |
 
-### <span id="attach">app.attachEvent("event:name", handler) </span>
+### [<span id="attach">app.attachEvent("event:name", handler) &uarr;</span>](#contents)
 
 Use this method to attach a custom event:
 
@@ -45,7 +45,7 @@ Events can be attached both in the app file and in view modules.
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-### <span id="call">app.callEvent("event:name")</span>
+### [<span id="call">app.callEvent("event:name") &uarr;</span>](#contents)
 
 Use this method to call a custom event:
 
@@ -68,7 +68,7 @@ Normally, inner events are called automatically, so there is no need to use **ca
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-### <span id="get_service">app.getService(name)</span>
+### [<span id="get_service">app.getService(name) &uarr;</span>](#contents)
 
 The method returns a service by its name, passed to the method as a parameter. Call this method to use a service:
 
@@ -94,7 +94,7 @@ export default class FormView extends JetView{
 
 You can read more about services in the ["Services"](services.md) chapter.
 
-### <span id="render">app.render()</span>
+### [<span id="render">app.render() &uarr;</span>](#contents)
 
 The **render** method builds the UI of the application. If called without any parameters, it just renders the UI inside the page according to the start URL, specified in the app configuration.
 
@@ -112,7 +112,7 @@ But if you want to render the app inside a container, you can pass the string pa
 app.render("mybox");
 ```
 
-### <span id="set_service">app.setService(name,handler)</span>
+### [<span id="set_service">app.setService(name,handler) &uarr;</span>](#contents)
 
 The method initializes a service for view communication.
 
@@ -136,7 +136,7 @@ export default class treeView extends JetView{
 
 You can read more about services in the ["Services"](services.md) chapter.
 
-### <span id="show">app.show(url)</span>
+### [<span id="show">app.show(url) &uarr;</span>](#contents)
 
 The **show** method is used to change the app interface. This method rebuilds the whole UI of the app according to the URL passed as a parameter:
 
@@ -148,7 +148,7 @@ app.show("/demo/details")
 
 For more info about showing UI components, visit the ["Navigation"](navigation.md) chapter.
 
-### <span id="use">app.use(plugin, config)</span>
+### [<span id="use">app.use(plugin, config) &uarr;</span>](#contents)
 
 The **use** method is used to switch on plugins. The method takes two parameters:
 

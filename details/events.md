@@ -1,4 +1,4 @@
-# View Communication
+# <span id="contents">View Communication</span>
 
 Views are separated, but there should be some means of communication between them.
 
@@ -6,7 +6,7 @@ Views are separated, but there should be some means of communication between the
 - [Events](#events)
 - [Methods](#methods)
 
-### <span id="params">Parameters</span>
+### [<span id="params">Parameters &uarr;</span>](#contents)
 
 You can enable view communication with *parameters*. For instance, you need to open a form with some specific data from another view. Pass the needed parameters to *view.show*:
 
@@ -56,7 +56,7 @@ You can also pass several parameters to **show**:
 this.show("./form?name=Jack&email=some");
 ```
 
-### <span id="events">Events</span>
+### [<span id="events">Events &uarr;</span>](#contents)
 
 Feel free to use the in-app event bus for view communication.
 
@@ -132,7 +132,7 @@ export default class FormView extends JetView{
 }
 ```
 
-### <span id="methods">Declaring and Calling Methods<span>
+### [<span id="methods">Declaring and Calling Methods &uarr;<span>](#contents)
 
 One more effective way of connecting views is methods. In one of the views, you can define a method, and in another view, we you can call this method.
 
@@ -221,5 +221,6 @@ For more info on view communications, you can read:
 - - -
 <a id="myfootnote1" href="#origin1">1 &uarr;</a>:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
+
 <a id="myfootnote2" href="#origin2">2 &uarr;</a>:
 Event listeners created with **attachEvent** have longer lifetimes than views that attached them. That's why, before you destroy the view, you have to detach event listeners to prevent memory leaks. Do not leave this task to the garbage collector.
