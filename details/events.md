@@ -62,7 +62,7 @@ Feel free to use the in-app event bus for view communication.
 
 ##### Calling an Event
 
-To trigger an event, call **app.callEvent**. You can call the method by referencing the app with **this.app** from an *arrow function*<sup><a href="#myfootnote1" id="origin">1</a></sup>:
+To trigger an event, call **app.callEvent**. You can call the method by referencing the app with **this.app** from an *arrow function*<sup><a href="#myfootnote1" id="origin1">1</a></sup>:
 
 ```js
 // views/data.js
@@ -83,22 +83,9 @@ export default class DataView extends JetView{
 
 You can attach an event handler to the event bus in one view and trigger the event in another view.
 
-This is how you can attach an event to a Jet view:
+###### Preferable Way: this.on
 
-```js
-// views/form.js
-import {JetView} from "webix-jet";
-
-export default class FormView extends JetView{
-    init(){
-        this.app.attachEvent("save:form", function(){
-            this.show("aftersave");
-        });
-    }
-}
-```
-
-One more way to attach an event is **this.on** (**this** references a Jet view). This way is better, because the event is automatically detached when the view that called it is destroyed.
+The best way to attach an event is **this.on** (**this** references a Jet view). The benefit of this way is that the event is automatically detached when the view that called it is destroyed. **this.on** can *handle* app and Webix view events (not necessarily to *call* Webix events as Webix issues them itself, e.g. the *onItemClick* event of List).
 
 ```js
 // views/form.js
@@ -114,6 +101,36 @@ export default class FormView extends JetView{
 ```
 
 Once an event is attached, any other view can call it.
+
+###### One More Way: app.attachEvent
+
+One more way to attach an event is to call **app.attachEvent**. This way you'll have to detach an event manually<sup><a href="#myfootnote2" id="origin2">2</a></sup>.
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+
+export default class FormView extends JetView{
+    init(){
+        this.app.attachEvent("save:form", function(){
+            this.show("aftersave");
+        });
+    }
+}
+```
+
+To detach an event, call **app.detachEvent** when the view that attached the event is destroyed:
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+
+export default class FormView extends JetView{
+    destroy(){
+        this.app.detachEvent("save:form");
+    }
+}
+```
 
 ### <span id="methods">Declaring and Calling Methods<span>
 
@@ -202,5 +219,7 @@ For more info on view communications, you can read:
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin">2 &uarr;</a>:
+<a id="myfootnote1" href="#origin1">1 &uarr;</a>:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
+<a id="myfootnote2" href="#origin2">2 &uarr;</a>:
+Event listeners created with **attachEvent** have longer lifetimes than views that attached them. That's why, before you destroy the view, you have to detach event listeners to prevent memory leaks. Do not leave this task to the garbage collector.

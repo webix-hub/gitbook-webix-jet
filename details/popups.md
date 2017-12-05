@@ -1,14 +1,19 @@
 # Working with Popups and Windows
 
-Temporary views like popups and windows can be created with **this.ui**. **this.ui** takes care of the windows it creates and destroys them when their parent views are destroyed.
+![](../images/window.png)
 
-Consider a simple popup view:
+Temporary views like popups and windows can be created with **this.ui**. It returns the UI object. **this.ui** takes care of the windows it creates and destroys them when their parent views are destroyed.
+
+### Windows as Simple Views
+
+Consider a simple popup view that is positioned to appear in the center of the screen:
 
 ```js
-// views/window.js
+// views/window1.js
 const win1 = {
 	view:"popup",
-	body:{ template:"Text 1" }
+	position:"center",
+	body:{ template:"Text 1 (center)" }
 };
 export default win1;
 ```
@@ -33,31 +38,33 @@ export default class TopView extends JetView {
 }
 ```
 
-The popus is created in **init** of *TopView*:
+The popus must be created in **init** of *TopView*. Add a new **win1** property to the class (*this.win1*), initialize the popup with **this.ui** and assign it to the **win1** property. **this.ui** returns a UI object with all Webix methods of the view. 
 
 ```js
 // views/top.js
-import win1 from "window";
+import win1 from "window1";
 ...
 init(){
     this.win1 = this.ui(win1);
 }
 ```
 
-**this** refers to *TopView*. **win1** becomes its child view. To show **win1**, call **this.win1.show()**. Here's the button click handler:
+To show the popup, you must get the **win1** property of the class and call the **show** method of the Webix popup assigned to **win1**. This is the button click handler that shows the popup:
 
 ```js
 // views/top.js
 
 { view:"form",  width: 200, rows:[
-    { view:"button", value:"Show Window 1", click:(id) =>
-        this.win1.show($$(id).$view) }
+    { view:"button", value:"Show Window 1", click:() =>
+        this.win1.show() }
 ]}
 ```
 
-**this.win1.show** renders the popup at a position, defined by the parameter. In the code sample, the parameter is the HTML code of the button that calls the method, so the popup appears below the button. If you do not pass a parameter, **win1** will be rendered in the top left corner.
+**this.win1.show** renders the popup at a position, defined in the config of the popup (*position:"center"*). If you don't set position, **win1** will be rendered in the top left corner.
 
-You can create windows and popups with view classes as well. Have a look at a similar popup, defined as a class:
+### Windows as Jet View Classes
+
+You can define windows and popups as view classes as well. Have a look at a similar popup, defined as a class:
 
 ```js
 // views/window2.js
@@ -67,20 +74,38 @@ export class WindowsView extends JetView {
 	config(){
 		return {
 			view:"popup",
-			body:{ template:"Text 2" }
+			top:200, left:300,
+			body:{ template:"Text 2 (fixed position)" }
 		};
-	}
-	show(target){
-		this.getRoot().show(target);
 	}
 }
 ```
 
-Unlike with a simple view, with a class view you have to redefine **show**. *this.getRoot* refers to the popup UI. So *this.getRoot().show(target)* does the same thing as *this.win1* from the previous example with a simple view **win1**. It shows the popup below the target view or component.
+If a popup is a class view, you have to define the **showWindow** method that will call the **show** method of a Webix popup. *this.getRoot()* refers to the popup UI returned by **config**. *this.getRoot().show()* shows the popup at a fixed position on screen (*top:200, left:300*).
 
-![](../images/window.png)
+```js
+// views/window2.js
+import {JetView} from "webix-jet";
 
-Here's how you initiate and show this popup (spoiler: exactly the same way as **win1**):
+export class WindowsView extends JetView {
+	config(){
+		return {
+			view:"popup",
+			top:200, left:300,
+			body:{ template:"Text 2 (fixed position)" }
+		};
+	}
+	showWindow(){
+		this.getRoot().show();
+	}
+}
+```
+
+To show this popup, you must call **showWindow**.
+
+Here's how you initiate and show this class popup by **TopView** (spoiler: exactly the same way as the simple popup with some difference in concepts).
+
+To create a popup, use **this.ui** inside **init** of **TopView**. Add a new **win2** property, create the popup with **this.ui** and assign the popup to **win2**. **this.ui** returns a class, so you can call class methods. To show the popup, call **showWindow**. 
 
 ```js
 // views/top.js
@@ -92,8 +117,8 @@ export default class TopView extends JetView {
 		return {
 			cols:[
                 { view:"form",  width: 200, rows:[
-                    { view:"button", value:"Show Window 2", click:(id) =>
-                        this.win2.show($$(id).$view) }
+                    { view:"button", value:"Show Window 2", click:() =>
+                        this.win2.showWindow() }
                 ]},
                 { $subview: true }
             ]

@@ -309,7 +309,23 @@ export default class ToolbarView extends JetView{
 }
 ```
 
-This is all on view class methods.
+You can use **destroy** to detach events that were attached by this view with **app.attachEvent**. Events attached by **attachEvent** aren't destroyed automatically.
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+
+export default class FormView extends JetView{
+    init(){
+        this.app.attachEvent("save:form", function(){
+            this.show("aftersave");
+        });
+    }
+    destroy(){
+        this.app.detachEvent("save:form");
+    }
+}
+```
 
 ## Which Way to Define Views is Better
 
