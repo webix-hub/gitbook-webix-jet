@@ -111,7 +111,7 @@ For more details about popups and windows, [go to the "popups and Windows" secti
 
 ### [<span id="on">this.on(app,"app:event:name",handler) &uarr;</span>](#contents)
 
-Use this method to attach events. This way of attatching an event is convenient, because it automatically detaches the event when the view that called it is destroyed.
+Use this method to attach events. This way of attatching an event is convenient, because it automatically detaches the event when the view that called it is destroyed. This helps to avoid memory leaks that may happen, especially in older browsers.
 
 ```js
 export default class FormView extends JetView{

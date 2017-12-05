@@ -6,6 +6,7 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 |--------|---------|
 | [attachEvent(event, handler)](#attach)   | attach an event |
 | [callEvent(event)](#call)                | call an event |
+| [detachEvent(event)](#detach)            | manually detach an event listener |
 | [getService(name,handler)](#get_service) | access a service by its name |
 | [render(container)](#render)             | render the app or the app module |
 | [setService(name)](#set_service)         | set a service |
@@ -14,7 +15,7 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 
 ### [<span id="attach">app.attachEvent("event:name", handler) &uarr;</span>](#contents)
 
-Use this method to attach a custom event:
+Use this method to attach a custom event, for example, from a Jet view class:
 
 ```js
 // views/form.js
@@ -29,7 +30,9 @@ export default class FormView extends JetView{
 }
 ```
 
-or to attach in inner Jet event:
+Events can be attached both in the app file and in view modules. Yet, if you attach an event listener with this method, you had better to [detach it manually &darr;](#detach) to eliminate a possibility of memory leaks.
+
+You can also attach an inner Jet event. For instance, from app:
 
 ```js
 // myapp.js
@@ -40,8 +43,6 @@ app.attachEvent("app:guard", function(url, view, nav){
 });
 ...
 ```
-
-Events can be attached both in the app file and in view modules.
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
@@ -65,6 +66,30 @@ export default class DataView extends JetView{
 ```
 
 Normally, inner events are called automatically, so there is no need to use **callEvent** for them.
+
+For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
+
+### [<span id="detach>app.detachEvent(event) &uarr;</span>](#contents)
+
+Use this method to detach event listeners added by **attachEvent** from Jet view classes. You should do this, because the lifetime of such an event listener is longer than the lifetime of the Jet view. So if the view is destroyed, but the event listener isn't detached, this may cause memory leaks, especially in older browsers.
+
+To detach an event, call **app.detachEvent** when the view that attached the event is destroyed:
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+
+export default class FormView extends JetView{
+    init(){
+        this.app.attachEvent("save:form", function(){
+            this.show("aftersave");
+        });
+    }
+    destroy(){
+        this.app.detachEvent("save:form");
+    }
+}
+```
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
