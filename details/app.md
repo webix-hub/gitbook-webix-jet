@@ -69,7 +69,7 @@ Normally, inner events are called automatically, so there is no need to use **ca
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-### [<span id="detach>app.detachEvent(event) &uarr;</span>](#contents)
+### [<span id="detach">app.detachEvent(event) &uarr;</span>](#contents)
 
 Use this method to detach event listeners added by **attachEvent** from Jet view classes. You should do this, because the lifetime of such an event listener is longer than the lifetime of the Jet view. So if the view is destroyed, but the event listener isn't detached, this may cause memory leaks, especially in older browsers.
 
