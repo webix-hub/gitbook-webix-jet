@@ -22,7 +22,9 @@ export class StatisticsView extends JetView {
 
 In practice, however, some UI configuration settings can be stored in a database. For example, you may want to store colors in a DB to allow the end-user to change them. In this case, a module can return a **promise** of the UI instead of the UI configuration.
 
-## A Promise Returned by **config** of a Class View
+## webix.ajax
+
+#### A Promise Returned by **config** of a Class View
 
 Let's use **webix.ajax** that makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, the response is passed to a callback in **then**:
 
@@ -46,7 +48,7 @@ export class StatisticsView extends JetView {
 
 The **webix.ajax\(\)** call sends an asynchronous request to the *server/colors.php* script on the server and returns a promise of data instead of real data. First, all the data should come to the client side and only after that the final view configuration will be constructed and the view will be rendered.
 
-## A Simple View as a Promise
+#### A Simple View as a Promise
 
 The same view can be defined in a simpler way. You can define it as a promise of a view object:
 
@@ -88,10 +90,55 @@ export default new Promise((res, rej) => {
 });
 ```
 
-## Other Ways
+## webix.promise Interface
 
-There are two more ways to implement asynchronous data loading:
+Webix offers an interface for working with promise objects. [webix.promise](https://docs.webix.com/api__refs__promise.html) features a set of methods that duplicate [Promise object methods](https://github.com/zolmeister/promiz). **webix.promise** allows treating the result of asynchronous operations without callbacks.
 
-* **data.waitData** that is used for data components, such as DataCollection, List, Tree, DataTable, etc;
-* **webix.promise** that allows treating the result of asynchronous operations without callbacks.
+#### Simple View that Returns a Promise
+
+**defer** of **webix.remore** creates a new instance of a promise object. **resolve** creates and resolves a promise with a specified value, for example, a Webix view.
+
+Have a look at a simple example of a factory function that returns a promise that resolves in a second: 
+
+```js
+// views/promised.js
+const promised = () => {
+	var t = webix.promise.defer();
+	setTimeout(function(){
+		t.resolve({ template:"Resolved by promise" });
+	}, 1000);
+	return t;
+};
+export default promised;
+```
+
+The promise resolves with a template in this case. The delay is done purely for the demo.
+
+#### Promises in Class Views
+
+The same promises can be returned by **config** of a class view:
+
+```js
+// views/top.js
+import {JetView} from "webix-jet";
+
+class TopView extends JetView {
+	config(){
+		var res = webix.promise.defer();
+		var ui = {
+			template:"Resolved by a promise"
+		};
+		setTimeout(function(){
+			res.resolve(ui);
+		}, 1000);
+		return res;
+	}
+}
+```
+
+[Check Out the Demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/promises.js)
+
+## **data.waitData**
+
+that is used for data components, such as DataCollection, List, Tree, DataTable, etc;
 

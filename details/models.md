@@ -52,6 +52,28 @@ export default class DataView extends JetView{
 
 All the changes made in the datatable are saved to the server.
 
+You can also sync a Jet view with a data component to a DataCollection.
+
+```js
+// views/data.js
+import {JetView} from "webix-jet";
+import {records} from "../models/records";
+
+export default class DataView extends JetView{
+	config(){
+		return { view:"datatable", autoConfig:true, editable:true };
+	}
+	init(view){
+		view.sync(records);
+	}
+	removeRecord(id){
+		records.remove(id);
+	}
+}
+```
+
+Mind that if you synced a data component to a DataCollection, you have to perform *add/remove* operations on the master collection while synced view will reflect these changes automatically. Slave views can only update the master.
+
 ### [<span id="dynamic">2. Dynamic Data &uarr;</span>](#contents)
 
 This is the model for *big data* (less than 10K records). These data can be *used only once* and mustn't be cached. The data can be loaded from a server with an AJAX request:
@@ -262,4 +284,4 @@ And third, several requests are sent as one, which makes operations faster.
 
 For more details on services, read:
 
--[Services](services.md)
+- [Services](services.md)

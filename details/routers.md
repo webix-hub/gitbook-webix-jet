@@ -21,9 +21,28 @@ var app = new JetApp({
 }).render();
 ```
 
+#### Hiding the "!" in the URL
+
+You can hide the "!" in the app URL by using the **routerPrefix** parameter in the app config. Have a look:
+
+```js
+// myapp.js
+var app = new JetApp({
+    start: "/demo/details",
+	router: JetApp.routers.HashRouter, //optional
+	routerPrefix:""
+}).render();
+```
+
+If you set **routerPrefix** to an empty string, the app URL will look like this:
+
+```
+index.html#/sales
+```
+
 ## [<span id="url">2. URL Router &uarr;</span>](#contents)
 
-The app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server-side code should be compatible.
+If you choose UrlRouter, the app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server-side code should be compatible.
 
 Have a look at the example. Here are three views: one parent and two child views that are dynamically included by a click on jet links in the parent view:
 

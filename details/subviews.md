@@ -85,7 +85,7 @@ Views can be defined as JS6 classes.
 
 - Classes have the **this** pointer that references the view inside methods and handlers.
 
-- You can **extend** class views. With JS6 classes, inheritance is closer to classic OOP and the syntax is nicer. Inheritance can help you reuse old components for creating slightly different ones. For example, if you already have a toolbar and want to create a similar one, but with one additional button, define a new class and inherit from the old toolbar.
+- You can **extend** class views. Thanks to ES6 classes, inheritance is closer to classic OOP and the syntax is nicer. Inheritance can help you reuse old components for creating slightly different ones. In the case when views share many common traits, you can create a base view and create a necessary number of subclasses, in which you can redefine necessary parts of UI/logic. For example, if you already have a toolbar and want to create a similar one, but with additional buttons, define a new class and inherit from the old toolbar.
 
 ### <span id="methods">JetView Methods</span>
 
@@ -121,7 +121,9 @@ export default class ToolbarView extends JetView{
 
 #### [<span id="init">init\(view, url\) &uarr;</span>](#methods)
 
-The method is called only once for every instance of a view class when the view is rendered. It can be used to change the initial UI configuration of a view returned by **config**. For instance, the above-defined toolbar will be always rendered with the first segment of the button active. You can change the control state in **init**. Let's link it to the URL:
+The method is called only once for every instance of a view class when the view is rendered. It is a good place to load some common data (list of options for select in form for example) or to change the initial UI configuration of a view returned by **config**.
+
+For instance, the above-defined toolbar will be always rendered with the first segment of the button active. You can change the control state in **init**. Let's link it to the URL:
 
 ```js
 // views/toolbar.js
@@ -143,13 +145,33 @@ export default class ToolbarView extends JetView{
 }
 ```
 
+This is how you can load data to a Jet class view:
+
+```js
+// views/data.js
+impport {records} from "../models/records";
+
+export default class DataView extends JetView{
+    config(){
+        return {
+            view:"datatable", autoConfig:true
+        };
+    }
+    init(view){
+        view.parse(records);
+    }
+}
+```
+
+##### Parameters of **init**
+
 The **init** method receives two **parameters**:
 
-##### 1. **view** - the view UI
+###### 1. **view** - the view UI
 
 The segmented button is referenced by **view.queryView()**. **view** is received by **init** as one of the two parameters and references a Webix view inside the class instance. **queryView** looks for a view (a segmented button in this case) by its attributes. For more details on referencing nested views, [read the "Referencing views" section](referencing.md).
 
-##### 2. **url** - the app URL as an array
+###### 2. **url** - the app URL as an array
 
 Each array element is an object that contains:
 
@@ -175,7 +197,7 @@ If you change it to:
 /layout/demo/preview
 ```
 
-**urlChange** will be called for **preview** and **demo**.
+**urlChange** will be called for **preview** and **demo**. **demo** is not reconstructed. Such approach allows preserving parts of UI not affected by navigation, which improves performance and UX of the app. It is especially important if you have some complex widget in the parent view and do not want to fully reconstruct/reload it on subview navigation.
 
 The **urlChange** method can be used to restore the state of the view according to the URL, e.g. to highlight the right controls.
 
