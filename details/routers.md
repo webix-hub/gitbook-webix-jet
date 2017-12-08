@@ -4,10 +4,10 @@ To manipulate the URL, views have Routers. Webix Jet has four predefined types o
 
 | Type            | Displays app URL   | Stored   |
 |-----------------|--------------------|----------|
-| [Hash](#hash)   | &#x2705; (with #!) | &#x2705; |
-| [Url](#url)     | &#x2705; (no #!)   | &#x2705; |
-| [Store](#store) | &#x274C; 		   | &#x2705; |
-| [Empty](#empty) | &#x274C;           | &#x274C; |
+| [Hash](#hash)   | <span style="color:green;">Yes, with #!</span> | <span style="color:green;">Yes</span> |
+| [Url](#url)     | <span style="color:green;">Yes, no #!</span>   | <span style="color:green;">Yes</span> |
+| [Store](#store) | <span style="color:red;">No</span> 		   	   | <span style="color:green;">Yes</span> |
+| [Empty](#empty) | <span style="color:red;">No</span>             | <span style="color:red;">No</span> |
 
 ## [<span id="hash">1. Hash Router \(default\) &uarr;</span>](#contents)
 
