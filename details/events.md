@@ -8,13 +8,17 @@ Views are separated, but there should be some means of communication between the
 
 ### [<span id="params">Parameters &uarr;</span>](#contents)
 
-You can enable view communication with *parameters*. For instance, you need to open a form with some specific data from another view. Pass the needed parameters to *view.show*:
+You can enable view communication with *parameters*. This way of communication is useful if you want to initialize components and load data. You can pass parameters with the URL in the **show** method of a Jet view class.
+
+#### Sending Parameters with *view.show*
+
+For instance, let's create a view that open a form as a subview with some specific data. Pass the needed URL parameters to *view.show*:
 
 ```js
 // views/data.js
 export default class DataView extends JetView{
     config(){
-        return { rows:[
+        return { cols:[
             { $subview:true }
         ]};
     }
@@ -24,7 +28,17 @@ export default class DataView extends JetView{
 }
 ```
 
-And here is **form**:
+#### Getting Parameters
+
+To use *id* in the form, you need to get to the **url** parameter that is received by **init** and by **urlChange** of a Jet class view. **url** is an array of objects, each with three properties:
+
+- page - the name of the URL element
+- params - the parameters after the URL
+- index - the number of the URL element
+
+**params** is the one. If any parameters were passed, you can get to them with *url[n].params.{parameter}*, where *n* is the number of the URL object that came last.
+
+Let's redefine **urlChange** of the Jet form view to use the *id* parameter and fill the form with the values from a data record with ID = 1:
 
 ```js
 // views/form.js
@@ -48,7 +62,9 @@ export default class FormView extends JetView{
 }
 ```
 
-In this simple example, as soon as DataView is initialized, the form is filled with data from a data record with ID 1.
+In this simple example, as soon as DataView is initialized, **urlChange** of *FormView* is called and the form is filled correct data.
+
+#### Several URL Parameters
 
 You can also pass several parameters to **show**:
 
@@ -60,9 +76,9 @@ this.show("./form?name=Jack&email=some");
 
 Feel free to use the in-app event bus for view communication.
 
-##### Calling an Event
+#### Calling an Event
 
-To trigger an event, call **app.callEvent**. You can call the method by referencing the app with **this.app** from an *arrow function*<sup><a href="#myfootnote1" id="origin1">1</a></sup>:
+To call/trigger an event, call **app.callEvent**. You can call the method by referencing the app with **this.app** from an *arrow function*<sup><a href="#myfootnote1" id="origin1">1</a></sup>:
 
 ```js
 // views/data.js
@@ -79,13 +95,15 @@ export default class DataView extends JetView{
 }
 ```
 
-##### Attaching an Event
+Calling events is necessary mostly for your custom events. Inner Jet events and Webix events are called automatically (e.g. the *onItemClick* event of List).
+
+#### Attaching an Event
 
 You can attach an event handler to the event bus in one view and trigger the event in another view.
 
-###### Preferable Way: this.on
+##### Preferable Way: this.on
 
-The best way to attach an event is **this.on** (**this** references a Jet view). The benefit of this way is that the event is automatically detached when the view that called it is destroyed. **this.on** can *handle* app and Webix view events (not necessarily to *call* Webix events as Webix issues them itself, e.g. the *onItemClick* event of List).
+The best way to attach an event is **this.on** (**this** references a Jet view). The benefit of this way is that the event handler is automatically detached when the view that attached the event handler is destroyed. **this.on** can *handle* app and Webix view events.
 
 ```js
 // views/form.js
@@ -102,7 +120,7 @@ export default class FormView extends JetView{
 
 Once an event is attached, any other view can call it.
 
-###### One More Way: app.attachEvent
+##### One More Way: app.attachEvent
 
 One more way to attach an event is to call **app.attachEvent**. This way you'll have to detach an event manually<sup><a href="#myfootnote2" id="origin2">2</a></sup>.
 
@@ -134,13 +152,13 @@ export default class FormView extends JetView{
 
 ### [<span id="methods">Declaring and Calling Methods &uarr;<span>](#contents)
 
-One more effective way of connecting views is methods. In one of the views, you can define a method, and in another view, we you can call this method.
+One more effective way of connecting views is methods. In one of the views, you can define a method, and in another view, you can call this method.
 
-Unlike events, methods can also return something useful. Methods can only be used for view communication when you know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent one.
+Unlike events, methods can also return something useful. Methods can only be used for view communication when you know that a view with the necessary method exists. It's better to use this variant with a parent and a child views. A method is declared in the child view and is called in the parent view.
 
-##### Events vs Methods
+#### Events vs Methods
 
-Have a look at the example. Here is a view that has the *setMode("mode")* method:
+Have a look at the example. Here is a view that has the *setMode(mode)* method:
 
 ```js
 // views/child.js
@@ -152,8 +170,8 @@ export default class ChildView extends JetView{
             { view:"spreadsheet" }
         }
     }
-    setMode("mode"){
-        //sets the mode of the view
+    setMode(mode){
+        this.app.config.mode = mode;
     }
 }
 ```
@@ -181,9 +199,9 @@ export default class ParentView extends JetView{
 
 You can use methods for view communication in similar use-cases, but still events are more advisable here. Now let's have a look at the example where methods are better then events.
 
-##### Methods vs Events
+#### Methods vs Events
 
-Suppose you want to create a file manager resembling Total Commander. The parent view will have two *file* views as subviews:
+Suppose you want to create a file manager resembling Total Commander. The parent view will have two *file* subviews:
 
 ```js
 // views/manager.js
