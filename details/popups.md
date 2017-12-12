@@ -2,13 +2,13 @@
 
 ![](../images/window.png)
 
-- Windows as simple views
-- Windows as Jet class views
-- Jet view embedded in the body of a window/popup
+- [<span id="contents">Windows as simple views</span>](#simple)
+- [Windows as Jet class views](#class)
+- [Jet view embedded in the body of a window/popup](#body)
 
 Temporary views like popups and windows can be created with **this.ui**. It returns the UI object. **this.ui** takes care of the windows it creates and destroys them when their parent views are destroyed.
 
-### Windows as Simple Views
+### [<span id="simple">Windows as Simple Views &uarr;</span>](#contents)
 
 Consider a simple popup view that is positioned to appear in the center of the screen:
 
@@ -66,7 +66,7 @@ To show the popup, you must get the **win1** property of the class and call the 
 
 **this.win1.show** renders the popup at a position, defined in the config of the popup (*position:"center"*). If you don't set position, **win1** will be rendered in the top left corner.
 
-### Windows as Jet View Classes
+### [<span id="class">Windows as Jet View Classes &uarr;</span>](#contents)
 
 You can define windows and popups as view classes as well. Have a look at a similar popup, defined as a class:
 
@@ -137,7 +137,7 @@ export default class TopView extends JetView {
 
 [Check out the demo on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/windows.js)
 
-### Jet View Embedded in the Body of a Window/Popup
+### [<span id="body">Jet View Embedded in the Body of a Window/Popup &uarr;</span>](#contents)
 
 You can also embed Jet views into the body of a window or a popup. For instance, this is the Jet class view you want to embed:
 

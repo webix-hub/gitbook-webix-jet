@@ -6,11 +6,11 @@ In the new version of Webix Jet, there is a convenient reference to a Jet view f
 - [Reference to the App](#ref_app)
 - [Reference to the Root UI Element of the View](#below)
 - [Referencing Parent Views and Subviews](#parent_sub)
-- [Referencing Webix Views and Controls](#controls)
+- [Referencing Webix Widgets](#controls)
 
 ### [<span id="ref_view">1. Reference to the View &uarr;</span>](#contents)
 
-Due to ES6 *arrow functions*, you can refer to a Jet view with **this** from click handlers of Webix views. This way is shorter and advisable. For example, **this.show** in the handler of the button refers to **Toolbar**: 
+Due to ES6 *arrow functions*, you can refer to a Jet view with **this** from click handlers of Webix widgets. This way is shorter and advisable. For example, **this.show** in the handler of the button refers to **Toolbar**: 
 
 ```js
 // views/toolbar.js
@@ -28,7 +28,7 @@ const Toolbar = {
 export default Toolbar;
 ```
 
-Another way to reference a Jet view is useful when you need to define a handler as *function*. In this case, **this** refers to a Webix view. Any Webix component created inside of a view has the **$scope** property, which points to the Jet view. So if you want to change the URL from controls of the view, reference the view with **this.$scope** and call its **show** method:
+Another way to reference a Jet view is useful when you need to define a handler as *function*. In this case, **this** refers to a Webix widget. Any Webix widget put inside of a view has the **$scope** property, which points to the Jet view. So if you want to change the URL from controls of the view, reference the view with **this.$scope** and call its **show** method:
 
 ```js
 // views/toolbar.js
@@ -241,36 +241,15 @@ export default class ChildForm extends JetView{
 }
 ```
 
-### [<span id="controls">5. Referencing Webix Views and Controls &uarr;</span>](#contents)
+### [<span id="controls">5. Referencing Webix Widgets &uarr;</span>](#contents)
 
-You already know how to change the URL by controls. Now have a look how the state of controls can be changed by the URL. For example, if you have a toolbar with a segmented button that is used to switch between two views:
+You can reference a Webix widget inside a Jet view in two ways. 
 
-```js
-// views/toolbar.js
-import {JetView} from "webix-jet";
+##### 1. Getting by Local IDS (*localId*) 
 
-export default class ToolbarView extends JetView {
-    config() {
-        return {
-            view: "toolbar",
-            elements: [
-                { view: "label", label: "Demo" }, 
-                {
-                    view: "segmented", options: ["details", "dash"],
-                    click: function() {
-                        this.$scope.show(this.getValue());
-                    }
-            }]
-        };
-    }
-}
-```
+You can add local IDs to a widget and then use **this.\$\$("localId")** to reference it. Local IDs are better than global, because they isolate IDs inside the current Jet view.
 
-This works fine, however, if you switch to **dash** and reload the page, the segmented button won't be turned to **dash**. In more complex apps this behavior might be confusing<sup><a href="#myfootnote1" id="origin">1</a></sup>. There is a way to solve this problem. You can reference a control inside a view and set its value in **init** of a class view that hosts the control. 
-
-##### 1. queryView()
-
-You can use **queryView** to reference the control. With this method, you can look for control by any attribute, like *view*, *name*, etc.
+Let's use the local ID to get to the segmented button and set the value of the button in **init** of the parent Jet view: 
 
 ```js
 // views/toolbar.js
@@ -278,91 +257,35 @@ import {JetView} from "webix-jet";
 
 export default class ToolbarView extends JetView {
     config() {
-        /* same config with segmented button */
-    }
-    init(view, url) {
-        if (url.length > 1)
-            view.queryView({view:"segmented"}).setValue(url[1].page);
-    }
-}
-```
-
-If you switch to **dash** and reload the page now, the state of the button will be restored correctly.
-
-**queryView()** is also often used for form validation. Consider also an example of simple form validation:
-
-```js
-// views/form.js
-import {JetView} from "webix-jet";
-
-export default class FormView extends JetView{
-    config(){
-        return { 
-            view:"form", elements:[
-                { view:"text", name:"email",  label:"Email" },
-                { view:"button", value:"save", 
-                    click: () => {
-                        var text = this.getRoot().queryView({ name: "email" });
-                        if (text.getValue())
-                            this.show("details");
-                    } 
-                }
-            ]
-        };
-    }
-}
-```
-
-**queryView** will look for a view or a control with the *email* name inside the form. The same control can be found by its view type *text* or its label *Email*. 
-
-##### 2. Getting by IDs
-
-You can also use **this.\$\$("localId")** to reference a control and set its value in **init** of the parent Jet view. **this.\$\$("localId")** can be used to reference nested views and controls by their global or local IDs.
-
-```js
-// views/toolbar.js
-import {JetView} from "webix-jet";
-
-export default class ToolbarView extends JetView {
-    config() {
-        //...
-        { view: "segmented", localId: "control", options: ["details", "dash"],
+        return { view: "segmented", localId: "nav", options: ["details", "dash"],
             click: function() {
                 this.$scope.app.show("/demo/" + this.getValue());
-        }}
+        }};
     }
     init(ui, url) {
         if (url.length > 1)
-            this.$$("control").setValue(url[1].page);
+            this.$$("nav").setValue(url[1].page);
     }
 }
 ```
 
-#### &#x2753; Which way to reference controls and Webix views is better?
+##### 2. Getting by IDs
 
-**IDs** must be unique, and the more developers are working on the project, the stronger odds are that someone will give the same IDs to another view.
+**this.\$\$(id)** can be used to reference nested views and controls by their *global or local IDs*. So you can add global IDs to widgets, but you should keep in mind that global IDs must be unique. The more developers are working on the project, the stronger the odds are that someone will give the same IDs to some nother widget.
 
-One of the solutions is to give complex IDs, e.g. *"root:control"*:
+One of the solutions is to give complex IDs, e.g. *"root_view:control"* or *"control:function"*. This will lessen the chances of non-unique IDs.
 
 ```js
 // views/toolbar.js
 ...
 {
-    view: "toolbar",
-    elements: [
-        { view: "segmented", localId: "toolbar:segbtn", options: ["details", "dash"],
-            click: function() {
-                this.$scope.app.show("/demo/" + this.getValue());
-        }}
-    ]
+    { view: "segmented", id: "segbtn:nav", options: ["details", "dash"],
+        click: function() {
+            this.$scope.app.show("/demo/" + this.getValue());
+    }}
+    ...
+    thit.$$("segbtn:nav").setValue(url[1].page);
 }
 ```
 
-This will lessen the chances of non-unique IDs.
-
-**queryView** is another solution to this problem. The syntax is longer, but it works as fine as the search by its local ID and lets you avoid IDs at all.
-
-<!-- footnotes -->
-- - -
-<a id="myfootnote1" href="#origin">1</a>:
-Actually, this task can be solved with the Menu plugin. You can [read about it in the dedicated section](plugins.md).
+If you use *this.\$\$(id)* with a global ID, it's the same as *webix.\$\$(id)*.

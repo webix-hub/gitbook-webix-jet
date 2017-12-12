@@ -19,7 +19,7 @@ After you click on the link, the app UI will be rebuilt and will consist of the 
 
 ##### Route for Webix Controls
 
-The **route** attribute can be added not only to links, but also to Webix controls and widgets. **route** refers to the path to the module inside the **views** folder. For instance, if you want to load the *list* module in the *area* subfolder, you can add **route** to a button with *area.list*:
+The **route** attribute can be added not only to links, but also to Webix controls. **route** refers to the path to the module inside the **views** folder. For instance, if you want to load the *list* module in the *area* subfolder, you can add **route** to a button with *area.list*:
 
 ```js
 // views/top

@@ -169,7 +169,7 @@ The **init** method receives two **parameters**:
 
 ###### 1. **view** - the view UI
 
-The segmented button is referenced by **view.queryView()**. **view** is received by **init** as one of the two parameters and references a Webix view inside the class instance. **queryView** looks for a view (a segmented button in this case) by its attributes. For more details on referencing nested views, [read the "Referencing views" section](referencing.md).
+The segmented button is referenced by **view.queryView()**. **view** is received by **init** as one of the two parameters and references a Webix widget inside the class instance. **queryView** looks for a view (a segmented button in this case) by its attributes. For more details on referencing nested views, [read the "Referencing views" section](referencing.md).
 
 ###### 2. **url** - the app URL as an array
 
@@ -235,7 +235,7 @@ Here's how you can select the right segment of the button in **urlChange**:
 
 The **urlChange** method receives the same two **parameters** as **init**:
 
-- **view** - the Webix view inside the Jet view class
+- **view** - the Webix widget inside the Jet view class
 - **url** - the URL as an array of URL elements
 
 #### [<span id="ready">ready(view,url) &uarr;</span>](#methods)
@@ -303,7 +303,7 @@ Note that *subviews* can have **names**. If you give a name to a subview, you ca
 
 **ready** receives same two **parameters**:
 
-- **view** - the Webix view inside the Jet view class
+- **view** - the Webix widget inside the Jet view class
 - **url** - the URL as an array of URL elements
 
 #### [<span id="destroy">destroy() &uarr;</span>](#methods)

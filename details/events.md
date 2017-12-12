@@ -103,7 +103,7 @@ You can attach an event handler to the event bus in one view and trigger the eve
 
 ##### Preferable Way: this.on
 
-The best way to attach an event is **this.on** (**this** references a Jet view). The benefit of this way is that the event handler is automatically detached when the view that attached the event handler is destroyed. **this.on** can *handle* app and Webix view events.
+The best way to attach an event is **this.on** (**this** references a Jet view). The benefit of this way is that the event handler is automatically detached when the view that attached the event handler is destroyed. **this.on** can *handle* app and Webix events.
 
 ```js
 // views/form.js

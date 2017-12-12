@@ -96,7 +96,7 @@ Webix offers an interface for working with promise objects. [webix.promise](http
 
 #### Simple View that Returns a Promise
 
-**defer** of **webix.remore** creates a new instance of a promise object. **resolve** creates and resolves a promise with a specified value, for example, a Webix view.
+**defer** of **webix.remore** creates a new instance of a promise object. **resolve** creates and resolves a promise with a specified value, for example, a Webix widget.
 
 Have a look at a simple example of a factory function that returns a promise that resolves in a second: 
 

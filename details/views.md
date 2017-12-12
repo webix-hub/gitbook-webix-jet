@@ -8,16 +8,18 @@ JetView class has the following methods:
 | [this.show("path")](#show)                | show a view or a subview          |
 | [this.ui(view)](#ui)                      | create a popup or a window        |
 | [this.on(app,"event:name",handler)](#on)  | attach an event                   |
-| [this.getRoot()](#getroot)                | call methods of the Webix view    |
+| [this.getRoot()](#getroot)                | call methods of the Webix widget  |
 | [this.getSubview(name)](#getsub)          | call the methods of a subview     |
 | [this.getParentView()](#getpar)           | call methods of a parent view     |
-| [this.\$\$("controlID")](#id)             | call methods of some Webix view   |
+| [this.\$\$("controlID")](#id)             | call methods of some Webix widget |
 
 ### [<span id="use">this.use(plugin, config) &uarr;</span>](#contents)
 
 The method includes a plugin, for example, this is how the **Status** plugin can be added:
 
 ```js
+// views/data.js
+...
 init(){
 	this.use(plugins.Status, { 
 		target: "app:status",
@@ -31,28 +33,71 @@ For more details on plugins, check out the ["Plugins" section](plugins.md).
 
 ### [<span id="show">this.show("path") &uarr;</span>](#contents)
 
-This method is used to reload view modules according to the path specified as a parameter:
+This method is used for in-app navigation. It loads view modules according to the path specified as a parameter:
 
 ```js
-/* sources/views/toolbar.js */
+// views/toolbar.js */
 const Toolbar = {
     view: "toolbar",
     elements: [
-        { view: "label", label: "Demo" },
         { view: "button", value:"Details",
             click: () => {
-                this.show(this.getValue().toLowerCase());
+                this.show("details");
             }
     }]
 };
 export default Toolbar;
 ```
 
+**show** returns a *promise*. This is useful, when you plan to do something after a subview is rendered.
+
+```js
+// views/toolbar.js
+const Toolbar = {
+    view: "toolbar",
+    elements: [
+        { view: "button", value:"Details",
+            click: () => {
+                this.show("details").then(/* do something */);
+            }
+    }]
+};
+export default Toolbar;
+```
+
+##### Optional *target* Parameter
+
+Subviews can have names. If you pass a configuration object with *target*, the view module will be shown as a subview with *name:target*:
+
+```js
+// views/big.js
+...
+{
+    cols:[
+        { $subview: true },
+        { $subview: "right" },
+    ]
+}
+...
+this.show("small", { target:"right" })
+```
+
+where *small* is the name of the view module.
+
+the above code is works the same as this:
+
+```js
+this.getSubView("right").show("small");
+```
+*getSubView* returns a subview by the name passed as a parameter.
+
 For more details on view navigation, [read the "Navigation" article](../basic/navigation.md).
 
 ### [<span id="ui">this.ui(view) &uarr;</span>](#contents)
 
 **this.ui** call is equivalent to **webix.ui**. It creates a new instance of the view passed to it as a parameter. For example, you can create views inside popups or modal windows with **this.ui**. The good thing about this way is that it correctly destroys the window or popup when its parent view is destroyed. 
+
+#### *this.ui* for Windows and Popups
 
 For example, you want to create a view with a list of orders and a form for editing records in the list. The form will be created inside a modal window. Here's the window:
 
@@ -65,11 +110,11 @@ const orderform = {
 	head:"Add new order",
 	body:{
 		view:"form", id:"order-form", elements:[
-			{ view:"combo", name:"product", label:"Product", id:"order-product", 
+			{ view:"combo", name:"product", label:"Product", 
             options:[
-                { id:1, value:"Webix Chai"}, { id:2, value:"Webix Syrup"}, { id:3, value:"Webix Cajun Seasoning"}
+                { id:1, value:"Webix Chai"}, { id:2, value:"Webix Syrup"}
             ]},
-			{ view:"button", label:"Add", type:"form", align:"center", width:120, click:function(){
+			{ view:"button", label:"Add", width:120, click:function(){
 			    webix.$$("order-win").hide();
 			}}
 		]
@@ -105,9 +150,71 @@ export default class OrdersView extends JetView{
 }
 ```
 
-The window is created in **init** of OrdersView and shown on a button click. And note again that there's no need to destroy the window manually.
+The window is created in **init** of OrdersView and is shown on a button click. Note again that there's no need to destroy the window manually.
 
 For more details about popups and windows, [go to the "popups and Windows" section](popups.md).
+
+In the example above, a *Jet view* was passed to *this.ui*, so the return value of *this.ui* was also a Jet view. You can also pass *Webix widgets* or *Jet views wrapped inside a Webix layout*.
+
+#### *this.ui* with a Webix widget config
+
+*this.ui* returns a Webix UI object:
+
+```js
+class TopView extends JetView {
+  ...
+  init(){
+  	this.win = this.ui({ template:"test" });
+  }
+}
+```
+
+#### *this.ui* with Jet views inside a Webix layout
+
+*this.ui* returns a Webix UI object with Jet views inside:
+
+```js
+class SubView extends JetView {
+  config(){
+    return {template:"test"};
+  }
+};
+class TopView extends JetView {
+  ...
+  init(){
+  	this.win = this.ui({
+          rows:[
+            SubView
+        ]
+    });
+  }
+}
+```
+
+##### Optional *container* Parameter
+
+**this.ui** has an optional parameter - *container*. If you provide it, the view will be rendered inside the container:
+
+```js
+var SubView = {
+  template:"test"
+};
+
+class TopView extends JetView {
+  config(){
+    return {};
+  }
+  init(){
+  	this.win = this.ui(SubView,{container:"here"});
+  }
+}
+```
+
+where *"here"* is the ID of a *div* element on the page. *container* can be an ID or an HTML element, e.g.:
+
+```js
+this.win = this.ui(SubView,{container:document.getElementById("here")});
+```
 
 ### [<span id="on">this.on(app,"app:event:name",handler) &uarr;</span>](#contents)
 
@@ -127,7 +234,7 @@ For more details on attaching and calling events, read the ["Events and Methods"
 
 ### [<span id="getroot">this.getRoot() &uarr;</span>](#contents)
 
-Use this method to return the Webix view inside a Jet class view and to call Webix view methods.
+Use this method to return the Webix widget inside a Jet class view and to call methods of a Webix widget.
 
 ```js
 // views/form.js

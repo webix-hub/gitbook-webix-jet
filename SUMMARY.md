@@ -24,5 +24,7 @@
   * [Tools](details/tools.md)
   * [Plugins](details/plugins.md)
   * [Inner Events and Error Handling](details/inner_events.md)
-  * [Jet Recipes](details/recipes.md)
-  * [Unrecommended, but Possible Solutions](details/unrecommended.md)
+* Part III - Practical Tasks
+  * [Deploying App](practice/deploy.md)
+  * [Jet Recipes](practice/recipes.md)
+  * [Extra Solutions](practice/unrecommended.md)
