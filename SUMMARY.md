@@ -25,4 +25,4 @@
   * [Plugins](details/plugins.md)
   * [Inner Events and Error Handling](details/inner_events.md)
   * [Jet Recipes](details/recipes.md)
-
+  * [Unrecommended, but Possible Solutions](details/unrecommended.md)

@@ -2,6 +2,10 @@
 
 ![](../images/window.png)
 
+- Windows as simple views
+- Windows as Jet class views
+- Jet view embedded in the body of a window/popup
+
 Temporary views like popups and windows can be created with **this.ui**. It returns the UI object. **this.ui** takes care of the windows it creates and destroys them when their parent views are destroyed.
 
 ### Windows as Simple Views
@@ -132,3 +136,37 @@ export default class TopView extends JetView {
 ```
 
 [Check out the demo on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/windows.js)
+
+### Jet View Embedded in the Body of a Window/Popup
+
+You can also embed Jet views into the body of a window or a popup. For instance, this is the Jet class view you want to embed:
+
+```js
+// views/embeddable.js
+export default class Embeddable extends JetView{
+	config(){
+		return {
+			template:"I'm cozily inside a window"
+		};
+	}
+}
+```
+
+To embed this view in a window, just put it into the body:
+
+```js
+// views/window3.js
+import Embeddable from "embeddable";
+
+export default class Window extends JetView{
+	config(){
+		return {
+			view:"window", position:"center", head:"Window",
+			body: Enbeddable
+		}
+	}
+	showWindow(){
+		this.getRoot().show();
+	}
+}
+```
