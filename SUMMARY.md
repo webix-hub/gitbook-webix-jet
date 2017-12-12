@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Deploying App](deploy.md)
+* [Getting Started](start.md)
 * [Migration from older version](migration.md)
 * Part I - Basic usage
   * [Creating app](basic/app.md)
