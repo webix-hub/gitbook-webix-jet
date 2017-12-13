@@ -209,7 +209,7 @@ app.render();
 
 ![](../images/appguard.png)
 
-[Check out the solution on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
+[Check out the solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
 ## [<span id="responsive">Responsive UI - Sizing UI to Device &uarr;</span>](#contents)
 			
@@ -219,7 +219,7 @@ app.render();
 
 *1. ...is partly available out of the box (by Webix UI)*
 
-Webix UI resizes components automatically if you don't set fixed sizes. If you minimise your browser window or open the app from a smartphone, components will shrink. However, this is not enough if you want to reorganize your components, e.g. if for wide screens you want to display the layout in columns and for narrower screens in rows, in tabs or simply display less content.
+Webix UI resizes components automatically if you don't set fixed sizes. If you minimize your browser window or open the app from a smartphone, components will shrink. However, this is not enough if you want to reorganize your components, e.g. if for wide screens you want to display the layout in columns and for narrower screens in rows, in tabs or simply display less content.
 
 *2. Just add a check in config :)*
 

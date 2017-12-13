@@ -1,4 +1,4 @@
-# Unrecommended, but Possible Solutions
+# Not recommended, but Possible Solutions
 
 ## Dynamic Layout Rebuilding
 

@@ -271,7 +271,7 @@ export default class ToolbarView extends JetView {
 
 ##### 2. Getting by IDs
 
-**this.\$\$(id)** can be used to reference nested views and controls by their *global or local IDs*. So you can add global IDs to widgets, but you should keep in mind that global IDs must be unique. The more developers are working on the project, the stronger the odds are that someone will give the same IDs to some nother widget.
+**this.\$\$(id)** can be used to reference nested views and controls by their *global or local IDs*. So you can add global IDs to widgets, but you should keep in mind that global IDs must be unique. The more developers are working on the project, the stronger the odds are that someone will give the same IDs to some other widget.
 
 One of the solutions is to give complex IDs, e.g. *"root_view:control"* or *"control:function"*. This will lessen the chances of non-unique IDs.
 

@@ -131,7 +131,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 app.render();
 ```
 
-[The demo is available on Github >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
+[The demo is available on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
 ![](../images/appguard.png)
 

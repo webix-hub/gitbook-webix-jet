@@ -1,4 +1,4 @@
-# Async (Promised) Views
+# Asynchronous (Promised) Views
 
 Data is usually stored in a database on the server side. If the UI is built much faster than the data is loaded, it's a good idea to make use of promises to load the data. To make the UI wait for data, you can make an asynchronous request to a PHP script and give the UI a promise of data. Then the app will wait for data from a database, and only after a promise resolves, it will render the view with the data.
 
@@ -96,7 +96,7 @@ Webix offers an interface for working with promise objects. [webix.promise](http
 
 #### Simple View that Returns a Promise
 
-**defer** of **webix.remore** creates a new instance of a promise object. **resolve** creates and resolves a promise with a specified value, for example, a Webix widget.
+**defer** of **webix.remote** creates a new instance of a promise object. **resolve** creates and resolves a promise with a specified value, for example, a Webix widget.
 
 Have a look at a simple example of a factory function that returns a promise that resolves in a second: 
 
@@ -140,5 +140,5 @@ class TopView extends JetView {
 
 ## **data.waitData**
 
-that is used for data components, such as DataCollection, List, Tree, DataTable, etc;
+that is used for data components, such as DataCollection, List, Tree, DataTable, etc.;
 

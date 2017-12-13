@@ -207,7 +207,7 @@ The **target** property is the ID of the view component where you want to displa
 **Status** can have two more properties in its config:
 
 - **data** - a property that defines the ID of the data component to track.
-- **remote** - a boolean property that enables [*webix.remote*](https://docs.webix.com/desktop__webix_remote.html) - a protocol that allows the client component to call functions on the server directly.
+- **remote** - a Boolean property that enables [*webix.remote*](https://docs.webix.com/desktop__webix_remote.html) - a protocol that allows the client component to call functions on the server directly.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js)
 
@@ -257,7 +257,7 @@ function logout(){
 }
 ```
 
-##### PLugin Usage
+##### Plugin Usage
 
 To use a plugin, call *app.use* and pass the **session** model to it:
 
@@ -343,23 +343,23 @@ The **User** plugin has other useful methods.
 
 **getStatus()**
 
-**getStatus** returns the current status of the user. It can receive an optional boolean parameter *server*. The **User** service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
+**getStatus** returns the current status of the user. It can receive an optional Boolean parameter *server*. The **User** service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
 
-##### Loggin Out
+##### Logging Out
 
 **logout()**
 
 **logout** ends the current session and shows an afterLogout page, usually it's the login form.
 
 
-#### Login with an external OAuth service ( Google, Github, etc. )
+#### Login with an external OAuth service ( Google, GitHub, etc. )
 
 tbc <!-- to be continued -->
 
 
 ### [<span id="theme">Theme plugin &uarr;</span>](#contents)
 
-This is a plugin to change app themes. This is how you can swith the plugin on:
+This is a plugin to change app themes. This is how you can switch the plugin on:
 
 ```js
 // myapp.js
@@ -475,7 +475,7 @@ export default {
 };
 ```
 
-This is how you can swith the Locale plugin on:
+This is how you can switch the Locale plugin on:
 
 ```js
 // myapp.js

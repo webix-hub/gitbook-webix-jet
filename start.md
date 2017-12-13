@@ -8,7 +8,7 @@ Webix Jet is a fully client-side solution and can be used with any REST-based da
 
 ## Getting Started
 
-To begin with, you should grab the app package from https://github.com/webix-hub/jet-start/archive/master.zip and unpack it locally. After that, run the following commands in the target folder (this assumes that you have *nodejs* and *npm* installed):
+To begin with, you should grab the app package from https://github.com/webix-hub/jet-start/archive/master.zip and unpack it locally. After that, run the following commands in the target folder (this assumes that you have *Node.js* and *npm* installed):
 
 ```
 npm install

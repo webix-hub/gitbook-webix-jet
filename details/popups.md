@@ -42,7 +42,7 @@ export default class TopView extends JetView {
 }
 ```
 
-The popus must be created in **init** of *TopView*. Add a new **win1** property to the class (*this.win1*), initialize the popup with **this.ui** and assign it to the **win1** property. **this.ui** returns a UI object with all Webix methods of the view. 
+The popup must be created in **init** of *TopView*. Add a new **win1** property to the class (*this.win1*), initialize the popup with **this.ui** and assign it to the **win1** property. **this.ui** returns a UI object with all Webix methods of the view. 
 
 ```js
 // views/top.js

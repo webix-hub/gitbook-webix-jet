@@ -7,7 +7,7 @@ An app module is created as a new instance of the JetApp class. You must pass an
 | [start](#start)     | to set the start app URL|
 | [debug](#debug)     | to enable debugging |
 | [router](#router)   | to change a router |
-| [arbitrary parameters](#other) | e.g. access mode, screen size, etc |
+| [arbitrary parameters](#other) | e.g. access mode, screen size, etc. |
 | [views](#views)     | to change view modules names |
 | [routes](#routes)   | to shorten the app URL |
 
@@ -81,9 +81,11 @@ const app = new JetApp({
 }).render();
 ```
 
-### [<span id="views">Changing View Names &uarr;</span>](#contents)
+### [<span id="views">Changing View Creation Logic &uarr;</span>](#contents)
 
-If the module you want to show is in a subfolder and you want to show the module with a shorter name, you can change the view name in app configuration:
+Use the **views** parameter to change the names of view modules inside your code.
+
+For example, if the module you want to show is in a subfolder and you want to shorten the URL of the module, you can do it in the app configuration:
 
 ```js
 // myapp.js
@@ -121,6 +123,25 @@ export default class TopView extends JetView {
 **this** in the button handler refers to the Jet view, because the handler is an arrow function<sup><a href="#myfootnote1" id="origin1">1</a></sup>.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewresolve.js)
+
+You can also implement your own logic of view creating. Define **views** as a function for that: 
+
+```js
+var app = new JetApp({
+    ...,
+    views: function(url){
+        //implement your own logic here
+        url = url.replace(/\./g, "/");
+        var view = require("jet-views/"+url);
+        if (view.__esModule) {
+            view = view.default;
+        }
+        return view;
+    }
+});
+
+app.render();
+```
 
 ### [<span id="routes">Beautifying the URL &uarr;</span>](#contents)
 
