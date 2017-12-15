@@ -5,10 +5,10 @@ Navigation is implemented by changing the URL of the page. The URL reflects the 
 ### Advantages of Jet Navigation
 
 - *Browser Navigation Keys*: You can move backwards and forwards to previously opened subviews.
-- *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before page reload.
+- *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before a page reload.
 - *Convenient Development*: If you work on some particular subview (*games*), you can open the path to it (*#!/games*) and test it separately from the rest of the UI.
 
-In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three more ways to show views and subviews:
+In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three<sup><a href="#myfootnoten" id="originn">*</a></sup> more ways to show views and subviews:
 
 <span id="contents"></span>
 
@@ -158,3 +158,6 @@ This is relevant for *HashRouter*, which is the default router. Hashbang is not 
 
 <a id="myfootnote2" href="#origin2">2 &uarr;</a>, <a id="myfootnote3" href="#origin3">3 &uarr;</a>:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
+
+<a id="myfootnoten" href="#originn">* &uarr;</a>:
+There is one more way, described in the advanced part, the ["Navigation"](../details/navigation.md) chapter.

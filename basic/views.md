@@ -61,7 +61,6 @@ You can enable embedding multiple views that will change according to the URL. I
 
 ```js
 // views/bigview.js
-
 export default class BigView extends JetView {
     config() => { 
             rows:[

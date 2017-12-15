@@ -18,15 +18,12 @@ yarn add webix-jet
 ```
 
 - create folder sources and move all dev files there ( app.js, models/, views/, helpers/, etc. )
-- in webpack.config.json change entry field to the main file of your app (entry: "sources/app.js")
-
+- in webpack.config.json change the entry field to the main file of your app (entry: "sources/app.js")
 - update app.js similar to https://github.com/webix-hub/jet-start/blob/master/sources/myapp.js
-
     - import JetApp
     - replace "core.create" with "new JetApp"
     - remove "view.use" commands if any
     - add app.render() call
-
 - run the app 
 
 ```
@@ -36,11 +33,11 @@ npm start
 
 ### Migrating views
 
-Jet 1.x can recognize old configuration objects and use them correctly, so you will need not change anything in a common case. There are still some scenarios when you will need to change the code
+Jet 1.x can recognize old configuration objects and use them correctly, so you will need not to change anything in a common case. There are still some scenarios when you will need to change the code:
 
 #### View has "app" as dependency
 
-Change object to JetView based class and use "this.app" instead of "app"
+Change object to JetView-based class and use "this.app" instead of "app"
 
 #### View is using locale
 

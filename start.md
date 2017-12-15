@@ -2,11 +2,11 @@
 
 ## Advantages of Webix Jet
 
-Webix Jet allows you to create flexible, easy maintainable apps, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins, and user access levels. 
+Webix Jet allows you to create flexible, easily maintainable apps, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins, and user access levels. 
 
 Webix Jet is a fully client-side solution and can be used with any REST-based data API. So there aren’t any special requirements to the server.
 
-## Getting Started
+## How to Start
 
 To begin with, you should grab the app package from https://github.com/webix-hub/jet-start/archive/master.zip and unpack it locally. After that, run the following commands in the target folder (this assumes that you have *Node.js* and *npm* installed):
 
@@ -55,7 +55,6 @@ The *start.js* file describes a start page view:
 
 ```js
 //views/start.js
-
 export default {
 	template:"Start page"
 };
@@ -71,7 +70,6 @@ The *views/top* module defines the top level view, that contains a menu and incl
 
 ```js
 //views/top.js
-
 import start from "views/start"
 
 export default {
@@ -95,7 +93,6 @@ Check out the following code:
 
 ```js
 //views/top.js
-
 export default {
 	cols:[
 		{ view:"menu" },
@@ -160,8 +157,8 @@ As you can see, this module returns an object that differs from those described 
 - the *config* method that returns the interface of the component that will be initialized. In this example, it’s a datatable;
 - the *init* method that specifies the component initialization behavior, in our case data from the *records* model will be loaded into the view after its creation. 
 
-For more details on views and view classes, go to the chapters ["Creating views"](basic/views.md) and ["Views and Subviews"](details/subviews.md#class_views).
+## Further Reading
 
-For more details on models, [read chapter "Models"](details/models.md).
-
-Click to read the full book <a href='https://webix.gitbooks.io/webix-jet/'>Read</a>
+- ["Creating views"](basic/views.md)
+- ["Views and Subviews"](details/subviews.md#class_views)
+- ["Models"](details/models.md)
