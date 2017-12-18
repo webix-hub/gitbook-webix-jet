@@ -15,7 +15,7 @@ All views should be stored in the **views** folder: one view per file. For examp
 import {JetView} from "webix-jet";
 
 export default class MyView extends JetView{
-    config() => { template:"MyView text" };
+    config: () => { template:"MyView text" };
 }
 ```
 
@@ -39,7 +39,7 @@ import {JetView} from "webix-jet";
 import MyView from "myview";
 
 export default class BigView extends JetView{
-    config() => { 
+    config: () => { 
         rows:[
             MyView,
             {
@@ -62,7 +62,7 @@ You can enable embedding multiple views that will change according to the URL. I
 ```js
 // views/bigview.js
 export default class BigView extends JetView {
-    config() => { 
+    config: () => { 
             rows:[
                 { $subview: true },
                 { template:"BigView text" }
