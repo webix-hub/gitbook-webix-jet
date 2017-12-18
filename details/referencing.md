@@ -58,7 +58,7 @@ This is one of the cases when arrow functions do not help to shorten the syntax.
 }
 ```
 
-**getRoot()** and **queryView()** are discussed <a href="#below">below</a>.
+**getRoot()** is discussed <a href="#below">below</a>.
 
 ### [<span id="ref_app">2. Reference to the App &uarr;</span>](#contents)
 
@@ -167,7 +167,7 @@ export default class Parent extends JetView{
 	    }
     }
     getSelected(){
-        this.getRoot.getSelectedItem();
+        this.getRoot().queryView({view:"list"}).getSelectedItem();
     }
 }
 ```
@@ -195,9 +195,9 @@ export default class Child extends JetView{
 
 When the parent and the subview are rendered, the form in the subview gets the name of the selected item in the list from the parent.
 
-##### 2. getSubview("name")
+##### 2. getSubView("name")
 
-Use **getSubview()** to get to the methods of subviews from a parent. Consider an example with a parent and two static subviews:
+Use **getSubView()** to get to the methods of subviews from a parent. Consider an example with a parent and two static subviews:
 
 ```js
 // views/listedit.js
@@ -215,8 +215,8 @@ export default class ListEditView extends JetView{
 	    }
     }
 	ready(){
-        var list = this.getSubview("list").getRoot();
-		this.getSubview("form").bindWith(list);
+        var list = this.getSubView("list").getRoot();
+		this.getSubView("form").bindWith(list);
 	}
 }
 ```
@@ -247,9 +247,9 @@ You can reference a Webix widget inside a Jet view in two ways.
 
 ##### 1. Getting by Local IDS (*localId*) 
 
-You can add local IDs to a widget and then use **this.\$\$("localId")** to reference it. Local IDs are better than global, because they isolate IDs inside the current Jet view.
+You can add a local ID to a widget and then use **this.\$\$("localId")** to reference it. Local IDs are better than global, because they isolate IDs inside the current Jet view.
 
-Let's use the local ID to get to the segmented button and set the value of the button in **init** of the parent Jet view: 
+Let's use the local ID to get to the segmented button and set its value in **init** of the parent Jet view: 
 
 ```js
 // views/toolbar.js
@@ -269,9 +269,9 @@ export default class ToolbarView extends JetView {
 }
 ```
 
-##### 2. Getting by IDs
+##### 2. Getting by Global IDs
 
-**this.\$\$(id)** can be used to reference nested views and controls by their *global or local IDs*. So you can add global IDs to widgets, but you should keep in mind that global IDs must be unique. The more developers are working on the project, the stronger the odds are that someone will give the same IDs to some other widget.
+**this.\$\$(id)** can be used to reference nested views and controls by their *global or local IDs*. So you can add global IDs to widgets, but you should keep in mind that global IDs must be unique. The more developers are working on the project, the stronger the odds are that someone will give the same ID to some other widget.
 
 One of the solutions is to give complex IDs, e.g. *"root_view:control"* or *"control:function"*. This will lessen the chances of non-unique IDs.
 

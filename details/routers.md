@@ -4,8 +4,8 @@ To manipulate the URL, views have Routers. Webix Jet has four predefined types o
 
 | Type            | Displays app URL   | Stored   |
 |-----------------|--------------------|----------|
-| [Hash](#hash)   | <span style="color:green;">https:myshop.com/#!/my/app</span> | <span style="color:green;">Yes</span> |
-| [Url](#url)     | <span style="color:green;">https:myshop.com/my/app</span>   | <span style="color:green;">Yes</span> |
+| [Hash](#hash)   | <span style="color:green;">https://myshop.com/#!/my/app</span> | <span style="color:green;">Yes</span> |
+| [Url](#url)     | <span style="color:green;">https://myshop.com/my/app</span>   | <span style="color:green;">Yes</span> |
 | [Store](#store) | <span style="color:red;">No</span> 		   	   | <span style="color:green;">Yes</span> |
 | [Empty](#empty) | <span style="color:red;">No</span>             | <span style="color:red;">No</span> |
 
@@ -37,7 +37,7 @@ var app = new JetApp({
 If you set **routerPrefix** to an empty string, the app URL will look like this:
 
 ```
-index.html#/sales
+https://myshop.com/#/sales/top
 ```
 
 ## [<span id="url">2. URL Router &uarr;</span>](#contents)
@@ -115,7 +115,7 @@ In the production app, it can be done through *apache/nginx* configuration.
 
 ## [<span id="store">3. Store Router &uarr;</span>](#contents)
 
-With this guy, the app URL isn't displayed at all, but it is stored in the session storage. So no worries, you can still return to the previous and next views as if they are in the URL. This can be useful if you have a multilevel application \(apps are subviews of other apps\). The Store router is set for the enclosed apps because there's only one address bar and it's already taken by the outer app. Suppose you have closed an app module with a deep level of subviews and expect to be in the same place of this app when you switch to it again. The Store router allows this.
+With this guy, the app URL isn't displayed at all, but it is stored in the session storage. So no worries, you can still return to the previous and next views as if they are in the URL. This can be useful if you have a multilevel application \(apps are subviews of other apps\). The Store router is set for the enclosed apps because the address bar is already taken by the outer app. Suppose you have closed an app module with a deep level of subviews and expect to be in the same place of this app when you switch to it again. The Store router allows this.
 
 Here's an app module with a form view:
 
@@ -143,7 +143,7 @@ var app2 = new JetApp({
 
 ## [<span id="empty">4. Empty Router &uarr;</span>](#contents)
 
-If you don't want to store the app part of the URL, there's the EmptyRouter for you. The app URL isn't displayed and isn't stored. It's used for nested apps because there is only one address bar. 
+If you don't want to store the app part of the URL, there's the EmptyRouter for you. The app URL isn't displayed and isn't stored. It's also used for nested apps. 
 
 ```js
 // app1.js

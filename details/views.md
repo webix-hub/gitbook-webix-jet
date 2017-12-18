@@ -9,7 +9,7 @@ JetView class has the following methods:
 | [this.ui(view)](#ui)                      | create a popup or a window        |
 | [this.on(app,"event:name",handler)](#on)  | attach an event                   |
 | [this.getRoot()](#getroot)                | call methods of the Webix widget  |
-| [this.getSubview(name)](#getsub)          | call the methods of a subview     |
+| [this.getSubView(name)](#getsub)          | call the methods of a subview     |
 | [this.getParentView()](#getpar)           | call methods of a parent view     |
 | [this.\$\$("controlID")](#id)             | call methods of some Webix widget |
 
@@ -255,7 +255,7 @@ export default class FormView extends JetView{
 
 For more details on referencing views, [read the "Referencing" section](referencing.md).
 
-### [<span id="getsub">this.getSubview(name) &uarr;</span>](#contents)
+### [<span id="getsub">this.getSubView(name) &uarr;</span>](#contents)
 
 Use this method if you want to get to the methods of a subview. It looks for a subview by its name. So you must set the name. You can do it like this:
 
@@ -290,8 +290,8 @@ import ChildForm from "form";
 export default class ListEditView extends JetView{
 	...
 	ready(){
-        var list = this.getSubview("list").getRoot();
-		this.getSubview("form").bind(list);
+        var list = this.getSubView("list").getRoot();
+		this.getSubView("form").bind(list);
 	}
 }
 ```

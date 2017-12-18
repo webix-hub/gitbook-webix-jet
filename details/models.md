@@ -41,8 +41,8 @@ import {JetView} from "webix-jet";
 import {records} from "../models/records";
 
 export default class DataView extends JetView{
-	config(){
-		return { view:"datatable", autoConfig:true, editable:true };
+	config: () => {
+		view:"datatable", autoConfig:true, editable:true
 	}
 	init(view){
 		view.parse(records);
@@ -52,7 +52,7 @@ export default class DataView extends JetView{
 
 All the changes made in the datatable are saved to the server.
 
-You can also sync a Jet view with a data component to a DataCollection.
+You can also sync a data component inside a Jet view to a DataCollection. Let's sync the datatable with records:
 
 ```js
 // views/data.js
@@ -60,8 +60,8 @@ import {JetView} from "webix-jet";
 import {records} from "../models/records";
 
 export default class DataView extends JetView{
-	config(){
-		return { view:"datatable", autoConfig:true, editable:true };
+	config: () => {
+		view:"datatable", autoConfig:true, editable:true
 	}
 	init(view){
 		view.sync(records);
@@ -72,7 +72,7 @@ export default class DataView extends JetView{
 }
 ```
 
-Mind that if you synced a data component to a DataCollection, you have to perform *add/remove* operations on the master collection while synced view will reflect these changes automatically. Slave views can only update the master.
+Mind that if you synced a data component to a DataCollection, you must *perform **add/remove** operations on the master collection* while the synced view will reflect these changes automatically. Slave views can only update the master.
 
 ### [<span id="dynamic">2. Dynamic Data &uarr;</span>](#contents)
 
@@ -94,7 +94,7 @@ export function getData(){
 }
 ```
 
-To parse data, pass *getData* to *view.parse*:
+To parse data, pass the return value of *getData* to *view.parse*:
 
 ```js
 // views/data.js
@@ -102,8 +102,8 @@ import {JetView} from "webix-jet";
 import {getData} from "../models/records";
 
 export default class DataView extends JetView{
-	config(){ 
-		return { view:"datatable", autoConfig:true };
+	config: () => { 
+		view:"datatable", autoConfig:true
 	}
 	init(view){ 
 		view.parse(getData());
@@ -131,8 +131,8 @@ import {JetView} from "webix-jet";
 import {getData, saveData} from "../models/records";
 
 export default class DataView extends JetView{
-	config(){ 
-		return { view:"datatable", autoConfig:true, editable:true };
+	config: () => { 
+		view:"datatable", autoConfig:true, editable:true
 	}
 	init(view) {
 		view.parse(getData());
@@ -141,7 +141,7 @@ export default class DataView extends JetView{
 }
 ```
 
-Loading and saving data can also be in **config** of the view module:
+Loading and saving data can also be in **config** of the view module, if needed:
 
 ```js
 // views/data.js
@@ -149,12 +149,10 @@ import {JetView} from "webix-jet";
 import {getData, saveData} from "../models/records";
 
 export default class DataView extends JetView{
-	config() {
-		return {
-			view:"datatable", autoConfig:true,
-			url: getData,
-			save: saveData
-		}
+	config: () => {
+		view:"datatable", autoConfig:true,
+		url: getData,
+		save: saveData
 	}
 }
 ```
@@ -168,12 +166,10 @@ For really *huge data* (more than 10K records), you can use dynamic loading of W
 import {JetView} from "webix-jet";
 
 export default class DataView extends JetView{
-	config(){
-		return { 
-			view:"datatable", autoConfig:true,
-			url:"data.php",
-			save:"data.php" 
-		};
+	config() => {
+		view:"datatable", autoConfig:true,
+		url:"data.php",
+		save:"data.php"
 	}
 }
 ```
