@@ -1,6 +1,5 @@
 # Summary
 
-* [Intro](cover.md)
 * [Getting Started](start.md)
 * [Migration from older version](migration.md)
 * Part I - Basic usage
