@@ -6,6 +6,8 @@
     "pluginsConfig": {},
     "styles": {
         "website": "styles/website.css",
-        "pdf": "styles/print.css"
+        "pdf": "styles/print.css",
+        "mobi": "styles/print.css",
+        "epub": "styles/print.css"
     }
 }
