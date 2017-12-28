@@ -1,1 +1,6 @@
 /* CSS for website */
+#img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
