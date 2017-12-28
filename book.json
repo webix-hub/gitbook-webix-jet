@@ -9,5 +9,11 @@
         "pdf": "styles/print.css",
         "mobi": "styles/print.css",
         "epub": "styles/print.css"
+    },
+    "structure":{
+        "introduction": {
+            "path": "intro.md",
+            "title": "Introduction"
+        }
     }
 }
