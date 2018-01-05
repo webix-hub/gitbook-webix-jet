@@ -1,10 +1,11 @@
-# Working with Popups and Windows
+# Working with Popups, Windows and Context Menus
 
 ![](../images/window.png)
 
 - [<span id="contents">Windows as simple views</span>](#simple)
 - [Windows as Jet class views](#class)
 - [Jet view embedded in the body of a window/popup](#body)
+- [Adding a Context Menu](#context)
 
 Temporary views like popups and windows can be created with **this.ui**. It returns the UI object. **this.ui** takes care of the windows it creates and destroys them when their parent views are destroyed.
 
@@ -170,3 +171,46 @@ export default class Window extends JetView{
 	}
 }
 ```
+
+### [<span id="context">Adding a Context Menu &uarr;</span>](#contents)
+
+You can also attach a context menu to widgets with *this.ui*.
+
+Let's attach a context menu to a simple template. This is a Jet view with the template:
+
+```js
+// views/top.js
+import {JetView} from "webix-jet";
+
+export default class TopView extends JetView {
+  config(){
+    return {
+		localId:"body", template:"A place for context"
+    };
+  }
+}
+```
+
+The context menu will be created by *this.ui* constructor in *init* of the *top* view. After that, the context menu will be attached to the template. To reference the template, you can use its local ID:
+
+```js
+// views/top.js
+import {JetView} from "webix-jet";
+
+export default class TopView extends JetView {
+  config(){
+    return {
+		localId:"body", template:"A place for context"
+    };
+  }  
+  init(){
+    var context = this.ui({
+      view:"contextmenu",
+      data:["Add","Rename","Delete",{ $template:"Separator" },"Info"]
+    });
+    context.attachTo(this.$$("body").getNode());
+  }
+}
+```
+
+[Check out the example >>](https://webix.com/snippet/dec9f580)
