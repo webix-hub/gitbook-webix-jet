@@ -2,7 +2,7 @@
 
 Services are one more means of view communication besides [the event bus and methods](events.md). Methods are preferable when you want to connect views with their subviews. If views aren't related to each other, e.g. if you want to connect two subviews of the same view, you cannot use methods. This is where services help. You can create a service connected to one of the views, and other views can communicate with the view through the service. In short, a service serves as shared functionality.
 
-The same communication can be implemented with events, but this is much more complex. With JS6, the problem can also be solved with creating and requiring a module. Services are better, because if you create two apps that require the same module, there's only one instance of the shared code. With services, a new instance of a service is created each time.
+The same communication can be implemented with events, but this is much more complex. With ES6, the problem can also be solved with creating and requiring a module. Services are better, because if you create two apps that require the same module, there's only one instance of the shared code. With services, a new instance of a service is created each time.
 
 ## Initializing Services
 

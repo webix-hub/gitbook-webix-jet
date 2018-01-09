@@ -8,7 +8,6 @@
     - [View Inclusion](#view_subview)
     - [App Inclusion](#app_subview)
 
-
 After reading the "Basics" chapter of this guide, you are familiar with the concept of a _view_. Now it's time to find out all the ways of creating views. You can create views in three ways.
 
 ## [<span id="simple">1. Simple Views &uarr;</span>](#contents)
@@ -71,7 +70,7 @@ export default () => {
 
 ## [<span id="class_views">3. Class Views &uarr;</span>](#contents)
 
-Views can be defined as JS6 classes.
+Views can be defined as ES6 classes.
 
 ### Advantages of Classes
 
