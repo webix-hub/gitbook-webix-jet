@@ -1,6 +1,6 @@
 # <span id="contents">Models</span>
 
-View modules return the UI configuration of the components. They describe the visual aspect of an application and shouldn't contain any data. For data, there is another type of modules - a **model**. Models are JS files that are placed in a separate folder. This division of UI and data is an advantage because if the data changes, all you have to do is change the data model. There's no need to modify view files. 
+View modules return the UI configuration of the components. They describe the visual aspect of an application and shouldn't contain any data. For data, there is another type of modules - a **model**. Models are JS files that are placed in a separate folder. The model object stores all functionality related to some data entity. This division of UI and data is an advantage because if the data changes, all you have to do is change the data model. There's no need to modify view files. 
 
 There are several ways of loading data in Webix Jet:
 
@@ -73,6 +73,40 @@ export default class DataView extends JetView{
 ```
 
 Mind that if you synced a data component to a DataCollection, you must *perform **add/remove** operations on the master collection* while the synced view will reflect these changes automatically. Slave views can only update the master.
+
+###### Shared Data Transport
+
+To return several types of data and afterwards distribute data chunks to different views, a shared data transport can be used.
+
+For example, this is the data model for grid:
+
+```js
+//models/griddata.js
+import {sharedData} from models/shared.js
+
+const gridData = new webix.DataCollection();
+gridData.parse(sharedData("grid"));
+
+export gridData;
+```
+
+And here is a separate file "shareddata" which communicates with shared data feed and can provide different data chunks for different consumers:
+
+```js
+//models/shareddata.js
+var data = webix.ajax("some.json").then(a => a.json());
+export function sharedData(name){
+    return data.then(a => {
+		switch name:
+			case "grid":
+				return a.grid;
+			default:
+				return [];
+    });
+}
+```
+
+At the same time, each entity has its own model that stores data and all related API and just uses shareddata for data loading.
 
 ### [<span id="dynamic">2. Dynamic Data &uarr;</span>](#contents)
 
