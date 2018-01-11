@@ -2,7 +2,8 @@
 .date{
     color:#999;
     font-size:80%;
-    padding-left:5em;
+    float:right;
+    padding-right:10em;
 }
 </style>
 
