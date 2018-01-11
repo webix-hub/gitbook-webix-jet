@@ -96,9 +96,14 @@ this.getSubView("right").show("small");
 
 For more details on view navigation, [read the "Navigation" article](../basic/navigation.md).
 
-### [<span id="ui">this.ui(view) &uarr;</span>](#contents)
+### [<span id="ui">this.ui(view,[container]) &uarr;</span>](#contents)
 
-**this.ui** call is equivalent to **webix.ui**. It creates a new instance of the view passed to it as a parameter. For example, you can create views inside popups or modal windows with **this.ui**. The good thing about this way is that it correctly destroys the window or popup when its parent view is destroyed. 
+**this.ui** call is equivalent to **webix.ui**. It creates a new instance of the view passed to it as a parameter. For example, you can create views inside popups or modal windows with **this.ui**. The good thing about this way is that it correctly destroys the window or popup when its parent view is destroyed.
+
+- *this.ui* for Windows and Popups
+- *this.ui* with a Webix widget config
+- *this.ui* with Jet views inside a Webix layout
+- [optional *container* parameter](#container)
 
 #### *this.ui* for Windows and Popups
 
@@ -194,7 +199,7 @@ class TopView extends JetView {
 }
 ```
 
-##### Optional *container* Parameter
+##### [<span id="container">Optional *container* Parameter &uarr;</span>](#ui)
 
 **this.ui** has an optional parameter - *container*. If you provide it, the view will be rendered inside the container:
 
