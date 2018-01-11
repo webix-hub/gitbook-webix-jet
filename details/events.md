@@ -190,7 +190,7 @@ export default class ParentView extends JetView{
                 { view:"button", value:"Set mode", click:() => {
                     this.getSubView().setMode("readonly")}
                 }, 
-                { $subview: ChildView }]
+                { $subview:"child" }]
     }}
 }
 ```
@@ -210,13 +210,13 @@ import FileView from "files";
 config() { 
     return { 
         cols:[ 
-            { name:"left", $subview:FileView }, 
-            { name:"right", $subview:FileView }
+            { name:"left", $subview:"fileview" }, 
+            { name:"right", $subview:"fileview" }
         ]
 }}
 ```
 
-Here each subview has a name. *FileView* has the *loadFiles* method. Next, let's tell the file manager which paths to open in each file view:
+Here each subview has a name. *fileview* has the *loadFiles* method. Next, let's tell the file manager which paths to open in each file view:
 
 ```js
 // views/manager.js

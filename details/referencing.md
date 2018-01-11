@@ -162,7 +162,7 @@ export default class Parent extends JetView{
 		return {
             cols:[
                 { view:"list", select:true },
-                { $subview:form }
+                { $subview:"form" }
             ]
 	    }
     }
@@ -209,8 +209,8 @@ export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                { $subview:ChildList, name:"list" },
-                { $subview:ChildForm, name:"form" }
+                { $subview:"list", name:"list" },
+                { $subview:"form", name:"form" }
             ]
 	    }
     }

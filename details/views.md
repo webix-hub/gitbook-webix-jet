@@ -273,8 +273,8 @@ export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                { $subview:list, name:"list" },
-                { $subview:form, name:"form" }
+                { $subview:"list", name:"list" },
+                { $subview:"form", name:"form" }
             ]
 	    }
 	}
@@ -405,7 +405,7 @@ var id = this.getParam("id"); //id == ""
 var id = this.getParam("id", true); //id == 12
 ```
 
-For example, this is a parent view that puts the parameter into the URL:
+For example, this is a parent view that puts the parameter into the URL and loads a subview:
 
 ```js
 export default class DetailsView extends JetView {
@@ -420,6 +420,8 @@ export default class DetailsView extends JetView {
 }
 ```
 
+Here **sub** is a Jet view that will access the parent's parameter and display it:
+
 ```js
 export default class sub extends JetView {
 	config(){
@@ -433,7 +435,6 @@ export default class sub extends JetView {
 	}
 }
 ```
-
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
