@@ -12,17 +12,16 @@
 
 - TypeScript support
 - new API:
-    - [getParam and setParam](details/views.md) methods to get/set URL parameters
+    - [getParam](details/views.md#getparam) and [setParam](details/views.md#setparam) methods to get/set URL parameters
     - [getUrl](details/views.md)
-- [*UrlParam* plugin](details/plugins.md#urlparam)
+- [*UrlParam*](details/plugins.md#urlparam) plugin
 
 ### Version 1.2 <span class="date">December 12, 2017</span>
 
 - [*show*](details/views.md#show) and [*getSubView*](details/views.md#getsub) APIs updated
 - *this.ui* updated
-    - [allows to define custom HTML parent](details/views.md#container)
-    - [can be used with JetView classes](details/popups.md#class)
-
+    - allows to define [custom HTML parent](details/views.md#container)
+    - can be used with [JetView classes](details/popups.md#class)
 - ability to [remove *"!"* from the hash URL](details/routers.md#hash)
 - ability to return a promise from the *config* method of a view
 - HashRouter supports [*config.routes*](details/app_config.md#routes)
@@ -32,6 +31,6 @@
 
 Major update after version 0.5:
 - [views](basic/views.md) and [app modules](basic/app.md) as ES6 classes
-- [using Webpack as a module bundler](practice/webpackconfig.md)
-- [ability to choose among 4 routers](details/routers.md)
-- [6 plugins](details/plugins.md)
+- using [Webpack](practice/webpackconfig.md) as a module bundler
+- ability to choose among [4 routers](details/routers.md)
+- ability to use [6 plugins](details/plugins.md) for common tasks
