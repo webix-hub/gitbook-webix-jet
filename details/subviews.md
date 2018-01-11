@@ -285,8 +285,8 @@ export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                { $subview:list, name:"list" },
-                { $subview:form, name:"form" }
+                { $subview:"list", name:"list" },
+                { $subview:"form", name:"form" }
             ]
 	    }
     }
@@ -383,7 +383,7 @@ import child from "child";
 }
 ```
 
-- one view including with $subview:view:
+- one view including with $subview:"view":
 
 ```js
 import child from "child";
@@ -391,7 +391,7 @@ import child from "child";
 {
     rows:[
         { view:"button" },
-        { $subview:child }
+        { $subview:"child" }
     ]
 }
 ```

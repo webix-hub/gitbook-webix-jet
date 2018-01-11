@@ -11,6 +11,7 @@ These plugins are switched on to a specific view by *view.use*:
 - [the Menu plugin](#menu)
 - [the UnloadGuard plugin](#unload)
 - [the Status plugin](#status)
+- [the UrlParam plugin](#urlparam)
 
 **App Plugins**
 
@@ -210,6 +211,51 @@ The **target** property is the ID of the view component where you want to displa
 - **remote** - a Boolean property that enables [*webix.remote*](https://docs.webix.com/desktop__webix_remote.html) - a protocol that allows the client component to call functions on the server directly.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js)
+
+### [<span id="urlparam">UrlParam plugin &uarr;</span>](#contents)
+
+The plugin allows using the URL fragments as parameters. It makes them accessible via **getParam(name)** and correctly weeds them out of the URL.
+
+Let's consider a simple example with a parent view **some** and its child **details**:
+
+```js
+// views/some.js
+import {JetView} from "webix-jet";
+
+export default class SomeView() extends JetView{
+	config(){
+		return {
+			rows:[
+				{ $subview:true}
+			]
+		};
+	}
+}
+
+// views/details.js
+const details = { template:"Details" };
+export default details;
+```
+
+When loading the URL *"/some/23/details"*, you need to drop *23* and treat it as a parameter of **some**. This will be done by the plugin. Launch it in the **init** method of **some**:
+
+```js
+// views/some.js
+import {JetView} from "webix-jet";
+
+export default class SomeView() extends JetView{
+   ...
+   init(){
+       this.use(plugins.UrlParam, ["id"])
+       // now when loading /some/23/details
+       var id = this.getParam("id");//id === 23
+   }
+}
+```
+
+In this example, **details** will be rendered inside **some**, and the fragment *23* will be dropped.
+
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
 ### [<span id="user">User Plugin &uarr;</span>](#contents)
 

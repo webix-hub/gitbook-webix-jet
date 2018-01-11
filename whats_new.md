@@ -8,6 +8,21 @@
 
 # What's New
 
+### Version 1.3.2 <span class="date">January 11, 2018</span>
+
+- **update**:
+    - ES6 and typescript versions merged
+
+### Version 1.3.0 <span class="date">January 10, 2018</span>
+
+[update] new api renaming, show supports hash of parameters
+[dev] code tests and lint
+[fix] correct patch for older versions of webix UI
+
+### <span class="date">January 9, 2018</span>
+
+[update] url vars, ts-loader
+
 ### Version 1.2.1 <span class="date">December 12, 2017</span>
 
 - **fix**:

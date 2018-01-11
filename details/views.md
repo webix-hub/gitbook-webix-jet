@@ -12,6 +12,9 @@ JetView class has the following methods:
 | [this.getSubView(name)](#getsub)          | call the methods of a subview     |
 | [this.getParentView()](#getpar)           | call methods of a parent view     |
 | [this.\$\$("controlID")](#id)             | call methods of some Webix widget |
+| [this.getUrl()](#url)                     | get the URL segment related to the view  |
+| [this.getParam(name, anywhere)](#getparam) | give the API access to the URL parameters |
+| [this.setParam(name, value)](#setparam)    | set the URL parameters |
 
 ### [<span id="use">this.use(plugin, config) &uarr;</span>](#contents)
 
@@ -323,8 +326,6 @@ The child refers to its parent view with **this.getParentView** and calls its **
 
 For more details, [read the "Referencing" section](referencing.md).
 
-See details in ["Events and Methods"](events.md).
-
 ### [<span id="id">this.\$\$("controlID") &uarr;</span>](#contents)
 
 Use **this.$$** to look for nested views by their IDs.
@@ -347,3 +348,130 @@ export default class ToolbarView extends JetView {
 ```
 
 For details, [read the "Referencing" section](referencing.md).
+
+### this.getUrl()
+
+Use this method to get the URL as an array of segments, each one is an object with three properties:
+- *page* (name of the segment as *string*)
+- *params* (object with parameters)
+- *index* (number)
+
+For example, you can get the URl segment related to the view by accessing the *page* property:
+
+```js
+// views/some.js
+export default class SomeView extends JetView{
+    config(){
+        return {
+            view:"button", value:"Show URL", click: () => {
+                var url = this.getUrl();  //URL as an array of segments
+                console.log(url[0].page); //"some"
+            }
+        };
+    }
+}
+```
+
+### this.getParam(name, [parent])
+
+Use this method to get the URL related data.
+**getParam()** lets the API access the URL parameters (variables), including those of the parent views. This can be useful as views and subviews quite often share a common parameter.
+
+**getParam()** takes two parameters:
+
+- *name* - (mandatory, string) the name of the parameter;
+- *parent* - (optional, Boolean) *false* by default; if *false*, it looks among those parameters that belong to the view that called the method; if *true*, it looks for parameters of the parent views.
+
+Consider a simple example with two views, a parent **page** and its subview **some**. The URL is:
+
+```
+#!/top/page?id=12/some
+```
+
+Where **id** is the parameter of the parent **page**.
+
+This is how you can get **id** from the **page** view:
+
+```js
+//from page.js
+var id = this.getParam("id"); //id == 12
+```
+
+And this is how you can get **id** from **some**:
+
+```js
+//from some.js
+var id = this.getParam("id"); //id == ""
+var id = this.getParam("id", true); //id == 12
+```
+
+For example, this is a parent view that puts the parameter into the URL:
+
+```js
+export default class DetailsView extends JetView {
+	config(){
+        return { cols:[
+            { $subview:true }
+        ]};
+    }
+    init(){
+        this.show("?id=1/sub");
+    }
+}
+```
+
+```js
+export default class sub extends JetView {
+	config(){
+		return {
+			view:"template"
+		};
+	}
+	urlChange(view){
+		var id = this.getParam("id", true);
+		view.setHTML("id="+id);
+	}
+}
+```
+
+
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
+
+### this.setParam(name, value, [url])
+
+Use this method to set the URL related data. You can use **setParam()** to change a URL segment or a URL parameter:
+
+```js
+view.setParam("mode", "12", true); // some?mode=12
+```
+
+**setParam()** requires two obligatory parameters:
+- the *name* of the URL parameter
+- the new *value*.
+
+The third parameter is optional and if set to *true*, the parameter is displayed in the URL.
+
+For example, this is how you can change a URL parameter with a widget inside a Jet view:
+
+```js
+// views/top.js
+import {JetView} from "webix-jet";
+
+export default class TopView extends JetView {
+	config(){
+		return {
+			rows:[
+				{ view:"segmented", options:["full", "brief"], on:{
+					onChange: function(){
+						this.$scope.setParam("mode", this.getValue(), true);
+					}
+				}}
+			]
+		};
+	}
+}
+```
+
+**mode** will be set to either *full* or *brief* and the value will be displayed in the URL.
+
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
