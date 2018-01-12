@@ -155,7 +155,7 @@ JetView class has two methods to reference subviews (kids) and parent views.
 ```js
 // views/listedit.js
 import {JetView} from "webix-jet";
-import form from "form";
+import form from "views/form";
 
 export default class Parent extends JetView{
 	config(){
@@ -202,15 +202,13 @@ Use **getSubView()** to get to the methods of subviews from a parent. Consider a
 ```js
 // views/listedit.js
 import {JetView} from "webix-jet";
-import ChildList from "list";
-import ChildForm from "form";
 
 export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                { $subview:"list", name:"list" },
-                { $subview:"form", name:"form" }
+                { $subview:"list", name:"list" },   //load "views/list"
+                { $subview:"form", name:"form" }    //load "views/form"
             ]
 	    }
     }

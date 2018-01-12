@@ -82,7 +82,7 @@ For example, this is the data model for grid:
 
 ```js
 //models/griddata.js
-import {sharedData} from models/shared.js
+import {sharedData} from "models/shared";
 
 const gridData = new webix.DataCollection();
 gridData.parse(sharedData("grid"));

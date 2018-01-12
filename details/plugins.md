@@ -488,6 +488,7 @@ To restore the state of the segmented button after the new theme is applied, you
 
 ```js
 // views/settings.js
+...
 config(){
 	const theme = this.app.getService("theme").getTheme();
     return {

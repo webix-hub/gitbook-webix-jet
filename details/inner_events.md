@@ -94,8 +94,6 @@ Suppose you have a layout with three views, one parent and two subviews (simple 
 ```js
 // views/top.js
 import {JetView} from "webix-jet";
-import allowed1 from "allowed";
-import blocked from "blocked";
 
 export default class TopView extends JetView {
 	config(){
@@ -104,9 +102,9 @@ export default class TopView extends JetView {
 				{ type:"wide",cols:[
 						{ view:"form",  width: 200, rows:[
 							{ view:"button", value:"Allowed page", click:() =>
-								this.show("allowed") },
+								this.show("allowed") },		//load "views/allowed"
 							{ view:"button", value:"Blocked page", click:() =>
-								this.show("blocked") }
+								this.show("blocked") }		//load "views/blocked"
 						]},
 						{ $subview: true }
 					]

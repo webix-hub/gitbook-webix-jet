@@ -47,7 +47,7 @@ The popup must be created in **init** of *TopView*. Add a new **win1** property 
 
 ```js
 // views/top.js
-import win1 from "window1";
+import win1 from "views/window1";
 ...
 init(){
     this.win1 = this.ui(win1);
@@ -115,7 +115,7 @@ To create a popup, use **this.ui** inside **init** of **TopView**. Add a new **w
 ```js
 // views/top.js
 import {JetView} from "webix-jet";
-import WindowView from "window2";
+import WindowView from "views/window2";
 
 export default class TopView extends JetView {
 	config(){
@@ -157,7 +157,7 @@ To embed this view in a window, just put it into the body:
 
 ```js
 // views/window3.js
-import Embeddable from "embeddable";
+import Embeddable from "views/embeddable";
 
 export default class Window extends JetView{
 	config(){
@@ -205,7 +205,7 @@ export default class TopView extends JetView {
   }  
   init(){
     var context = this.ui({
-      view:"contextmenu",
+      view:"contextmenu", localId:"context",
       data:["Add","Rename","Delete",{ $template:"Separator" },"Info"]
     });
     context.attachTo(this.$$("body").getNode());
@@ -213,4 +213,14 @@ export default class TopView extends JetView {
 }
 ```
 
-[Check out the example >>](https://webix.com/snippet/dec9f580)
+To remove the context menu when its parent is destroyed, call its destructor:
+
+```js
+// views/top.js
+...
+destroy(){
+    $$("context").destructor();
+}
+```
+
+[Check out the example >>](https://webix.com/snippet/e15ae356)

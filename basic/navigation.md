@@ -73,6 +73,7 @@ You can also change the URL by calling the **show\(\)** method of a specific vie
 
 ```js
 // views/layout.js
+import {JetView} from "webix-jet";
 
 export default class LayoutView extends JetView {
     config(){
@@ -92,6 +93,7 @@ A specific instance of the related view class is referenced with **this** if you
 
 ```js
 // views/layout.js
+import {JetView} from "webix-jet";
 
 export default class LayoutView extends JetView {
     config(){

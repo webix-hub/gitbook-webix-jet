@@ -278,15 +278,13 @@ Let's include these views into one module and bind the list to the form:
 ```js
 // views/listedit.js
 import {JetView} from "webix-jet";
-import list from "list";
-import form from "form";
 
 export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                { $subview:"list", name:"list" },
-                { $subview:"form", name:"form" }
+                { $subview:"list", name:"list" },   //load "views/list"
+                { $subview:"form", name:"form" }    //load "views/form"
             ]
 	    }
     }
@@ -373,7 +371,7 @@ Apart from direct inclusion [described in the second chapter](../basic/views.md)
 - plain including:
 
 ```js
-import child from "child";
+import child from "views/child";
 ...
 {
     rows:[
@@ -386,7 +384,7 @@ import child from "child";
 - one view including with $subview:"view":
 
 ```js
-import child from "child";
+import child from "views/child";
 ...
 {
     rows:[
@@ -399,8 +397,8 @@ import child from "child";
 - including a hierarchy of views with $subview:"top/some":
 
 ```js
-import child from "child";
-import grandchild from "grandchild";
+import child from "views/child";
+import grandchild from "views/grandchild";
 
 ...
 {
@@ -427,6 +425,7 @@ For example, here are three views created in different ways:
 
 ```js
 // views/myview.js
+import {JetView} from "webix-jet";
 
 export default class MyView extends JetView {
     config() => { template:"MyView text" };
@@ -437,7 +436,6 @@ export default class MyView extends JetView {
 
 ```js
 // views/details.js
-
 export default Details = { 
     cols: [
         { template:"Details text" },
@@ -450,7 +448,6 @@ export default Details = {
 
 ```js
 // views/form.js
-
 export default Form = () => {
     view:"form", elements:[
         { view:"text", name:"email", required:true, label:"Email" },
@@ -465,9 +462,7 @@ Let's group them into a bigger view:
 
 ```js
 // views/bigview.js
-import myview from "myview";
-import details from "details";
-import form from "form";
+import myview from "views/myview";
 
 export default BigView = {
     rows:[
@@ -481,6 +476,7 @@ Mind that all these views could be put in any order you want and it doesn't depe
 
 ```js
 // views/bigview.js
+import details from "views/details";
 
 export default BigView = {
     rows:[
@@ -496,6 +492,7 @@ You can also include a view into a **popup or a window**:
 
 ```js
 // views/some.js
+import WindowView from "views/window";
 ...
 init(){
     this.win1 = this.ui(WindowView);
@@ -510,12 +507,12 @@ where *WindowView* is a view class like the following:
 import {JetView} from "webix-jet";
 
 export default class WindowView extends JetView{
-  config(){
-      return { view:"window", body:{} };
-  }
-  show(target){
-      this.getRoot().show(target);
-  }
+    config(){
+        return { view:"window", body:{} };
+    }
+    show(target){
+        this.getRoot().show(target);
+    }
 }
 ```
 
@@ -566,7 +563,7 @@ Next, the app module is included into another view:
 ```js
 // views/page.js
 import {app1} from "app1";
-import {toolbar} from "toolbar";
+import {toolbar} from "views/toolbar";
 
 export default PageView = () => ({
     rows: [ toolbar, app1 ]

@@ -18,7 +18,7 @@ JetView class has the following methods:
 
 ### [<span id="use">this.use(plugin, config) &uarr;</span>](#contents)
 
-The method includes a plugin, for example, this is how the **Status** plugin can be added:
+The method launches a plugin, for example, this is how the **Status** plugin can be added:
 
 ```js
 // views/data.js
@@ -87,7 +87,7 @@ this.show("small", { target:"right" })
 
 where *small* is the name of the view module.
 
-the above code is works the same as this:
+The above code works the same as this:
 
 ```js
 this.getSubView("right").show("small");
@@ -135,9 +135,9 @@ Have a look at the parent view with a list of records:
 
 ```js
 // views/orders.js
-import data from "orders";
-import orderform from "orderform";
 import {JetView} from "webix-jet";
+import orderform from "views/orderform";
+import data from "../models/orders";
 
 export default class OrdersView extends JetView{
 	config(){
@@ -169,7 +169,10 @@ In the example above, a *Jet view* was passed to *this.ui*, so the return value 
 *this.ui* returns a Webix UI object:
 
 ```js
-class TopView extends JetView {
+// views/top.js
+import {JetView} from "webix-jet";
+
+export default class TopView extends JetView {
   ...
   init(){
   	this.win = this.ui({ template:"test" });
@@ -182,12 +185,20 @@ class TopView extends JetView {
 *this.ui* returns a Webix UI object with Jet views inside:
 
 ```js
-class SubView extends JetView {
+// views/sub.js
+import {JetView} from "webix-jet";
+
+export default class SubView extends JetView {
   config(){
     return {template:"test"};
   }
 };
-class TopView extends JetView {
+
+// views/top.js
+import {JetView} from "webix-jet";
+import SubView from "views/sub";
+
+export default class TopView extends JetView {
   ...
   init(){
   	this.win = this.ui({
@@ -229,6 +240,9 @@ this.win = this.ui(SubView,{container:document.getElementById("here")});
 Use this method to attach events. This way of attaching an event is convenient, because it automatically detaches the event when the view that called it is destroyed. This helps to avoid memory leaks that may happen, especially in older browsers.
 
 ```js
+// views/form.js
+import {JetView} from "webix-jet";
+
 export default class FormView extends JetView{
     init(){
         this.on(this.app, "save:form", function(){
@@ -246,6 +260,8 @@ Use this method to return the Webix widget inside a Jet class view and to call m
 
 ```js
 // views/form.js
+import {JetView} from "webix-jet";
+
 export default class FormView extends JetView{
     config(){
         return { 
@@ -269,17 +285,14 @@ Use this method if you want to get to the methods of a subview. It looks for a s
 
 ```js
 // views/listedit.js
-
 import {JetView} from "webix-jet";
-import ChildList from "list";
-import ChildForm from "form";
 
 export default class ListEditView extends JetView{
 	config(){
 		return {
             cols:[
-                { $subview:"list", name:"list" },
-                { $subview:"form", name:"form" }
+                { $subview:"list", name:"list" },       //load "views/list"
+                { $subview:"form", name:"form" }        //load "views/form"
             ]
 	    }
 	}
@@ -290,10 +303,7 @@ After you set the name to a subview, you can refer to it with **this.getSubView(
 
 ```js
 // views/listedit.js
-
 import {JetView} from "webix-jet";
-import ChildList from "list";
-import ChildForm from "form";
 
 export default class ListEditView extends JetView{
 	...
@@ -312,6 +322,8 @@ Use this method to get to the methods of the parent view.
 
 ```js
 // views/form.js
+import {JetView} from "webix-jet";
+
 export default class Child extends JetView{
     config(){
         return {
@@ -333,10 +345,12 @@ For more details, [read the "Referencing" section](referencing.md).
 
 ### [<span id="id">this.\$\$("controlID") &uarr;</span>](#contents)
 
-Use **this.$$** to look for nested views by their IDs.
+Use **this.$$** to look for nested widgets by their IDs.
 
 ```js
 // views/toolbar.js
+import {JetView} from "webix-jet";
+
 export default class ToolbarView extends JetView {
     config() {
         //...
@@ -365,6 +379,8 @@ For example, you can get the URl segment related to the view by accessing the *p
 
 ```js
 // views/some.js
+import {JetView} from "webix-jet";
+
 export default class SomeView extends JetView{
     config(){
         return {
@@ -379,8 +395,7 @@ export default class SomeView extends JetView{
 
 ### this.getParam(name, [parent])
 
-Use this method to get the URL related data.
-**getParam()** lets the API access the URL parameters (variables), including those of the parent views. This can be useful as views and subviews quite often share a common parameter.
+Use this method to get the URL related data. **getParam()** lets the API access the URL parameters (variables), including those of the parent views. This can be useful as views and subviews quite often share a common parameter.
 
 **getParam()** takes two parameters:
 
@@ -413,6 +428,9 @@ var id = this.getParam("id", true); //id == 12
 For example, this is a parent view that puts the parameter into the URL and loads a subview:
 
 ```js
+// views/details.js
+import {JetView} from "webix-jet";
+
 export default class DetailsView extends JetView {
 	config(){
         return { cols:[
@@ -428,6 +446,9 @@ export default class DetailsView extends JetView {
 Here **sub** is a Jet view that will access the parent's parameter and display it:
 
 ```js
+// views/sub.js
+import {JetView} from "webix-jet";
+
 export default class sub extends JetView {
 	config(){
 		return {

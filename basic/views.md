@@ -36,7 +36,7 @@ One of the ways to nest a view is to directly include a view class. Let's create
 ```js
 // views/bigview.js
 import {JetView} from "webix-jet";
-import MyView from "myview";
+import MyView from "views/myview";
 
 export default class BigView extends JetView{
     config: () => { 
@@ -61,6 +61,8 @@ You can enable embedding multiple views that will change according to the URL. I
 
 ```js
 // views/bigview.js
+import {JetView} from "webix-jet";
+
 export default class BigView extends JetView {
     config: () => { 
             rows:[

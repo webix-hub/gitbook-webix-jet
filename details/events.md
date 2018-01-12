@@ -16,6 +16,8 @@ For instance, let's create a view that open a form as a subview with some specif
 
 ```js
 // views/data.js
+import {JetView} from "webix-jet";
+
 export default class DataView extends JetView{
     config(){
         return { cols:[
@@ -181,7 +183,6 @@ And this is a parent view that will include *ChildView* and call its method:
 ```js
 // views/parent.js
 import {JetView} from "webix-jet";
-import ChildView from "child";
 
 export default class ParentView extends JetView{
     config() {
@@ -190,7 +191,8 @@ export default class ParentView extends JetView{
                 { view:"button", value:"Set mode", click:() => {
                     this.getSubView().setMode("readonly")}
                 }, 
-                { $subview:"child" }]
+				{ $subview:"child" }	//load "views/child"
+			]
     }}
 }
 ```
@@ -205,13 +207,12 @@ Suppose you want to create a file manager resembling Total Commander. The parent
 
 ```js
 // views/manager.js
-import FileView from "files";
 ...
 config() { 
     return { 
         cols:[ 
-            { name:"left", $subview:"fileview" }, 
-            { name:"right", $subview:"fileview" }
+            { name:"left", $subview:"fileview" }, 	// "views/files"
+            { name:"right", $subview:"fileview" }	// "views/files"
         ]
 }}
 ```
@@ -220,7 +221,7 @@ Here each subview has a name. *fileview* has the *loadFiles* method. Next, let's
 
 ```js
 // views/manager.js
-
+...
 init() {
 	this.getSubView("left").loadFiles("a");
 	this.getSubView("right").loadFiles("b");

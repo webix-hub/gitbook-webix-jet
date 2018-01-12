@@ -60,7 +60,7 @@ Apart from navigating with links with the **route** attribute, you can create HT
 
 ~~~js
 // views/demo.js 
-import {ToolbarView} from "toolbar";
+import {ToolbarView} from "views/toolbar";
 
 const DemoView = {
     rows: [
