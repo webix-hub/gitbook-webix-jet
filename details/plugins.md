@@ -532,6 +532,18 @@ app.use(plugins.Locale);
 app.render();
 ```
 
+#### Optional Path for the Locale Plugin
+
+You can create subfolders inside the *jet-locale* folder and set the path while launching the plugin:
+
+```js
+// app.js
+...
+app.use(plugins.Locale, { path:"some"});
+```
+
+where *path* is a subfolder (subpath) inside the *jet-locale* folder.
+
 #### Locale Service Methods
 
 The Locale plugin launches a service. The **locale** service has several methods for localizing apps.

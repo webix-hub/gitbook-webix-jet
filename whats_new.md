@@ -16,6 +16,7 @@
     - [getParam](details/views.md#getparam) and [setParam](details/views.md#setparam) methods to get/set URL parameters
     - [getUrl](details/views.md)
 - [*UrlParam*](details/plugins.md#urlparam) plugin
+- ability to set optional path for the [Locale plugin](details/plugins.md#locale)
 
 ### Version 1.2 <span class="date">December 12, 2017</span>
 
