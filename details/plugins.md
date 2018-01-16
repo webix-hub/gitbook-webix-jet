@@ -212,7 +212,7 @@ The **target** property is the ID of the view component where you want to displa
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js)
 
-### [<span id="urlparam">UrlParam plugin &uarr;</span>](#contents)
+### [<span id="urlparam">UrlParam Plugin &uarr;</span>](#contents)
 
 The plugin allows using the URL fragments as parameters. It makes them accessible via **getParam(name)** and correctly weeds them out of the URL.
 
@@ -226,7 +226,7 @@ export default class SomeView() extends JetView{
 	config(){
 		return {
 			rows:[
-				{ $subview:true}
+				{ $subview:true }
 			]
 		};
 	}
@@ -241,7 +241,7 @@ When loading the URL *"/some/23/details"*, you need to drop *23* and treat it as
 
 ```js
 // views/some.js
-import {JetView} from "webix-jet";
+import {JetView,plugins} from "webix-jet";
 
 export default class SomeView() extends JetView{
    ...

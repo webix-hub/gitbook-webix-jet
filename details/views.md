@@ -368,7 +368,7 @@ export default class ToolbarView extends JetView {
 
 For details, [read the "Referencing" section](referencing.md).
 
-### this.getUrl()
+### [<span id="url">this.getUrl() &uarr;</span>](#contents)
 
 Use this method to get the URL as an array of segments, each one is an object with three properties:
 - *page* (name of the segment as *string*)
@@ -393,7 +393,7 @@ export default class SomeView extends JetView{
 }
 ```
 
-### this.getParam(name, [parent])
+### [<span id="getparam">this.getParam(name, [parent]) &uarr;</span>](#contents)
 
 Use this method to get the URL related data. **getParam()** lets the API access the URL parameters (variables), including those of the parent views. This can be useful as views and subviews quite often share a common parameter.
 
@@ -464,7 +464,7 @@ export default class sub extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
-### this.setParam(name, value, [url])
+### [<span id="setparam">this.setParam(name, value, [url]) &uarr;</span>](#contents)
 
 Use this method to set the URL related data. You can use **setParam()** to change a URL segment or a URL parameter:
 
