@@ -100,7 +100,7 @@ The method returns a service by its name, passed to the method as a parameter. C
 ```js
 // views/form.js
 import {JetView} from "webix-jet";
-import {getData} from "../models/records";
+import {getData} from "models/records";
 
 export default class FormView extends JetView{
     config(){

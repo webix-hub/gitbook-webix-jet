@@ -178,7 +178,7 @@ This is how you can use the plugin to display the status of data loading into a 
 
 ```js
 // views/data.js
-import {data} from "../models/records";
+import {data} from "models/records";
 ...
 config(){
 	return {

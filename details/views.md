@@ -216,16 +216,16 @@ export default class TopView extends JetView {
 
 ```js
 var SubView = {
-  template:"test"
+  	template:"test"
 };
 
 class TopView extends JetView {
-  config(){
-    return {};
-  }
-  init(){
-  	this.win = this.ui(SubView,{container:"here"});
-  }
+	config(){
+		return {};
+	}
+	init(){
+		this.win = this.ui(SubView,{container:"here"});
+	}
 }
 ```
 

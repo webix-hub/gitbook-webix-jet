@@ -38,7 +38,7 @@ To use the data in a component, you need to parse it. You must parse data in **i
 ```js
 // views/data.js
 import {JetView} from "webix-jet";
-import {records} from "../models/records";
+import {records} from "models/records";
 
 export default class DataView extends JetView{
 	config: () => {
@@ -57,7 +57,7 @@ You can also sync a data component inside a Jet view to a DataCollection. Let's 
 ```js
 // views/data.js
 import {JetView} from "webix-jet";
-import {records} from "../models/records";
+import {records} from "models/records";
 
 export default class DataView extends JetView{
 	config: () => {
@@ -162,7 +162,7 @@ In *init* you need to define a way to save data:
 ```js
 // views/data.js
 import {JetView} from "webix-jet";
-import {getData, saveData} from "../models/records";
+import {getData, saveData} from "models/records";
 
 export default class DataView extends JetView{
 	config: () => { 
@@ -180,7 +180,7 @@ Loading and saving data can also be in **config** of the view module, if needed:
 ```js
 // views/data.js
 import {JetView} from "webix-jet";
-import {getData, saveData} from "../models/records";
+import {getData, saveData} from "models/records";
 
 export default class DataView extends JetView{
 	config: () => {
@@ -288,7 +288,7 @@ You can import the model and parse it into a view component:
 
 ```js
 // views/data.js
-import records from "../models/nomencl";
+import records from "models/nomencl";
 ...
 init(view){
 	view.parse(records.getData(id));
