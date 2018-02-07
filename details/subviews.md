@@ -584,7 +584,7 @@ var app2 = new JetApp({
 
 As a result, this is a two-level app.
 
-[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/b686944b383745070fc977aa9123f01a36ce2b3c/viewapp.js).
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewapp.js).
 
 <!-- footnotes -->
 - - -
