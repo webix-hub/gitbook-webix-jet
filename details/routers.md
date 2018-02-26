@@ -15,9 +15,11 @@ The app URL is displayed after a hashbang. As this router is set by default, the
 
 ```js
 // myapp.js
+import {JetApp, HashRouter} from "webix-jet";
+
 var app = new JetApp({
     start: "/demo/details",
-    router: JetApp.routers.HashRouter //optional
+    router: HashRouter //optional
 }).render();
 ```
 
@@ -27,6 +29,8 @@ You can hide the "!" in the app URL by using the **routerPrefix** parameter in t
 
 ```js
 // myapp.js
+import {JetApp, HashRouter} from "webix-jet";
+
 var app = new JetApp({
     start: "/demo/details",
 	router: JetApp.routers.HashRouter, //optional
@@ -92,7 +96,7 @@ webix.ready(() => {
 Note that there is a router prefix that is present in the URL instead of a hashbang. You must provide it if the app is hosted in a folder. In your *index.html* you should set the relative URL with the same prefix:
 
 ```html
- <!-- index.html -->
+<!-- index.html -->
 <script type="text/javascript">
 	if(document.location.pathname == "/index.html")
 		document.location.href = "/routers-url/";
@@ -121,23 +125,28 @@ Here's an app module with a form view:
 
 ```js
 // app1.js
+import {JetApp, StoreRouter} from "webix-jet";
+
 var app1 = new JetApp({
     start: "/form",
-    router: JetApp.routers.StoreRouter
+    router: StoreRouter
 });
 ```
 
 Next, the app module is included into a view and the view is included into another app:
 
 ```js
-// app2.js
+// views/page.js
 const PageView = () => ({
     rows: [app1]
 });
 
+// app2.js
+import {JetApp, HashRouter} from "webix-jet";
+
 var app2 = new JetApp({
     start: "/page",
-    router: JetApp.routers.HashRouter
+    router: HashRouter
 }).render();
 ```
 
@@ -147,9 +156,11 @@ If you don't want to store the app part of the URL, there's the EmptyRouter for 
 
 ```js
 // app1.js
+import {JetApp, EmptyRouter} from "webix-jet";
+
 var app1 = new JetApp({
     start: "/form",
-    router: JetApp.routers.EmptyRouter
+    router: EmptyRouter
 });
 ```
 
@@ -159,3 +170,8 @@ var app1 = new JetApp({
 
 If these four routers aren't what you want, you can define your own.
 
+A router must be a class with the following methods:
+
+- **constructor**(callback, config), where _callback_ is a function called to set the correct URL and _config_ can contain the router prefix;
+- **set**(path, config), where _path_ is the app URL and _config_ can contain some additional options for setting the URL;
+- **get**() that returns the URL.
