@@ -384,12 +384,10 @@ import child from "views/child";
 - one view including with $subview:"view":
 
 ```js
-import child from "views/child";
-...
 {
     rows:[
         { view:"button" },
-        { $subview:"child" }
+        { $subview:"child" }    //load from "views/child"
     ]
 }
 ```
@@ -397,14 +395,10 @@ import child from "views/child";
 - including a hierarchy of views with $subview:"top/some":
 
 ```js
-import child from "views/child";
-import grandchild from "views/grandchild";
-
-...
 {
     rows:[
         { view:"button" },
-        { $subview:"child/grandchild" }
+        { $subview:"child/grandchild" } // load from "views/child" and "views/grandchild"
     ]
 }
 ```
