@@ -152,8 +152,11 @@ To save data, you can add one more function to the *records* model:
 export function getData(){
 	return webix.ajax("data.php");
 };
-export function saveData(){
-	return webix.ajax().post("data.php", { data });
+export function saveData(id, operation, data){
+	if(operation is "update") //"add", "delete"
+		return webix.ajax().post("data.php", data);
+	if(operation =="add")
+		// ...
 }
 ```
 
