@@ -1,11 +1,11 @@
-# Asynchronous Views and Data
+# <span id="contents">Asynchronous Views and Data</span>
 
 Data are usually stored on the server side. If data are loaded asynchronously, you need to wait until they are available to perform data-related operation with views, e.g. select a record. If the UI is built much faster than data are loaded, it is a good idea to make use of promises to load the data. The app will wait for data from the server, and only after a promise resolves, it will render the view.
 
 Promises are returned by all Ajax requests within Webix:
 
 - [**webix.ajax**](#ajax), which is resolved when an Ajax request is completed
-- [**data.waitData**](#waitData), which is resolved when a data component is populated with remote data
+- [**data.waitData**](#waitdata), which is resolved when a data component is populated with remote data
 - [**webix.promise**](#promise), an interface for working with promise objects
 
 ## [<span id="ajax">webix.ajax &uarr;</span>](#contents)
