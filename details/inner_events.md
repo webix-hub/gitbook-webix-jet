@@ -10,6 +10,8 @@ Apart from using built-in means like plugins, you can use a number of inner even
 - [*app:render*](#render)
 - [*app:route*](#route)
 - [*app:guard*](#guard)
+- [*app:user:login*](#login)
+- [*app:user:logout*](logout)
 
 ### [<span id="render">app:render &uarr;</span>](#events)
 
@@ -17,7 +19,7 @@ The event is triggered before each view of an app is rendered. You can use it to
 
 ```js
 // myapp.js
-
+...
 app.attachEvent("app:render", function(view,url,result){
 	if (result.ui.view === "button")
 		result.ui.disabled = true;
@@ -36,7 +38,7 @@ For example, you can put all the buttons on a toolbar:
 
 ```js
 // myapp.js
-
+...
 app.attachEvent("app:render", function(view,url,result){
 	if (result.ui.view === "button")
 		result.ui = {
@@ -108,19 +110,18 @@ export default class TopView extends JetView {
 						]},
 						{ $subview: true }
 					]
-			}]
-};}}
+				}
+			]
+		};
+	}
+}
 ```
 
 One of the subviews will be blocked. Let's create a guard that will block it and redirect users to the *allowed* subview. Group the views into app and attach the **app:guard** event:
 
 ```js
 // myapp.js
-import {JetApp} from "webix-jet";
-
-const app = new JetApp({
-	start:		"/top/blocked"
-});
+...
 app.attachEvent("app:guard", function(url, view, nav){
 	if (url.indexOf("/blocked") !== -1){
 		nav.redirect = "/top/allowed";
@@ -132,6 +133,30 @@ app.render();
 [The demo is available on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
 ![](../images/appguard.png)
+
+### [<span id="login">app:user:login &uarr;</span>](#events)
+
+The **app:user:login** event is called by the User plugin when a user logs in. The event handler receives one parameter - an object with user data.
+
+```js
+// myapp.js
+...
+app.attachEvent("app:user:login",function(user){
+	webix.ajax("log.php", user);
+})
+```
+
+### [<span id="logout">app:user:logout &uarr;</span>](#events)
+
+The **app:user:logout** event is called by the User plugin when a user logs out.
+
+```js
+// myapp.js
+...
+app.attachEvent("app:user:logout",function(){
+	app.show("loginform");	//load "views/loginform.js"
+})
+```
 
 ## [<span id="errors">Error Handling and Debugging &uarr;</span>](#contents)
 

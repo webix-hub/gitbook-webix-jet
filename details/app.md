@@ -4,14 +4,15 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 
 | Method | Use to  |
 |--------|---------|
-| [attachEvent(event, handler)](#attach)   | attach an event |
-| [callEvent(event)](#call)                | call an event |
-| [detachEvent(event)](#detach)            | manually detach an event listener |
-| [getService(name,handler)](#get_service) | access a service by its name |
-| [render(container)](#render)             | render the app or the app module |
-| [setService(name)](#set_service)         | set a service |
-| [show(url)](#show)                       | rebuild the app or app module according to the new URL |
-| [use(plugin, config)](#use)              | switch on a plugin |
+| [attachEvent(event, handler)](#attach)    | attach an event |
+| [callEvent(event)](#call)                 | call an event |
+| [detachEvent(event)](#detach)             | manually detach an event listener |
+| [getService(name,handler)](#get_service)  | access a service by its name |
+| [refresh()](#refresh)                     | repaints the UI of an app |
+| [render(container)](#render)              | render the app or the app module |
+| [setService(name)](#set_service)          | set a service |
+| [show(url)](#show)                        | rebuild the app or app module according to the new URL |
+| [use(plugin, config)](#use)               | switch on a plugin |
 
 ### [<span id="attach">app.attachEvent("event:name", handler) &uarr;</span>](#contents)
 
@@ -118,6 +119,10 @@ export default class FormView extends JetView{
 ```
 
 You can read more about services in the ["Services"](services.md) chapter.
+
+### [<span id="refresh">app.refresh() &uarr;</span>](#contents)
+
+If you want to repaint the UI of the application, call *app.refresh()*. It will re-render all the views.
 
 ### [<span id="render">app.render() &uarr;</span>](#contents)
 
