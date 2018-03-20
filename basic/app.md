@@ -11,24 +11,29 @@ An app represents an application or an application module. It is used to group v
 
 ### The Syntax of Creation
 
-An app module is created as a new instance of the JetApp class. You must pass an object with your app configuration like the app name, version, start URL, etc. as the parameter.
+An app module is created as a new instance of the JetApp class.
+
+1. Import the _JetApp_ class and create its instance.
+2. Define the start point, which is the start app URL. App configuration can include other properties like the app name, version, etc.
+3. Call the **render()** method of the JetApp instance to paint the UI on the page.
+4. Enclose it in **webix.ready()** to ensure that HTML page is parsed completely before JS starts executing.
 
 ~~~js
 // myapp.js
 import {JetApp} from "webix-jet";
 
-var app = new JetApp({
-    start:"/top/layout"
-}).render(); //mandatory!
+webix.ready(function(){
+	var app = new JetApp({
+		start:"/top/layout"
+	}).render(); //mandatory!
+});
 ~~~
-
-After you specify the app configuration, you must call the **render** method to build the UI.
 
 You can open the needed URL and the UI will be rendered from the URL elements. The app splits the URL into parts, finds the corresponding files in the **views** folder and creates an interface by combining UI modules from those files.
 
 ### App Configuration
 
-In the app config, for example, you can set the mode in which the app will work:
+In the app configuration, for example, you can set the mode in which the app will work:
 
 ```js
 // myapp.js
@@ -51,11 +56,11 @@ if (this.app.config.mode === "readonly"){
 ...
 ```
 
-**this.app** refers to the app, while **this** refers to the view<sup><a href="#myfootnote1" id="origin">1</a></sup>.
+**this** refers to the current instance of a Jet view (_games_, for example)<sup><a href="#myfootnote1" id="origin">1</a></sup>.
 
 ### Routers
 
-New Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is *HashRouter*. If you don't want to display the hashbang in the URL, you can change the router to *UrlRouter*:
+Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is _HashRouter_. If you don't want to display the hashbang in the URL, you can change the router to _UrlRouter_:
 
 ```js
 // myapp.js
