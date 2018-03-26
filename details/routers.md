@@ -33,7 +33,7 @@ import {JetApp, HashRouter} from "webix-jet";
 
 var app = new JetApp({
     start: "/demo/details",
-	router: JetApp.routers.HashRouter, //optional
+	router: HashRouter, //optional
 	routerPrefix:""
 }).render();
 ```
@@ -46,37 +46,9 @@ https://myshop.com/#/sales/top
 
 ## [<span id="url">2. URL Router &uarr;</span>](#contents)
 
-If you choose UrlRouter, the app URL is displayed without a hashbang. Clandestine and cool, but there's a trick with this router. Your server-side code should be compatible.
+If you choose UrlRouter, the app URL is displayed without a hashbang. There is a trick with this router: your server-side code should be compatible. You need to provide redirects to avoid error 404.
 
-Have a look at the example. Here are three views: one parent and two child views that are dynamically included by a click on jet links in the parent view:
-
-```js
-// views/top.js
-const TopView = {
-	type:"space", rows:[
-		{ type:"header", template:"Url router"},
-		{
-			type:"wide", cols:[
-				{ width:200, css:"navblock", template:`
-					<a route="/top/start"> - show start</a>
-					<a route="/top/details"> - show details</a>
-				`},
-				{ $subview: true }
-			]
-		}
-	]
-};
-
-const StartView = {
-	template:"Start page"
-};
-
-const DetailsView = {
-	template:"Details page"
-};
-```
-
-Let's create an app from these views and choose UrlRouter:
+You must choose _UrlRouter_ in the app configuration:
 
 ```js
 // myapp.js
@@ -84,16 +56,42 @@ import {JetApp, UrlRouter} from "webix-jet";
 
 webix.ready(() => {
 	const app = new JetApp({
-		id:			"routers-url",
-		router:		UrlRouter,
-		routerPrefix: "/routers-url", //!
-		start:		"/top/start"
+		router: UrlRouter,
+		start: "/top/start"
 	});
 	app.render();
 });
 ```
 
-Note that there is a router prefix that is present in the URL instead of a hashbang. You must provide it if the app is hosted in a folder. In your *index.html* you should set the relative URL with the same prefix:
+Next, configure http redirects by adding a fallback. For webpack dev server from a starter kit, this can be done in _webpack.config_:
+
+```js
+// webpack.config.js
+devServer:{
+	historyApiFallback:{
+		index : "index.html"
+	}
+}
+```
+In production apps, this can be done through *apache/nginx* configuration.
+
+If the app is hosted in a folder, you must provide a router prefix:
+
+```js
+// myapp.js
+import {JetApp, UrlRouter} from "webix-jet";
+
+webix.ready(() => {
+	const app = new JetApp({
+		router: UrlRouter,
+		routerPrefix: "/routers-url", //!
+		start: "/top/start"
+	});
+	app.render();
+});
+```
+
+In your _index.html_ you should set the relative URL with the same prefix:
 
 ```html
 <!-- index.html -->
@@ -102,18 +100,6 @@ Note that there is a router prefix that is present in the URL instead of a hashb
 		document.location.href = "/routers-url/";
 </script>
 ```
-
-Next, configure http redirects so that requests to all URLs triggered the html file of the app. This can be done through the webpack config:
-
-```js
-// webpack.config.js
-devServer:{
-	historyApiFallback:{
-		index : "routers-url.html"
-	}
-}
-```
-In the production app, it can be done through *apache/nginx* configuration.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js)
 

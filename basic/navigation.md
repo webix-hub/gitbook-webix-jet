@@ -1,45 +1,51 @@
 # In-App Navigation (Routing)
 
-Navigation is implemented by changing the URL of the page. The URL reflects the current state of the app. By default, it is stored as a part after the hashbang. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">1</a></sup>. When the URL is changed, the app updates itself accordingly. 
+_Routing_ means navigating from one part of the application to another. Navigation is implemented by changing the URL of the page. The URL reflects the current state of the app. By default, it is stored as a part after the hashbang. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">1</a></sup>. When the URL is changed, the app updates itself accordingly. 
 
 ### Advantages of Jet Navigation
 
-- *Browser Navigation Keys*: You can move backwards and forwards to previously opened subviews.
+- *Browser Navigation Keys*: Jet URL is stored in the browser history, so you can move backwards and forwards to previously opened subviews.
 - *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before a page reload.
-- *Convenient Development*: If you work on some particular subview (*games*), you can open the path to it (*#!/games*) and test it separately from the rest of the UI.
+- *Convenient Development*: If you work on some particular subview (e.g. *games*), you can open the path to it (*#!/games*) and test it separately from the rest of the UI.
 
 In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three<sup><a href="#myfootnoten" id="originn">*</a></sup> more ways to show views and subviews:
 
 <span id="contents"></span>
 
 - [Jet links](#jet_links)
-- [app.show](#app_show)
-- [view.show](#view_show)
+- [app.show()](#app_show)
+- [view.show()](#view_show)
 
 ### [<span id="jet_links">1. Jet Links &uarr;</span>](#contents)
 
-You can add links with the **route** attribute instead of the usual **href** and provide the URL to the desired views, e.g.:
+You can add links with the **route** attribute and provide the URL to the desired views, e.g.:
 
-```html
-<a route="/details/data"></a>
+```js
+export default {
+    template:'<a route="/top/data">Data</a>'
+}
 ```
 
-After you click on the link, the app UI will be rebuilt and will consist of the parent view _details_ and a subview _data_.
+After you click on the link, the app UI will be rebuilt and will consist of the parent view _top_ and a subview _data_.
 
 You can pass one or more **parameters** with a Jet link:
 
-```html
-<!-- one -->
-<a route="/details/data?id=2"></a>
-<!-- or several -->
-<a route="/details/data?id=2&name=some"></a>
+```js
+// one
+export default {
+     template:'<span route="/top/data?id=2">Data</span>'
+}
+// or several
+export default {
+     template:'<span route="/top/data?id=2&name=some">Data</span>'
+}
 ```
 
 ### [<span id="app_show">2. app.show\(\) &uarr;</span>](#contents)
 
-The **app.show\(\)** method is applied to the whole application and rebuilds its UI. You can call the method from control handlers, for instance.
+The **app.show\(\)** method is applied to the whole application and rebuilds its UI (only the parts that changed). You can call the method from control handlers, for instance.
 
-Here is how you can rebuild the app UI with **app.show**. A specific instance of the related view class is referenced with **this** if you define handlers as *arrow functions*. To reference the app and to call its **show** method, use **this.app**<sup><a href="#myfootnote2" id="origin2">2</a></sup>.
+Here is how you can rebuild the app UI with **app.show()**. **this** refers to a specific instance of the related view class if you define handlers as *arrow functions*. <sup><a href="#myfootnote2" id="origin2">2</a></sup>.
 
 ```js
 // views/layout.js
@@ -52,13 +58,12 @@ Here is how you can rebuild the app UI with **app.show**. A specific instance of
 
 After a button click, the URL will change, and the app UI will be rebuilt according to it.
 
-##### App.show with URL Parameters
+##### _app.show()_ with URL Parameters
 
 You can pass one or more parameters to show alongside the URL:
 
 ```js
 // views/layout.js
-
 // one
 this.app.show("/demo/details?id=2");
 // or many
@@ -69,7 +74,7 @@ this.app.show("/demo/details?id=2&name=some");
 
 ##### Rebuilding Part of the App
 
-You can also change the URL by calling the **show\(\)** method of a specific view class. Showing subviews with **view.show** gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
+You can also change the URL by calling the **show\(\)** method of a specific view class. Showing subviews with **view.show()** gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
 ```js
 // views/layout.js
@@ -87,9 +92,9 @@ export default class LayoutView extends JetView {
 }
 ```
 
-If the current URL is _"/layout/details"_, the subview is **details**. Let's replace **details** with the **demo** subview on a button click. To replace the current subview with a different one, pass the name of the subview as it is or with *"./"* to **show**.
+If the current URL is _"/layout/details"_, the subview is **details**. Let's replace **details** with the **demo** subview on a button click. Pass the name of the subview as it is or with *"./"* to **show()**.
 
-A specific instance of the related view class is referenced with **this** if you define a handler as an *arrow function*<sup><a href="#myfootnote3" id="origin3">3</a></sup>. To rebuild a part of the UI, call **this.show()**:
+**this** refers to a specific instance of the related view class if you define a handler as an *arrow function*<sup><a href="#myfootnote3" id="origin3">3</a></sup>. To rebuild a part of the UI, call **this.show()**:
 
 ```js
 // views/layout.js
@@ -110,13 +115,13 @@ export default class LayoutView extends JetView {
 
 //or
 ...
-    { view:"button", value:"demo", click: () => {
+    { view:"button", value:"Demo", click: () => {
         this.show("./demo");
     }}
 ...
 ```
 
-If you click **demo**, the resulting URL is going to be */layout/demo*.
+If you click **Demo**, the resulting URL is going to be */layout/demo*.
 
 ##### Rebuilding the whole app
 
@@ -125,19 +130,19 @@ If you want to rebuild the whole app and load the **demo** view as the only view
 ```js
 // views/layout.js
 ...
-    { view:"button", value:"demo", click: () => {
-        this.show("/demo");
-    }}
+{ view:"button", value:"demo", click: () => {
+    this.show("/demo");
+}}
 ...
 ```
 
-##### View.show with URL Parameters
+##### _view.show()_ with URL Parameters
 
 You can pass one or more parameters with the URL:
 
 ```js
 // views/layout.js
-
+// one
 this.show("demo?id=2");
 // or many
 this.show("demo?id=2&name=some");

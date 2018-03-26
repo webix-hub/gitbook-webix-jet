@@ -1,6 +1,25 @@
 # <span id="contents">App Configuration</span>
 
-An app module is created as a new instance of the JetApp class. You can include various parameters into the app configuration.
+An app module is created as a new instance of the JetApp class. In this file you will also typically include:
+- stylesheets
+- custom widgets
+- app-level plugins
+- app-level Webix settings
+
+```js
+//app.js
+import "./styles/app.css";
+
+webix.ready(() => {
+	if (webix.CustomScroll && !webix.env.touch)
+			webix.CustomScroll.init();
+	new JetApp({ 
+		"/top/start"
+	}).render();
+});
+```
+
+You can include various parameters into the app configuration.
 
 | Parameter                         | What For |
 |-----------------------------------|----------|
@@ -28,7 +47,7 @@ webix.ready(function{
 
 ### [<span id="debug">Debugging &uarr;</span>](#contents)
 
-You can enable debugging in the app configuration: 
+It is highly recommended to enable the **debug** mode when developing Jet apps. You can enable debugging in the app configuration: 
 
 ```js
 // myapp.js

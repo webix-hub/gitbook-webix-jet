@@ -4,17 +4,17 @@ Data are usually stored on the server side. If data are loaded asynchronously, y
 
 Promises are returned by all Ajax requests within Webix:
 
-- [**webix.ajax**](#ajax), which is resolved when an Ajax request is completed
+- [**webix.ajax()**](#ajax), which is resolved when an Ajax request is completed
 - [**data.waitData**](#waitdata), which is resolved when a data component is populated with remote data
 - [**webix.promise**](#promise), an interface for working with promise objects
 
 ## [<span id="ajax">webix.ajax &uarr;</span>](#contents)
 
-#### A Promise Returned by **config()** of a Class View
+#### A Promise Returned by *config()* of a Class View
 
-If your client depends on server-side data, you can fetch them asynchronously and return a promise in the **config()** method of a Jet view. **webix.ajax** makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, the response is passed to a callback in **then**.
+If your client depends on server-side data, you can fetch them asynchronously and return a promise in the **config()** method of a Jet view. **webix.ajax()** makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, the response is passed to a callback in **then()**.
 
-Let's load chart configuration with **webix.ajax**:
+Let's load chart configuration with **webix.ajax()**:
 
 ```js
 //views/statistics.js
@@ -25,9 +25,10 @@ export class StatisticsView extends JetView {
         return webix.ajax("data/colors").then(function(data){
             const colors = data.json();
             const chart = { view:"chart", series:[]};
-            chart.series.push({
-                value:"#"+i+"#", color:colors[i]
-            });
+            for (let i = 0; i < colors.length; i++)
+                chart.series.push({
+                    value:"#"+i+"#", color:colors[i]
+                });
             return chart;
         });
     }
@@ -38,9 +39,10 @@ export class StatisticsView extends JetView {
 
 #### A Simple View as a Promise
 
-Views can also be defined in a simpler way. You can define a view as a promise of a view object:
+You can define a view as a promise of a view object:
 
 ```js
+// views/chart.js
 export default webix.ajax("server/colors.php").then(function(data){
     /* view creation */
     const colors = data.json();
@@ -52,9 +54,10 @@ export default webix.ajax("server/colors.php").then(function(data){
 }
 ```
 
-Let's load data into List inside a simple promised view:
+Let's load data into a list inside a simple promised view:
 
-```js 
+```js
+// views/data.js
 const data = webix.ajax("data").then(res => {
 	return {
 		view:"list", data:res.json()
@@ -66,6 +69,7 @@ export default data;
 More explicitly, the same list view can be defined like this:
 
 ```js
+// views/data.js
 export default new Promise((res, rej) => {
 	webix.ajax("data", function(text, res){
 		const ui = {
@@ -103,7 +107,7 @@ export default class DataView extends JetView {
 ```js
 // models/records.js
 export const data = new webix.DataCollection({
-   url:"/some/records", 
+   url:"/some/records"
 });
 ```
 
@@ -133,7 +137,7 @@ For example, these are data returned by two models, the first dataset is linked 
 ]
 ```
 
-Use **webix.promise.all** to wait till both data models are loaded and then do something with them:
+Use **webix.promise.all()** to wait till both data models are loaded and then do something with them:
 
 ```js
 // views/details.js
@@ -159,9 +163,9 @@ export class DetailsView extends JetView {
 }
 ```
 
-#### Simple View that Returns a Promise
+#### A Simple View that Returns a Promise
 
-**defer** of **webix.promise** creates a new instance of a promise object. **resolve** creates and resolves a promise with a specified value, for example, a Webix widget.
+**defer()** of **webix.promise** creates a new instance of a promise object. **resolve()** creates and resolves a promise with a specified value, for example, a Webix widget.
 
 Have a look at a simple example of a factory function that returns a promise that resolves with a template in a second. The delay is done purely for the demo.
 

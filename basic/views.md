@@ -25,11 +25,26 @@ Views are resolved one by one according to URL chunks in the address bar. _The l
 index.html#!/myview
 ```
 
+You can also include view files into subfolders: 
+
+views
+- start.js
+- details
+    - form.js
+    - template.js
+
+To show the files in subfolders, reference them as _folder.file_, e.g. 
+
+```
+\#!details.form
+\#!details.template
+```
+
 ## [<span id="stat_subview">Subview &uarr;</span>](#contents)
 
-Apps created with Webix Jet are single-page. The interface of your app can be constructed from multiple views. Some parts can be dynamic and you may change them based on the state of the app. Such dynamic views are called _subviews_. 
+Apps created with Webix Jet are single-page. The interface of your app can be constructed from multiple views. Views can be included in other views and are called _subviews_. They can be either static or dynamic.
 
-#### Direct (Static) Including
+#### Static Subviews
 
 One of the ways to nest a view is to import Jet view class and  directly include it into another view. Let's create a new view in _bigview.js_ and include the **MyView** class into it:
 
@@ -53,7 +68,7 @@ You can open the view with this URL:
 index.html#!/bigview
 ```
 
-#### [<span id="dynam_subview">Dynamic Including &uarr;</span>](#contents)
+#### [<span id="dynam_subview">Dynamic Subviews &uarr;</span>](#contents)
 
 You can embed multiple views that will change according to the URL. Instead of the concrete name of the view class, write _{ $subview: true }_:
 
@@ -70,9 +85,7 @@ export default class BigView extends JetView {
 }
 ```
 
-The next segment of the URL (after _bigview_) will instruct the app, which view to load as a subview. Based on the URL, the view file will be located, the related view will be loaded, and the corresponding view module will be rendered as a subview.
-
-You can show subviews by changing the URL, for example:
+The next segment of the URL (after _bigview_) will instruct the app, which view to load as a subview. Based on the URL, the view file will be located, the related view will be loaded, and the corresponding view module will be rendered as a subview. For example:
 
 ```
 //load views/myview.js
