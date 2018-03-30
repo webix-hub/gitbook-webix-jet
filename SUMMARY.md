@@ -18,8 +18,7 @@
   * [Navigation](details/navigation.md)
   * [Popups and Windows](details/popups.md)
   * [Routers](details/routers.md)
-  * [Events and Methods](details/events.md)
-  * [Services](details/services.md)
+  * [View Communication](details/events.md)
   * [Plugins](details/plugins.md)
   * [Inner Events and Error Handling](details/inner_events.md)
 * Part III - Practical Tasks
