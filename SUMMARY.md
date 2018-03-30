@@ -26,6 +26,7 @@
   * [Deploying App](practice/deploy.md)
   * [Webpack Configuration](practice/webpackconfig.md)
   * [Working with package.json](practice/packjson.md)
+  * [Using TypeScript](practice/typescript.md)
   * [Jet Recipes](practice/recipes.md)
   * [Extra Solutions](practice/unrecommended.md)
   * [Tools](practice/tools.md)

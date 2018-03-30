@@ -11,7 +11,7 @@
 
 ### Version 1.3 <span class="date">January 11, 2018</span>
 
-- TypeScript support
+- [TypeScript support](practice/typescript.md)
 - new API:
     - [getParam](details/views.md#getparam) and [setParam](details/views.md#setparam) methods to get/set URL parameters
     - [getUrl](details/views.md)
