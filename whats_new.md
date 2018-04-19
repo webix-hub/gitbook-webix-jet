@@ -9,6 +9,10 @@
 
 # What's New
 
+### Version 1.4 <span class="date">April 11, 2018</span>
+
+- JetView class instances can be created in **config()**
+
 ### Version 1.3 <span class="date">January 11, 2018</span>
 
 - [TypeScript support](practice/typescript.md)

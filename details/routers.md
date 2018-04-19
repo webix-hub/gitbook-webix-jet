@@ -84,7 +84,7 @@ import {JetApp, UrlRouter} from "webix-jet";
 webix.ready(() => {
 	const app = new JetApp({
 		router: UrlRouter,
-		routerPrefix: "/routers-url", //!
+		routerPrefix: "/myapp", //!
 		start: "/top/start"
 	});
 	app.render();
@@ -97,7 +97,7 @@ In your _index.html_ you should set the relative URL with the same prefix:
 <!-- index.html -->
 <script type="text/javascript">
 	if(document.location.pathname == "/index.html")
-		document.location.href = "/routers-url/";
+		document.location.href = "/myapp";
 </script>
 ```
 
