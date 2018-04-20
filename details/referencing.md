@@ -218,7 +218,7 @@ export default class ListEditView extends JetView{
 }
 ```
 
-When all the views are ready (**ready** of the parent view is called after all its subviews are ready), the form is bound to the list. Mind that the parent view must have the **bindWith** method that calls the **bind** method of a Webix form:
+When all the views are ready (**ready()** of the parent view is called after all its subviews are ready), the form is bound to the list. Mind that the parent view must have the **bindWith()** method that calls the **bind()** method of a Webix form:
 
 ```js
 // views/form.js
@@ -240,13 +240,13 @@ export default class ChildForm extends JetView{
 
 ### [<span id="controls">5. Referencing Webix Widgets &uarr;</span>](#contents)
 
-You can reference a Webix widget inside a Jet view in two ways. 
+You can reference a Webix widget inside a Jet view with **this.ui()** by their global and local IDs. **this.$$()** ignores widgets inside subviews<sup><a href="#footnote1" id="origin1">*</a></sup>. 
 
 ##### 1. Getting by Local IDS (*localId*) 
 
 You can add a local ID to a widget and then use **this.\$\$("localId")** to reference it. Local IDs are better than global, because they isolate IDs inside the current Jet view.
 
-Let's use the local ID to get to the segmented button and set its value in **init** of the parent Jet view: 
+Let's use the local ID to get to the segmented button and set its value in **init()** of the parent Jet view: 
 
 ```js
 // views/toolbar.js
@@ -268,9 +268,9 @@ export default class ToolbarView extends JetView {
 
 ##### 2. Getting by Global IDs
 
-**this.\$\$(id)** can be used to reference nested views and controls by their *global or local IDs*. So you can add global IDs to widgets, but you should keep in mind that global IDs must be unique. The more developers are working on the project, the stronger the odds are that someone will give the same ID to some other widget.
+**this.\$\$(id)** can be used to reference nested views and controls by their *global IDs*. You should keep in mind that global IDs must be unique. The more developers are working on the project, the stronger the odds are that someone will give the same ID to some other widget.
 
-One of the solutions is to give complex IDs, e.g. *"root_view:control"* or *"control:function"*. This will lessen the chances of non-unique IDs.
+You can give complex IDs, e.g. *"root_view:control"* or *"control:function"*. This will lessen the chances of non-unique IDs.
 
 ```js
 // views/toolbar.js
@@ -286,3 +286,7 @@ One of the solutions is to give complex IDs, e.g. *"root_view:control"* or *"con
 ```
 
 If you use *this.\$\$(id)* with a global ID, it's the same as *webix.\$\$(id)*.
+
+---
+<a id="footnote1" href="#origin1">* &uarr;</a>:
+Starting with Webix Jet 1.5. If you want to look for widgets in the current view and all its subviews, use [this.getRoot().queryView()](https://docs.webix.com/api__ui.baseview_queryview.html).

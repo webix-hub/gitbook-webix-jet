@@ -9,12 +9,12 @@ The JetView class has the following methods:
 | [getParentView()](#getpar)               | call methods of a parent view                 |
 | [getRoot()](#getroot)                    | call methods of the Webix widget              |
 | [getSubView(name)](#getsub)              | call the methods of a subview                 |
-| [getUrl()](#url)                         | get the URL segment related to the view       |
+| [getUrl()](#url)                         | get the URL segment related to a view         |
 | [setParam(name, value)](#setparam)       | set the URL parameters                        |
 | [show("path")](#show)                    | show a view or a subview                      |
 | [ui(view)](#ui)                          | create a popup or a window                    |
 | [use(plugin, config)](#use)              | switch on a plugin                            |
-| [\$\$("controlID")](#id)                 | call methods of some Webix widget             |
+| [\$\$("controlID")](#id)                 | return Webix widgets inside a view            |
 
 -------------
 
@@ -349,7 +349,7 @@ For more details, [read the "Referencing" section](referencing.md).
 
 ### [<span id="id">this.\$\$("controlID") &uarr;</span>](#contents)
 
-Use **this.$$()** to look for nested widgets by their local IDs.
+Use **this.$$()** to look for Webix widgets by their local IDs inside the current Jet view<sup><a href="#footnote1" id="origin1">*</a></sup>.
 
 ```js
 // views/toolbar.js
@@ -431,7 +431,7 @@ And this is how you can get **id** from **some**:
 
 ```js
 //from some.js
-var id = this.getParam("id"); //id == ""
+var id = this.getParam("id");       //id == ""
 var id = this.getParam("id", true); //id == 12
 ```
 
@@ -518,3 +518,7 @@ export default class TopView extends JetView {
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
 [<span style="float:right;">**Back to top &uarr;**</span>](#contents)
+
+- - -
+<a id="footnote1" href="#origin1">* &uarr;</a>:
+Starting with Webix Jet 1.5. If you want to look for widgets in the current view and all its subviews, use [this.getRoot().queryView()](https://docs.webix.com/api__ui.baseview_queryview.html).

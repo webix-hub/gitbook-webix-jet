@@ -27,5 +27,6 @@
   * [Working with package.json](practice/packjson.md)
   * [Using TypeScript](practice/typescript.md)
   * [Jet Recipes](practice/recipes.md)
+  * [Nesting Jet Views into Webix Widgets](practice/nested.md)
   * [Extra Solutions](practice/unrecommended.md)
   * [Tools](practice/tools.md)

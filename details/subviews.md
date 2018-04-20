@@ -82,6 +82,7 @@ export default class TopView extends JetView {
 ```
 
 - [<span id="class_contents">Advantages of Classes</span>](#class_advantages)
+- [Jet View Constructor](#constructor)
 - [JetView Lifetime Methods](#methods)
 - [Local Methods and Properties](#class_methods_properties)
 
@@ -117,9 +118,50 @@ Successor class:
 ```js
 import Toolbar from "views/toolbar";
 export default class BiggerToolbar extends Toolbar {
-   init(view){
-      view.addView({view:"button", value:"Save"});
-   }
+    init(view){
+        view.addView({view:"button", value:"Save"});
+    }
+}
+```
+
+### [<span id="constructor">JetView Constructor &uarr;</span>](#class_contents)
+
+You can create new instances of Jet class views with a constructor. This is very useful if you want to reuse a view several times, but want each instance to be different in some way (changes in UI, different data).
+
+```js
+// views/customerdata.js
+import {JetView} from "webix-jet";
+export default class CustomersData extends JetView{
+    constructor(app,name,data){
+        super(app,name);
+        this._data = data;
+    }
+	config(){
+		return {
+			view:"datatable",
+			columns:[
+				{ id:"name", header:["Name", {content:"textFilter"} ], sort:"text", fillspace:true },
+				{ id:"email", header:"Email", sort:"text", adjust:"data" },
+				{ id:"phone", header:"Phone", sort:"text", width:120 }
+			]
+		};
+    }
+    init(view){
+        view.parse(_data);
+    }
+}
+```
+
+Then you can create a new instance of CustomerData in **config()** of another Jet view:
+
+```js
+// views/customers.js
+import {JetView} from "webix-jet";
+import {getData()} from "models/customers";
+...
+config(){
+    ...
+    var data = new CustomersData(this.app,"",getData());
 }
 ```
 
@@ -640,6 +682,8 @@ var app2 = new JetApp({
 As a result, this is a two-level app.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewapp.js).
+
+Jet apps can also behave as Webix widgets, for details, check ["Deploying App"](../practice/deploy.md).
 
 <!-- footnotes -->
 - - -

@@ -9,9 +9,15 @@
 
 # What's New
 
+### Version 1.5 <span class="date">April 24, 2018</span>
+
+- the ability to compile a Jet app into a standalone bundle and [use it in other apps or as is](practice/deploy.md)
+- the ability to compile a Jet app as a component and [use it as a Webix widget](practice/deploy.md)
+- [**this.$$()**](details/views.md#id) returns [widgets from the current Jet view only](details/referencing.md#controls)
+
 ### Version 1.4 <span class="date">April 11, 2018</span>
 
-- JetView class instances can be created in **config()**
+- JetView class instances can be created [in **config()**](practice/nested.md#subgrid)
 
 ### Version 1.3 <span class="date">January 11, 2018</span>
 
