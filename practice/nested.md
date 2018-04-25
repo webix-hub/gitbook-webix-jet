@@ -13,7 +13,7 @@ You can place Jet views inside Multiview.
 
 #### 1. Multiview control
 
-Jet views can be included into Multiview. First, you need to create Multiview and put Jet views as _$subviews_ into each cell. Next, add a control to switch between Multiview cells - for example, a segmented button. *segmented* needs IDs of the subviews. It is very important not to define IDs outside the view file, because it is unsafe. A better approach is to give IDs to the contents of the Multiview cells.
+Jet views can be included into Multiview. First, you need to create Multiview and put Jet views as _$subviews_ into each cell. Next, add a control to switch between Multiview cells - for example, a segmented button. *segmented* needs IDs of the subviews. It is very important not to define IDs outside the file with Multiview, because it is unsafe. A better approach is to give IDs to the contents of the Multiview cells.
 
 ```js
 // views/top.js
@@ -22,15 +22,15 @@ import {ChildView1} from "views/childview1";
 import {ChildView2} from "views/childview2";
 
 export default class TopView extends JetView {
-	 config(){
+	config(){
 		return {
 			rows: [
 				{ view:"segmented", multiview:true, options:[
 					"Dashboard", "Meta Info"
 				]},
 				{ view:"multiview", cells:[
-					{ $subview:ChildView1, id:"Dashboard" },	//load views/childview1.js
-					{ $subview:ChildView2, id:"Meta Info" }		//load views/childview2.js
+					{ $subview:ChildView1, id:"Dashboard" },    //load views/childview1.js
+					{ $subview:ChildView2, id:"Meta Info" }     //load views/childview2.js
 				]}
 			]
 		};
@@ -53,7 +53,7 @@ import ChildView1 from "views/childview1";
 import ChildView2 from "views/childview2";
 
 export default class TopView extends JetView {
-	 config(){
+	config(){
 		return {
 			rows: [
 				{ view:"tabview", cells:[
@@ -68,20 +68,41 @@ export default class TopView extends JetView {
 
 [Check out the solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/tabbar.js)
 
-You can also use **addView()** to add tabs with Jet views into TabView:
+You can also add tabs with Jet views into TabView with **addView()**. A new instance of Jet view can be created with the class constructor.
 
 ```js
 // views/top.js
 import {JetView} from "webix-jet";
+import ChildView1 from "views/childview1";
+import ChildView2 from "views/childview2";
 import NewTabView from "views/newtab";
-...
-addTab(){
-	this.getRoot().addView({
-		header:"New Tab",
-		body:NewTabView
-	})
+
+export default class TopView extends JetView {
+	config(){
+		return {
+			rows: [
+                {
+                    view:"button", value:"Add new", click:()=>{
+                        this.addTab();
+                    }
+                },
+				{ view:"tabview", localId:"tabs", cells:[
+					{ header:"Dashboard", body:ChildView1 },
+					{ header:"Meta Info", body:ChildView2 }
+				]}
+			]
+		};
+    }
+    addTab(){
+        this.$$("tabs").addView({
+            header:"New Tab",
+            body:new NewTabView()   //a class view
+        })
+    }
 }
 ```
+
+[Check out the snippet >>](https://snippet.webix.com/71fu49p3)
 
 ## [<span id="dashboard">Jet Views in Webix Dashboard &uarr;</span>](#contents)
 

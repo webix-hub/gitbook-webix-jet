@@ -157,7 +157,7 @@ Then you can create a new instance of CustomerData in **config()** of another Je
 ```js
 // views/customers.js
 import {JetView} from "webix-jet";
-import {getData()} from "models/customers";
+import {getData} from "models/customers";
 ...
 config(){
     ...
