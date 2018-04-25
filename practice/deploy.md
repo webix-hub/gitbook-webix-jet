@@ -40,3 +40,21 @@ To check the quality of the source code, run the following command:
 ```bash
 npm run lint
 ```
+
+To test the source code, you can use the mocha test example from the [**tests** branch of _jet-start_](https://github.com/webix-hub/jet-start/tree/tests).
+
+Once you have:
+- added [setup.js](https://github.com/webix-hub/jet-start/commit/da672f703808dd62be7267d76ff9dc9bc6580805#diff-81e799b66ac20327dd8a1b8bb1f5f802) to prepare the JSDOM environment for testing,
+- added [webpack.test.config.js](https://github.com/webix-hub/jet-start/commit/da672f703808dd62be7267d76ff9dc9bc6580805#diff-7e9207f7db6729521af653acff794836),
+- made necessary changes to your [package.json](https://github.com/webix-hub/jet-start/commit/da672f703808dd62be7267d76ff9dc9bc6580805#diff-b9cfc7f2cdf78a7f4b91a753d10865a2) (npm script for mocha and dev dependencies),
+- added [test files](https://github.com/webix-hub/jet-start/tree/tests/tests) for each view and model file in your project,
+
+run the following command: 
+
+```bash
+npm run test
+```
+
+After the tests are complete, you will see something like this:
+
+![Webix Jet webpack-mocha tests successful](../images/mocha.png)

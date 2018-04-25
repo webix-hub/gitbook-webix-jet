@@ -1,78 +1,96 @@
 # Creating Complex Webix Widgets with Webix Jet
 
-For simple widgets that wrap some third party library components, you can create custom widgets with webix.protoUI and base them on webix.ui.view as a base
+To create simple and medium-sized widgets that enclose some third party library components or a few Webix widgets, you can use **webix.protoUI()**. Custom widgets must be based on **webix.ui.view**, while custom layouts must be based on **webix.ui.layout** and have the layout configuration defined in the **$init** method.
 
-For medium widgets that contain a few widgets, you can create custom components with webix.protoUI and base them on webix.ui.layout, then define the layout configuration in the **$init** method of the new widget.
-
-For complex cases, when you have multiple layouts, dynamic views, complex data etc., you can use Webix Jet.
-You can create an app by Webix Jet rules and convert it to a new widget:
+For complex cases, when you want to create a widget with multiple layouts, dynamic views, complex data, etc., it is better to use Webix Jet. Create a Jet app and convert it into a new widget with **webix.protoUI()** with **webix.ui.jetapp** as the base:
 
 ```js
-class NewWidgetApp extends JetApp {
-   ...
+// sources/newwidgetapp.js
+import {JetApp, routers} from "webix-jet";
+export default class NewWidgetApp extends JetApp {
+    //app config
+    constructor(){
+        super({
+            ...
+            router:EmptyRouter
+        });
+    }
 }
 
 webix.protoUI({
-   name:"new-widget",
-   app: NewWidgetApp
+    name:"new-widget",
+    app: NewWidgetApp
 }, webix.ui.jetapp);
 ```
 
-Later this widgets can be used like an ordinary Webix widget:
+Later this widget can be used like an ordinary Webix widget (included on a page, in Webix layout, resized, etc.):
 
 ```js
-webix.ui({ view:"new-widget" });
+webix.ui({
+    rows:[
+        { view:"toolbar", elements:[...] },
+        {
+            cols:[ { menu }, { view:"new-widget" } ]
+        }
+    ]
+});
 ```
 
-### Important
+## Important
 
-If you plan to use Jet app as a widget
+If you plan to use Jet app as a widget, keep in mind a few things:
 
-1.
-Do not use any hardcoded "id" values, as it will prevent initializing more than one instance of the widget.
-Use localId and this.$$ or queryView to locate the widgets inside of view. 
+_1\. **Do not use** any hardcoded **"id"** values_.
 
-2. 
-Use services instead of models.
-Models are shared between all instances of the app ( widget ), so with shared model change in one instance of the widget
-will be reflected in all other widgets. If you want to have a separate state ( which is a common use-case )
-you need to has unique model per widget. 
+This will prevent initializing more than one instance of the widget, because the IDs will be no longer unique. Instead, use **localId** and locate widgets inside the view with **this.$$()** or **queryView()**. 
 
-Instead of 
+_2\. Use **services** instead of **models** for data loading_.
+
+Models are shared between all instances of a widget, so a change in the data of one instance of the widget will reflect in all other instances. A common use-case will be to have all instances with separate states and unique data models.
+
+Instead of importing a model as usual:
 
 ```js
 import {data} from "models/records";
 ```
 
-use
+modify the model so that a new DataCollection should be created for every instance:
 
 ```js
 // models/records.js
 function init(){
-  const data = new webix.DataCollection({});
-  
-  return { data };
+    const data = new webix.DataCollection({
+        url:"data/records.php"
+    });
+    return { data };
 }
 ```
+
+Then import the model and set a service that will create a new DataCollection when necessary:
 
 ```js
 // app.js
-import records from "models/records";
+import {JetApp} from "webix-jet";
+import {records} from "models/records";
 
-class MyApp extends JetApp {
-  constructor(config){
-    super(config);
-    
-    this.setService("records", records()); 
-  }
+export default class MyApp extends JetApp {
+    constructor(config){
+        super(config);
+        this.setService("records", records()); 
+    }
 }
+...
 ```
 
+Later any view inside the widget can get a new copy of data model with the help of the service:
+
 ```js
-// view.js
-class MyView(){
-   init(){
-      this.$data = this.app.getService("records");
-   }
+// views/myview.js
+import {JetView} from "webix-jet";
+export default class MyView extends JetView {
+    ...
+    init(){
+        this.data = this.app.getService("records");
+    }
 }
 ```
