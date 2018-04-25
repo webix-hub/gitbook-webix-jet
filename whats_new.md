@@ -17,7 +17,7 @@
 
 ### Version 1.4 <span class="date">April 11, 2018</span>
 
-- JetView class instances can be created [in **config()**](practice/nested.md#subgrid)
+- JetView class instances can be created [in **config()**](details/subview.md#constructor)
 
 ### Version 1.3 <span class="date">January 11, 2018</span>
 

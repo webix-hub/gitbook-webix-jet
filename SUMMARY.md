@@ -22,11 +22,13 @@
   * [Plugins](details/plugins.md)
   * [Inner Events and Error Handling](details/inner_events.md)
 * Part III - Practical Tasks
-  * [Deploying App](practice/deploy.md)
+  * [Deploying and Testing](practice/deploy.md)
+  * [Big App Development](practice/big_apps.md)
+  * [Nesting Jet Views into Webix Widgets](practice/nested.md)
+  * [Creating Complex Widgets](practice/complex.md)
+  * [Jet Recipes](practice/recipes.md)
   * [Webpack Configuration](practice/webpackconfig.md)
   * [Working with package.json](practice/packjson.md)
   * [Using TypeScript](practice/typescript.md)
-  * [Jet Recipes](practice/recipes.md)
-  * [Nesting Jet Views into Webix Widgets](practice/nested.md)
   * [Extra Solutions](practice/unrecommended.md)
-  * [Tools](practice/tools.md)
+  <!-- * [Tools](practice/tools.md) -->
