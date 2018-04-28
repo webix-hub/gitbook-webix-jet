@@ -2,6 +2,7 @@
 
 * [What's New](whats_new.md)
 * [Getting Started](start.md)
+* [Quick Dev Guidelines](guidelines.md)
 * [Migration from older version](migration.md)
 * Part I - Basic usage
   * [Creating app](basic/app.md)

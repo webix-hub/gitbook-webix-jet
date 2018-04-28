@@ -31,7 +31,7 @@ export default class DataView extends JetView{
 }
 ```
 
-### Getting Parameters
+### Getting Parameters from Class Methods
 
 To access *id* in the form, you need to get to the **url** parameter that is received by **init()**, **urlChange()** and **ready()** methods of a Jet class view. **url** is an array of objects, each with three properties:
 
@@ -66,6 +66,110 @@ export default class FormView extends JetView{
 ```
 
 In this simple example, as soon as DataView is initialized, **urlChange()** of *FormView* is called and the form is filled correct data.
+
+### Setting / Getting Parameters with JetView Methods
+
+You can get URL parameters with [this.getParam()](views.md#getparam). **getParam()** lets the API access the URL parameters of the current view and its parent. This can be useful, as views and subviews quite often share a common parameter.
+
+Consider a simple example with two views, a parent **page** and its subview **some**. The URL is:
+
+```
+#!/top/page?id=12/some
+```
+
+Where **id** is the parameter of the parent **page**.
+
+This is how you can get **id** from the **page** view:
+
+```js
+//from page.js
+var id = this.getParam("id"); //id == 12
+```
+
+And this is how you can get **id** from **some**:
+
+```js
+//from some.js
+var id = this.getParam("id");       //id == ""
+var id = this.getParam("id", true); //id == 12
+```
+
+For example, this is a parent view that puts the parameter into the URL and loads a subview:
+
+```js
+// views/details.js
+import {JetView} from "webix-jet";
+
+export default class DetailsView extends JetView {
+	config(){
+        return { cols:[
+            { $subview:true }
+        ]};
+    }
+    init(){
+        this.show("?id=1/sub");
+    }
+}
+```
+
+Here **sub** is a Jet view that will access the parent's parameter and display it:
+
+```js
+// views/sub.js
+import {JetView} from "webix-jet";
+
+export default class sub extends JetView {
+	config(){
+		return {
+			view:"template"
+		};
+	}
+	urlChange(view){
+		var id = this.getParam("id", true);
+		view.setHTML("id="+id);
+	}
+}
+```
+
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
+
+Use [this.setParam()](views.md#setparam) method to set the URL parameters or to change a URL segment:
+
+```js
+this.setParam("mode", "12", true); // some?mode=12
+```
+
+**setParam()** has three parameters:
+- the *name* of the URL parameter,
+- the new *value*,
+- (optional) *display*, if it is set to *true*, the parameter is displayed in the URL.
+
+For example, this is how you can change a URL parameter with a widget inside a Jet view:
+
+```js
+// views/top.js
+import {JetView} from "webix-jet";
+
+export default class TopView extends JetView {
+    config(){
+        return {
+            rows:[
+                { view:"segmented", options:["full", "brief"], on:{
+                    onChange: function(){
+                        this.$scope.setParam("mode", this.getValue(), true);
+                    }
+                }}
+            ]
+        };
+    }
+}
+```
+
+**mode** will be set to either *full* or *brief* and the value will be displayed in the URL.
+
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
+
+Work with URL parameters can be simplified with the [UrlParam plugin](details/plugins.md).
 
 ### Several URL Parameters
 

@@ -2,6 +2,9 @@
 
 Webix Jet provides predefined plugins and the ability to create custom plugins.
 
+1. [Default Plugins](#contents)
+2. [Custom Plugins](#custom)
+
 ## <span id="contents">1. Default Plugins</span>
 
 **View Plugins**
@@ -681,7 +684,7 @@ app.use(plugins.Locale, { path:"some" });
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js)
 
 
-## 2. Custom Plugins
+## [<span id="custom">2. Custom Plugins &uarr;</span>](#)
 
 You can create a service and use it as an app-level plugin. 
 

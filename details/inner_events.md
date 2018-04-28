@@ -160,7 +160,7 @@ app.attachEvent("app:user:logout",function(){
 
 ## [<span id="errors">Error Handling and Debugging &uarr;</span>](#contents)
 
-Errors are logged if you set the **debug** property in your app config. Besides logging errors, this will enable a debugger.
+If you include **webix_debug.js** and set the **debug** property in your app config, error messages will be logged in the console. Besides logging errors, this will enable a debugger.
 
 ```js
 // myapp.js
