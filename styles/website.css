@@ -1,1 +1,7 @@
 /* CSS for website */
+.date{
+    color:#999;
+    font-size:80%;
+    float:right;
+    padding-right:10em;
+}

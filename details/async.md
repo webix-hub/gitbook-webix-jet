@@ -1,16 +1,14 @@
-# <span id="contents">Asynchronous Views and Data</span>
-
 Data are usually stored on the server side. If data are loaded asynchronously, you need to wait until they are available to perform data-related operation with views, e.g. select a record. If the UI is built much faster than data are loaded, it is a good idea to make use of promises to load the data. The app will wait for data from the server, and only after a promise resolves, it will render the view.
 
 Promises are returned by all Ajax requests within Webix:
 
-- [**webix.ajax()**](#ajax), which is resolved when an Ajax request is completed
-- [**data.waitData**](#waitdata), which is resolved when a data component is populated with remote data
-- [**webix.promise**](#promise), an interface for working with promise objects
+- **webix.ajax()**, which is resolved when an Ajax request is completed
+- **data.waitData**, which is resolved when a data component is populated with remote data
+- **webix.promise**, an interface for working with promise objects
 
-## [<span id="ajax">webix.ajax &uarr;</span>](#contents)
+## webix.ajax()
 
-#### A Promise Returned by *config()* of a Class View
+### A Promise Returned by *config()* of a Class View
 
 If your client depends on server-side data, you can fetch them asynchronously and return a promise in the **config()** method of a Jet view. **webix.ajax()** makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, the response is passed to a callback in **then()**.
 
@@ -37,7 +35,7 @@ export class StatisticsView extends JetView {
 
 **webix.ajax\(\)** sends a request to *server/colors.php* and returns a promise of data instead of real data. First, all the data come to the client side and only after that the final view configuration will be constructed and the view will be rendered.
 
-#### A Simple View as a Promise
+### A Simple View as a Promise
 
 You can define a view as a promise of a view object:
 
@@ -80,7 +78,7 @@ export default new Promise((res, rej) => {
 });
 ```
 
-## [<span id="waitdata">data.waitData &uarr;</span>](#contents)
+## data.waitData
 
 **waitData** is used to catch the moment when data are loaded into data components, such as DataCollection, List, Tree, DataTable, etc.
 
@@ -111,11 +109,11 @@ export const data = new webix.DataCollection({
 });
 ```
 
-## [<span id="promise">**webix.promise** Interface &uarr;</span>](#contents)
+## **webix.promise**
 
 Webix offers an interface for working with promise objects. [webix.promise](https://docs.webix.com/api__refs__promise.html) features a set of methods that duplicate [Promise object methods](https://github.com/zolmeister/promiz).
 
-#### Waiting for Data from Multiple Sources
+### Waiting for Data from Multiple Sources
 
 Promises are great when you need to wait until *several data sources* are available on the client.
 
@@ -163,7 +161,7 @@ export class DetailsView extends JetView {
 }
 ```
 
-#### A Simple View that Returns a Promise
+### A Simple View that Returns a Promise
 
 **defer()** of **webix.promise** creates a new instance of a promise object. **resolve()** creates and resolves a promise with a specified value, for example, a Webix widget.
 
@@ -181,7 +179,7 @@ const promised = () => {
 export default promised;
 ```
 
-#### Promises in Class Views
+### Promises in Class Views
 
 **webix.promise** can also return promises from **config()** of a class view:
 

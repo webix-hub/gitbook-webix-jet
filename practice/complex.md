@@ -1,8 +1,10 @@
-# Creating Complex Webix Widgets with Webix Jet
-
 To create simple and medium-sized widgets that enclose some third party library components or a few Webix widgets, you can use **webix.protoUI()**. Custom widgets must be based on **webix.ui.view**, while custom layouts must be based on **webix.ui.layout** and have the layout configuration defined in the **$init** method.
 
-For complex cases, when you want to create a widget with multiple layouts, dynamic views, complex data, etc., it is better to use Webix Jet. Create a Jet app and convert it into a new widget with **webix.protoUI()** with **webix.ui.jetapp** as the base:
+For complex cases, when you want to create a widget with multiple layouts, dynamic views, complex data, etc., it is better to use Webix Jet.
+
+## How to Create
+
+Create a Jet app and convert it into a new widget with **webix.protoUI()** with **webix.ui.jetapp** as the base:
 
 ```js
 // sources/newwidgetapp.js
@@ -36,7 +38,7 @@ webix.ui({
 });
 ```
 
-## Important
+## Very Important Issues
 
 If you plan to use Jet app as a widget, keep in mind a few things:
 
@@ -54,7 +56,7 @@ Instead of importing a model as usual:
 import {data} from "models/records";
 ```
 
-modify the model so that a new DataCollection should be created for every instance:
+modify the model in such a way, that a new DataCollection should be created for every instance:
 
 ```js
 // models/records.js

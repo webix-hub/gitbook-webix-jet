@@ -1,5 +1,3 @@
-# <span id="contents">Models</span>
-
 View modules return the UI configuration of the components. You can put data loading logic in views, which is relevant for prototyping and considered bad practice for real-life apps.
 
 Good practice is to separate data loading logic from UI configuration and put it in separate modules - **models**. A model stores all functionality related to some data entity. This division of UI and data is an advantage because if the data changes, all you have to do is change the data model. There is no need to modify all the views that use the data.
@@ -11,17 +9,17 @@ In the data model, you can define:
 
 There are several types of models in Webix Jet:
 
-- [shared models](#shared)
-- [dynamic models](#dynamic)
-- [remote models](#remote)
-- [services for data](#services)
-- [models with webix.remote](#webix_remote)
+- shared models
+- dynamic models
+- remote models
+- services for data
+- models with webix.remote
 
-### [1. <span id="shared">Shared Data &uarr;</span>](#contents)
+## 1\. Shared Data
 
 For *relatively small data* used in *many components*, you can load data into Webix DataCollection. This way, you make a single request to the server, store the data on the client side and sync it with the necessary views.
 
-#### Loading
+### Loading
 
 You can export either the whole collection or an accessor function that will return it.
 
@@ -37,7 +35,7 @@ const records = new webix.DataCollection({
 export function getRecords(){ return records; };
 ```
 
-#### Saving
+### Saving
 
 A collection will handle *save* operations as well. You need to provide a **save** URL for a collection, so that it can send all updates made from views to the server:
 
@@ -49,7 +47,7 @@ export const records = new webix.DataCollection({
 });
 ```
 
-#### Data Parsing
+### Data Parsing
 
 To use the data in a component, you can parse it. You must parse data in **init()**, not in **config()** (leave *config()* for the UI). Have a look at the example with a datatable:
 
@@ -70,7 +68,7 @@ export default class DataView extends JetView{
 
 All the changes made in the datatable are saved to the server.
 
-#### Models for Options of Select Boxes
+### Models for Options of Select Boxes
 
 You can use models to load options of select boxes, e.g.:
 
@@ -92,7 +90,6 @@ export default class StartView extends JetView {
 
 And for options of Datatable select editors:
 
-
 ```js
 // views/data.js
 import {JetView} from "webix-jet";
@@ -100,14 +97,16 @@ import {options} from "models/options";
 
 export default class DataView extends JetView{
 	config(){
-		return { view:"datatable", editable:true, columns:[		
-			{ id:"categoryId",  editor:"richselect", collection:options}
-		]}
+		return {
+			view:"datatable", editable:true, columns:[		
+				{ id:"categoryId",  editor:"richselect", collection:options }
+			]
+		}
 	}
 }
 ```
 
-#### Syncing Components to DataCollection
+### Syncing Components to DataCollection
 
 You can also sync a *data component* inside a Jet view with a DataCollection. Let's sync the datatable with records:
 
@@ -131,7 +130,7 @@ export default class DataView extends JetView{
 
 Mind that if you synced a data component to a DataCollection, you must *perform **add/remove** operations on the master collection*, while the synced view will reflect these changes automatically. Slave views can only update the master.
 
-#### Shared Data Transport
+### Shared Data Transport
 
 To return several types of data and distribute data chunks to different views, a shared data transport can be used.
 
@@ -139,7 +138,7 @@ For example, this is the data model for a grid:
 
 ```js
 //models/griddata.js
-import {sharedData} from "models/shared";
+import {sharedData} from "models/shareddata";
 
 const gridData = new webix.DataCollection();
 gridData.parse(sharedData("grid"));
@@ -165,11 +164,11 @@ export function sharedData(name){
 
 Each view has its own model that stores data and all related API and uses *shareddata* for data loading.
 
-### [<span id="dynamic">2. Dynamic Data for Big Data &uarr;</span>](#contents)
+### 2\. Dynamic Data for Big Data
 
 As browser resources are limited, big collections should not be stored on the client side. Dynamic model is for *big data* (less than 10K records) *used only once* that must not be cached.
 
-#### Loading
+### Loading
 
 The data can be loaded from a server directly with an AJAX request:
 
@@ -208,7 +207,7 @@ export function getData(){
 }
 ```
 
-#### Saving
+### Saving
 
 To save data, you must provide a pattern for saving. Let's add one more function to the *records* model:
 
@@ -218,9 +217,9 @@ export function getData(){
 	return webix.ajax("data.php");
 };
 export function saveData(id, operation, data){
-	if(operation is "update") //"add", "delete"
+	if (operation is "update") //"add", "delete"
 		return webix.ajax().post("data.php", data);
-	if(operation =="add")
+	if (operation =="add")
 		// ...
 };
 ```
@@ -259,7 +258,7 @@ export default class DataView extends JetView{
 }
 ```
 
-### [<span id="remote">3. Remote Models for Huge Data &uarr;</span>](#contents)
+## 3\. Remote Models for Huge Data
 
 In case data is really huge, you can drop the whole concept of separating data from UI and rely on the dynamic loading of Webix components (Datatable, Dataview, List, Tree). Data will be loaded in portions when needed. For that, load data in the view configuration. You can do it with the **url** property. For saving data, use the **save** property.
 
@@ -292,7 +291,7 @@ export default class DataView extends JetView{
 ```
 Webix dynamic loading pattern allows loading data in portions, provided that your backend returns the response as: *{ data:[], total_count:1000, pos:100}*. When the component is scrolled (or tree branches are opened) the component itself can send the request to the server for a new portion of data using the defined data url.
 
-### Shared vs Dynamic vs Remote models
+## Shared vs Dynamic vs Remote models
 
 Let's recap main differences of the three ways to load and save data:
 
@@ -303,7 +302,7 @@ Let's recap main differences of the three ways to load and save data:
 | Remote  | Huge      | Handy for prototyping |
 
 
-### [<span id="services">4. Services as Data Sources &uarr;</span>](#contents)
+## 4\. Services as Data Sources
 
 You can use services instead of models as data sources. Suppose there is a list of customers and a grid that displays records on a selected customer. Here is how you can use a service that returns the ID of a selected list item:
 
@@ -318,7 +317,7 @@ A better and shorter way is:
 var data = service.getNomenclature();
 ```
 
-### [<span id="webix_remote">5. Using Webix Remote with Webix Jet &uarr;</span>](#contents)
+## 5\. Using Webix Remote with Webix Jet
 
 You can use [webix.remote](https://docs.webix.com/desktop__webix_remote_php.html) instead of sending AJAX requests. You must have a server-side script with a class for getting the data:
 
@@ -359,7 +358,7 @@ init(view){
 
 **webix.remote** is better then an AJAX request for several reasons:
 
-*1. You don't need to serialize data after loading.*
+*1\. You don't need to serialize data after loading.*
 
 Compare the results of these two requests:
 
@@ -370,9 +369,9 @@ var data2 = webix.remote.nm.getNomenclature(154);	//{id:154,name:"John"}
 
 After receiving the response of the AJAX request, you have to call <code>JSON.parse(data1)</code> to turn a string into an object. The response of the second request is already an object.
 
-*2. Requests with *webix.remote* are safer due to CSRF-security.*
+*2\. Requests with *webix.remote* are safer due to CSRF-security.*
 
-*3. Several requests are sent as one, which makes operations faster.*
+*3\. Several requests are sent as one, which makes operations faster.*
 
 ## Further reading
 

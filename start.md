@@ -1,10 +1,8 @@
-# Getting Started
-
 ## Advantages of Webix Jet
 
 Webix Jet allows you to create flexible, easily maintainable apps, where data and visual presentations are clearly separated, interface elements can be easily combined and reused, all parts can be developed and tested separately - all with minimal code footprint. It has a ready to use solution for all kinds of tasks, from simple admin pages to fully-fledged apps with multiple locales, customizable skins, and user access levels. 
 
-Webix Jet is a fully client-side solution and can be used with any REST-based data API. So there aren’t any special requirements to the server.
+Webix Jet is a fully client-side solution and can be used with any REST-based data API. So there are no special requirements to the server.
 
 ## How to Start
 
@@ -15,7 +13,7 @@ npm install
 npm start
 ```
 
-Next, open ```http://localhost:8080``` in the browser. You’ll see the application interface. Let’s have a look at what it has inside.
+Next, open ```http://localhost:8080``` in the browser. You will see the application interface. Let’s have a look at what it has inside.
 
 ## The Application Structure
 
@@ -45,7 +43,7 @@ If you set the path to *index.html#!/top/start*, the interface described in the 
 
 **index.html#!/top/start**
 
-![webix jet start view example](images/how_it_works.png)
+![Webix Jet a starter view example](images/how_it_works.png)
 
 ##Defining a View Module
 
@@ -83,7 +81,7 @@ export default {
 In the above code, there is a layout with two columns.
 At the top of the file, we are providing the list of dependencies, which we will use in this layout.
 
-Open the path *index.html#!/top*, and you’ll see the page with the *start* view inside of *top*.
+Open the path *index.html#!/top*, and you will see the page with the *start* view inside of *top*.
 
 ## Creating Subviews
 
@@ -104,21 +102,21 @@ export default {
 The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the URL will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*.
 The *{ $subview: true }* placeholder will be replaced with the content of a subview file (*views/start.js* in the above example) and the corresponding interface will be rendered.
 
-For example, we've got a *data.js* view, which contains a datatable. If you enter the URL *index.html#!/top/data*, you’ll get the interface with a menu in the left part and a datatable in the right part:
+For example, we've got a *data.js* view, which contains a datatable. If you enter the URL *index.html#!/top/data*, you will get the interface with a menu in the left part and a datatable in the right part:
 
 **index.html#!/top/data**
 
-![webix jet subview including example](images/top_data.png)
+![Webix Jet a subview including example](images/top_data.png)
 
 Then, add one more */top* subdirectory into the path. The URL will look as *index.html#!/top/top/data* and the app will have another menu view inserted into the first one. This view will contain the datatable:
 
 **index.html#!/top/top/data**
 
-![webix jet changing subviews example](images/top_top_data.png)
+![Webix Jet a changing subviews example](images/top_top_data.png)
 
 The described way of inserting subviews into the main view is an alternative to specifying the necessary subview directly in the main view code.
 
-For more details on including subviews, go to the chapters ["Creating views"](basic/views.md) and ["Views and Subviews"](details/subviews.md#subviews).
+For more details on including subviews, go to the chapters ["Creating views"](basic/views.md) and ["Views and Subviews"](details/subviews.md#subview-including).
 
 
 ## Loading Data with Models
@@ -160,5 +158,5 @@ As you can see, this module returns an object that differs from those described 
 ## Further Reading
 
 - ["Creating views"](basic/views.md)
-- ["Views and Subviews"](details/subviews.md#class_views)
+- ["Views and Subviews"](details/subviews.md#3-class-views)
 - ["Models"](details/models.md)

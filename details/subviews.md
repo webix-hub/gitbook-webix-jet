@@ -1,16 +1,6 @@
-# <span id="contents">Views and SubViews</span>
-
-- Views
-    - [Simple Views](#simple)
-    - [Object "Factory Pattern"](#factory)
-    - [Class Views](#class_views)
-- SubView Including
-    - [View Inclusion](#view_subview)
-    - [App Inclusion](#app_subview)
-
 A view file contains a complete functionality of a particular part of the UI: a form, a datatable with the related toolbar, a navigation menu, etc. Views can be defined in three ways.
 
-## [<span id="simple">1. Simple Views &uarr;</span>](#contents)
+## 1\. Simple Views
 
 Views can be created as pure objects.
 
@@ -39,7 +29,7 @@ export default list;
 - Simple views are static and are included as they are.
 - Simple views have no **init()** and other methods that classes have.
 
-## [<span id="factory">2. Object "Factory Pattern" &uarr;</span>](#contents)
+## 2\. Object "Factory Pattern"
 
 View objects can also be returned by a factory function.
 
@@ -64,7 +54,7 @@ export default () => {
 
 - Such views have no **init()** or other methods that classes have.
 
-## [<span id="class_views">3. Class Views &uarr;</span>](#contents)
+## 3\. Class Views
 
 Views can be defined as ES6 classes that inherit from the _JetView_ class.
 
@@ -81,12 +71,7 @@ export default class TopView extends JetView {
 }
 ```
 
-- [<span id="class_contents">Advantages of Classes</span>](#class_advantages)
-- [Jet View Constructor](#constructor)
-- [JetView Lifetime Methods](#methods)
-- [Local Methods and Properties](#class_methods_properties)
-
-### [<span id="class_advantages">Advantages of Classes &uarr;</span>](#class_contents)
+### Advantages of Classes
 
 - Views defined as classes are **dynamic** and each new instance can be changed when it's created.
 
@@ -124,7 +109,7 @@ export default class BiggerToolbar extends Toolbar {
 }
 ```
 
-### [<span id="constructor">JetView Constructor &uarr;</span>](#class_contents)
+### JetView Constructor
 
 You can create new instances of Jet class views with a constructor. This is very useful if you want to reuse a view several times, but want each instance to be different in some way (changes in UI, different data).
 
@@ -165,7 +150,7 @@ config(){
 }
 ```
 
-### [<span id="methods">JetView Methods &uarr;</span>](#class_contents)
+### JetView Methods
 
 Webix UI lifetime event handlers are implemented through **JetView** class methods. Here are the methods that you can redefine:
 
@@ -175,7 +160,7 @@ Webix UI lifetime event handlers are implemented through **JetView** class metho
 - [ready()](#ready)
 - [destroy()](#destroy)
 
-#### [<span id="config">config() &uarr; </span>](#methods)
+#### [<span id="config">config() &uarr; </span>](#jetview-methods)
 
 This method returns the initial UI configuration of a view. Have a look at a toolbar returned by the **config()** method of the _ToolbarView_ class:
 
@@ -195,7 +180,7 @@ export default class ToolbarView extends JetView{
 }
 ```
 
-#### [<span id="init">init\(view, url\) &uarr;</span>](#methods)
+#### [<span id="init">init\(view, url\) &uarr;</span>](#jetview-methods)
 
 The method is called only once for every instance of a view class when the view is rendered. It is a good place to load some common data (list of options for a _select_ in a form, for example) or to change the initial UI configuration of a view returned by **config()**.
 
@@ -271,9 +256,9 @@ export default class DataView extends JetView{
 }
 ```
 
-#### [<span id="urlchange">urlChange\(view,url\) &uarr;</span>](#methods)
+#### [<span id="urlchange">urlChange\(view,url\) &uarr;</span>](#jetview-methods)
 
-**urlChange()** is called every time the URL is changed. It reacts to the change in the URL after **!\#**<sup><a href="#footnote1" id="origin">1</a></sup>. **urlChange()** is only called for the view that is rendered and for its parent.
+**urlChange()** is called every time the URL is changed. It reacts to the change in the URL after **!\#** [^1]. **urlChange()** is only called for the view that is rendered and for its parent.
 
 Consider the following example. The initial URL is:
 
@@ -318,13 +303,14 @@ Here's how you can highlight the right segment of the button if the URL is chang
 
 ```js
 // views/toolbar.js
-    urlChange(view, url){
-        if (url.length > 1)
-            view.queryView({view:"segmented"}).setValue(url[1].page);
-    }
+...
+urlChange(view, url){
+    if (url.length > 1)
+        view.queryView({view:"segmented"}).setValue(url[1].page);
+}
 ```
 
-#### [<span id="ready">ready(view,url) &uarr;</span>](#methods)
+#### [<span id="ready">ready(view,url) &uarr;</span>](#jetview-methods)
 
 **ready()** is called when the current view and all its subviews have been rendered. For instance, if the URL is changed to *a/b*, the order in which view class methods are called is the following:
 
@@ -390,7 +376,7 @@ export default class ListEditView extends JetView{
 
 In the example, the form will be bound to the list only when both the list and the form are rendered.
 
-#### [<span id="destroy">destroy() &uarr;</span>](#methods)
+#### [<span id="destroy">destroy() &uarr;</span>](#jetview-methods)
 
 **destroy()** is called only once for each class instance when the view is destroyed (closed and no longer present in the URL).
 
@@ -412,7 +398,7 @@ export default class FormView extends JetView{
 }
 ```
 
-### [<span id="class_methods_properties">Local Methods and Properties &uarr;</span>](#class_contents)
+### Local Methods and Properties
 
 You can define class view methods and properties. **this** inside methods refers to the instance of the corresponding view class.
 
@@ -455,11 +441,11 @@ If you are not sure which one to use, use classes. A class with the **config()**
 
 ## Subview Including
 
-### [<span id="view_subview">1. View Inclusion &uarr;</span>](#contents)
+### 1\. View Inclusion
 
 You can include views into each other. Views included into other views are called **subviews**, and they can be either static or dynamic.
 
-**1. Static subviews** are imported and placed into views directly.
+**1\. Static subviews** are imported and placed into views directly.
 
 ```js
 import Menu from "views/menu";
@@ -615,7 +601,7 @@ export default class WindowView extends JetView{
 
 For more details about popups and windows, [go to the "Popups and Windows" section](popups.md).
 
-### [<span id="app_subview">2. App Inclusion &uarr;</span>](#contents)
+### 2. App Inclusion
 
 App is a part of the whole application that implements some scenario and is quite independent. It can be a subview as well. By including apps into other apps, you can create high-level applications. E.g. here are two views:
 
@@ -683,9 +669,9 @@ As a result, this is a two-level app.
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewapp.js).
 
-Jet apps can also behave as Webix widgets, for details, check ["Deploying App"](../practice/deploy.md).
+Jet apps can also behave as Webix widgets, for details, check ["Big app development"](../practice/big_apps.md).
 
 <!-- footnotes -->
 - - -
-<a href="#origin" id="footnote1">1</a>:
+[^1]:
 This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for *EmptyRouter*. For details, [go to the "Routers" section](routers.md).

@@ -1,15 +1,8 @@
-# Working with Popups, Windows and Context Menus
-
-![](../images/window.png)
-
-- [<span id="contents">Windows as simple views</span>](#simple)
-- [Windows as Jet class views](#class)
-- [Jet view embedded in the body of a window/popup](#body)
-- [Adding a Context Menu](#context)
+![Creating windows and popups with Webix Jet views](../images/window.png)
 
 Temporary views like popups and windows can be created with **this.ui()**. It returns the UI object. **this.ui()** takes care of the windows it creates and destroys them when their parent views are destroyed.
 
-### [<span id="simple">Windows as Simple Views &uarr;</span>](#contents)
+## Windows as Simple Views
 
 Consider a simple popup view that will appear in the center of the screen:
 
@@ -67,7 +60,7 @@ To show the popup, you must get the **win1** property of the class and call the 
 
 **this.win1.show()** renders the popup at a position, defined in the config of the popup (*position:"center"*). If you don't set position, **win1** will be rendered in the top left corner.
 
-### [<span id="class">Windows as Jet View Classes &uarr;</span>](#contents)
+## Windows as Jet View Classes
 
 You can define windows and popups as view classes as well. Have a look at a similar popup, defined as a class:
 
@@ -134,7 +127,6 @@ export default class TopView extends JetView {
             ]
         };
     }
-
     init(){
         this.win2 = this.ui(WindowsView);
     }
@@ -143,7 +135,7 @@ export default class TopView extends JetView {
 
 [Check out the demo on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/windows.js)
 
-### [<span id="body">Jet View Embedded in the Body of a Window/Popup &uarr;</span>](#contents)
+## Jet View Embedded in the Body of a Window/Popup
 
 You can also embed Jet views into the body of a window or a popup. For instance, this is the Jet class view you want to embed:
 
@@ -177,7 +169,7 @@ export default class Window extends JetView{
 }
 ```
 
-### [<span id="context">Adding a Context Menu &uarr;</span>](#contents)
+## Adding a Context Menu
 
 You can also attach a context menu to widgets with *this.ui()*.
 
@@ -188,11 +180,11 @@ Let's attach a context menu to a simple template. This is a Jet view with the te
 import {JetView} from "webix-jet";
 
 export default class TopView extends JetView {
-  config(){
-    return {
-        localId:"body", template:"A place for context"
-    };
-  }
+    config(){
+        return {
+            localId:"body", template:"A place for context"
+        };
+    }
 }
 ```
 
@@ -203,18 +195,18 @@ The context menu will be created by *this.ui()* in *init()* of the *top* view. A
 import {JetView} from "webix-jet";
 
 export default class TopView extends JetView {
-  config(){
-    return {
-        localId:"body", template:"A place for context"
-    };
-  }  
-  init(){
-    var context = this.ui({
-      view:"contextmenu", localId:"context",
-      data:["Add","Rename","Delete",{ $template:"Separator" },"Info"]
-    });
-    context.attachTo(this.$$("body").getNode());
-  }
+    config(){
+        return {
+            localId:"body", template:"A place for context"
+        };
+    }  
+    init(){
+        var context = this.ui({
+        view:"contextmenu", localId:"context",
+        data:["Add","Rename","Delete",{ $template:"Separator" },"Info"]
+        });
+        context.attachTo(this.$$("body").getNode());
+    }
 }
 ```
 

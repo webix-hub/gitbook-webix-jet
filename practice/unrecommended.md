@@ -1,5 +1,3 @@
-# Not recommended, but Possible Solutions
-
 ## Dynamic Layout Rebuilding
 
 **Task:** you want to rebuild the existing view or replace some component in it

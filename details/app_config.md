@@ -1,6 +1,4 @@
-# <span id="contents">App Configuration</span>
-
-An app module is created as a new instance of the JetApp class. In this file you will also typically include:
+An app module is created as a new instance of the JetApp class. In this file, you will also typically include:
 - stylesheets
 - custom widgets
 - app-level plugins
@@ -21,16 +19,16 @@ webix.ready(() => {
 
 You can include various parameters into the app configuration.
 
-| Parameter                         | What For |
-|-----------------------------------|----------|
-| [debug](#debug)                   | to enable debugging |
-| [router](#router)                 | to change a router |
-| [routes](#routes)                 | to shorten the app URL |
-| [start](#start)                   | to set the start app URL|
-| [views](#views)                   | to change view modules names |
-| [arbitrary parameters](#other)    | e.g. access mode, screen size, etc. |
+| Parameter             | What For 							  |
+|-----------------------|-------------------------------------|
+| debug                 | to enable debugging                 |
+| router                | to change a router                  |
+| routes                | to shorten the app URL              |
+| start                 | to set the start app URL            |
+| views                 | to change view modules names        |
+| arbitrary parameters	| e.g. access mode, screen size, etc. |
 
-### [<span id="start">Start URL &uarr;</span>](#contents)
+## Setting the Start URL
 
 The app UI will be rendered from the URL elements from **start** when you open the app for the first time. The app splits the URL into parts, finds the corresponding files in the **views** folder and creates an interface by combining UI modules from those files.
 
@@ -45,7 +43,7 @@ webix.ready(function{
 });
 ~~~
 
-### [<span id="debug">Debugging &uarr;</span>](#contents)
+## Debugging
 
 It is highly recommended to enable the **debug** mode when developing Jet apps. You can enable debugging in the app configuration: 
 
@@ -63,7 +61,7 @@ webix.ready(function{
 
 With _debug:true_, error messages will be logged into console and a debugger will pause the app on errors.
 
-### [<span id="router">Routers &uarr;</span>](#contents)
+## Choosing a Router
 
 Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is _HashRouter_. If you don't want to display the hashbang in the URL, you can change the router to _UrlRouter_:
 
@@ -79,7 +77,7 @@ webix.ready(function{
 });
 ```
 
-### [<span id="views">Changing View Creation Logic &uarr;</span>](#contents)
+## Changing View Creation Logic
 
 Use the **views** parameter to change the names of view modules inside your code.
 
@@ -120,7 +118,7 @@ export default class TopView extends JetView {
 }
 ```
 
-**this** in the button click handler refers to the current instance of a Jet view class<sup><a href="#myfootnote1" id="origin1">1</a></sup>.
+**this** in the button click handler refers to the current instance of a Jet view class [1^].
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewresolve.js)
 
@@ -145,7 +143,7 @@ const app = new JetApp({
 app.render();
 ```
 
-### [<span id="routes">Beautifying the URL &uarr;</span>](#contents)
+## Beautifying the URL
 
 If you do not want to display some parts of the app URL, you can hide them with the help of **routes** in the app configuration. For instance, you might want to display only the names of subviews in the URL: 
 
@@ -169,7 +167,7 @@ Instead of a long URL with subdirectories and parent views, e.g. _"/top/area.lef
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/routes.js)
 
-### [<span id="other">Various App Parameters &uarr;</span>](#contents)
+## Various App Parameters
 
 In the app config, for example, you can set the mode in which the app will work:
 
@@ -196,9 +194,9 @@ if (this.app.config.mode === "readonly"){
 ...
 ```
 
-**this** refers to the current instance of a Jet view class <sup><a href="#myfootnote1" id="origin">1</a></sup>.
+**this** refers to the current instance of a Jet view class [^1].
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin1">1 &uarr;</a>:
+[^1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

@@ -1,12 +1,6 @@
-# <span id="contents">Jet Recipes</span>
-
 In this section you'll find elegant solutions for some common tasks.
 
-- [Access control on view level](#viewguard)
-- [Access control on app level](#appguard)
-- [Responsive UI](#responsive)
-
-## [<span id="viewguard">Access Guard - View Level &uarr;</span>](#contents)
+## Access Guard - View Level
 
 **Task**: You want to create views with several levels of access for different groups of users.
 
@@ -103,7 +97,7 @@ export default class limited extends JetView{
 }
 ```
 
-*this.app.config.access* gets to the access level of the current user. If you use [the **User** plugin](plugins.md#user), you can get the user name with *getUser* and check the group name.
+*this.app.config.access* gets to the access level of the current user. If you use [the **User** plugin](plugins.md#user-plugin), you can get the user name with *getUser* and check the group name.
 
 For the demo, the user group is changed by a control in *top*:
 
@@ -157,11 +151,11 @@ export default class blocked extends JetView{
 
 You can show this view via *top/blocked*.
 
-![](../images/viewguard.png)
+![Access control on the view level in apps built with Webix Jet](../images/viewguard.png)
 
 [Check out this solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewguard.js)
 
-## [<span id="appguard">Access Guard -- App Level &uarr;</span>](#contents)
+## Access Guard -- App Level
 
 **Task**: You want to create views with several levels of access for different groups of users.
 
@@ -207,11 +201,11 @@ app.attachEvent("app:guard", function(url, view, nav){
 app.render();
 ```
 
-![](../images/appguard.png)
+![Access control on the app level in apps built with Webix Jet](../images/appguard.png)
 
 [Check out the solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/appguard.js)
 
-## [<span id="responsive">Responsive UI - Sizing UI to Device &uarr;</span>](#contents)
+## Responsive UI - Sizing UI to Device
 			
 **Task**: You want to create a responsive UI.
 
@@ -225,7 +219,7 @@ Webix UI resizes components automatically if you don't set fixed sizes. If you m
 
 Suppose you want to distinguish two types of screens: *small* (less than 800px) and *wide*. (800 is just a number, you can choose the one you suppose is right). And there are two datatables (*ListA* and *ListB*) you want to display in two columns for *wide* screens and in two tabs for *small* screens.
 
-#### Defining the Screen Type
+### Defining the Screen Type
 
 Add a property to app config and initialize it with a function that will calculate the width of the screen and set the screen type:
 
@@ -268,7 +262,7 @@ webix.ready(() => {
 
 *webix.event* attaches an event handler to the **resize** event of a browser window. On window resize, the screen type will be redefined and changed if necessary. Don't forget to **refresh** the app.
 
-#### Responsive Layout
+### Responsive Layout
 
 Here's how you can change the layout according to the **size** of the screen. For small screens, the components will be put in tabs, and for wide screens they will be put side by side:
 
@@ -293,13 +287,14 @@ export default class StartView extends JetView {
 						ListB
 					]
 				};
-	}}
+		}
+	}
 }
 ```
 
-![](../images/resp_layout.png)
+![Responsive layout in apps built with Webix Jet](../images/resp_layout.png)
 
-#### Responsive Content
+### Responsive Content
 
 One more way to make your app responsive is to display less content for small screens. Let's leave only two columns in one of the datatables for small screens:
 
@@ -335,6 +330,6 @@ export default class ListB extends JetView {
 }
 ```
 
-![](../images/resp_content.png)
+![Responsive content in apps built with Webix Jet](../images/resp_content.png)
 
 [Check out the solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/screensize.js)

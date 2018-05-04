@@ -1,11 +1,6 @@
-# <span id="contents">Webpack Config</span>
-
 There are some cases when you might want to change the default Webpack configuration.
 
-- [Multiple Start Files](#multiple_start)
-- [Turning Off Localization and Views](#turn_off)
-
-### [<span id="multiple_start">Multiple Start Files &uarr;</span>](#contents)
+## Multiple Start Files
 
 By default, the app is built with one start file (*admin.js* in this example):
 
@@ -39,7 +34,7 @@ To create multiple entry files, pass an object to **entry** in config. For outpu
 }
 ```
 
-### [<span id="turn_off">Turning Off Localization and Views &uarr;</span>](#contents)
+## Turning Off Localization and Views
 
 If you aren't planning to localize the app, there is a way to do it without creating an empty folder for locales. Without changes in Webpack config, you would have to do that. Webpack config has the **resolve** property, the options for locating modules. It tells Webpack where to look for views and locales.
 
@@ -63,4 +58,4 @@ var config = {
 
 An alias is used instead of hardcoding the *"/views"* path to make this part configurable. If necessary, you can change webpack.config and define new folders for loading views.
 
-For example, you can change the path in *"jet-locales"*.
+For example, you can change the path in _"jet-locales"_.

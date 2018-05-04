@@ -1,15 +1,4 @@
-<style>
-.code{
-    font-family: Consolas, monospace;
-}
-</style>
-
-# <span id="contents">Testing and Deployment</span>
-
-- [Deploying the App](#production)
-- [Testing the App](#testing)
-
-## [<span id="production">Deploying the App &uarr;</span>](#contents)
+## Deploying the App
 
 When your app is complete, you need to build it for production.
 
@@ -33,7 +22,7 @@ By default, **index.html** uses the CDN version of Webix. If you are using Webix
 
 After building an app, you need to include **webix.js** and **codebase/myapp.js**. There are no extra dependencies.
 
-## [<span id="testing">Testing the App &uarr;</span>](#contents)
+## Testing the App
 
 To check the quality of the source code, run the following command:
 
@@ -57,4 +46,4 @@ npm run test
 
 After the tests are complete, you will see something like this:
 
-![Webix Jet webpack-mocha tests successful](../images/mocha.png)
+![Webix Jet with webpack-mocha tests that ran successfully](../images/mocha.png)

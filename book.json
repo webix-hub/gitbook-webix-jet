@@ -1,7 +1,8 @@
 {   "title": "Webix Jet",
     "description": "This is a tutorial on Webix Jet, a microframework for faster development with Webix UI library",
     "plugins": [
-        "comments"
+        "comments",
+        "callouts"
     ],
     "pluginsConfig": {},
     "styles": {

@@ -1,20 +1,18 @@
-# <span id="contents">JetApp API</span>
-
 Here you can find the list of all the **JetApp** methods, that you can make use of.
 
-| Method | Use to  |
-|--------|---------|
-| [attachEvent(event, handler)](#attach)    | attach an event |
-| [callEvent(event)](#call)                 | call an event |
-| [detachEvent(event)](#detach)             | manually detach an event listener |
-| [getService(name,handler)](#get_service)  | access a service by its name |
-| [refresh()](#refresh)                     | repaints the UI of an app |
-| [render(container)](#render)              | render the app or the app module |
-| [setService(name)](#set_service)          | set a service |
-| [show(url)](#show)                        | rebuild the app or app module according to the new URL |
-| [use(plugin, config)](#use)               | switch on a plugin |
+| Method                        | Use to  |
+|-------------------------------|---------|
+| attachEvent(event, handler)   | attach an event |
+| callEvent(event)              | call an event |
+| detachEvent(event)            | manually detach an event listener |
+| getService(name,handler)      | access a service by its name |
+| refresh()                     | repaints the UI of an app |
+| render(container)             | render the app or the app module |
+| setService(name)              | set a service |
+| show(url)                     | rebuild the app or app module according to the new URL |
+| use(plugin, config)           | switch on a plugin |
 
-### [<span id="attach">app.attachEvent("event:name", handler) &uarr;</span>](#contents)
+## app.attachEvent("event:name", handler)
 
 Use this method to attach a custom event, for example, from a Jet view class:
 
@@ -31,7 +29,7 @@ export default class FormView extends JetView{
 }
 ```
 
-Events can be attached both in the app file and in view modules. Yet, if you attach an event listener with this method, you had better to [detach it manually &darr;](#detach) to eliminate a possibility of memory leaks.
+Events can be attached both in the app file and in view modules. Yet, if you attach an event listener with this method, you had better to detach it manually with **detachEvent()** to eliminate a possibility of memory leaks.
 
 You can also attach an inner Jet event. For instance, from app:
 
@@ -47,7 +45,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-### [<span id="call">app.callEvent("event:name") &uarr;</span>](#contents)
+## app.callEvent("event:name")
 
 Use this method to call a custom event:
 
@@ -70,7 +68,7 @@ Normally, inner events are called automatically, so there is no need to use **ca
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-### [<span id="detach">app.detachEvent(event) &uarr;</span>](#contents)
+## app.detachEvent(event)
 
 Use this method to detach event listeners added by **attachEvent** from Jet view classes. You should do this, because the lifetime of such an event listener is longer than the lifetime of the Jet view. So if the view is destroyed, but the event listener isn't detached, this may cause memory leaks, especially in older browsers.
 
@@ -94,7 +92,7 @@ export default class FormView extends JetView{
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-### [<span id="get_service">app.getService(name) &uarr;</span>](#contents)
+## app.getService(name)
 
 The method returns a service by its name, passed to the method as a parameter. Call this method to use a service:
 
@@ -120,11 +118,11 @@ export default class FormView extends JetView{
 
 You can read more about services in the ["Services"](services.md) chapter.
 
-### [<span id="refresh">app.refresh() &uarr;</span>](#contents)
+## app.refresh()
 
 If you want to repaint the UI of the application, call *app.refresh()*. It will re-render all the views.
 
-### [<span id="render">app.render() &uarr;</span>](#contents)
+## app.render()
 
 The **render** method builds the UI of the application. If called without any parameters, it just renders the UI inside the page according to the start URL, specified in the app configuration.
 
@@ -142,7 +140,7 @@ But if you want to render the app inside a container, you can pass the string pa
 app.render("mybox");
 ```
 
-### [<span id="set_service">app.setService(name,handler) &uarr;</span>](#contents)
+## app.setService(name,handler)
 
 The method initializes a service for view communication.
 
@@ -162,11 +160,11 @@ export default class treeView extends JetView{
 }
 ```
 
-**this** refers to the instance of the *treeView* class if it is used in an *arrow function*<sup><a href="#myfootnote1" id="origin1">1</a></sup>.
+**this** refers to the instance of the *treeView* class if it is used in an *arrow function*[^1].
 
 You can read more about services in the ["Services"](services.md) chapter.
 
-### [<span id="show">app.show(url) &uarr;</span>](#contents)
+## app.show(url)
 
 The **show** method is used to change the app interface. This method rebuilds the whole UI of the app according to the URL passed as a parameter:
 
@@ -178,7 +176,7 @@ app.show("/demo/details")
 
 For more info about showing UI components, visit the ["Navigation"](navigation.md) chapter.
 
-### [<span id="use">app.use(plugin, config) &uarr;</span>](#contents)
+## app.use(plugin, config)
 
 The **use** method is used to switch on plugins. The method takes two parameters:
 
@@ -196,5 +194,5 @@ For more details, go to the ["Plugins"](plugins.md) chapter.
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin1">1 &uarr;</a>:
+[^1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

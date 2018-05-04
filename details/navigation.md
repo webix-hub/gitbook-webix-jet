@@ -1,13 +1,6 @@
-# <span id="contents">Navigation</span>
+There are several ways to navigate through an app with Webix Jet.
 
-There are several ways to navigate through an app with Webix Jet:
-
-- [Jet links](#jet)
-- [HTML links](#html)
-- [app.show](#app_show)
-- [view.show](#view_show)
-
-### [<span id="jet">1. Jet Links &uarr;</span>](#contents)
+## 1\. Jet Links
 
 Jet links are created with the **route** attribute. Here's an example of a Jet link:
 
@@ -19,13 +12,13 @@ export default {
 
 After you click on the link, the app UI will be rebuilt and will consist of the main view *top* and a subview *data*. Note that there is no hashbang in the path.
 
-##### Route for Webix Controls and Various HTML Elements
+### Route for Webix Controls and Various HTML Elements
 
-The **route** attribute can be added not only to **\<a>\</a>**, but also to Webix controls and other HTML elements. 
+The **route** attribute can be added not only to **\<a\>** elements, but also to Webix controls and other HTML elements. 
 
 ```js
 export default {
-     template:'<span route="/top/data">Data</span>'
+    template:'<span route="/top/data">Data</span>'
 }
 ```
 
@@ -51,26 +44,26 @@ export default class TopView extends JetView {
 }
 ```
 
-**this** in the button handler refers to the button, and **this.$scope** references the Jet view class<sup><a href="#myfootnote1" id="origin1">1</a></sup>.
+**this** in the button handler refers to the button, and **this.$scope** references the Jet view class [^1].
 
-##### Jet Links with Parameters
+### Jet Links with Parameters
 
 You can pass one or more parameters with a Jet link:
 
 ```js
 // one
 export default {
-     template:'<span route="/top/data?id=2">Data</span>'
+    template:'<span route="/top/data?id=2">Data</span>'
 }
 // or several
 export default {
-     template:'<span route="/top/data?id=2&name=some">Data</span>'
+    template:'<span route="/top/data?id=2&name=some">Data</span>'
 }
 ```
 
-### [<span id="html">2. Navigation with HTML links &uarr;</span>](#contents)
+## 2\. Navigation with HTML links
 
-You can use **href** links for navigation. The **href** attribute can only be added to **\<a>\</a>** elements:
+You can use **href** links for navigation. The **href** attribute can only be added to **\<a\>** elements:
 
 ~~~js
 export default {
@@ -91,9 +84,9 @@ export default {
 }
 ```
 
-### [<span id="app_show">3. app.show\(\) &uarr;</span>](#contents)
+## 3\. app.show\(\)
 
-Apart from links, you can use the **show()** method of app to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function*<sup><a href="#myfootnote2" id="origin2">2</a></sup>. Use **this.app** to call the **show()** method from control handlers, for instance:
+Apart from links, you can use the **show()** method of app to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function* [^2]. Use **this.app** to call the **show()** method from control handlers, for instance:
 
 ```js
 // views/toolbar.js
@@ -105,7 +98,7 @@ Apart from links, you can use the **show()** method of app to switch views. **ap
 
 After a button click, the URL will change, and the app UI will be rebuilt according to it.
 
-##### _app.show()_ with URL parameters
+### _app.show()_ with URL parameters
 
 You can pass one or more parameters with the URL:
 
@@ -116,9 +109,9 @@ this.app.show("/demo/details?id=2");
 this.app.show("/demo/details?id=2&name=some");
 ```
 
-### [<span id="view_show">4. view.show\(\) &uarr;</span>](#contents)
+## 4\. view.show\(\)
 
-You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this** from a handler that is defined as an *arrow function*<sup><a href="#myfootnote3" id="origin3">3</a></sup>. Calling **show()** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
+You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this** from a handler that is defined as an *arrow function* [^3]. Calling **show()** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
 ```js
 // views/layout.js
@@ -145,7 +138,7 @@ If the current URL is *"/layout/details"*, the subview is **details**. To replac
 }}
 ```
 
-The resulting URL is going to be */layout/demo*.
+The resulting URL is going to be _/layout/demo_.
 
 If you want to rebuild the whole app and load the **demo** view as the only view, specify the name of the view with a slash:
 
@@ -158,7 +151,7 @@ If you want to rebuild the whole app and load the **demo** view as the only view
 ...
 ```
 
-##### Navigating to Upper Levels
+### Navigating to Upper Levels
 
 The syntax of showing views resembles the way you navigate through directories. So you can move some levels up from *"/layout/details"*, for example:
 
@@ -170,7 +163,7 @@ The syntax of showing views resembles the way you navigate through directories. 
 
 As a result, the app URL will be */bigview*.
 
-##### _view.show()_ with URL parameters
+### _view.show()_ with URL parameters
 
 You can pass one or more parameters to **show()** alongside the URL:
 
@@ -183,5 +176,5 @@ this.show("details?id=2&name=some");
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin1">1 &uarr;</a>, <a id="myfootnote2" href="#origin2">2 &uarr;</a>, <a id="myfootnote3" href="#origin3">3 &uarr;</a>:
+[^1],[^2],[^3]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

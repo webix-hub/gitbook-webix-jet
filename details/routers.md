@@ -1,15 +1,13 @@
-# <span id="contents">Routing</span>
-
 To manipulate the URL, views have Routers. Webix Jet has four predefined types of routers.
 
-| Type            | Displays app URL   | Stored   |
-|-----------------|--------------------|----------|
-| [Hash](#hash)   | <span style="color:green;">https://myshop.com/#!/my/app</span> | <span style="color:green;">Yes</span> |
-| [Url](#url)     | <span style="color:green;">https://myshop.com/my/app</span>    | <span style="color:green;">Yes</span> |
-| [Store](#store) | <span style="color:red;">No</span> | <span style="color:green;">Yes</span> |
-| [Empty](#empty) | <span style="color:red;">No</span> | <span style="color:red;">No</span> |
+| Type        | Displays app URL   		     | Stored |
+|-------------|------------------------------|--------|
+| HashRouter  | https://myshop.com/#!/my/app | Yes    |
+| UrlRouter   | https://myshop.com/my/app    | Yes 	  |
+| StoreRouter | No							 | Yes 	  |
+| EmptyRouter | No							 | No     |
 
-## [<span id="hash">1. Hash Router \(default\) &uarr;</span>](#contents)
+## 1. Hash Router \(default\)
 
 The app URL is displayed after a hashbang. As this router is set by default, there's no need to to define it in the config.
 
@@ -23,7 +21,7 @@ var app = new JetApp({
 }).render();
 ```
 
-#### Hiding the "!" in the URL
+### Hiding the "!" in the URL
 
 You can hide the "!" in the app URL by using the **routerPrefix** parameter in the app config. Have a look:
 
@@ -44,7 +42,7 @@ If you set **routerPrefix** to an empty string, the app URL will look like this:
 https://myshop.com/#/sales/top
 ```
 
-## [<span id="url">2. URL Router &uarr;</span>](#contents)
+## 2\. URL Router
 
 If you choose UrlRouter, the app URL is displayed without a hashbang. There is a trick with this router: your server-side code should be compatible. You need to provide redirects to avoid error 404.
 
@@ -103,7 +101,7 @@ In your _index.html_ you should set the relative URL with the same prefix:
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js)
 
-## [<span id="store">3. Store Router &uarr;</span>](#contents)
+## 3. Store Router
 
 With this guy, the app URL isn't displayed at all, but it is stored in the session storage. So no worries, you can still return to the previous and next views as if they are in the URL. This can be useful if you have a multilevel application \(apps are subviews of other apps\). The Store router is set for the enclosed apps because the address bar is already taken by the outer app. Suppose you have closed an app module with a deep level of subviews and expect to be in the same place of this app when you switch to it again. The Store router allows this.
 
@@ -136,7 +134,7 @@ var app2 = new JetApp({
 }).render();
 ```
 
-## [<span id="empty">4. Empty Router &uarr;</span>](#contents)
+## 4. Empty Router
 
 If you don't want to store the app part of the URL, there's the EmptyRouter for you. The app URL isn't displayed and isn't stored. It's also used for nested apps. 
 

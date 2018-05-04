@@ -1,13 +1,6 @@
-# <span id="contents">View Communication</span>
+Views are separated, but there should be some means of communication between them.
 
-Views are separated, but there should be some means of communication between them:
-
-- [URL Parameters](#params)
-- [Events](#events)
-- [Services](#services)
-- [Methods](#methods)
-
-## [<span id="params">Parameters &uarr;</span>](#contents)
+## URL Parameters
 
 You can enable view communication with *URL parameters*. This way of communication is useful if you want to initialize components and load data. You can pass parameters with the URL in the **show()** method of a Jet view class.
 
@@ -69,7 +62,7 @@ In this simple example, as soon as DataView is initialized, **urlChange()** of *
 
 ### Setting / Getting Parameters with JetView Methods
 
-You can get URL parameters with [this.getParam()](views.md#getparam). **getParam()** lets the API access the URL parameters of the current view and its parent. This can be useful, as views and subviews quite often share a common parameter.
+You can get URL parameters with [this.getParam()](views.md#this-getparam). **getParam()** lets the API access the URL parameters of the current view and its parent. This can be useful, as views and subviews quite often share a common parameter.
 
 Consider a simple example with two views, a parent **page** and its subview **some**. The URL is:
 
@@ -133,7 +126,7 @@ export default class sub extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
-Use [this.setParam()](views.md#setparam) method to set the URL parameters or to change a URL segment:
+Use [this.setParam()](views.md#this-setparam) method to set the URL parameters or to change a URL segment:
 
 ```js
 this.setParam("mode", "12", true); // some?mode=12
@@ -179,13 +172,13 @@ You can also pass several parameters to **show()**:
 this.show("./form?name=Jack&email=some");
 ```
 
-## [<span id="events">Events &uarr;</span>](#contents)
+## Events
 
 Feel free to use the in-app event bus for view communication.
 
 ### Calling an Event
 
-To call/trigger an event, call **app.callEvent()**. You can call the method by referencing the app with **this.app()** from an *arrow function*<sup><a href="#myfootnote1" id="origin1">1</a></sup>:
+To call/trigger an event, call **app.callEvent()**. You can call the method by referencing the app with **this.app()** from an *arrow function* [^1]:
 
 ```js
 // views/data.js
@@ -230,7 +223,7 @@ Once an event is attached, any other view can call it.
 
 #### One More Way: app.attachEvent()
 
-One more way to attach an event is to call **app.attachEvent()**. This way you will have to detach the event manually<sup><a href="#myfootnote2" id="origin2">2</a></sup>.
+One more way to attach an event is to call **app.attachEvent()**. This way you will have to detach the event manually with **app.detachEvent()** [^2].
 
 ```js
 // views/form.js
@@ -259,7 +252,7 @@ export default class FormView extends JetView{
 }
 ```
 
-## [<span id="services">Services &uarr;</span>](#contents)
+## Services
 
 A service is a way to share functionality. You can create a service connected to one of the views, and other views can communicate with the view through the service. 
 
@@ -317,7 +310,7 @@ export default class FormView extends JetView{
 }
 ```
 
-Apart from view communication, services can be used for loading and saving data. [You can read about it in the "Models" chapter](models.md#services).
+Apart from view communication, services can be used for loading and saving data. [You can read about it in the "Models" chapter](models.md#4-services-as-data-sources).
 
 You can also use services to create app-level plugins. 
 
@@ -368,7 +361,7 @@ For example, it is better to use **URL parameters** to provide the information r
 
 Also remember that you **can't use the same service for two instances of a view class**, e.g. if you create a file manager with two identical file views. For each instance of the class a new service is created. Use services if other ways aren't possible.
 
-## [<span id="methods">Declaring and Calling Methods &uarr;<span>](#contents)
+## Declaring and Calling Methods
 
 One more effective way of connecting views is methods. Unlike events, methods can also return something useful. In one of the views, you can define a method, and in another view, you can call this method. 
 
@@ -421,7 +414,7 @@ export default class ParentView extends JetView{
 
 You can use methods for view communication in similar use-cases, but still events are more advisable. Now let's have a look at the example where methods are better then events.
 
-#### Methods vs Events
+### Methods vs Events
 
 Suppose you want to create a file manager resembling Total Commander. The parent view will have two *file* subviews, each of them contains a list of files:
 
@@ -452,8 +445,8 @@ Both subviews are referenced with **getSubView(name)**.
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin1">1 &uarr;</a>:
+[^1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
 
-<a id="myfootnote2" href="#origin2">2 &uarr;</a>:
+[^2]:
 Event listeners created with **attachEvent()** have longer lifetimes than views that attached them. That's why, before you destroy the view, you have to detach event listeners to prevent memory leaks. Do not leave this task to the garbage collector.

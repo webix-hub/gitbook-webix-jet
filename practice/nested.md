@@ -1,17 +1,10 @@
-# <span id="contents">Using Jet Views as Webix Widgets</span>
-
-- [Jet views in Webix Multiview/Tabview](#multiview)
-- [Jet views in Webix Dashboard](#dashboard)
-- [Jet views as subgrids of Webix Datatable](#subgrid)
-- [Using _addView()_ with Jet views](#add_view)
-
-## [<span id="multiview">Placing Jet views into Multiview / Tabview &uarr;</span>](#contents)
+## Placing Jet views into Multiview / Tabview
 
 You can place Jet views inside Multiview.
 
-![](../images/multiview.png)
+![Webix Jet views in Webix Multiview](../images/multiview.png)
 
-#### 1. Multiview control
+### 1\. Multiview control
 
 Jet views can be included into Multiview. First, you need to create Multiview and put Jet views as _$subviews_ into each cell. Next, add a control to switch between Multiview cells - for example, a segmented button. *segmented* needs IDs of the subviews. It is very important not to define IDs outside the file with Multiview, because it is unsafe. A better approach is to give IDs to the contents of the Multiview cells.
 
@@ -40,9 +33,9 @@ export default class TopView extends JetView {
 
 [Check out the demo on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/tabbar.js)
 
-#### 2. Tabview
+### 2\. Tabview
 
-![](../images/tabview.png)
+![Webix Jet views in Webix Tabview](../images/tabview.png)
 
 You can also put subviews into a Tabview. In this case you do not need IDs, you need to import the subviews and place them into the *body* of Tabview cells:
 
@@ -102,11 +95,11 @@ export default class TopView extends JetView {
 
 [Check out the solution on GitHub >>](https://github.com/webix-hub/jet-demos/blob/master/sources/tabbar.js)
 
-## [<span id="dashboard">Jet Views in Webix Dashboard &uarr;</span>](#contents)
+## Jet Views in Webix Dashboard
 
 You can put Jet views on panels of [Webix Dashboard](https://webix.com/widget/dashboard/).
 
-#### Static panels
+### Static panels
 
 Static panels can be created in _cells_:
 
@@ -132,7 +125,7 @@ export default class TopView extends JetView {
 }
 ```
 
-#### Dynamic panels
+### Dynamic panels
 
 You can also create a [dynamic dashboard](https://blog.webix.com/webix-dashboard-layout-how-to-build-appealing-dynamic-dashboards/) with Jet views. For example, panels can be dragged from a list like this:
 
@@ -206,9 +199,9 @@ export default class DashboardView extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/dashboard.js)
 
-## [<span id="subgrid">Jet Views as Subgrids of Webix Datatable &uarr;</span>](#contents)
+## Jet Views as Subviews and Subgrids of Webix Datatable
 
-You can also nest Jet views of any complexity into Datatable by including them into _Datatable subviews_ <sup><a href="#footnote1" id="origin1">1</a></sup>.
+You can also nest Jet views of any complexity into Datatable by including them into _Datatable subviews_ [^1].
 
 Let's add subviews into this datatable:
 
@@ -237,7 +230,9 @@ export default class TopView extends JetView {
 
 One Jet view class will be used for all subviews, but with different data. Let's use the ability to create Jet class instances with constructors.
 
-<span style="color:red;border:1px solid pink;border-left:5px solid red;border-radius:2px;display:block;padding:10px;"><b>Note</b>: This will work only for synchronous Jet views.</span>
+> #### Caution::Note
+>
+> This will work only for synchronous Jet views.
 
 Let's define the constructor that will call the parent constructor of the JetView class and then get the right data from a parent row of Datatable:
 
@@ -288,9 +283,9 @@ export default class TopView extends JetView {
 }
 ```
 
-## [<span id="add_view">Using _addView()_ with Jet Views &uarr;</span>](#contents)
+## Using _addView()_ with Jet Views
 
-You can use Webix **addView()** method to add Jet views into Webix layouts <sup><a href="#footnote2" id="origin2">2</a></sup>. You can add new elements on the fly, which is especially important for Dashboard. Also, **addView()** can be used with Layout, Tabview, Multiview, Carousel, etc.
+You can use Webix **addView()** method to add Jet views into Webix layouts [^2]. You can add new elements on the fly, which is especially important for Dashboard. Also, **addView()** can be used with Layout, Tabview, Multiview, Carousel, etc.
 
 ```js
 this.$$("layout").addView(WebixJetView);
@@ -298,6 +293,6 @@ this.$$("layout").addView(WebixJetView);
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/addview.js)
 
-- - -
-<a id="footnote1" href="#origin1">1 &uarr;</a>, <a id="footnote2" href="#origin1">2 &uarr;</a>:
+---
+[^1],[^2]:
 Starting with Webix 5.3

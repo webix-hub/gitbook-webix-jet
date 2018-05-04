@@ -1,5 +1,3 @@
-# Using Webix Jet with TypeScript
-
 Typescript is supported by Webix Jet since version 1.3. Benefits of combining Webix Jet and TypeScript:
 - a smart autocomplete for Webix methods,
 - hints on the use of methods,

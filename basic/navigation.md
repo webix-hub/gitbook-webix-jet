@@ -1,22 +1,14 @@
-# In-App Navigation (Routing)
+_Routing_ means navigating from one part of the application to another. Navigation is implemented by changing the URL of the page. The URL reflects the current state of the app. By default, it is stored as a part after the hashbang. Only the part after the hashbang \(\#!\) is changed [^1]. When the URL is changed, the app updates itself accordingly. 
 
-_Routing_ means navigating from one part of the application to another. Navigation is implemented by changing the URL of the page. The URL reflects the current state of the app. By default, it is stored as a part after the hashbang. Only the part after the hashbang \(\#!\) is changed<sup><a href="#myfootnote1" id="origin">1</a></sup>. When the URL is changed, the app updates itself accordingly. 
-
-### Advantages of Jet Navigation
+## Advantages of Jet Navigation
 
 - *Browser Navigation Keys*: Jet URL is stored in the browser history, so you can move backwards and forwards to previously opened subviews.
 - *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before a page reload.
 - *Convenient Development*: If you work on some particular subview (e.g. *games*), you can open the path to it (*#!/games*) and test it separately from the rest of the UI.
 
-In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three<sup><a href="#myfootnoten" id="originn">*</a></sup> more ways to show views and subviews:
+In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three [^2] more ways to show views and subviews:
 
-<span id="contents"></span>
-
-- [Jet links](#jet_links)
-- [app.show()](#app_show)
-- [view.show()](#view_show)
-
-### [<span id="jet_links">1. Jet Links &uarr;</span>](#contents)
+## 1\. Jet Links
 
 You can add links with the **route** attribute and provide the URL to the desired views, e.g.:
 
@@ -33,19 +25,19 @@ You can pass one or more **parameters** with a Jet link:
 ```js
 // one
 export default {
-     template:'<span route="/top/data?id=2">Data</span>'
+    template:'<span route="/top/data?id=2">Data</span>'
 }
 // or several
 export default {
-     template:'<span route="/top/data?id=2&name=some">Data</span>'
+    template:'<span route="/top/data?id=2&name=some">Data</span>'
 }
 ```
 
-### [<span id="app_show">2. app.show\(\) &uarr;</span>](#contents)
+## 2\. app.show\(\)
 
 The **app.show\(\)** method is applied to the whole application and rebuilds its UI (only the parts that changed). You can call the method from control handlers, for instance.
 
-Here is how you can rebuild the app UI with **app.show()**. **this** refers to a specific instance of the related view class if you define handlers as *arrow functions*. <sup><a href="#myfootnote2" id="origin2">2</a></sup>.
+Here is how you can rebuild the app UI with **app.show\(\)**. **this** refers to a specific instance of the related view class if you define handlers as *arrow functions*. [^3].
 
 ```js
 // views/layout.js
@@ -58,7 +50,7 @@ Here is how you can rebuild the app UI with **app.show()**. **this** refers to a
 
 After a button click, the URL will change, and the app UI will be rebuilt according to it.
 
-##### _app.show()_ with URL Parameters
+### _app.show\(\)_ with URL Parameters
 
 You can pass one or more parameters to show alongside the URL:
 
@@ -70,9 +62,9 @@ this.app.show("/demo/details?id=2");
 this.app.show("/demo/details?id=2&name=some");
 ```
 
-### [<span id="view_show">3. view.show\(\) &uarr;</span>](#contents)
+## 3\. view.show\(\)
 
-##### Rebuilding Part of the App
+### Rebuilding Part of the App
 
 You can also change the URL by calling the **show\(\)** method of a specific view class. Showing subviews with **view.show()** gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
@@ -94,7 +86,7 @@ export default class LayoutView extends JetView {
 
 If the current URL is _"/layout/details"_, the subview is **details**. Let's replace **details** with the **demo** subview on a button click. Pass the name of the subview as it is or with *"./"* to **show()**.
 
-**this** refers to a specific instance of the related view class if you define a handler as an *arrow function*<sup><a href="#myfootnote3" id="origin3">3</a></sup>. To rebuild a part of the UI, call **this.show()**:
+**this** refers to a specific instance of the related view class if you define a handler as an *arrow function* [^4]. To rebuild a part of the UI, call **this.show()**:
 
 ```js
 // views/layout.js
@@ -123,7 +115,7 @@ export default class LayoutView extends JetView {
 
 If you click **Demo**, the resulting URL is going to be */layout/demo*.
 
-##### Rebuilding the whole app
+### Rebuilding the whole app
 
 If you want to rebuild the whole app and load the **demo** view as the only view, specify the name of the view with a slash:
 
@@ -136,7 +128,7 @@ If you want to rebuild the whole app and load the **demo** view as the only view
 ...
 ```
 
-##### _view.show()_ with URL Parameters
+### _view.show()_ with URL Parameters
 
 You can pass one or more parameters with the URL:
 
@@ -160,11 +152,12 @@ You can also read these sections of Part II:
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin">1 &uarr;</a>:
+[^1]:
 This is relevant for *HashRouter*, which is the default router. Hashbang is not displayed if you use *UrlRouter*. The app part of the URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except *EmptyRouter* and the behavior is the same as if the URL were displayed. For more details, [see section "Routers"](../details/routers.md).
 
-<a id="myfootnote2" href="#origin2">2 &uarr;</a>, <a id="myfootnote3" href="#origin3">3 &uarr;</a>:
+[^2]:
+There is one more way, described in the advanced part, the ["Navigation"](../details/navigation.md) chapter.
+
+[^3], [^4]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
 
-<a id="myfootnoten" href="#originn">* &uarr;</a>:
-There is one more way, described in the advanced part, the ["Navigation"](../details/navigation.md) chapter.

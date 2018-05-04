@@ -1,10 +1,4 @@
-# <span id="contents">Creating Views</span>
-
-- [View Concept](#view)
-- [Static Subviews](#stat_subview)
-- [Dynamic Subviews](#dynam_subview)
-
-## [<span id="view">View Concept &uarr;</span>](#contents)
+## View Concept
 
 Views are modules for interface elements that should be kept in separate files. This makes the code loosely coupled. If some part of the app is messed up, the rest of it works. Parts of an app can be developed and tested independently. All visual components of the UI are separated from each other and can be reused. All the above said is critical for large and huge apps. Besides, the code looks neater.
 
@@ -40,7 +34,7 @@ To show the files in subfolders, reference them as _folder.file_, e.g.
 \#!details.template
 ```
 
-## [<span id="stat_subview">Subview &uarr;</span>](#contents)
+## Subview
 
 Apps created with Webix Jet are single-page. The interface of your app can be constructed from multiple views. Views can be included in other views and are called _subviews_. They can be either static or dynamic.
 
@@ -68,7 +62,7 @@ You can open the view with this URL:
 index.html#!/bigview
 ```
 
-#### [<span id="dynam_subview">Dynamic Subviews &uarr;</span>](#contents)
+#### Dynamic Subviews
 
 You can embed multiple views that will change according to the URL. Instead of the concrete name of the view class, write _{ $subview: true }_:
 

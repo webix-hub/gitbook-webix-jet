@@ -1,5 +1,3 @@
-# Creating App
-
 A Webix Jet app is single-page and is divided into views. The application structure consists of the following parts:
 
 - the *index.html* file that is a start page of the app;
@@ -9,7 +7,7 @@ A Webix Jet app is single-page and is divided into views. The application struct
 
 An app represents an application or an application module. It is used to group views and modules which implement some specific scenario. Later you will be able to combine separate app modules in high-level apps.
 
-### The Syntax of Creation
+## The Syntax of Creation
 
 An app module is created as a new instance of the JetApp class.
 
@@ -31,7 +29,7 @@ webix.ready(function(){
 
 You can open the needed URL and the UI will be rendered from the URL elements. The app splits the URL into parts, finds the corresponding files in the **views** folder and creates an interface by combining UI modules from those files.
 
-### App Configuration
+## App Configuration
 
 In the app configuration, for example, you can set the mode in which the app will work:
 
@@ -56,9 +54,9 @@ if (this.app.config.mode === "readonly"){
 ...
 ```
 
-**this** refers to the current instance of a Jet view (_games_, for example)<sup><a href="#myfootnote1" id="origin">1</a></sup>.
+**this** refers to the current instance of a Jet view (_games_, for example)[^1].
 
-### Routers
+## Routers
 
 Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is _HashRouter_. If you don't want to display the hashbang in the URL, you can change the router to _UrlRouter_:
 
@@ -83,5 +81,5 @@ You can read these sections of Part II:
 
 <!-- footnotes -->
 - - -
-<a id="myfootnote1" href="#origin">1 &uarr;</a>:
+[^1]:
 You can read more about ["Referencing views"](../details/referencing.md) and apps.

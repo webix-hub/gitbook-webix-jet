@@ -1,37 +1,32 @@
-# Plugins
-
 Webix Jet provides predefined plugins and the ability to create custom plugins.
 
-1. [Default Plugins](#contents)
-2. [Custom Plugins](#custom)
-
-## <span id="contents">1. Default Plugins</span>
+## 1\. Default Plugins
 
 **View Plugins**
 
 These plugins are enabled for a specific view by *view.use()*:
 
-- [the Menu plugin](#menu)
-- [the UnloadGuard plugin](#unload)
-- [the Status plugin](#status)
-- [the UrlParam plugin](#urlparam)
+- the Menu plugin
+- the UnloadGuard plugin
+- the Status plugin
+- the UrlParam plugin
 
 **App Plugins**
 
 These plugins are enabled for the whole app with *app.use()*:
 
-- [the User plugin](#user)
-- [the Theme plugin](#theme)
-- [the Locale plugin](#locale)
+- the User plugin
+- the Theme plugin
+- the Locale plugin
 
-### [<span id="menu">Menu Plugin &uarr;</span>](#contents)
+### Menu Plugin
 
 The Menu plugin simplifies your life if you plan to create a menu for navigation:
 
 - it sets subview URLs for menu options, buttons or other controls you plan to use for navigation;
 - it automatically highlights the right menu option after a page reload or change of the URL. 
 
-![](../images/top_data.png)
+![Using the Menu plugin in Webix Jet](../images/top_data.png)
 
 The plugin must be enabled in the Jet view that contains the menu with **view.use()** (call it as *this.use()*). After the plugin name, you must specify the local ID of the Webix control or widget that you want to use as a menu:
 
@@ -94,11 +89,11 @@ export default class TopView extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-start/blob/master/sources/views/top.js)
 
-### [<span id="unload">UnloadGuard Plugin &uarr;</span>](#contents)
+### UnloadGuard Plugin
 
 The **UnloadGuard** plugin can be used to prevent users from leaving the view on some conditions. For example, this can be useful in the case of forms with unsaved or invalid data. The plugin can intercept the event of leaving the current view and e.g. show a confirmation dialogue.
 
-![](../images/unload.png)
+![Using the UnloadGuard plugin in Webix Jet](../images/unload.png)
 
 The syntax for using the plugin is *this.use\(plugin,handler\)*.
 
@@ -160,11 +155,11 @@ If the form input is not valid, the function returns a promise with a dialogue w
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-unload.js)
 
-### [<span id="status">Status Plugin &uarr;</span>](#contents)
+### Status Plugin
 
 This plugin is useful if you want to show the status of data loading in case it takes time, to confirm success or to show an error message. 
 
-![webix jet plugin status demo](../images/plugin_status.png)
+![Using the Status plugin in Webix Jet](../images/plugin_status.png)
 
 These are the status messages that you can see:
 
@@ -219,7 +214,7 @@ this.use(plugins.Status, {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-status.js)
 
-### [<span id="urlparam">UrlParam Plugin &uarr;</span>](#contents)
+### UrlParam Plugin
 
 The plugin allows using the URL fragments as parameters. It makes them accessible via **view.getParam()** and correctly weeds them out of the URL.
 
@@ -268,22 +263,17 @@ export default class SomeView() extends JetView{
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
-### [<span id="user">User Plugin &uarr;</span>](#contents)
+### User Plugin
 
 The **User** plugin is useful for apps with authorization.
 
-![](../images/plugin_user.png)
+![Enabling the User plugin in Webix Jet](../images/plugin_user.png)
 
-#### <span id="login_plugin">Login through a Custom Script
+#### Login through a Custom Script
 
-- [Enabling the plugin](#enable_plugin)
-- [The session model](#session_model)
-- [Logging in](#logging_in)
-- [Logging out](#logging_out)
-- [Getting user info](#getting_user)
-- [Plugin configuration](#plugin_config)
+This section contains guidelines for using the plugin with a custom script.
 
-##### [<span id="enable_plugin">Enabling the Plugin &uarr;</span>](#login_plugin)
+##### Enabling the Plugin
 
 To enable the plugin, call **app.use()** with two parameters:
 
@@ -300,7 +290,7 @@ import session from "models/session";
 app.use(plugins.User, { model: session });
 ```
 
-##### [<span id="session_model">The Session Model &uarr;</span>](#login_plugin)
+##### The Session Model
 
 The plugin uses a **session** model, [check out an example](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js). The model contains requests to *php* scripts for logging in, getting the current status, and logging out. The *session* model includes the following functions:
 
@@ -338,7 +328,7 @@ function logout(){
 }
 ```
 
-##### [<span id="logging_in">Logging In &uarr;</span>](#login_plugin)
+##### Logging In
 
 This is an example of a form for logging in:
 
@@ -400,11 +390,11 @@ export default class LoginView extends JetView{
 - The [complete *login.js* file](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js);
 - The [demo on logging in with custom scripts](https://github.com/webix-hub/jet-start/tree/php).
 
-##### [<span id="logging_out">Logging Out &uarr;</span>](#login_plugin)
+##### Logging Out
 
 The **logout()** method ends the current session and shows an *afterLogout* page (the login form by default).
 
-##### [<span id="getting_user">Getting User Info & Checking the User Status &uarr;</span>](#login_plugin)
+##### Getting User Info & Checking the User Status
 
 The **getUser()** method returns the data of the currently logged in user.
 
@@ -412,7 +402,7 @@ The **getStatus()** method returns the current status of the user. It can receiv
 
 The **User** service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
 
-##### [<span id="plugin_config">Plugin Configuration &uarr;</span>](#login_plugin)
+##### Plugin Configuration
 
 Apart from the session model, the plugin configuration can include other settings:
 
@@ -427,16 +417,11 @@ Apart from the session model, the plugin configuration can include other setting
 to be continued...
 
 
-### [<span id="theme">Theme plugin &uarr;</span>](#contents)
+### Theme plugin
 
 This is a plugin for changing app themes.
 
-- [<span id="theme_contents">Enabling the Plugin</span>](#enable_theme)
-- [Adding Stylesheets](#add_stylesheets)
-- [Setting Themes](#setting_theme)
-- [Getting the Current Theme](#getting_theme)
-
-#### [<span id="enable_theme">Enabling the Plugin &uarr;</span>](#theme_contents)
+#### Enabling the Plugin
 
 This is how you can enable the plugin:
 
@@ -453,7 +438,7 @@ The plugin has two methods:
 1. **getTheme()** returns the name of the current theme;
 2. **setTheme(name)** takes one obligatory parameter - the name of the theme - and sets the theme for the app.
 
-#### [<span id="add_stylesheets">Adding Stylesheets &uarr;</span>](#theme_contents)
+#### Adding Stylesheets
 
 The service locates links to stylesheets by their *title* attributes. Here are the stylesheets for the app, e.g.:
 
@@ -463,7 +448,7 @@ The service locates links to stylesheets by their *title* attributes. Here are t
 <link rel="stylesheet" title="compact" type="text/css" href="//cdn.webix.com/edge/skins/compact.css">
 ```
 
-#### [<span id="setting_theme">Setting Themes &uarr;</span>](#theme_contents)
+#### Setting Themes
 
 You need to provide a way for users to choose a theme. For example, let's add a segmented button:
 
@@ -508,7 +493,7 @@ export default class SettingsView extends JetView {
 }
 ```
 
-#### [<span id="getting_theme">Restoring The State of the Control &uarr;</span>](#theme_contents)
+#### Restoring The State of the Control
 
 **getTheme()** can be used to restore the state of the segmented button after the new theme is applied. Let's get the current theme in **config()** and set the **value** of the segmented setting it to the correct value:
 
@@ -531,19 +516,13 @@ config(){
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-theme.js)
 
-### [<span id="locale">Locale plugin &uarr;</span>](#contents)
+### Locale plugin
 
 This is a plugin for localizing apps.
 
-![](../images/plugin_locale.png)
+![Using the Locale plugin in Webix Jet](../images/plugin_locale.png)
 
-- [<span id="locale_contents">Enabling the Plugin</span>](#enabling_plugin)
-- [Setting the Locale](#setting_locale)
-- [Applying the Locale](#applying_locale)
-- [Getting the Current Locale](#getting_locale)
-- [Optional Configuration for the Locale Plugin](#locale_config)
-
-#### [<span id="locale_contents">Enabling the Plugin &uarr;</span>](#locale_contents)
+#### Enabling the Plugin
 
 This is how you can enable the Locale plugin:
 
@@ -566,7 +545,7 @@ export default {
 };
 ```
 
-#### [<span id="setting_locale">Setting the Locale &uarr;</span>](#locale_contents)
+#### Setting the Locale
 
 Use the **setLang()** method of the *locale* service to set the new language. **setLocale()** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed. The method also calls **app.refresh()** that re-renders all the views.
 
@@ -608,7 +587,7 @@ export default class SettingsView extends JetView {
 }
 ```
 
-#### [<span id="applying_locale">Applying the Locale &uarr;</span>](#locale_contents)
+#### Applying the Locale
 
 The **\_()** method is used for translating text labels in the app. The method takes one parameter - a text string. **\_()** looks for the string in a locale file and returns the translation. E.g. _this.app.getService("locale").\_("Settings")_ will return _"Ajustes"_ if Spanish is chosen. If you need to localize a lot of text labels, it's reasonable to create a shorthand for the method:
 
@@ -641,7 +620,7 @@ export default class SettingsView extends JetView {
 }
 ```
 
-#### [<span id="getting_locale">Getting the Current Locale &uarr;</span>](#locale_contents)
+#### Getting the Current Locale
 
 The **getLang()** method returns the current language. **getLang()** can be used to restore the value of the segmented button:
 
@@ -666,7 +645,7 @@ export default class SettingsView extends JetView {
 }
 ```
 
-#### [<span id="locale_config">Optional Configuration for the Locale Plugin &uarr;</span>](#locale_contents)
+#### Optional Configuration for the Locale Plugin
 
 You can set add optional settings in the plugin config while enabling the plugin with **app.use()**:
 
@@ -684,7 +663,7 @@ app.use(plugins.Locale, { path:"some" });
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js)
 
 
-## [<span id="custom">2. Custom Plugins &uarr;</span>](#)
+## 2. Custom Plugins
 
 You can create a service and use it as an app-level plugin. 
 
