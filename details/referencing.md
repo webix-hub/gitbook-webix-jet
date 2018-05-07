@@ -233,7 +233,7 @@ export default class ChildForm extends JetView{
 
 ## 5\. Referencing Webix Widgets
 
-You can reference a Webix widget inside a Jet view with **this.ui()** by their global and local IDs. **this.$$()** ignores widgets inside subviews [^1]. 
+You can reference a Webix widget inside a Jet view with **this.ui()** by their global and local IDs. **this.$$()** ignores widgets inside subviews [1]. 
 
 ### 1\. Getting by Local IDS (*localId*) 
 
@@ -281,5 +281,5 @@ You can give complex IDs, e.g. _"root\_view:control"_ or _"control:function"_. T
 If you use *this.\$\$\(id\)* with a global ID, it's the same as *webix.\$\$\(id\)*.
 
 ---
-[^1]:
+[1]:
 Starting with Webix Jet 1.5. If you want to look for widgets in the current view and all its subviews, use [this.getRoot().queryView()](https://docs.webix.com/api__ui.baseview_queryview.html).

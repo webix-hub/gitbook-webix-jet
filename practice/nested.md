@@ -201,7 +201,7 @@ export default class DashboardView extends JetView {
 
 ## Jet Views as Subviews and Subgrids of Webix Datatable
 
-You can also nest Jet views of any complexity into Datatable by including them into _Datatable subviews_ [^1].
+You can also nest Jet views of any complexity into Datatable by including them into _Datatable subviews_ [1].
 
 Let's add subviews into this datatable:
 
@@ -285,7 +285,7 @@ export default class TopView extends JetView {
 
 ## Using _addView()_ with Jet Views
 
-You can use Webix **addView()** method to add Jet views into Webix layouts [^2]. You can add new elements on the fly, which is especially important for Dashboard. Also, **addView()** can be used with Layout, Tabview, Multiview, Carousel, etc.
+You can use Webix **addView()** method to add Jet views into Webix layouts [2]. You can add new elements on the fly, which is especially important for Dashboard. Also, **addView()** can be used with Layout, Tabview, Multiview, Carousel, etc.
 
 ```js
 this.$$("layout").addView(WebixJetView);
@@ -294,5 +294,5 @@ this.$$("layout").addView(WebixJetView);
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/addview.js)
 
 ---
-[^1],[^2]:
+[1],[2]:
 Starting with Webix 5.3

@@ -1,4 +1,4 @@
-_Routing_ means navigating from one part of the application to another. Navigation is implemented by changing the URL of the page. The URL reflects the current state of the app. By default, it is stored as a part after the hashbang. Only the part after the hashbang \(\#!\) is changed [^1]. When the URL is changed, the app updates itself accordingly. 
+_Routing_ means navigating from one part of the application to another. Navigation is implemented by changing the URL of the page. The URL reflects the current state of the app. By default, it is stored as a part after the hashbang. Only the part after the hashbang \(\#!\) is changed [1]. When the URL is changed, the app updates itself accordingly. 
 
 ## Advantages of Jet Navigation
 
@@ -6,7 +6,7 @@ _Routing_ means navigating from one part of the application to another. Navigati
 - *Refresh Friendly*: If you reload the page, the URL will stay the same and the state of the UI will be exactly the same as before a page reload.
 - *Convenient Development*: If you work on some particular subview (e.g. *games*), you can open the path to it (*#!/games*) and test it separately from the rest of the UI.
 
-In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three [^2] more ways to show views and subviews:
+In the previous section, ["Creating views"](views.md), you have read about direct URL navigation. There are three [2] more ways to show views and subviews:
 
 ## 1\. Jet Links
 
@@ -37,7 +37,7 @@ export default {
 
 The **app.show\(\)** method is applied to the whole application and rebuilds its UI (only the parts that changed). You can call the method from control handlers, for instance.
 
-Here is how you can rebuild the app UI with **app.show\(\)**. **this** refers to a specific instance of the related view class if you define handlers as *arrow functions*. [^3].
+Here is how you can rebuild the app UI with **app.show\(\)**. **this** refers to a specific instance of the related view class if you define handlers as *arrow functions*. [3].
 
 ```js
 // views/layout.js
@@ -86,7 +86,7 @@ export default class LayoutView extends JetView {
 
 If the current URL is _"/layout/details"_, the subview is **details**. Let's replace **details** with the **demo** subview on a button click. Pass the name of the subview as it is or with *"./"* to **show()**.
 
-**this** refers to a specific instance of the related view class if you define a handler as an *arrow function* [^4]. To rebuild a part of the UI, call **this.show()**:
+**this** refers to a specific instance of the related view class if you define a handler as an *arrow function* [4]. To rebuild a part of the UI, call **this.show()**:
 
 ```js
 // views/layout.js
@@ -152,12 +152,12 @@ You can also read these sections of Part II:
 
 <!-- footnotes -->
 - - -
-[^1]:
+[1]:
 This is relevant for *HashRouter*, which is the default router. Hashbang is not displayed if you use *UrlRouter*. The app part of the URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except *EmptyRouter* and the behavior is the same as if the URL were displayed. For more details, [see section "Routers"](../details/routers.md).
 
-[^2]:
+[2]:
 There is one more way, described in the advanced part, the ["Navigation"](../details/navigation.md) chapter.
 
-[^3], [^4]:
+[3], [4]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
 

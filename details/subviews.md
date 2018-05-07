@@ -258,7 +258,7 @@ export default class DataView extends JetView{
 
 #### [<span id="urlchange">urlChange\(view,url\) &uarr;</span>](#jetview-methods)
 
-**urlChange()** is called every time the URL is changed. It reacts to the change in the URL after **!\#** [^1]. **urlChange()** is only called for the view that is rendered and for its parent.
+**urlChange()** is called every time the URL is changed. It reacts to the change in the URL after **!\#** [1]. **urlChange()** is only called for the view that is rendered and for its parent.
 
 Consider the following example. The initial URL is:
 
@@ -673,5 +673,5 @@ Jet apps can also behave as Webix widgets, for details, check ["Big app developm
 
 <!-- footnotes -->
 - - -
-[^1]:
+[1]:
 This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for *EmptyRouter*. For details, [go to the "Routers" section](routers.md).

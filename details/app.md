@@ -160,7 +160,7 @@ export default class treeView extends JetView{
 }
 ```
 
-**this** refers to the instance of the *treeView* class if it is used in an *arrow function*[^1].
+**this** refers to the instance of the *treeView* class if it is used in an *arrow function*[1].
 
 You can read more about services in the ["Services"](services.md) chapter.
 
@@ -194,5 +194,5 @@ For more details, go to the ["Plugins"](plugins.md) chapter.
 
 <!-- footnotes -->
 - - -
-[^1]:
+[1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

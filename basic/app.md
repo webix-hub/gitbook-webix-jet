@@ -54,7 +54,7 @@ if (this.app.config.mode === "readonly"){
 ...
 ```
 
-**this** refers to the current instance of a Jet view (_games_, for example)[^1].
+**this** refers to the current instance of a Jet view (_games_, for example)[1].
 
 ## Routers
 
@@ -81,5 +81,5 @@ You can read these sections of Part II:
 
 <!-- footnotes -->
 - - -
-[^1]:
+[1]:
 You can read more about ["Referencing views"](../details/referencing.md) and apps.
