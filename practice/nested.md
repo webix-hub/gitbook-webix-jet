@@ -230,7 +230,7 @@ export default class TopView extends JetView {
 
 One Jet view class will be used for all subviews, but with different data. Let's use the ability to create Jet class instances with constructors.
 
-> #### Caution::Note
+> #### Note
 >
 > This will work only for synchronous Jet views.
 
