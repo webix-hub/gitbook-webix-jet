@@ -174,8 +174,7 @@ this.show("details?id=2");
 this.show("details?id=2&name=some");
 ```
 
-<!-- footnotes -->
+## Footnotes:
 
----
 #### [Footnotes]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

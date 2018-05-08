@@ -293,6 +293,5 @@ this.$$("layout").addView(WebixJetView);
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/addview.js)
 
----
 #### [Footnotes]:
 Starting with Webix 5.3

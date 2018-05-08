@@ -280,6 +280,7 @@ You can give complex IDs, e.g. _"root\_view:control"_ or _"control:function"_. T
 
 If you use *this.\$\$\(id\)* with a global ID, it's the same as *webix.\$\$\(id\)*.
 
----
+## Footnotes:
+
 #### [1]:
 Starting with Webix Jet 1.5. If you want to look for widgets in the current view and all its subviews, use [this.getRoot().queryView()](https://docs.webix.com/api__ui.baseview_queryview.html).

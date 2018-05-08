@@ -443,9 +443,8 @@ init() {
 
 Both subviews are referenced with **getSubView(name)**.
 
-<!-- footnotes -->
+## Footnotes:
 
----
 #### [1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
 

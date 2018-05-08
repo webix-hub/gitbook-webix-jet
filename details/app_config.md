@@ -196,8 +196,7 @@ if (this.app.config.mode === "readonly"){
 
 **this** refers to the current instance of a Jet view class [1].
 
-<!-- footnotes -->
+## Footnotes:
 
----
 #### [1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

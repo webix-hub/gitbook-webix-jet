@@ -192,8 +192,7 @@ app.use(plugins.User, { model: session });
 
 For more details, go to the ["Plugins"](plugins.md) chapter.
 
-<!-- footnotes -->
+## Footnotes:
 
----
 #### [1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

@@ -34,8 +34,8 @@ Jet 1.x can recognize old configuration objects and use them correctly, so you w
 
 ### View has "app" as dependency
 
-Change object to JetView-based class and use "this.app" instead of "app"
+Change object to JetView-based class and use "this.app" instead of "app".
 
 ### View is using locale
 
-Change object to JetView and use "this.getService('locale')" instead of 'locale'
+Change object to JetView and use "this.getService('locale')" instead of 'locale'.

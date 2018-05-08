@@ -150,9 +150,8 @@ You can also read these sections of Part II:
 - [JetApp API](../details./app.md)
 - [JetView API](../details/views.md)
 
-<!-- footnotes -->
+## Footnotes:
 
----
 #### [1]:
 This is relevant for *HashRouter*, which is the default router. Hashbang is not displayed if you use *UrlRouter*. The app part of the URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except *EmptyRouter* and the behavior is the same as if the URL were displayed. For more details, [see section "Routers"](../details/routers.md).
 

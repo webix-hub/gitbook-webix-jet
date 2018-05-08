@@ -81,6 +81,7 @@ You can read these sections of Part II:
 
 <!-- footnotes -->
 
----
+## Footnotes
+
 #### [1]:
 You can read more about ["Referencing views"](../details/referencing.md) and apps.
