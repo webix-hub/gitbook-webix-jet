@@ -12,7 +12,7 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 | show(url)                     | rebuild the app or app module according to the new URL |
 | use(plugin, config)           | switch on a plugin |
 
-## app.attachEvent("event:name", handler)
+## app.attachEvent()
 
 Use this method to attach a custom event, for example, from a Jet view class:
 
@@ -45,7 +45,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-## app.callEvent("event:name")
+## app.callEvent()
 
 Use this method to call a custom event:
 
@@ -68,7 +68,7 @@ Normally, inner events are called automatically, so there is no need to use **ca
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-## app.detachEvent(event)
+## app.detachEvent()
 
 Use this method to detach event listeners added by **attachEvent** from Jet view classes. You should do this, because the lifetime of such an event listener is longer than the lifetime of the Jet view. So if the view is destroyed, but the event listener isn't detached, this may cause memory leaks, especially in older browsers.
 
@@ -92,7 +92,7 @@ export default class FormView extends JetView{
 
 For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
-## app.getService(name)
+## app.getService()
 
 The method returns a service by its name, passed to the method as a parameter. Call this method to use a service:
 
@@ -140,7 +140,7 @@ But if you want to render the app inside a container, you can pass the string pa
 app.render("mybox");
 ```
 
-## app.setService(name,handler)
+## app.setService()
 
 The method initializes a service for view communication.
 
@@ -160,11 +160,11 @@ export default class treeView extends JetView{
 }
 ```
 
-**this** refers to the instance of the *treeView* class if it is used in an *arrow function*[1].
+**this** refers to the instance of the *treeView* class if it is used in an *arrow function* [[1]](#1).
 
 You can read more about services in the ["Services"](services.md) chapter.
 
-## app.show(url)
+## app.show()
 
 The **show** method is used to change the app interface. This method rebuilds the whole UI of the app according to the URL passed as a parameter:
 
@@ -176,7 +176,7 @@ app.show("/demo/details")
 
 For more info about showing UI components, visit the ["Navigation"](navigation.md) chapter.
 
-## app.use(plugin, config)
+## app.use()
 
 The **use** method is used to switch on plugins. The method takes two parameters:
 
@@ -193,6 +193,7 @@ app.use(plugins.User, { model: session });
 For more details, go to the ["Plugins"](plugins.md) chapter.
 
 <!-- footnotes -->
-- - -
-[1]:
+
+---
+#### [1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

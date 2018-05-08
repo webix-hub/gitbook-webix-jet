@@ -178,7 +178,7 @@ Feel free to use the in-app event bus for view communication.
 
 ### Calling an Event
 
-To call/trigger an event, call **app.callEvent()**. You can call the method by referencing the app with **this.app()** from an *arrow function* [1]:
+To call/trigger an event, call **app.callEvent()**. You can call the method by referencing the app with **this.app()** from an *arrow function* [[1]](#1):
 
 ```js
 // views/data.js
@@ -223,7 +223,7 @@ Once an event is attached, any other view can call it.
 
 #### One More Way: app.attachEvent()
 
-One more way to attach an event is to call **app.attachEvent()**. This way you will have to detach the event manually with **app.detachEvent()** [2].
+One more way to attach an event is to call **app.attachEvent()**. This way you will have to detach the event manually with **app.detachEvent()** [[2]](#2).
 
 ```js
 // views/form.js
@@ -444,9 +444,10 @@ init() {
 Both subviews are referenced with **getSubView(name)**.
 
 <!-- footnotes -->
-- - -
-[1]:
+
+---
+#### [1]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
 
-[2]:
+#### [2]:
 Event listeners created with **attachEvent()** have longer lifetimes than views that attached them. That's why, before you destroy the view, you have to detach event listeners to prevent memory leaks. Do not leave this task to the garbage collector.

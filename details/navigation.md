@@ -44,7 +44,7 @@ export default class TopView extends JetView {
 }
 ```
 
-**this** in the button handler refers to the button, and **this.$scope** references the Jet view class [1].
+**this** in the button handler refers to the button, and **this.$scope** references the Jet view class [[1]](#footnotes).
 
 ### Jet Links with Parameters
 
@@ -86,7 +86,7 @@ export default {
 
 ## 3\. app.show\(\)
 
-Apart from links, you can use the **show()** method of app to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function* [2]. Use **this.app** to call the **show()** method from control handlers, for instance:
+Apart from links, you can use the **show()** method of app to switch views. **app.show\(\)** will rebuild the whole app or app module that called the method. A specific instance of the related view class is referenced with **this** if your handler is an *arrow function* [[2]](#footnotes). Use **this.app** to call the **show()** method from control handlers, for instance:
 
 ```js
 // views/toolbar.js
@@ -111,7 +111,7 @@ this.app.show("/demo/details?id=2&name=some");
 
 ## 4\. view.show\(\)
 
-You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this** from a handler that is defined as an *arrow function* [3]. Calling **show()** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
+You can also change the URL by calling the **show\(\)** method from a specific view. A specific instance of the related view class is referenced with **this** from a handler that is defined as an *arrow function* [[3]](#footnotes). Calling **show()** from a view gives you more freedom, as it allows rebuilding only this view or only its subview, not the whole app or app module. For example, suppose you have a view like this:
 
 ```js
 // views/layout.js
@@ -175,6 +175,7 @@ this.show("details?id=2&name=some");
 ```
 
 <!-- footnotes -->
-- - -
-[1],[2],[3]:
+
+---
+#### [Footnotes]:
 To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).

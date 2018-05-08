@@ -155,12 +155,12 @@ config(){
 Webix UI lifetime event handlers are implemented through **JetView** class methods. Here are the methods that you can redefine:
 
 - [config()](#config)
-- [init()](#init)
-- [urlChange()](#urlchange)
-- [ready()](#ready)
+- [init()](#init-view-url)
+- [urlChange()](#urlchange-view-url)
+- [ready()](#ready-view-url)
 - [destroy()](#destroy)
 
-#### [<span id="config">config() &uarr; </span>](#jetview-methods)
+#### config()
 
 This method returns the initial UI configuration of a view. Have a look at a toolbar returned by the **config()** method of the _ToolbarView_ class:
 
@@ -180,7 +180,7 @@ export default class ToolbarView extends JetView{
 }
 ```
 
-#### [<span id="init">init\(view, url\) &uarr;</span>](#jetview-methods)
+#### init\(view, url\)
 
 The method is called only once for every instance of a view class when the view is rendered. It is a good place to load some common data (list of options for a _select_ in a form, for example) or to change the initial UI configuration of a view returned by **config()**.
 
@@ -256,9 +256,9 @@ export default class DataView extends JetView{
 }
 ```
 
-#### [<span id="urlchange">urlChange\(view,url\) &uarr;</span>](#jetview-methods)
+#### urlChange\(view,url\)
 
-**urlChange()** is called every time the URL is changed. It reacts to the change in the URL after **!\#** [1]. **urlChange()** is only called for the view that is rendered and for its parent.
+**urlChange()** is called every time the URL is changed. It reacts to the change in the URL after **!\#** [[1]](#1). **urlChange()** is only called for the view that is rendered and for its parent.
 
 Consider the following example. The initial URL is:
 
@@ -310,7 +310,7 @@ urlChange(view, url){
 }
 ```
 
-#### [<span id="ready">ready(view,url) &uarr;</span>](#jetview-methods)
+#### ready(view,url)
 
 **ready()** is called when the current view and all its subviews have been rendered. For instance, if the URL is changed to *a/b*, the order in which view class methods are called is the following:
 
@@ -672,6 +672,7 @@ As a result, this is a two-level app.
 Jet apps can also behave as Webix widgets, for details, check ["Big app development"](../practice/big_apps.md).
 
 <!-- footnotes -->
-- - -
-[1]:
+
+---
+#### [1]:
 This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for *EmptyRouter*. For details, [go to the "Routers" section](routers.md).

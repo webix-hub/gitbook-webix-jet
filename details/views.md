@@ -400,7 +400,7 @@ For more details on plugins, check out the ["Plugins" section](plugins.md).
 
 ## this.\$\$()
 
-Use **this.$$()** to look for Webix widgets by their local IDs inside the current Jet view [1].
+Use **this.$$()** to look for Webix widgets by their local IDs inside the current Jet view [[1]](#1).
 
 ```js
 // views/toolbar.js
@@ -424,6 +424,7 @@ export default class ToolbarView extends JetView {
 For details, [read the "Referencing" section](referencing.md).
 
 <!-- footnotes -->
-- - -
-[1]:
+
+---
+#### [1]:
 Starting with Webix Jet 1.5. If you want to look for widgets in the current view and all its subviews, use [this.getRoot().queryView()](https://docs.webix.com/api__ui.baseview_queryview.html).
