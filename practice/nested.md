@@ -285,7 +285,7 @@ export default class TopView extends JetView {
 
 ## Using _addView()_ with Jet Views
 
-You can use Webix **addView()** method to add Jet views into Webix layouts [2]. You can add new elements on the fly, which is especially important for Dashboard. Also, **addView()** can be used with Layout, Tabview, Multiview, Carousel, etc.
+You can use Webix **addView()** method to add Jet views into Webix layouts [[1]](#1). You can add new elements on the fly, which is especially important for Dashboard. Also, **addView()** can be used with Layout, Tabview, Multiview, Carousel, etc.
 
 ```js
 this.$$("layout").addView(WebixJetView);
@@ -293,5 +293,7 @@ this.$$("layout").addView(WebixJetView);
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/addview.js)
 
-#### [Footnotes]:
+## Footnotes
+
+#### [1]:
 Starting with Webix 5.3

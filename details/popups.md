@@ -106,9 +106,12 @@ export class WindowsView extends JetView {
 To show this popup, you must call **showWindow**.
 
 Here's how you initiate and show this class popup by **TopView**:
-1. To create a popup, use **this.ui()** inside **init()** of **TopView**. 
-2. Add a new **win2** property, create the popup with **this.ui()** and assign the popup to **win2**. 
-3. **this.ui()** returns a class, so you can call class methods. To show the popup, call **showWindow()**. 
+
+1. To create a popup, use **this.ui()** inside **init()** of **TopView**.
+
+2. Add a new **win2** property, create the popup with **this.ui()** and assign the popup to **win2**.
+
+3. **this.ui()** returns a class, so you can call class methods. To show the popup, call **showWindow()**.
 
 ```js
 // views/top.js

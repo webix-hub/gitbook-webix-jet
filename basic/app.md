@@ -77,9 +77,7 @@ You can read these sections of Part II:
 - [App Config](../details/app_config.md)
 - [Routers](../details/routers.md)
 - [JetApp API](../details/app.md)
-- [Webpack Configuration](../details/webpackconfig.md)
-
-<!-- footnotes -->
+- [Webpack Configuration](../practice/webpackconfig.md)
 
 ## Footnotes
 

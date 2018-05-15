@@ -14,19 +14,19 @@ yarn add -D wjet babel-core babel-loader babel-preset-env css-loader file-loader
 yarn add webix-jet
 ```
 
-- create folder sources and move all dev files there ( app.js, models/, views/, helpers/, etc. )
-- in webpack.config.json change the entry field to the main file of your app (entry: "sources/app.js")
+- create folder sources and move all dev files there ( _app.js_, _models/_, _views/_, _helpers/_, etc. )
+- in _webpack.config.json_ change the entry field to the main file of your app (```entry: "sources/app.js"```)
 - update app.js similar to https://github.com/webix-hub/jet-start/blob/master/sources/myapp.js
     - import JetApp
-    - replace "core.create" with "new JetApp"
-    - remove "view.use" commands if any
-    - add app.render() call
+    - replace ```core.create``` with ```new JetApp```
+    - remove ```view.use``` commands if any
+    - add ```app.render()``` call
 - run the app 
 
 ```
 npm start
 ```
-- open app at localhost:8080
+- open app at _localhost:8080_
 
 ## Migrating views
 
@@ -34,8 +34,8 @@ Jet 1.x can recognize old configuration objects and use them correctly, so you w
 
 ### View has "app" as dependency
 
-Change object to JetView-based class and use "this.app" instead of "app".
+Change object to JetView-based class and use ```this.app``` instead of ```app```.
 
 ### View is using locale
 
-Change object to JetView and use "this.getService('locale')" instead of 'locale'.
+Change object to JetView and use ```this.getService('locale')``` instead of ```locale```.

@@ -162,7 +162,7 @@ export default class TopView extends JetView {
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
-Work with URL parameters can be simplified with the [UrlParam plugin](details/plugins.md).
+Work with URL parameters can be simplified with the [UrlParam plugin](plugins.md).
 
 ### Several URL Parameters
 
@@ -446,7 +446,7 @@ Both subviews are referenced with **getSubView(name)**.
 ## Footnotes:
 
 #### [1]:
-To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
+To read more about how to reference apps and view classes, go to ["Referencing views"](../details/referencing.md).
 
 #### [2]:
 Event listeners created with **attachEvent()** have longer lifetimes than views that attached them. That's why, before you destroy the view, you have to detach event listeners to prevent memory leaks. Do not leave this task to the garbage collector.

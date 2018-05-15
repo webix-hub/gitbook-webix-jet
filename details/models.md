@@ -377,4 +377,4 @@ After receiving the response of the AJAX request, you have to call <code>JSON.pa
 
 For more details on services, read:
 
-- [Services](services.md)
+- [View Communication](events.md)

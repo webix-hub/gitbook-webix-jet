@@ -43,7 +43,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 ...
 ```
 
-For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
+For more details on events, read ["View Communication"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
 ## app.callEvent()
 
@@ -66,7 +66,7 @@ export default class DataView extends JetView{
 
 Normally, inner events are called automatically, so there is no need to use **callEvent** for them.
 
-For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
+For more details on events, read ["View Communication"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
 ## app.detachEvent()
 
@@ -90,7 +90,7 @@ export default class FormView extends JetView{
 }
 ```
 
-For more details on events, read ["Events and Methods"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
+For more details on events, read ["View Communication"](events.md) and ["Inner Events and Error Handling"](inner_events.md).
 
 ## app.getService()
 
@@ -116,7 +116,7 @@ export default class FormView extends JetView{
 }
 ```
 
-You can read more about services in the ["Services"](services.md) chapter.
+You can read more about services in the ["View Communication"](events.md) chapter.
 
 ## app.refresh()
 
@@ -162,7 +162,7 @@ export default class treeView extends JetView{
 
 **this** refers to the instance of the *treeView* class if it is used in an *arrow function* [[1]](#1).
 
-You can read more about services in the ["Services"](services.md) chapter.
+You can read more about services in the ["View Communication"](events.md) chapter.
 
 ## app.show()
 
@@ -192,7 +192,7 @@ app.use(plugins.User, { model: session });
 
 For more details, go to the ["Plugins"](plugins.md) chapter.
 
-## Footnotes:
+### Footnotes
 
 #### [1]:
-To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
+To read more about how to reference apps and view classes, go to ["Referencing views"](../details/referencing.md).

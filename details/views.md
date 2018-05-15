@@ -153,7 +153,7 @@ export default class FormView extends JetView{
 }
 ```
 
-For more details on attaching and calling events, read the ["Events and Methods" section](events.md).
+For more details on attaching and calling events, read the ["View Communication" section](events.md).
 
 ## this.setParam()
 
@@ -305,7 +305,7 @@ export default class TopView extends JetView {
 
 Note again that there is no need to destroy the window manually.
 
-For more details about popups and windows, [go to the "popups and Windows" section](popups.md).
+For more details about popups and windows, [go to the "Popups and Windows" section](popups.md).
 
 In the example above, a Jet view was passed to **this.ui()**, so the return value of **this.ui()** was also a Jet view. You can also pass Webix widgets or Jet views wrapped inside a Webix layout to the method.
 
@@ -423,7 +423,7 @@ export default class ToolbarView extends JetView {
 
 For details, [read the "Referencing" section](referencing.md).
 
-## Footnotes:
+## Footnotes
 
 #### [1]:
 Starting with Webix Jet 1.5. If you want to look for widgets in the current view and all its subviews, use [this.getRoot().queryView()](https://docs.webix.com/api__ui.baseview_queryview.html).

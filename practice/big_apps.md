@@ -88,7 +88,7 @@ This JetApp works as a widget and can be combined and sized like any other Webix
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/webixview.js)
 
-## Footnotes:
+## Footnotes
 
 #### [1]:
 Starting with Webix Jet 1.5

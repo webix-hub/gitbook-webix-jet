@@ -37,7 +37,7 @@ export default {
 
 The **app.show\(\)** method is applied to the whole application and rebuilds its UI (only the parts that changed). You can call the method from control handlers, for instance.
 
-Here is how you can rebuild the app UI with **app.show\(\)**. **this** refers to a specific instance of the related view class if you define handlers as *arrow functions*. [[3]](#3-4).
+Here is how you can rebuild the app UI with **app.show\(\)**. **this** refers to a specific instance of the related view class if you define handlers as *arrow functions* [[3]](#3-4).
 
 ```js
 // views/layout.js
@@ -86,7 +86,7 @@ export default class LayoutView extends JetView {
 
 If the current URL is _"/layout/details"_, the subview is **details**. Let's replace **details** with the **demo** subview on a button click. Pass the name of the subview as it is or with *"./"* to **show()**.
 
-**this** refers to a specific instance of the related view class if you define a handler as an *arrow function* [4](#3-4). To rebuild a part of the UI, call **this.show()**:
+**this** refers to a specific instance of the related view class if you define a handler as an *arrow function* [[4]](#3-4). To rebuild a part of the UI, call **this.show()**:
 
 ```js
 // views/layout.js
@@ -147,10 +147,10 @@ This is all about Webix Jet in a nutshell.
 You can also read these sections of Part II:
 
 - [Navigation](../details/navigation.md)
-- [JetApp API](../details./app.md)
+- [JetApp API](../details/app.md)
 - [JetView API](../details/views.md)
 
-## Footnotes:
+## Footnotes
 
 #### [1]:
 This is relevant for *HashRouter*, which is the default router. Hashbang is not displayed if you use *UrlRouter*. The app part of the URL isn't displayed at all if you use other types of routers. However, the app URL is stored for all the three routers except *EmptyRouter* and the behavior is the same as if the URL were displayed. For more details, [see section "Routers"](../details/routers.md).
@@ -159,4 +159,4 @@ This is relevant for *HashRouter*, which is the default router. Hashbang is not 
 There is one more way, described in the advanced part, the ["Navigation"](../details/navigation.md) chapter.
 
 #### [3],[4]:
-To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
+To read more about how to reference apps and view classes, go to ["Referencing views"](../details/referencing.md).

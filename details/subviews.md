@@ -376,7 +376,7 @@ export default class ListEditView extends JetView{
 
 In the example, the form will be bound to the list only when both the list and the form are rendered.
 
-#### [<span id="destroy">destroy() &uarr;</span>](#jetview-methods)
+#### destroy()
 
 **destroy()** is called only once for each class instance when the view is destroyed (closed and no longer present in the URL).
 
@@ -671,7 +671,7 @@ As a result, this is a two-level app.
 
 Jet apps can also behave as Webix widgets, for details, check ["Big app development"](../practice/big_apps.md).
 
-## Footnotes:
+## Footnotes
 
 #### [1]:
 This is true if you use *HashRouter*. There's no hashbang with other routers, but this still works for *URL* and *Store* routers. The URL isn't stored only for *EmptyRouter*. For details, [go to the "Routers" section](routers.md).

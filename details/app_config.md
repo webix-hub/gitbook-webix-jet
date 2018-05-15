@@ -118,7 +118,7 @@ export default class TopView extends JetView {
 }
 ```
 
-**this** in the button click handler refers to the current instance of a Jet view class [1^].
+**this** in the button click handler refers to the current instance of a Jet view class [[1]](#1).
 
 [Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/viewresolve.js)
 
@@ -196,7 +196,7 @@ if (this.app.config.mode === "readonly"){
 
 **this** refers to the current instance of a Jet view class [1].
 
-## Footnotes:
+### Footnotes
 
 #### [1]:
-To read more about how to reference apps and view classes, go to ["Referencing views"](../detailed/referencing.md).
+To read more about how to reference apps and view classes, go to ["Referencing views"](../details/referencing.md).

@@ -1,19 +1,19 @@
 ## Version 1.5 - April 24, 2018
 
-- the ability to compile a Jet app into a standalone bundle and [use it in other apps or as is](practice/deploy.md)
-- the ability to compile a Jet app as a component and [use it as a Webix widget](practice/deploy.md)
+- the ability to compile a Jet app into a standalone bundle and [use it in other apps or as is](practice/big_apps.md#modules-and-large-app-development)
+- the ability to compile a Jet app as a component and [use it as a Webix widget](practice/big_apps.md#using-jet-app-as-a-widget)
 - [**this.$$()**](details/views.md#this-usdusd) returns [widgets from the current Jet view only](details/referencing.md#5-referencing-webix-widgets)
 
 ## Version 1.4 - April 11, 2018
 
-- JetView class instances can be created [in **config()**](details/subview.md#jetview-constructor)
+- JetView class instances can be created [in **config()**](details/subviews.md#jetview-constructor)
 
 ## Version 1.3 - January 11, 2018
 
 - [TypeScript support](practice/typescript.md)
 - new API:
-    - [getParam](details/views.md#getparam) and [setParam](details/views.md#this-setparam) methods to get/set URL parameters
-    - [getUrl](details/views.md)
+    - [getParam](details/views.md#this-getparam) and [setParam](details/views.md#this-setparam) methods to get/set URL parameters
+    - [getUrl](details/views.md#this-geturl)
 - [*UrlParam*](details/plugins.md#urlparam-plugin) plugin
 - ability to set optional path for the [Locale plugin](details/plugins.md#locale-plugin)
 - ["app:user:login"](details/inner_events.md#app-user-login) and ["app:user:logout"](details/inner_events.md#app-user-logout) events

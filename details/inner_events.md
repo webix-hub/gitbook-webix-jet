@@ -170,7 +170,7 @@ There are four events that can be used to handle errors.
 
 | Event              | is called                                                               |
 |--------------------|-------------------------------------------------------------------------|
-| app:error)         | any error occurs                                                        |
+| app:error          | any error occurs                                                        |
 | app:error:resolve  | when Jet can't find a module by its name                                |
 | app:error:render   | on errors during view rendering, mostly Webix UI related                |
 | app:error:initview | in the case of an error during view rendering, mostly Webix Jet related |

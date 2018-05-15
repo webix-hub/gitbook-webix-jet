@@ -28,9 +28,9 @@ The codebase of the app consists of:
 
 ## How it Works
 
-The basic principle of creating an app is the following. The app is a single page. We divide it into multiple views, which will be kept in separate files. Thus, the process of controlling the behavior of the app gets much easier and quicker.
+The basic principle of creating an app is the following. The app is a single page. It is divided into multiple views, which will be kept in separate files. Thus, the process of controlling the behavior of the app gets much easier and quicker.
 
-In order to navigate between pages, we will change the URL of the page. But as we are writing a single page app, we will change not the main URL, but only the part after the hashbang (#!). The framework will react to the URL change and rebuild the interface from these elements.
+Navigation between pages works, when the URL of the page changes. But as this is a single page app, only the part of the URL after the hashbang (#!) will change, not the main URL. The framework will react to the URL change and rebuild the interface from these elements.
 
 The app splits the URL into parts, finds the corresponding files in the *views* folder and creates an interface by combining UI from those files.
 
@@ -64,7 +64,7 @@ You can look at this page by opening the URL *index.html#!/start*.
 
 **views/top**
 
-The *views/top* module defines the top level view, that contains a menu and includes the start page view, which we have described above:
+The *views/top* module defines the top level view, that contains a menu and includes the start page view, which have been described above:
 
 ```js
 //views/top.js
@@ -79,7 +79,7 @@ export default {
 ```
 
 In the above code, there is a layout with two columns.
-At the top of the file, we are providing the list of dependencies, which we will use in this layout.
+At the top of the file, there is the list of dependencies, which will be used in this layout.
 
 Open the path *index.html#!/top*, and you will see the page with the *start* view inside of *top*.
 
@@ -99,10 +99,10 @@ export default {
 };
 ```
 
-The line *{ $subview: true }* implies that we can enclose other modules inside of the top module. The next segment of the URL will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*.
+The line *{ $subview: true }* implies that you can enclose other modules inside of the top module. The next segment of the URL will be loaded into this structure. So for rendering the interface including a particular subview, put its name after *index.html#!/top/* like *index.html#!/top/start*.
 The *{ $subview: true }* placeholder will be replaced with the content of a subview file (*views/start.js* in the above example) and the corresponding interface will be rendered.
 
-For example, we've got a *data.js* view, which contains a datatable. If you enter the URL *index.html#!/top/data*, you will get the interface with a menu in the left part and a datatable in the right part:
+For example, there is a *data.js* view, which contains a datatable. If you enter the URL *index.html#!/top/data*, you will get the interface with a menu in the left part and a datatable in the right part:
 
 **index.html#!/top/data**
 

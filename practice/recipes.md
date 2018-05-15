@@ -97,7 +97,7 @@ export default class limited extends JetView{
 }
 ```
 
-*this.app.config.access* gets to the access level of the current user. If you use [the **User** plugin](plugins.md#user-plugin), you can get the user name with *getUser* and check the group name.
+*this.app.config.access* gets to the access level of the current user. If you use [the **User** plugin](../details/plugins.md#user-plugin), you can get the user name with *getUser* and check the group name.
 
 For the demo, the user group is changed by a control in *top*:
 
