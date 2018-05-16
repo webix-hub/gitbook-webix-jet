@@ -4,7 +4,7 @@
 * [What's New](whats-new.md)
 * [Getting Started](getting-started.md)
 * [Quick Development Guidelines](quick-development-guidelines.md)
-* [Migration from Older Version](migration-from-older-version.md)
+* [Migration from Jet 0.x](migration-from-older-version.md)
 * Part I - Basic usage
   * [Creating Apps](part-i-basic-usage/creating-apps.md)
   * [Creating Views](part-i-basic-usage/creating-views.md)

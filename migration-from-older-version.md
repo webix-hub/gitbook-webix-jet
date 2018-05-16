@@ -1,4 +1,4 @@
-# Migration from Older Version
+# Migration from Jet 0.x
 
 ## Toolchain and App
 
