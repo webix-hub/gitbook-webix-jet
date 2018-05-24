@@ -533,7 +533,7 @@ export default Details = {
 export default Form = () => {
     view:"form", elements:[
         { view:"text", name:"email", required:true, label:"Email" },
-        { view:"button", value:"save", click:() => this.show("details") }
+        { view:"button", value:"save" }
     ]
 }
 ```

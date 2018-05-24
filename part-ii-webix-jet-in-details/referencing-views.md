@@ -8,34 +8,44 @@ Due to ES6 _arrow functions_, you can refer to a Jet view with **this** from cli
 
 ```javascript
 // views/toolbar.js
-const Toolbar = {
-    view: "toolbar",
-    elements: [
-        { view: "label", label: "Demo" },
-        { view: "button", value:"details",
-            click: () => {
-                this.show("details");
-            }
-    }]
+import {JetView} from "webix-jet";
+export default class Toolbar extends JetView {
+    config(){
+        return {
+            view: "toolbar",
+            elements: [
+                { view: "label", label: "Demo" },
+                { view: "button", value:"details",
+                    click: () => {
+                        this.show("details");
+                    }
+                }
+            ]
+        };
+    }
 };
-export default Toolbar;
 ```
 
 Another way to reference a Jet view is useful when you need to define a handler as _function_. In this case, **this** refers to a Webix widget. Any Webix widget put inside of a view has the **$scope** property, which points to the Jet view. So if you want to change the URL from controls of the view, reference the view with **this.$scope** and call its **show** method:
 
 ```javascript
 // views/toolbar.js
-const Toolbar = {
-    view: "toolbar",
-    elements: [
-        { view: "label", label: "Demo" },
-        { view: "button", value:"details",
-            click: function() {
-                this.$scope.show(this.getValue());
-            }
-    }]
-};
-export default Toolbar;
+import {JetView} from "webix-jet";
+export default class Toolbar extends JetView {
+    config(){
+        return {
+            view: "toolbar",
+            elements: [
+                { view: "label", label: "Demo" },
+                { view: "button", value:"details",
+                    click: function() {
+                        this.$scope.show(this.getValue());
+                    }
+                }
+            ]
+        };
+    }
+}
 ```
 
 This is one of the cases when arrow functions do not help to shorten the syntax. Have a look at the same task done with an arrow function:
