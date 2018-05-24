@@ -446,7 +446,7 @@ init() {
 
 Both subviews are referenced with **getSubView\(name\)**.
 
-## Footnotes:
+## Footnotes
 
 #### \[1\]:
 

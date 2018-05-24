@@ -81,9 +81,9 @@ You can read these sections of Part II:
 * [JetApp API](../part-ii-webix-jet-in-details/jetapp-api.md)
 * [Webpack Configuration](../part-iii-practical-tasks/webpack-configuration.md)
 
-## Footnotes
+### Footnotes
 
-### \[1\]:
+#### \[1\]:
 
 You can read more about ["Referencing views"](../part-ii-webix-jet-in-details/referencing-views.md) and apps.
 
