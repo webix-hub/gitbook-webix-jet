@@ -155,11 +155,12 @@ And here is the "shareddata" file that communicates with the shared data feed an
 var data = webix.ajax("some.json").then(a => a.json());
 export function sharedData(name){
     return data.then(a => {
-        switch name:
+        switch (name){
             case "grid":
                 return a.grid;
             default:
                 return [];
+        }
     });
 }
 ```
