@@ -8,7 +8,7 @@ Webix Jet is a fully client-side solution and can be used with any REST-based da
 
 ## How to Start
 
-To begin with, you should grab the app package from [https://github.com/webix-hub/jet-start/archive/master.zip](https://github.com/webix-hub/jet-start/archive/master.zip) and unpack it locally. After that, run the following commands in the target folder \(this assumes that you have _Node.js_ and _npm_ installed\):
+To begin with, you can grab the app package from [https://github.com/webix-hub/jet-start/archive/master.zip](https://github.com/webix-hub/jet-start/archive/master.zip) and unpack it locally. After that, run the following commands in the target folder \(this assumes that you have _Node.js_ and _npm_ installed\):
 
 ```text
 npm install
@@ -158,4 +158,3 @@ As you can see, this module returns an object that differs from those described 
 * ["Creating views"](part-i-basic-usage/creating-views.md)
 * ["Views and Subviews"](part-ii-webix-jet-in-details/views-and-subviews.md#3-class-views)
 * ["Models"](part-ii-webix-jet-in-details/models.md)
-

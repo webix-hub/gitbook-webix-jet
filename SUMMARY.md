@@ -24,6 +24,7 @@
   * [Plugins](part-ii-webix-jet-in-details/plugins.md)
   * [Inner Events and Error Handling](part-ii-webix-jet-in-details/inner-events-and-error-handling.md)
 * Part III - Practical Tasks
+  * [WJet Utility for Faster Prototyping](part-iii-practical-tasks/wjet-utility-for-faster-prototyping.md)
   * [Deploying and Testing](part-iii-practical-tasks/deploying-and-testing.md)
   * [Big App Development](part-iii-practical-tasks/big-app-development.md)
   * [Nesting Jet Views into Webix Widgets](part-iii-practical-tasks/nesting-jet-views-into-webix-widgets.md)

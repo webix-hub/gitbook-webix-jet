@@ -10,6 +10,7 @@ The JetView class has the following methods:
 | getSubView\(name\) | call the methods of a subview |
 | getUrl\(\) | get the URL segment related to a view |
 | on\(app,"event:name",handler\) | attach an event |
+| refresh\(\) | repaint the view and its subviews |
 | setParam\(name, value\) | set the URL parameters |
 | show\("path"\) | show a view or a subview |
 | ui\(view\) | create a popup or a window |
@@ -156,6 +157,28 @@ export default class FormView extends JetView{
 ```
 
 For more details on attaching and calling events, read the ["View Communication" section](view-communication.md).
+
+## this.refresh\(\)
+
+Use the **refresh\(\)** method to repaint the view and its subviews after some changes in the UI:
+
+```javascript
+// views/top.js
+this.refresh();
+```
+
+When the method is called, the following happens:
+
+- all subviews are destroyed,
+- the **config()** of the view is called and the UI is created,
+- **init** handlers of the view and its subviews are triggered,
+- subviews are recreated.
+
+> #### Important
+>
+> the **destroy()** handler for the refreshed view is not called. That is why you need to provide safeguards in **init()** to prevent double initialization.
+
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/refresh.js)
 
 ## this.setParam\(\)
 
