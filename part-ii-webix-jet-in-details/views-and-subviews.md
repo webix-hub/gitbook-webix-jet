@@ -80,31 +80,7 @@ export default class TopView extends JetView {
 * You can also define **custom methods** and **local variables**.
 * All instances have their individual **inner states**. E.g. if you use the same Toolbar class to add identical toolbars at the top and at the bottom, there are two instances of the Toolbar class and the toolbars will behave independently.
 * Classes have the **this** pointer that references the view inside methods and handlers.
-* You can **extend** class views. Views can inherit not only from the JetView class, but from each other.
-
-Thanks to ES6 classes, inheritance is closer to classic OOP. Inheritance can help you reuse old components for creating slightly different ones. In the case when views share many common traits, you can create a base view and create a necessary number of subclasses, in which you can redefine necessary parts of UI/logic. For example, you already have a toolbar and want to create a similar one, but with additional buttons. You can define a new _BiggerToolbar_ class view on the base of Toolbar one and add elements in the _init_ handler.
-
-Base class:
-
-```javascript
-import {JetView} from "webix-jet";
-export default class Toolbar extends JetView {
-    config(){
-      return { view:"toolbar", height:50, elements:[ ... ]};
-    }
-}
-```
-
-Successor class:
-
-```javascript
-import Toolbar from "views/toolbar";
-export default class BiggerToolbar extends Toolbar {
-    init(view){
-        view.addView({view:"button", value:"Save"});
-    }
-}
-```
+* You can **extend** class views. Views can inherit not only from the JetView class, but from each other. For details about code reuse, read section ["Creating Similar Views"](views-and-subviews.md#creating-similar-views) in this chapter.
 
 ### JetView Constructor
 
@@ -391,6 +367,50 @@ export default class FormView extends JetView{
     }
     destroy(){
         this.app.detachEvent("save:form");
+    }
+}
+```
+
+### Creating Similar Views
+
+ES6 inheritance can help you reuse components for creating slightly different ones. If views share many common traits, you can create a base view and then create a necessary number of subclasses, in which you can redefine necessary parts of UI/logic, load different data, etc. 
+
+To achieve this, you can define a custom base class and use it instead of _JetView_ for creating new views.
+
+For example, if you need to create a lot of similar datatables, you can define a class that will store all the common elements (configuration handlers, logic, etc.):
+
+```javascript
+// views/basedatatable.js
+import {JetView} from "webix-jet";
+export default class BaseDatatable extends JetView {
+    constructor(app, name, config){
+        super(app, name);
+        this.config = config;
+    }
+    config(){
+        return { view:"datatable", columns: this.config.columns };
+    }
+}
+```
+
+Next you can create custom datatable views, each one can define parameters for the base class and redefine any of its methods if necessary:
+
+```javascript
+// views/products.js
+import {BaseDatatable} from "webix-jet";
+import products from "models/products"; //data collection
+export default class ProductsView extends BaseDatatable {
+    constructor(app, name){
+        super(app, name, {
+            columns:[
+                {id:"id",header:""},
+                {id:"product",header:"Product"},
+                {id:"stock",header:"In stock"}
+            ]
+        });
+    }
+    init(view){
+        view.parse(products);
     }
 }
 ```

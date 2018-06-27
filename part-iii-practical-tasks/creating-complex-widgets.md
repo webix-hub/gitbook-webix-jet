@@ -1,6 +1,6 @@
 # Creating Complex Widgets
 
-To create simple and medium-sized widgets that enclose some third party library components or a few Webix widgets, you can use **webix.protoUI\(\)**. Custom widgets must be based on **webix.ui.view**, while custom layouts must be based on **webix.ui.layout** and have the layout configuration defined in the **$init** method.
+To create simple and medium-sized widgets that enclose some third party library components or a few Webix widgets, you can use [webix.protoUI()](https://docs.webix.com/desktop__custom_component.html). Custom widgets must be based on **webix.ui.view**, while custom layouts must be based on **webix.ui.layout** and have the layout configuration defined in the **$init** method.
 
 For complex cases, when you want to create a widget with multiple layouts, dynamic views, complex data, etc., it is better to use Webix Jet.
 
@@ -44,7 +44,7 @@ webix.ui({
 
 If you plan to use Jet app as a widget, keep in mind a few things:
 
-_1. **Do not use** any hardcoded **"id"** values_.
+_1. **Do not use** any hard-coded **"id"** values_.
 
 This will prevent initializing more than one instance of the widget, because the IDs will be no longer unique. Instead, use **localId** and locate widgets inside the view with **this.$$\(\)** or **queryView\(\)**.
 
@@ -98,4 +98,32 @@ export default class MyView extends JetView {
     }
 }
 ```
+
+## Dynamic Widget Loading
+
+If you want to load custom widget code on demand, you can split your code and import the bundles with widget code when it is needed. For example, widgets can be imported in **config()** of a Jet view:
+
+```javascript
+// views/statistics.js
+import {JetView} from "webix-jet";
+export default class StatisticsView extends JetView{
+    config(){
+        var widgets = import(/* webpackChunkName: "widgets" */ "modules/customgrid");
+        return widgets.then(() => {
+
+            return { rows:[
+                { type:"header", template:"Sales 2018" },
+                { view:"custom-grid" }
+            ]};
+
+        });
+    }
+}
+```
+
+> #### Note
+>
+> This works for both custom Webix widgets and Jet apps as custom widgets.
+
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/bundles.js)
 

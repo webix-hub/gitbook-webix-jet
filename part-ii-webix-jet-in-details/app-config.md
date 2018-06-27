@@ -143,7 +143,7 @@ const app = new JetApp({
 });
 ```
 
-In **webpack.config.js**, you can define the chunk naming scheme (chunkFilename property) in output's configuration:
+In **webpack.config.js**, you can define the chunk naming scheme (the _chunkFilename_ property) in output's configuration:
 
 ```javascript
 // webpack.config.js
