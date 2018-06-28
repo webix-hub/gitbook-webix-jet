@@ -158,3 +158,4 @@ As you can see, this module returns an object that differs from those described 
 * ["Creating views"](part-i-basic-usage/creating-views.md)
 * ["Views and Subviews"](part-ii-webix-jet-in-details/views-and-subviews.md#3-class-views)
 * ["Models"](part-ii-webix-jet-in-details/models.md)
+

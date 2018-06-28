@@ -4,12 +4,12 @@
 * [What's New](whats-new.md)
 * [Getting Started](getting-started.md)
 * [Quick Development Guidelines](quick-development-guidelines.md)
-* [Migration from Jet 0.x](migration-from-older-version.md)
-* Part I - Basic usage
+* [Migration from Jet 0.x](migration-from-jet-0.x.md)
+* [Part I - Basic usage](part-i-basic-usage/README.md)
   * [Creating Apps](part-i-basic-usage/creating-apps.md)
   * [Creating Views](part-i-basic-usage/creating-views.md)
   * [In-app Navigation](part-i-basic-usage/in-app-navigation.md)
-* Part II - Webix Jet in details
+* [Part II - Webix Jet in details](part-ii-webix-jet-in-details/README.md)
   * [JetApp API](part-ii-webix-jet-in-details/jetapp-api.md)
   * [App Config](part-ii-webix-jet-in-details/app-config.md)
   * [Views and SubViews](part-ii-webix-jet-in-details/views-and-subviews.md)
@@ -23,7 +23,7 @@
   * [View Communication](part-ii-webix-jet-in-details/view-communication.md)
   * [Plugins](part-ii-webix-jet-in-details/plugins.md)
   * [Inner Events and Error Handling](part-ii-webix-jet-in-details/inner-events-and-error-handling.md)
-* Part III - Practical Tasks
+* [Part III - Practical Tasks](part-iii-practical-tasks/README.md)
   * [WJet Utility for Faster Prototyping](part-iii-practical-tasks/wjet-utility-for-faster-prototyping.md)
   * [Deploying and Testing](part-iii-practical-tasks/deploying-and-testing.md)
   * [Big App Development](part-iii-practical-tasks/big-app-development.md)

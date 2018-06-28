@@ -3,7 +3,7 @@
 ## Version 1.6 - June 26, 2018
 
 * new [WJET utility](part-iii-practical-tasks/wjet-utility-for-faster-prototyping.md) for faster prototyping
-* JetView has the [refresh() method](part-ii-webix-jet-in-details/jetview-api.md#this-refresh)
+* JetView has the [refresh\(\) method](part-ii-webix-jet-in-details/jetview-api.md#this-refresh)
 * better support for ES6 modules: [app.views](part-ii-webix-jet-in-details/app-config.md#code-splitting) can return a promise of an ES6 module, which can be used for code-splitting
 
 ## Version 1.5 - April 24, 2018

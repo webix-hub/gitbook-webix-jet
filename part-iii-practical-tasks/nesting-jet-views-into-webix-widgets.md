@@ -232,9 +232,9 @@ export default class TopView extends JetView {
 
 One Jet view class will be used for all subviews, but with different data. Let's use the ability to create Jet class instances with constructors.
 
-> #### Note
->
-> This will work only for synchronous Jet views.
+{% hint style="warning" %}
+This will work only for synchronous Jet views.
+{% endhint %}
 
 Let's define the constructor that will call the parent constructor of the JetView class and then get the right data from a parent row of Datatable:
 

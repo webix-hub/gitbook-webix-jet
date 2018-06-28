@@ -169,16 +169,16 @@ this.refresh();
 
 When the method is called, the following happens:
 
-- all subviews are destroyed,
-- the **config()** of the view is called and the UI is created,
-- **init** handlers of the view and its subviews are triggered,
-- subviews are recreated.
+* all subviews are destroyed,
+* the **config\(\)** of the view is called and the UI is created,
+* **init** handlers of the view and its subviews are triggered,
+* subviews are recreated.
 
-> #### Important
->
-> the **destroy()** handler for the refreshed view is not called. That is why you need to provide safeguards in **init()** to prevent double initialization.
+{% hint style="warning" %}
+**Important:** the **destroy\(\)** handler for the refreshed view is not called. That is why you need to provide safeguards in **init\(\)** to prevent double initialization.
+{% endhint %}
 
-[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/master/sources/refresh.js)
+[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/refresh.js)
 
 ## this.setParam\(\)
 

@@ -373,11 +373,11 @@ export default class FormView extends JetView{
 
 ### Creating Similar Views
 
-ES6 inheritance can help you reuse components for creating slightly different ones. If views share many common traits, you can create a base view and then create a necessary number of subclasses, in which you can redefine necessary parts of UI/logic, load different data, etc. 
+ES6 inheritance can help you reuse components for creating slightly different ones. If views share many common traits, you can create a base view and then create a necessary number of subclasses, in which you can redefine necessary parts of UI/logic, load different data, etc.
 
 To achieve this, you can define a custom base class and use it instead of _JetView_ for creating new views.
 
-For example, if you need to create a lot of similar datatables, you can define a class that will store all the common elements (configuration handlers, logic, etc.):
+For example, if you need to create a lot of similar datatables, you can define a class that will store all the common elements \(configuration handlers, logic, etc.\):
 
 ```javascript
 // views/basedatatable.js
@@ -511,7 +511,7 @@ export default class TopView extends JetView {
 }
 ```
 
-2. Subviews which are resolved based on the URL segments are called **dynamic**. To create them, you need to put a placeholder into the UI with the help of **$subview:true**:
+1. Subviews which are resolved based on the URL segments are called **dynamic**. To create them, you need to put a placeholder into the UI with the help of **$subview:true**:
 
 ```javascript
 // views/top.js

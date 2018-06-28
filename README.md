@@ -6,6 +6,7 @@ This guide provides all the information needed to start creating web application
 
 Webix is a library of UI components and you do not need any special techniques to create apps with it. However, while more and more components are added to a project, there is a risk to get a mess of code. This guide will provide you with an easy and convenient way of creating apps with Webix by means of using Webix Jet framework.
 
-![Webix Jet GitBook Cover](.gitbook/assets/Webix-Jet-no-btn-tiny.png)
+![Webix Jet GitBook Cover](.gitbook/assets/webix-jet-no-btn-tiny.png)
 
-[![](.gitbook/assets/Webixjet-btn-gitbook-tiny.png)](https://webix.gitbook.io/webix-jet/getting-started)
+[![](.gitbook/assets/webixjet-btn-gitbook-tiny.png)](https://webix.gitbook.io/webix-jet/getting-started)
+
