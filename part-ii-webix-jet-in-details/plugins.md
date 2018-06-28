@@ -524,7 +524,7 @@ This is a plugin for localizing apps.
 
 #### Enabling the Plugin
 
-This is how you can enable the Locale plugin:
+You can enable the *Locale* plugin before the app is rendered:
 
 ```javascript
 // myapp.js
@@ -539,17 +539,59 @@ You must create files with all the text labels in English and their translations
 ```javascript
 // locales/es.js
 export default {
-    "Settings" : "Ajustes",
-    "Language" : "Idioma",
-    "Theme" : "Tema"
+    "My Profile" : "Mi Perfil",
+	"My Account" : "Mi Cuenta",
+	"My Calendar" : "Mi Calendario"
 };
 ```
 
-#### Setting the Locale
+#### Changing the Default Locale
 
-Use the **setLang\(\)** method of the _locale_ service to set the new language. **setLocale\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed. The method also calls **app.refresh\(\)** that re-renders all the views.
+The default locale is English. You can change it while enabling the plugin:
 
-Let's create a segmented button that will be used to choose languages. Note that IDs of the button options should be the same as the locale file names \(e.g. "es", "en"\).
+```javascript
+// app.js
+app.use(plugins.Locale,{lang:"es"});
+```
+
+#### Applying the Locale
+
+To translate all the text labels, you need to apply the **\_\(\)** method of the service to each label. The method takes one parameter - a text string. **\_\(\)** looks for the string in a locale file and returns the translation. E.g. `this.app.getService\("locale"\).\_\("My Profile"\)` will return "Mi Perfil" if Spanish is chosen.
+
+For example, let's apply the **\_\(\)** method to a small menu:
+
+```javascript
+// views/menu.js
+import {JetView} from "webix-jet";
+export default class MenuView extends JetView {
+    config(){
+        const _ = this.app.getService("locale")._;
+
+        return {
+            view:"menu", data:[
+                { id:"profile", value:"My Profile" },
+                { id:"account", value:"My Account" },
+                { id:"calendar", value:"My Calendar" }
+            ],
+            template:(obj)=>{
+				return _(obj.value)};
+			}
+        };
+    }
+}
+```
+
+#### Dynamically Changing Locales
+
+If you want your app to be multilingual and let the users to choose a language, you can add a control for that.
+
+To set a new language, use the **setLang\(\)** method of the _locale_ service. **setLocale\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed.
+
+{% hint style="danger" %}
+Do not call **setLang()** in lifetime handlers of JetView! It calls **app.refresh\(\)** that re-renders all the views, which will start an infinite loop.
+{% endhint %}
+
+Let's create a simple page for app settings with a segmented button that will be used to choose languages. Note that the IDs of the button options should be the same as the locale file names \(e.g. "es", "en"\).
 
 ```javascript
 // views/settings.js
@@ -571,12 +613,14 @@ export default class SettingsView extends JetView {
 }
 ```
 
-To set the locale, you need to get the value of the segmented button and pass it to **setLang\(\)** that will set the locale. This is done in the **toggleLanguage\(\)** method of the _SettingsView_ class:
+**toggleLanguage\(\)** is a class method that will:
+
+- get the value of the segmented button,
+- pass it to **setLang\(\)** that will set the locale.
 
 ```javascript
 // views/settings.js
 import {JetView} from "webix-jet";
-
 export default class SettingsView extends JetView {
     ...
     toggleLanguage(){
@@ -587,47 +631,13 @@ export default class SettingsView extends JetView {
 }
 ```
 
-#### Applying the Locale
-
-The **\_\(\)** method is used for translating text labels in the app. The method takes one parameter - a text string. **\_\(\)** looks for the string in a locale file and returns the translation. E.g. _this.app.getService\("locale"\).\_\("Settings"\) _will return_ "Ajustes"\_ if Spanish is chosen. If you need to localize a lot of text labels, it's reasonable to create a shorthand for the method:
-
-```javascript
-const _ = this.app.getService("locale")._;
-```
-
-Let's apply the **\_\(\)** method to SettingsView:
-
-```javascript
-// views/settings.js
-import {JetView} from "webix-jet";
-
-export default class SettingsView extends JetView {
-    config(){
-        const _ = this.app.getService("locale")._;
-
-        return {
-            type:"space", rows:[
-                { template:_("Settings"), type:"header" },
-                { name:"lang", optionWidth: 120, view:"segmented", label:_("Language"), options:[
-                    { id:"en", value:"English" },
-                    { id:"es", value:"Español" }
-                ], click:() => this.toggleLanguage() },
-                {}
-            ]
-        };
-    }
-    ...
-}
-```
-
 #### Getting the Current Locale
 
-The **getLang\(\)** method returns the current language. **getLang\(\)** can be used to restore the value of the segmented button:
+To check the current language, use the **getLang\(\)** method. It can be useful for restoring the value of the settings control, e.g.:
 
 ```javascript
 // views/settings.js
 import {JetView} from "webix-jet";
-
 export default class SettingsView extends JetView {
     config(){
         const lang = this.app.getService("locale").getLang();
@@ -645,22 +655,27 @@ export default class SettingsView extends JetView {
 }
 ```
 
-#### Optional Configuration for the Locale Plugin
+[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js)
 
-You can set add optional settings in the plugin config while enabling the plugin with **app.use\(\)**:
+#### Storing the Language
 
-* **path** is a subfolder \(subpath\) inside the _jet-locale_ folder, in which you want the plugin to look for translations:
+To restore the last chosen language when the app is opened again, set the **storage** setting of the plugin, e.g. you can choose the local storage:
+
+```javascript
+// app.js
+...
+app.use(plugins.Locale, { storage:webix.storage.local });
+```
+
+#### Path for the Locale Plugin
+
+You can also set **path** to a subfolder \(subpath\) inside the _jet-locale_ folder, in which you want the plugin to look for translations:
 
 ```javascript
 // app.js
 ...
 app.use(plugins.Locale, { path:"some" });
 ```
-
-* **lang** \(string\) is the default language of the app, "en" by default;
-* **storage** is the storage from which the locale will be restored and to which the current locale will be saved.
-
-[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-locale.js)
 
 ## 2. Custom Plugins
 
@@ -696,7 +711,7 @@ And any view will be able to use it as:
 
 ```javascript
 { view:"button", value:"Add new",  click:() => {
-     if(!this.app.getService("state").getState())
+    if(!this.app.getService("state").getState())
         this._jetPopup.showWindow();
 }}
 ```
