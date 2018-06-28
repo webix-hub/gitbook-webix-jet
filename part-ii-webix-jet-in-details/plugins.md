@@ -711,8 +711,8 @@ And any view will be able to use it as:
 
 ```javascript
 { view:"button", value:"Add new",  click:() => {
-    if(!this.app.getService("state").getState())
-        this._jetPopup.showWindow();
+    if(this.app.getService("state").getState())
+        //do something
 }}
 ```
 
