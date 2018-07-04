@@ -43,7 +43,7 @@ If you want to use the module on a page without Webix Jet:
 * use _**npm run standalone**_
 * just include the resulting JS file:
 
-```markup
+```html
 <!-- index.html -->
 <script src="../other-app/dist/full/app-name"></script>
 <script>
@@ -79,7 +79,7 @@ webix.protoUI({
 
 Now you can run **npm run standalone** and use the resulting app file like this:
 
-```markup
+```html
 <script src="../other-app/dist/full/app-name"></script>
 <script>
     webix.ui({ view:"some-widget" })

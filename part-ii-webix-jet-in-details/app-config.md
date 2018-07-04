@@ -13,7 +13,7 @@ import "./styles/app.css";
 
 webix.ready(() => {
     if (webix.CustomScroll && !webix.env.touch)
-            webix.CustomScroll.init();
+        webix.CustomScroll.init();
     new JetApp({ 
         "/top/start"
     }).render();
@@ -56,8 +56,8 @@ import {JetApp} from "webix-jet";
 
 webix.ready(function{
     const app = new JetApp({
-        start: "/top/about",
-        debug: true
+        start:"/top/about",
+        debug:true
     }).render();
 });
 ```

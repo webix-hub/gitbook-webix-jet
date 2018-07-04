@@ -4,17 +4,17 @@ Data are usually stored on the server side. If data are loaded asynchronously, y
 
 Promises are returned by all Ajax requests within Webix:
 
-* **webix.ajax\(\)**, which is resolved when an Ajax request is completed
-* **data.waitData**, which is resolved when a data component is populated with remote data
-* **webix.promise**, an interface for working with promise objects
+* [webix.ajax\(\)](https://docs.webix.com/api__refs__ajax.html), which is resolved when an Ajax request is completed,
+* [data.waitData](https://docs.webix.com/api__link__ui.proto_waitdata_other.html), which is resolved when a data component is populated with remote data,
+* [webix.promise](https://docs.webix.com/api__refs__promise.html), an interface for working with promise objects.
 
 ## webix.ajax\(\)
 
 ### A Promise Returned by _config\(\)_ of a Class View
 
-If your client depends on server-side data, you can fetch them asynchronously and return a promise in the **config\(\)** method of a Jet view. **webix.ajax\(\)** makes an asynchronous request to a PHP script and returns a promise. After the promise resolves, the response is passed to a callback in **then\(\)**.
+If your client-side depends on server-side data, you can fetch the data asynchronously and return a promise of them in the [config\(\)](views-and-subviews.md#config) lifetime handler of a Jet view. A promise can be returned by [webix.ajax\(\)](https://docs.webix.com/api__refs__ajax.html). After the promise resolves, the response is passed to a callback in **then\(\)**.
 
-Let's load chart configuration with **webix.ajax\(\)**:
+For example, let's load chart configuration with **webix.ajax\(\)**:
 
 ```javascript
 //views/statistics.js
@@ -22,7 +22,7 @@ import {JetView} from "webix-jet";
 
 export class StatisticsView extends JetView {
     config() { 
-        return webix.ajax("data/colors").then(function(data){
+        return webix.ajax("data/colors").then( data => {
             const colors = data.json();
             const chart = { view:"chart", series:[]};
             for (let i = 0; i < colors.length; i++)
@@ -82,7 +82,7 @@ export default new Promise((res, rej) => {
 
 ## data.waitData
 
-**waitData** is used to catch the moment when data are loaded into data components, such as DataCollection, List, Tree, DataTable, etc.
+[waitData](https://docs.webix.com/api__link__ui.proto_waitdata_other.html) is used to catch the moment when data are loaded into data components, such as DataCollection, List, Tree, DataTable, etc.
 
 ```javascript
 // views/data.js
@@ -163,9 +163,12 @@ export class DetailsView extends JetView {
 }
 ```
 
-### A Simple View that Returns a Promise
+**webix.promise** has more useful methods, e.g.:
 
-**defer\(\)** of **webix.promise** creates a new instance of a promise object. **resolve\(\)** creates and resolves a promise with a specified value, for example, a Webix widget.
+- [defer\(\)](https://docs.webix.com/api__promise_defer.html) that creates a promise,
+- [resolve\(\)](https://docs.webix.com/api__promise_resolve.html) that creates and resolves a promise.
+
+### A Simple View that Returns a Promise
 
 Have a look at a simple example of a factory function that returns a promise that resolves with a template in a second. The delay is done purely for the demo.
 

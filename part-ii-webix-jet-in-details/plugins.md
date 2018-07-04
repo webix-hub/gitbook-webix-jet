@@ -6,7 +6,7 @@ Webix Jet provides predefined plugins and the ability to create custom plugins.
 
 **View Plugins**
 
-These plugins are enabled for a specific view by _view.use\(\)_:
+These plugins are enabled for a specific view by [view.use\(\)](jetview-api.md#this-use):
 
 * the Menu plugin
 * the UnloadGuard plugin
@@ -15,7 +15,7 @@ These plugins are enabled for a specific view by _view.use\(\)_:
 
 **App Plugins**
 
-These plugins are enabled for the whole app with _app.use\(\)_:
+These plugins are enabled for the whole app with [app.use\(\)](jetapp-api.md#app-use):
 
 * the User plugin
 * the Theme plugin
@@ -30,7 +30,7 @@ The Menu plugin simplifies your life if you plan to create a menu for navigation
 
 ![Using the Menu plugin in Webix Jet](../.gitbook/assets/top_data.png)
 
-The plugin must be enabled in the Jet view that contains the menu with **view.use\(\)** \(call it as _this.use\(\)_\). After the plugin name, you must specify the local ID of the Webix control or widget that you want to use as a menu:
+The plugin must be enabled in the Jet view that contains the menu with [view.use\(\)](jetview-api.md#this-use) \(call it as _this.use\(\)_\). After the plugin name, you must specify the local ID of the Webix control or widget that you want to use as a menu:
 
 ```javascript
 // views/top.js
@@ -110,7 +110,7 @@ init(){
 }
 ```
 
-_this.use\(\)_ takes two parameters:
+[this.use\(\)](jetview-api.md#this-use) takes two parameters:
 
 * the plugin name
 * the function that will define the behavior of the plugin
@@ -169,7 +169,7 @@ These are the status messages that you can see:
 * "Error",
 * "Connecting...".
 
-**Status** is enabled with _this.use\(\)_ with two parameters:
+**Status** is enabled with [this.use\(\)](jetview-api.md#this-use) with two parameters:
 
 * the plugin name;
 * the plugin configuration \(a string or an object\).
@@ -220,7 +220,7 @@ this.use(plugins.Status, {
 
 The plugin allows using the URL fragments as parameters. It makes them accessible via [view.getParam\(\)](jetview-api.md#this-getparam) and correctly weeds them out of the URL.
 
-**UrlParam** is enabled with _this.use\(\)_ with two parameters:
+**UrlParam** is enabled with [this.use\(\)](jetview-api.md#this-use) with two parameters:
 
 * the plugin name;
 * an array with parameter\(s\).
@@ -245,7 +245,7 @@ const details = { template:"Details" };
 export default details;
 ```
 
-When loading the URL _"/some/23/details"_, you need to treat _23_ as a parameter of **some**. Enable the plugin the **init\(\)** method of **some**:
+When loading the URL _"/some/23/details"_, you need to treat _23_ as a parameter of **some**. Enable the plugin the [init\(\)](views-and-subviews.md#init-view-url) method of **some**:
 
 ```javascript
 // views/some.js
@@ -277,7 +277,7 @@ This section contains guidelines for using the plugin with a custom script.
 
 **Enabling the Plugin**
 
-To enable the plugin, call **app.use\(\)** with two parameters:
+To enable the plugin, call [app.use\(\)](jetapp-api.md#app-use) with two parameters:
 
 * the plugin name,
 * the plugin configuration.
@@ -588,7 +588,7 @@ If you want your app to be multilingual and let the users to choose a language, 
 To set a new language, use the **setLang\(\)** method of the _locale_ service. **setLocale\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed.
 
 {% hint style="danger" %}
-Do not call **setLang()** in lifetime handlers of JetView! It calls **app.refresh\(\)** that re-renders all the views, which will start an infinite loop.
+Do not call **setLang()** in lifetime handlers of JetView! It calls [app.refresh\(\)](jetapp-api.md#app-refresh) that re-renders all the views, which will start an infinite loop.
 {% endhint %}
 
 Let's create a simple page for app settings with a segmented button that will be used to choose languages. Note that the IDs of the button options should be the same as the locale file names \(e.g. "es", "en"\).

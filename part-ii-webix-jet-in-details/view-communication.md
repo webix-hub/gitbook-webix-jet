@@ -4,11 +4,11 @@ Views are separated, but there should be some means of communication between the
 
 ## URL Parameters
 
-You can enable view communication with _URL parameters_. This way of communication is useful if you want to initialize components and load data. You can pass parameters with the URL in the **show\(\)** method of a Jet view class.
+You can enable view communication with _URL parameters_. This way of communication is useful if you want to initialize components and load data. You can pass parameters with the URL in the [show\(\)](jetview-api.md#this-show) method of a Jet view class.
 
 ### Sending Parameters with _view.show\(\)_
 
-For instance, let's create a view that opens a form as a subview with some specific data. Pass the needed URL parameters to _view.show\(\)_:
+For instance, let's create a view that opens a form as a subview with some specific data. Pass the needed URL parameters to [view.show\(\)](jetview-api.md#this-show):
 
 ```javascript
 // views/data.js
@@ -28,7 +28,7 @@ export default class DataView extends JetView{
 
 ### Getting Parameters from Class Methods
 
-To access _id_ in the form, you need to get to the **url** parameter that is received by **init\(\)**, **urlChange\(\)** and **ready\(\)** methods of a Jet class view. **url** is an array of objects, each with three properties:
+To access _id_ in the form, you need to get to the **url** parameter that is received by [init\(\)](views-and-subviews.md#init-view-url), [urlChange\(\)](views-and-subviews.md#urlchange-view-url) and [ready\(\)](views-and-subviews.md#ready-view-url) methods of a Jet class view. **url** is an array of objects, each with three properties:
 
 * **page** - the name of the URL element
 * **params** - the parameters after the URL
@@ -36,7 +36,7 @@ To access _id_ in the form, you need to get to the **url** parameter that is rec
 
 If any parameters were passed, you can get to them with _url\[n\].params.{parameter}_, where _n_ is the number of the URL segment.
 
-Let's access the _id_ parameter from **urlChange\(\)** and fill the form with the values from a data record with ID = 1:
+Let's access the _id_ parameter from [urlChange\(\)](views-and-subviews.md#urlchange-view-url) and fill the form with the values from a data record with ID = 1:
 
 ```javascript
 // views/form.js
@@ -60,7 +60,7 @@ export default class FormView extends JetView{
 }
 ```
 
-In this simple example, as soon as DataView is initialized, **urlChange\(\)** of _FormView_ is called and the form is filled correct data.
+In this simple example, as soon as DataView is initialized, [urlChange\(\)](views-and-subviews.md#urlchange-view-url) of _FormView_ is called and the form is filled correct data.
 
 ### Setting / Getting Parameters with JetView Methods
 
@@ -169,7 +169,7 @@ Work with URL parameters can be simplified with the [UrlParam plugin](plugins.md
 
 ### Several URL Parameters
 
-You can also pass several parameters to **show\(\)**:
+You can also pass several parameters to [view.show\(\)](jetview-api.md#this-show):
 
 ```javascript
 this.show("./form?name=Jack&email=some");
@@ -181,7 +181,7 @@ Feel free to use the in-app event bus for view communication.
 
 ### Calling an Event
 
-To call/trigger an event, call **app.callEvent\(\)**. You can call the method by referencing the app with **this.app\(\)** from an _arrow function_ [\[1\]](view-communication.md#1):
+To call/trigger an event, call [app.callEvent\(\)](jetapp-api.md#app-callevent). You can call the method by referencing the app with **this.app\(\)** from an _arrow function_ [\[1\]](view-communication.md#1):
 
 ```javascript
 // views/data.js
@@ -206,7 +206,7 @@ You can attach an event handler to the event bus in one view and trigger the eve
 
 #### Preferable Way: this.on\(\)
 
-The best way to attach an event is **this.on\(\)** \(**this** references a Jet view\). The benefit of this way is that the event handler is automatically detached when the view that attached the event handler is destroyed. **this.on\(\)** can _handle_ app and Webix events.
+The best way to attach an event is [this.on\(\)](jetview-api.md#this-on). The benefit of this way is that the event handler is automatically detached when the view that attached the event handler is destroyed. **this.on\(\)** can _handle_ app and Webix events.
 
 ```javascript
 // views/form.js
@@ -226,7 +226,7 @@ Once an event is attached, any other view can call it.
 
 #### One More Way: app.attachEvent\(\)
 
-One more way to attach an event is to call **app.attachEvent\(\)**. This way you will have to detach the event manually with **app.detachEvent\(\)** [\[2\]](view-communication.md#2).
+One more way to attach an event is to call [app.attachEvent\(\)](jetapp-api.md#app-attachevent). This way you will have to detach the event manually [\[2\]](view-communication.md#2).
 
 ```javascript
 // views/form.js
@@ -241,7 +241,7 @@ export default class FormView extends JetView{
 }
 ```
 
-To detach an event, call **app.detachEvent\(\)** when the view that attached the event is destroyed:
+To detach an event, call [app.detachEvent\(\)](jetapp-api.md#app-detachevent) when the view that attached the event is destroyed:
 
 ```javascript
 // views/form.js
@@ -263,7 +263,7 @@ With ES6, the problem can also be solved with creating and requiring a module. I
 
 ### Initializing Services
 
-To set a service, call the **app.setService\(\)** method. **setService\(\)** requires two parameters:
+To set a service, call the [app.setService\(\)](jetapp-api.md#app-setservice) method. **setService\(\)** requires two parameters:
 
 * **service** - \(string\) the name of the service
 * **obj** - \(object\) methods that you want to call from other Jet views
@@ -281,14 +281,14 @@ export default class treeView extends JetView{
     init(view) {
         this.app.setService("masterTree", {
             getSelected : () => view.getSelectedId();
-        })
+        });
     }
 }
 ```
 
 ### Using Services
 
-To get to the service and its methods, use the **app.getService\(\)** method. **getService\(\)** requires one parameter - the **name** of the service.
+To get to the service and its methods, use the [app.getService\(\)](jetapp-api.md#app-getservice) method. **getService\(\)** requires one parameter - the **name** of the service.
 
 This is how you can get the ID of the selected node in the master tree and use it to fill a form with correct values:
 
@@ -413,7 +413,7 @@ export default class ParentView extends JetView{
 }
 ```
 
-**this.getSubView\(\)** refers to _ChildView_ and calls the method. **getSubView\(\)** can take a parameter with the name of a subview if there are several subviews, as you will see in [the "Referencing Views" chapter](referencing-views.md).
+[this.getSubView\(\)](jetview-api.md#this-getsubview) refers to _ChildView_ and calls the method. **getSubView\(\)** can take a parameter with the name of a subview if there are several subviews, as you will see in [the "Referencing Views" chapter](referencing-views.md).
 
 You can use methods for view communication in similar use-cases, but still events are more advisable. Now let's have a look at the example where methods are better then events.
 
@@ -444,7 +444,7 @@ init() {
 }
 ```
 
-Both subviews are referenced with **getSubView\(name\)**.
+Both subviews are referenced with [this.getSubView\(\)](jetview-api.md#this-getsubview).
 
 ## Footnotes
 

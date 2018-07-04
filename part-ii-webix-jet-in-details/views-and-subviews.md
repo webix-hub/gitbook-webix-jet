@@ -29,7 +29,7 @@ export default list;
 ### Disadvantages
 
 * Simple views are static and are included as they are.
-* Simple views have no **init\(\)** and other methods that classes have.
+* Simple views have no [init\(\)](views-and-subviews.md#init-view-url) and other methods that classes have.
 
 ## 2. Object "Factory Pattern"
 
@@ -54,7 +54,7 @@ export default () => {
 
 ### Disadvantages
 
-* Such views have no **init\(\)** or other methods that classes have.
+* Such views have no [init\(\)](views-and-subviews.md#init-view-url) or other methods that classes have.
 
 ## 3. Class Views
 
@@ -76,7 +76,7 @@ export default class TopView extends JetView {
 ### Advantages of Classes
 
 * Views defined as classes are **dynamic** and each new instance can be changed when it's created.
-* View classes have **init\(\)** and other **lifetime methods** that can be redefined by users.
+* View classes have [init\(\)](views-and-subviews.md#init-view-url) and other **lifetime methods** that can be redefined by users.
 * You can also define **custom methods** and **local variables**.
 * All instances have their individual **inner states**. E.g. if you use the same Toolbar class to add identical toolbars at the top and at the bottom, there are two instances of the Toolbar class and the toolbars will behave independently.
 * Classes have the **this** pointer that references the view inside methods and handlers.
@@ -110,7 +110,8 @@ export default class CustomersData extends JetView{
 }
 ```
 
-Then you can create a new instance of CustomerData in **config\(\)** of another Jet view:
+Then you can create a new instance of CustomerData in 
+[config\(\)](views-and-subviews.md#config) of another Jet view:
 
 ```javascript
 // views/customers.js
@@ -155,7 +156,7 @@ export default class ToolbarView extends JetView{
 
 #### init\(view, url\)
 
-The method is called only once for every instance of a view class when the view is rendered. It is a good place to load some common data \(list of options for a _select_ in a form, for example\) or to change the initial UI configuration of a view returned by **config\(\)**.
+The method is called only once for every instance of a view class when the view is rendered. It is a good place to load some common data \(list of options for a _select_ in a form, for example\) or to change the initial UI configuration of a view returned by [config\(\)](views-and-subviews.md#config).
 
 **init\(\)** receives two **parameters**:
 
@@ -353,7 +354,7 @@ In the example, the form will be bound to the list only when both the list and t
 
 **destroy\(\)** is called only once for each class instance when the view is destroyed \(closed and no longer present in the URL\).
 
-You can use **destroy\(\)** to detach events that were attached by this view with **app.attachEvent\(\)**. Events attached by **attachEvent\(\)** are not destroyed automatically.
+You can use **destroy\(\)** to detach events that were attached by this view with [app.attachEvent\(\)](jetapp-api#app-attachevent). Events attached by **attachEvent\(\)** are not destroyed automatically.
 
 ```javascript
 // views/form.js
@@ -419,7 +420,7 @@ export default class ProductsView extends BaseDatatable {
 
 You can define class view methods and properties. **this** inside methods refers to the instance of the corresponding view class.
 
-Consider a simple example. The class has a counter stored as a class property, which is declared in **init\(\)**. There is also a method that increments it, when a button is clicked.
+Consider a simple example. The class has a counter stored as a class property, which is declared in [init\(\)](views-and-subviews.md#init-view-url). There is also a method that increments it, when a button is clicked.
 
 ```javascript
 import {JetView} from "webix-jet";
@@ -454,7 +455,7 @@ When you are defining views as **const** _\(simple view objects\)_, you can defi
 
 So if you are choosing between **classes** and **const**, it is flexibility VS brevity.
 
-If you are not sure which one to use, use classes. A class with the **config\(\)** method works exactly the same as the **const** declaration.
+If you are not sure which one to use, use classes. A class with the [config\(\)](views-and-subviews.md#config) method works exactly the same as the **const** declaration.
 
 ## Subview Including
 

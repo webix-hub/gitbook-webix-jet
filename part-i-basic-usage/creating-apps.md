@@ -15,7 +15,7 @@ An app module is created as a new instance of the JetApp class.
 
 1. Import the _JetApp_ class and create its instance.
 2. Define the start point, which is the start app URL. App configuration can include other properties like the app name, version, etc.
-3. Call the **render\(\)** method of the JetApp instance to paint the UI on the page.
+3. Call the [render\(\)](jetapp-api.md#app-render) method of the JetApp instance to paint the UI on the page.
 4. Enclose it in **webix.ready\(\)** to ensure that HTML page is parsed completely before JS starts executing.
 
 ```javascript
