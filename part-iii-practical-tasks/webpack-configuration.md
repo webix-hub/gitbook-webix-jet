@@ -1,6 +1,56 @@
-# Webpack Configuration
+# Configuring Webpack
 
-There are some cases when you might want to change the default Webpack configuration.
+There are some cases when you might want to add some extra configuration for your app. You can change the default Webpack configuration and get the expected result.
+
+## Configuring Webix Jet to Work with a Backend Server
+
+{% hint style="info" %}
+These instructions are for the **development stage**. For production, [see this](deploying-and-testing.md).
+{% endhint %}
+
+Let's look at an example of configuring Webix Jet to work with the Apache Tomcat server.
+
+**Prerequisites:**
+
+1. There is a Java app on your Tomcat server, configured to your needs.
+2. There is a Webix Jet app (you can use the [jet-start package](https://github.com/webix-hub/jet-start)).
+
+You need to let the Webix Jet app access the Java app. Set the **proxy** path in **webpack.config.js**. Replace this:
+
+```js
+devServer:{
+    stats:"errors-only"
+}
+```
+
+with this:
+
+```js
+devServer:{
+    stats:"errors-only",
+    proxy: {
+        "/server":{
+            target: 'http://localhost:9200',
+            pathRewrite: {"^/server" : ""}
+        }	
+    }
+}
+```
+
+"http://localhost:9200" is the web path to the Java server side.
+
+This configuration will make it possible to set the path to the server as:
+
+```js
+// models/mydata.js
+export const mydata = new webix.DataCollection({        
+    url:"/server/mydata"
+})
+```
+
+This will load the data from "http://localhost:9200/mydata".
+
+Both servers can be run separately and at the same time. The Webix Jet app will be able to communicate with the server-side code as they both are run by the same server.
 
 ## Multiple Start Files
 
@@ -10,11 +60,11 @@ By default, the app is built with one start file \(_admin.js_ in this example\):
 /* webpack.config.js */
 ...
 var config = {
-        entry: "./sources/admin.js",
-        output: {
-            //...
-            filename: "admin.js"
-        },
+    entry: "./sources/admin.js",
+    output: {
+        //...
+        filename: "admin.js"
+    },
     ...
 }
 ...
@@ -58,7 +108,7 @@ var config = {
 }
 ```
 
-An alias is used instead of hardcoding the _"/views"_ path to make this part configurable. If necessary, you can change webpack.config and define new folders for loading views.
+An alias is used instead of hardcoding the _"/views"_ path to make this part configurable. If necessary, you can change **webpack.config** and define new folders for loading views.
 
 For example, you can change the path in _"jet-locales"_.
 

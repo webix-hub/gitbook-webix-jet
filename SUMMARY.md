@@ -30,7 +30,7 @@
   * [Nesting Jet Views into Webix Widgets](part-iii-practical-tasks/nesting-jet-views-into-webix-widgets.md)
   * [Creating Complex Widgets](part-iii-practical-tasks/creating-complex-widgets.md)
   * [Jet Recipes](part-iii-practical-tasks/jet-recipes.md)
-  * [Webpack Configuration](part-iii-practical-tasks/webpack-configuration.md)
+  * [Configuring Webpack](part-iii-practical-tasks/webpack-configuration.md)
   * [Working with package.json](part-iii-practical-tasks/working-with-package.json.md)
   * [Using TypeScript](part-iii-practical-tasks/using-typescript.md)
   * [Extra Solutions](part-iii-practical-tasks/extra-solutions.md)
