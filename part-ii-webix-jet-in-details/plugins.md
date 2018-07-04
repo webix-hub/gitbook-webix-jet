@@ -218,7 +218,7 @@ this.use(plugins.Status, {
 
 ### UrlParam Plugin
 
-The plugin allows using the URL fragments as parameters. It makes them accessible via **view.getParam\(\)** and correctly weeds them out of the URL.
+The plugin allows using the URL fragments as parameters. It makes them accessible via [view.getParam\(\)](jetview-api.md#this-getparam) and correctly weeds them out of the URL.
 
 **UrlParam** is enabled with _this.use\(\)_ with two parameters:
 
@@ -251,7 +251,7 @@ When loading the URL _"/some/23/details"_, you need to treat _23_ as a parameter
 // views/some.js
 import {JetView,plugins} from "webix-jet";
 
-export default class SomeView() extends JetView{
+export default class SomeView extends JetView{
    ...
    init(){
        this.use(plugins.UrlParam, ["id"])

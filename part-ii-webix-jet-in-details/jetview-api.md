@@ -4,7 +4,7 @@ The JetView class has the following methods:
 
 | Method | Use it to |
 | --- | --- |
-| getParam\(name, anywhere\) | give the API access to the URL parameters |
+| getParam\(name, parent\) | give the API access to the URL parameters |
 | getParentView\(\) | call methods of a parent view |
 | getRoot\(\) | call methods of the Webix widget |
 | getSubView\(name\) | call the methods of a subview |
