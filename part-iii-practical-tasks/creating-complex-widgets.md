@@ -40,13 +40,13 @@ webix.ui({
 });
 ```
 
-## Very Important Issues
+## Very Important
 
 If you plan to use Jet app as a widget, keep in mind a few things:
 
 _1. **Do not use** any hard-coded **"id"** values_.
 
-This will prevent initializing more than one instance of the widget, because the IDs will be no longer unique. Instead, use **localId** and locate widgets inside the view with **this.$$\(\)** or **queryView\(\)**.
+This will prevent initializing more than one instance of the widget, because the IDs will be no longer unique. Instead, use **localId** and locate widgets inside the view with [this.$$\(\)](../part-ii-webix-jet-in-details/jetview-api.md#this-usdusd) or **queryView\(\)**.
 
 _2. Use **services** instead of **models** for data loading_.
 
@@ -101,7 +101,7 @@ export default class MyView extends JetView {
 
 ## Dynamic Widget Loading
 
-If you want to load custom widget code on demand, you can split your code and import the bundles with widget code when it is needed. For example, widgets can be imported in **config\(\)** of a Jet view:
+If you want to load custom widget code on demand, you can split your code and import the bundles with widget code when it is needed. For example, widgets can be imported in [config\(\)](../part-ii-webix-jet-in-details/views-and-subviews.md#config) of a Jet view:
 
 ```javascript
 // views/statistics.js
@@ -121,9 +121,9 @@ export default class StatisticsView extends JetView{
 }
 ```
 
-> ### Note
->
-> This works for both custom Webix widgets and Jet apps as custom widgets.
+{% hint style="info" %}
+This works for both custom Webix widgets and Jet apps as custom widgets.
+{% endhint %}
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/bundles.js)
 
