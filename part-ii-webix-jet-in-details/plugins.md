@@ -56,7 +56,7 @@ export default class TopView extends JetView{
 }
 ```
 
-Subview URLs are taken either from menu option IDs or from option values if there are no IDs. If you want to change some URL, you can add custom subview URLs in the plugin configuration:
+Subview URLs are taken from menu option IDs or from values if there are no IDs. If you want to change some URL, you can add custom subview URLs in the plugin configuration:
 
 ```javascript
 // views/top.js
@@ -68,8 +68,8 @@ export default class TopView extends JetView {
             rows:[
                 {
                     view:"menu", localId:"menu", data:[
-                        "Details",  //show "/top/demo/details"
-                        "Dash"      //show "/dash"
+                        { id:"details", value:"Details"},  //show "/top/demo/details"
+                        { id:"dash", value:"Dash" }        //show "/top/dash"
                     ]
                 },
                 { $subview:true }
@@ -81,8 +81,7 @@ export default class TopView extends JetView {
         this.use(plugins.Menu, {
             id:"menu",
             urls:{
-                details:"demo/details",
-                dash:"/dash"
+                details:"demo/details"
             }
         });
     }

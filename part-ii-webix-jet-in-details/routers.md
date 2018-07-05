@@ -159,7 +159,11 @@ If these four routers aren't what you want, you can define your own.
 
 A router must be a class with the following methods:
 
-* **constructor**\(callback, config\), where _callback_ is a function called to set the correct URL and _config_ can contain the router prefix;
-* **set**\(path, config\), where _path_ is the app URL and _config_ can contain some additional options for setting the URL;
+* **constructor**\(callback, config\), where:
+    - _callback_ is a function called to set the correct URL,
+    - _config_ with the app configuration;
+* **set**\(path, config\), where:
+    - _path_ is the app URL,
+    - _config_ with the **silent** flag, if it is set, the callback is not called;
 * **get**\(\) that returns the URL.
 
