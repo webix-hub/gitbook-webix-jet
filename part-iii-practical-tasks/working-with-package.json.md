@@ -1,12 +1,6 @@
-# Working with package.json
+# Changing the Port
 
-[_package.json_](https://docs.npmjs.com/getting-started/using-a-package.json) is needed to manage locally installed npm packages.
-
-You can reconfigure your app by changing this file.
-
-## Changing the Port
-
-You can change the default port 8080 to another port \(e.g. 3010\).
+You can change the default port 8080 to another port \(e.g. 3010\). You can do this by changing the [_package.json_](https://docs.npmjs.com/getting-started/using-a-package.json) file.
 
 Modify the _"start"_ command in the _package.json_ file:
 
@@ -18,4 +12,3 @@ Modify the _"start"_ command in the _package.json_ file:
      "start": "webpack-dev-server --port 3010"
 }
 ```
-
