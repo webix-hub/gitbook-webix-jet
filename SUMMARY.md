@@ -1,10 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [What's New](whats-new.md)
 * [Getting Started](getting-started.md)
-* [Quick Development Guidelines](quick-development-guidelines.md)
-* [Migration from Jet 0.x](migration-from-jet-0.x.md)
 * [Part I - Basic usage](part-i-basic-usage/README.md)
   * [Creating Apps](part-i-basic-usage/creating-apps.md)
   * [Creating Views](part-i-basic-usage/creating-views.md)
@@ -35,3 +32,6 @@
   * [WJet Utility for Faster Prototyping](part-iii-practical-tasks/wjet-utility-for-faster-prototyping.md)
   * [Configuring Webpack](part-iii-practical-tasks/webpack-configuration.md)
   * [Changing the Port](part-iii-practical-tasks/working-with-package.json.md)
+* [Quick Development Guidelines](quick-development-guidelines.md)
+* [What's New](whats-new.md)
+* [Migration from Jet 0.x](migration-from-jet-0.x.md)

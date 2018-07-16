@@ -1,6 +1,6 @@
 # Introduction
 
-_Latest update was made on July 11, 2018_
+_Latest update was made on July 16, 2018_
 
 This guide provides all the information needed to start creating web applications with Webix Jet. The book is available [on GitHub](https://github.com/webix-hub/gitbook-webix-jet) and [on GitBook](https://webix.gitbook.io/webix-jet/getting-started), so you can watch the repo to get the updates and read the tutorial online.
 
