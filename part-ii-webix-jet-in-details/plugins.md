@@ -274,6 +274,11 @@ The **User** plugin is useful for apps with authorization.
 
 This section contains guidelines for using the plugin with a custom script.
 
+**Related demos:**
+
+- [Demo of authorization, custom PHP script](https://github.com/webix-hub/jet-start/tree/php)
+- [Webix Jet with NodeJS Express](https://github.com/webix-hub/jet-start/tree/node-express)
+
 **Enabling the Plugin**
 
 To enable the plugin, call [app.use\(\)](jetapp-api.md#app-use) with two parameters:

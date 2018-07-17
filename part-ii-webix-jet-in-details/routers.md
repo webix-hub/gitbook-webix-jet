@@ -4,8 +4,8 @@ To manipulate the URL, views have Routers. Webix Jet has four predefined types o
 
 | Type | Displays app URL | Stored |
 | --- | --- | --- |
-| HashRouter | [https://myshop.com/\#!/my/app](https://myshop.com/#!/my/app) | Yes |
-| UrlRouter | [https://myshop.com/my/app](https://myshop.com/my/app) | Yes |
+| HashRouter | https://myshop.com/#!/my/app | Yes |
+| UrlRouter | https://myshop.com/my/app | Yes |
 | StoreRouter | No | Yes |
 | EmptyRouter | No | No |
 
