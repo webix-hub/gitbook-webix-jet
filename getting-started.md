@@ -151,12 +151,15 @@ For more details on including subviews and in-app navigation, read the following
 
 ## Loading Data with Models
 
-While views contain the code of interfaces, *models* are used to control the data. Let's consider data loading on the example of the _views/data.js_ file. It takes data from the _models/records_ module. **records.js** in the demo returns a data collection with local data. To load data from an external source, set the URL, for example:
+While views contain the code of interfaces, *models* are used to control the data. Let's consider data loading on the example of the _views/data.js_ file. It takes data from the _models/records_ module. **records.js** in the demo returns a data collection with local data.
 
 ```javascript
 //models/records.js
 export const data = new webix.DataCollection({
-    url: "data.php"
+    data:[
+        { id:1, title:"The Shawshank Redemption", year:1994, votes:678790, rating:9.2, rank:1},
+        { id:2, title:"The Godfather", year:1972, votes:511495, rating:9.2, rank:2}
+    ]
 });
 ```
 
