@@ -10,29 +10,36 @@ CLI commands:
 
 | Command | What it does |
 | --- | --- |
-| _npm run module_ | builds a standalone module, which is stored in **dist/{modulename}.js**; the module **doesn't** include _webix-jet_ |
-| _npm run standalone_ | builds a standalone module, which is stored in **dist/{modulename}.js**; the module **includes all dependencies** |
+| `npm run module` or `yarn module` | builds a standalone module, which is stored in **dist/module/** (a JS and a CSS files); the module **doesn't** include _webix-jet_ |
+| `npm run standalone` or `yarn standalone` | builds a standalone module, which is stored in **dist/full/** (a JS and a CSS files); the module **includes all dependencies** |
+
+When the module is built, you can copy it to a subfolder of some other app, e.g. *sources/modules/*.
 
 ### When to use _npm run module_
 
 If you want to use the module as a part of another Webix Jet app:
 
 * use _**npm run module**_
-* import files in **dist** from the master project:
+* import the JS and CSS files of your module from the subfolder you have put them into:
 
 ```javascript
 // views/someview.js
-import OtherApp from "../other-app/dist/module/app-name";
+import OtherApp from "modules/app-name";
+import "modules/style.css";
 ...
 config(){
     return {
         rows:[
             ToolbarView,
-            OtherApp
+            new OtherApp()
         ]
     };
 }
 ```
+
+{% hint style="info" %}
+Be sure to use webix-jet 1.4+
+{% endhint %}
 
 Modules are much more lightweight than bundles with dependencies. So if you plan to create a lot of app modules, compile them this way.
 
@@ -41,18 +48,23 @@ Modules are much more lightweight than bundles with dependencies. So if you plan
 If you want to use the module on a page without Webix Jet:
 
 * use _**npm run standalone**_
-* just include the resulting JS file:
+* include the JS and CSS files of your module from the subfolder you have put them into:
 
 ```html
 <!-- index.html -->
-<script src="../other-app/dist/full/app-name"></script>
+<script src="modules/app-name.js"></script>
+<link rel="stylesheet" type="text/css" href="modules/style.css">
 <script>
-    var app = new appname.default();
-    app.render(document.body);
+    webix.ready(function(){
+        var app = new appname.default();
+        app.render(document.body);
+    });
 </script>
 ```
 
-Standalone bundles are including all dependencies, so they are more stable \( except of webix.js \). However, the size of a bundle is much bigger than the size of a module.
+Instead of `document.body` you can use the ID of the target HTML container.
+
+Standalone bundles include all dependencies \(except *webix.js*\), so they are more stable. However, the size of a bundle is much bigger than the size of a module.
 
 ## Using Jet App as a Widget
 
@@ -64,12 +76,21 @@ import {JetApp} from "webix-jet";
 export default class MyApp extends JetApp {
     //app config
     constructor(){
-        super({
-            start: "/top/form",
-            router: EmptyRouter //!
-        });
+        const defaults = {
+			id 		: APPNAME,
+			version : VERSION,
+			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter, //!
+			debug 	: !PRODUCTION,
+			start 	: "/top/start"
+		};
+        super({ ...defaults, ...config });
     }
 }
+
+if (!BUILD_AS_MODULE){
+	webix.ready(() => new MyApp().render() );
+}
+
 // add this
 webix.protoUI({
     name:"some-widget",
@@ -77,10 +98,14 @@ webix.protoUI({
 }, webix.ui.jetapp);
 ```
 
-Now you can run **npm run standalone** and use the resulting app file like this:
+{% hint style="info" %}
+Make sure the app config includes the EmptyRouter.
+{% endhint %}
+
+Now you can run `npm run standalone` to get a standalone bundle. Then you can copy the bundle to any subfolder of your app and use it:
 
 ```html
-<script src="../other-app/dist/full/app-name"></script>
+<script src="module/app-name.js"></script>
 <script>
     webix.ui({ view:"some-widget" })
 </script>

@@ -20,29 +20,79 @@ An app module is created as a new instance of the JetApp class.
 
 ```javascript
 // myapp.js
-import {JetApp} from "webix-jet";
+import "./styles/app.css";
+import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
-webix.ready(function(){
-    var app = new JetApp({
-        start:"/top/layout"
-    }).render(); //mandatory!
-});
+export default class MyApp extends JetApp{
+	constructor(config){
+		const defaults = {
+			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+			debug 	: !PRODUCTION,
+			start 	: "/top/layout"
+		};
+
+		super({ ...defaults, ...config });
+	}
+}
+
+if (!BUILD_AS_MODULE){
+	webix.ready(() => new MyApp().render() );   // mandatory!
+}
 ```
 
 You can open the needed URL and the UI will be rendered from the URL elements. The app splits the URL into parts, finds the corresponding files in the **views** folder and creates an interface by combining UI modules from those files.
+
+## Adding Stylesheets
+
+This is how you can include a stylesheet. You can include several stylesheets (any CSS or LESS). When the app will be built, they all will be compiled into *app.css*that you can link to your *index.html* page and that will be put in *codebase* when you build the production files.
+
+```javascript
+//app.js
+import "./styles/app.css";
+import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
+
+export default class MyApp extends JetApp{
+	constructor(config){
+		const defaults = {
+			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+			debug 	: !PRODUCTION,
+			start 	: "/top/layout"
+		};
+
+		super({ ...defaults, ...config });
+	}
+}
+
+if (!BUILD_AS_MODULE){
+	webix.ready(() => new MyApp().render() );   // mandatory!
+}
+```
 
 ## App Configuration
 
 In the app configuration, for example, you can set the mode in which the app will work:
 
 ```javascript
-// myapp.js
-import {JetApp} from "webix-jet";
+// app.js
+import "./styles/app.css";
+import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
-var app = new JetApp({
-    mode:"readonly",  //application wide configuration
-    start:"/top/layout"
-});
+export default class MyApp extends JetApp{
+	constructor(config){
+		const defaults = {
+            mode:"readonly",  //application wide configuration
+			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+			debug 	: !PRODUCTION,
+			start 	: "/top/layout"
+		};
+
+		super({ ...defaults, ...config });
+	}
+}
+
+if (!BUILD_AS_MODULE){
+	webix.ready(() => new MyApp().render() );   // mandatory!
+}
 ```
 
 Later in the code, you can do some actions according to the mode:
@@ -64,12 +114,24 @@ Webix Jet has four types of routers. You should specify the preferred router in 
 
 ```javascript
 // myapp.js
-import {UrlRouter,JetApp} from "webix-jet";
+import "./styles/app.css";
+import { JetApp, EmptyRouter, UrlRouter } from "webix-jet";
 
-var app = new JetApp({
-    router: UrlRouter,
-    start:"/top/layout"
-});
+export default class MyApp extends JetApp{
+	constructor(config){
+		const defaults = {
+			router 	: BUILD_AS_MODULE ? EmptyRouter : UrlRouter,    // !
+			debug 	: !PRODUCTION,
+			start 	: "/top/layout"
+		};
+
+		super({ ...defaults, ...config });
+	}
+}
+
+if (!BUILD_AS_MODULE){
+	webix.ready(() => new MyApp().render() );   // mandatory!
+}
 ```
 
 ## Further reading
