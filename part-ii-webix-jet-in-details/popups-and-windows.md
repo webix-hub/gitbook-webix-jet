@@ -163,7 +163,7 @@ export default class Window extends JetView{
     config(){
         return {
             view:"window", position:"center", head:"Window",
-            body: Enbeddable
+            body: Embeddable
         }
     }
     showWindow(){
