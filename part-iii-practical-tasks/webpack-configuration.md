@@ -86,11 +86,11 @@ To create multiple entry files, pass an object to **entry** in config. For outpu
 }
 ```
 
-## Turning Off Localization and Views
+## Turning Off Localization
 
-If you aren't planning to localize the app, there is a way to do it without creating an empty folder for locales. Without changes in Webpack config, you would have to do that. Webpack config has the **resolve** property, the options for locating modules. It tells Webpack where to look for views and locales.
+If you do not want to localize the app and do not want to create an empty **locales** folder, you can change the Webpack config.
 
-By default, Webpack loads views from the **views** folder like this: _require\("jet-views/"+name\)_. _resolve.alias_ settings in webpack.config makes it so:
+By default, Webpack tries to resolve the locales in *sources/locales*. Delete the `jet-locales` alias:
 
 ```javascript
 /* webpack.config.js */
@@ -101,14 +101,51 @@ var config = {
         modules: ["./sources", "node_modules"],
         alias:{
             "jet-views":path.resolve(__dirname, "sources/views"),
-            "jet-locales":path.resolve(__dirname, "sources/locales") //change me
+            "jet-locales":path.resolve(__dirname, "sources/locales") // !
         }
     },
     ...
 }
 ```
 
-An alias is used instead of hardcoding the _"/views"_ path to make this part configurable. If necessary, you can change **webpack.config** and define new folders for loading views.
+Next tell Webpack to ignore `jet-locales` while compiling the app. Use the [**IgnorePlugin**](https://webpack.js.org/plugins/ignore-plugin/) for this:
 
-For example, you can change the path in _"jet-locales"_.
+```javascript
+/* webpack.config.js */
+...
+plugins: [
+	new MiniCssExtractPlugin({
+		filename:"[name].css"
+	}),
+	new webpack.DefinePlugin({
+		VERSION: `"${pack.version}"`,
+		APPNAME: `"${pack.name}"`,
+		PRODUCTION : production,
+		BUILD_AS_MODULE : (asmodule || standalone)
+	}),
+	new webpack.IgnorePlugin(/jet-locales/)	// !
+]
+```
+
+Now the app will be compiled without the locales.
+
+## Changing Paths tor Locales and Views
+
+By default, views and locales are stores in **sources/views** and **sources/locales** correspondingly. If you want your app structure to be different, you can change the paths to views and locales in the Webpack config file:
+
+```javascript
+/* webpack.config.js */
+var config = {
+    ...
+    resolve: {
+        extensions: [".js"],
+        modules: ["./sources", "node_modules"],
+        alias:{
+            "jet-views":path.resolve(__dirname, "sources/components"),	// !
+            "jet-locales":path.resolve(__dirname, "sources/languages") 	// !
+        }
+    },
+    ...
+}
+```
 
