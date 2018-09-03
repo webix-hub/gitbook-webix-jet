@@ -300,7 +300,7 @@ Webix dynamic loading pattern allows loading data in portions, provided that you
 Let's recap main differences of the three ways to load and save data:
 
 | Model | Data Size | Usage |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | Shared | Small | Many times |
 | Dynamic | Big | Once |
 | Remote | Huge | Handy for prototyping |

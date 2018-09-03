@@ -110,8 +110,7 @@ export default class CustomersData extends JetView{
 }
 ```
 
-Then you can create a new instance of CustomerData in 
-[config\(\)](views-and-subviews.md#config) of another Jet view:
+Then you can create a new instance of CustomerData in [config\(\)](views-and-subviews.md#config) of another Jet view:
 
 ```javascript
 // views/customers.js
@@ -354,7 +353,7 @@ In the example, the form will be bound to the list only when both the list and t
 
 **destroy\(\)** is called only once for each class instance when the view is destroyed \(closed and no longer present in the URL\).
 
-You can use **destroy\(\)** to detach events that were attached by this view with [app.attachEvent\(\)](jetapp-api#app-attachevent). Events attached by **attachEvent\(\)** are not destroyed automatically.
+You can use **destroy\(\)** to detach events that were attached by this view with [app.attachEvent\(\)](https://github.com/webix-hub/gitbook-webix-jet/tree/f1fe4ed50e00bc55805d25af1926fc10073f5991/part-ii-webix-jet-in-details/jetapp-api/README.md#app-attachevent). Events attached by **attachEvent\(\)** are not destroyed automatically.
 
 ```javascript
 // views/form.js

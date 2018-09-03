@@ -15,7 +15,7 @@ An app module is created as a new instance of the JetApp class.
 
 1. Import the _JetApp_ class and create its instance.
 2. Define the start point, which is the start app URL. App configuration can include other properties like the app name, version, etc.
-3. Call the [render\(\)](jetapp-api.md#app-render) method of the JetApp instance to paint the UI on the page.
+3. Call the [render\(\)](https://github.com/webix-hub/gitbook-webix-jet/tree/2d186f59684fcf9977905010591510a0f43a5297/part-i-basic-usage/jetapp-api.md#app-render) method of the JetApp instance to paint the UI on the page.
 4. Enclose it in **webix.ready\(\)** to ensure that HTML page is parsed completely before JS starts executing.
 
 ```javascript
@@ -24,19 +24,19 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout"
-		};
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );   // mandatory!
+    webix.ready(() => new MyApp().render() );   // mandatory!
 }
 ```
 
@@ -44,7 +44,7 @@ You can open the needed URL and the UI will be rendered from the URL elements. T
 
 ## Adding Stylesheets
 
-This is how you can include a stylesheet. You can include several stylesheets (any CSS or LESS). When the app will be built, they all will be compiled into *app.css*that you can link to your *index.html* page and that will be put in *codebase* when you build the production files.
+This is how you can include a stylesheet. You can include several stylesheets \(any CSS or LESS\). When the app will be built, they all will be compiled into _app.css_that you can link to your _index.html_ page and that will be put in _codebase_ when you build the production files.
 
 ```javascript
 //app.js
@@ -52,19 +52,19 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout"
-		};
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );   // mandatory!
+    webix.ready(() => new MyApp().render() );   // mandatory!
 }
 ```
 
@@ -78,20 +78,20 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
+    constructor(config){
+        const defaults = {
             mode:"readonly",  //application wide configuration
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout"
-		};
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );   // mandatory!
+    webix.ready(() => new MyApp().render() );   // mandatory!
 }
 ```
 
@@ -118,19 +118,19 @@ import "./styles/app.css";
 import { JetApp, EmptyRouter, UrlRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : UrlRouter,    // !
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout"
-		};
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : UrlRouter,    // !
+            debug     : !PRODUCTION,
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );   // mandatory!
+    webix.ready(() => new MyApp().render() );   // mandatory!
 }
 ```
 

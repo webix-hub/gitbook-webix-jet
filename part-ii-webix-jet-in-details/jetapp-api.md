@@ -3,7 +3,7 @@
 Here you can find the list of all the **JetApp** methods, that you can make use of.
 
 | Method | Use to |
-| --- | --- |
+| :--- | :--- |
 | attachEvent\(event, handler\) | attach an event |
 | callEvent\(event\) | call an event |
 | detachEvent\(event\) | manually detach an event listener |

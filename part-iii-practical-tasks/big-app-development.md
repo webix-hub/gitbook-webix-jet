@@ -9,11 +9,11 @@ Webix Jet toolchain has been updated to support such kind of development [\[1\]]
 CLI commands:
 
 | Command | What it does |
-| --- | --- |
-| `npm run module` or `yarn module` | builds a standalone module, which is stored in **dist/module/** (a JS and a CSS files); the module **doesn't** include _webix-jet_ |
-| `npm run standalone` or `yarn standalone` | builds a standalone module, which is stored in **dist/full/** (a JS and a CSS files); the module **includes all dependencies** |
+| :--- | :--- |
+| `npm run module` or `yarn module` | builds a standalone module, which is stored in **dist/module/** \(a JS and a CSS files\); the module **doesn't** include _webix-jet_ |
+| `npm run standalone` or `yarn standalone` | builds a standalone module, which is stored in **dist/full/** \(a JS and a CSS files\); the module **includes all dependencies** |
 
-When the module is built, you can copy it to a subfolder of some other app, e.g. *sources/modules/*.
+When the module is built, you can copy it to a subfolder of some other app, e.g. _sources/modules/_.
 
 ### When to use _npm run module_
 
@@ -50,7 +50,7 @@ If you want to use the module on a page without Webix Jet:
 * use _**npm run standalone**_
 * include the JS and CSS files of your module from the subfolder you have put them into:
 
-```html
+```markup
 <!-- index.html -->
 <script src="modules/app-name.js"></script>
 <link rel="stylesheet" type="text/css" href="modules/style.css">
@@ -64,7 +64,7 @@ If you want to use the module on a page without Webix Jet:
 
 Instead of `document.body` you can use the ID of the target HTML container.
 
-Standalone bundles include all dependencies \(except *webix.js*\), so they are more stable. However, the size of a bundle is much bigger than the size of a module.
+Standalone bundles include all dependencies \(except _webix.js_\), so they are more stable. However, the size of a bundle is much bigger than the size of a module.
 
 ## Using Jet App as a Widget
 
@@ -77,18 +77,18 @@ export default class MyApp extends JetApp {
     //app config
     constructor(){
         const defaults = {
-			id 		: APPNAME,
-			version : VERSION,
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter, //!
-			debug 	: !PRODUCTION,
-			start 	: "/top/start"
-		};
+            id         : APPNAME,
+            version : VERSION,
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter, //!
+            debug     : !PRODUCTION,
+            start     : "/top/start"
+        };
         super({ ...defaults, ...config });
     }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 
 // add this
@@ -104,7 +104,7 @@ Make sure the app config includes the EmptyRouter.
 
 Now you can run `npm run standalone` to get a standalone bundle. Then you can copy the bundle to any subfolder of your app and use it:
 
-```html
+```markup
 <script src="module/app-name.js"></script>
 <script>
     webix.ui({ view:"some-widget" })

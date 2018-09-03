@@ -34,8 +34,8 @@ The basic principle of creating an app is the following. The app is a single pag
 
 Navigation between pages works, when the URL of the page changes. The URL of the app is divided by a hashbang \(\#!\) into two parts:
 
-- the main URL that is the web address of the app,
-- the app URL fragment that defines the UI (_#!/some/part_).
+* the main URL that is the web address of the app,
+* the app URL fragment that defines the UI \(_\#!/some/part_\).
 
 This is a single page app, that is why only the part of the URL after the hashbang will change. The framework will react to the URL change and rebuild the interface from these elements.
 
@@ -80,7 +80,7 @@ import {JetView} from "webix-jet";
 import start from "views/start"
 
 export default class TopView extends JetView {
-	config(){
+    config(){
         return {
             cols: [
                 { view: "menu" },
@@ -97,12 +97,12 @@ Open the path _/\#!/top_, and you will see the page with the _start_ view inside
 
 This module returns an object that differs from **start**. There are two variants of the return object:
 
-- a mere description of the interface (as in *start*),
-- a JetView-based class (as in *top*).
+* a mere description of the interface \(as in _start_\),
+* a JetView-based class \(as in _top_\).
 
 A JetView-based class can have:
 
-* the _config()_ method that returns the interface of the component that will be initialized. In this example, it's a menu;
+* the _config\(\)_ method that returns the interface of the component that will be initialized. In this example, it's a menu;
 * the lifetime handler methods that specify the component behavior during its life cycle.
 
 ## Creating Subviews
@@ -126,7 +126,7 @@ export default class TopView extends JetView {
 }
 ```
 
-The line _{ $subview: true }_ implies that other modules can appear inside of the top module. The next segment of the URL after *top* will be loaded into this structure. So for rendering the interface with a particular subview, put its name after _/\#!/top/_ -- for example _/\#!/top/start_. The _{ $subview: true }_ placeholder will be replaced with the content of a subview file \(_views/start.js_ in the above example\) and the corresponding interface will be rendered.
+The line _{ $subview: true }_ implies that other modules can appear inside of the top module. The next segment of the URL after _top_ will be loaded into this structure. So for rendering the interface with a particular subview, put its name after _/\#!/top/_ -- for example _/\#!/top/start_. The _{ $subview: true }_ placeholder will be replaced with the content of a subview file \(_views/start.js_ in the above example\) and the corresponding interface will be rendered.
 
 For example, there is a _data.js_ view, which contains a datatable. If you enter the URL _/\#!/top/data_, you will get the interface with a menu on the left and a datatable on the right:
 
@@ -144,14 +144,14 @@ The described way of inserting subviews into the main view is an alternative to 
 
 For more details on including subviews and in-app navigation, read the following chapters:
 
-- ["Creating views"](part-i-basic-usage/creating-views.md)
-- ["Views and Subviews"](part-ii-webix-jet-in-details/views-and-subviews.md#subview-including)
-- [In-App Navigation](part-i-basic-usage/in-app-navigation.md)
-- [Menu Plugin](part-ii-webix-jet-in-details/plugins.md#menu-plugin)
+* ["Creating views"](part-i-basic-usage/creating-views.md)
+* ["Views and Subviews"](part-ii-webix-jet-in-details/views-and-subviews.md#subview-including)
+* [In-App Navigation](part-i-basic-usage/in-app-navigation.md)
+* [Menu Plugin](part-ii-webix-jet-in-details/plugins.md#menu-plugin)
 
 ## Loading Data with Models
 
-While views contain the code of interfaces, *models* are used to control the data. Let's consider data loading on the example of the _views/data.js_ file. It takes data from the _models/records_ module. **records.js** in the demo returns a data collection with local data.
+While views contain the code of interfaces, _models_ are used to control the data. Let's consider data loading on the example of the _views/data.js_ file. It takes data from the _models/records_ module. **records.js** in the demo returns a data collection with local data.
 
 ```javascript
 //models/records.js
@@ -184,9 +184,10 @@ export default class DataView extends JetView {
 
 This module returns a JetView-based class with two methods:
 
-* the _config()_ method that returns the interface of the component that will be initialized. In this example, it's a datatable;
-* the _init()_ method that specifies the component initialization behavior. When the component is created, data from the _records_ model will be loaded into it. 
+* the _config\(\)_ method that returns the interface of the component that will be initialized. In this example, it's a datatable;
+* the _init\(\)_ method that specifies the component initialization behavior. When the component is created, data from the _records_ model will be loaded into it. 
 
 For more details about data loading, read:
 
 * ["Models"](part-ii-webix-jet-in-details/models.md)
+

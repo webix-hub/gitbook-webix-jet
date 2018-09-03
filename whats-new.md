@@ -42,7 +42,7 @@
 Major update after version 0.5:
 
 * [views](part-i-basic-usage/creating-views.md) and [app modules](part-i-basic-usage/creating-apps.md) as ES6 classes
-* using [Webpack](part-iii-practical-tasks/webpack-configuration.md) as a module bundler
+* using [Webpack]() as a module bundler
 * ability to choose among [4 routers](part-ii-webix-jet-in-details/routers.md)
 * ability to use [6 plugins](part-ii-webix-jet-in-details/plugins.md) for common tasks
 

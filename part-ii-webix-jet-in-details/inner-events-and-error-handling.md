@@ -5,7 +5,7 @@ You can use a number of inner events for some additional actions if the plugins 
 ## Inner Events
 
 | Event | is called |
-| --- | --- |
+| :--- | :--- |
 | _app:render_ | before each view of an app is rendered |
 | _app:route_ | after navigation to a view |
 | _app:guard_ | before navigation to another view |
@@ -171,7 +171,7 @@ var app = new JetApp({
 There are four events that can be used to handle errors.
 
 | Event | is called |
-| --- | --- |
+| :--- | :--- |
 | app:error | any error occurs |
 | app:error:resolve | when Jet can't find a module by its name |
 | app:error:render | on errors during view rendering, mostly Webix UI related |

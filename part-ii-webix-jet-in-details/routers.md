@@ -3,9 +3,9 @@
 To manipulate the URL, views have Routers. Webix Jet has four predefined types of routers.
 
 | Type | Displays app URL | Stored |
-| --- | --- | --- |
-| HashRouter | https://myshop.com/#!/my/app | Yes |
-| UrlRouter | https://myshop.com/my/app | Yes |
+| :--- | :--- | :--- |
+| HashRouter | [https://myshop.com/\#!/my/app](https://myshop.com/#!/my/app) | Yes |
+| UrlRouter | [https://myshop.com/my/app](https://myshop.com/my/app) | Yes |
 | StoreRouter | No | Yes |
 | EmptyRouter | No | No |
 
@@ -160,10 +160,10 @@ If these four routers aren't what you want, you can define your own.
 A router must be a class with the following methods:
 
 * **constructor**\(callback, config\), where:
-    - _callback_ is a function called to set the correct URL,
-    - _config_ with the app configuration;
+  * _callback_ is a function called to set the correct URL,
+  * _config_ with the app configuration;
 * **set**\(path, config\), where:
-    - _path_ is the app URL,
-    - _config_ with the **silent** flag, if it is set, the callback is not called;
+  * _path_ is the app URL,
+  * _config_ with the **silent** flag, if it is set, the callback is not called;
 * **get**\(\) that returns the URL.
 

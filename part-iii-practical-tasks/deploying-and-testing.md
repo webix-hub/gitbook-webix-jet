@@ -20,13 +20,13 @@ Any of these commands will compile the whole app in two files, **myapp.css** and
 
 Now, you need to upload the files from **codebase** and **index.html** \(the html page which is stored at the root of the project\) to the production server.
 
-### Deploying on a Back-end Server 
+### Deploying on a Back-end Server
 
-To deploy the app on the back-end server (e.g. Tomcat), put the **codebase** folder inside the web-folder of the server.
+To deploy the app on the back-end server \(e.g. Tomcat\), put the **codebase** folder inside the web-folder of the server.
 
 ### Webix Version
 
-By default, **index.html** uses the CDN version of Webix (GPL). If you are using Webix PRO, you need to change paths in **index.html** to the place where _webix.js_ and _webix.css_ are stored on your production server.
+By default, **index.html** uses the CDN version of Webix \(GPL\). If you are using Webix PRO, you need to change paths in **index.html** to the place where _webix.js_ and _webix.css_ are stored on your production server.
 
 After building the app, you need to include **webix.js** and **codebase/myapp.js**. There are no extra dependencies.
 

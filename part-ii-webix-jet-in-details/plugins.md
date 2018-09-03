@@ -276,8 +276,8 @@ This section contains guidelines for using the plugin with a custom script.
 
 **Related demos:**
 
-- [Demo of authorization, custom PHP script](https://github.com/webix-hub/jet-start/tree/php)
-- [Webix Jet with NodeJS Express](https://github.com/webix-hub/jet-start/tree/node-express)
+* [Demo of authorization, custom PHP script](https://github.com/webix-hub/jet-start/tree/php)
+* [Webix Jet with NodeJS Express](https://github.com/webix-hub/jet-start/tree/node-express)
 
 **Enabling the Plugin**
 
@@ -528,7 +528,7 @@ This is a plugin for localizing apps.
 
 #### Enabling the Plugin
 
-You can enable the *Locale* plugin before the app is rendered:
+You can enable the _Locale_ plugin before the app is rendered:
 
 ```javascript
 // myapp.js
@@ -544,8 +544,8 @@ You must create files with all the text labels in English and their translations
 // locales/es.js
 export default {
     "My Profile" : "Mi Perfil",
-	"My Account" : "Mi Cuenta",
-	"My Calendar" : "Mi Calendario"
+    "My Account" : "Mi Cuenta",
+    "My Calendar" : "Mi Calendario"
 };
 ```
 
@@ -578,8 +578,8 @@ export default class MenuView extends JetView {
                 { id:"calendar", value:"My Calendar" }
             ],
             template:(obj)=>{
-				return _(obj.value)};
-			}
+                return _(obj.value)};
+            }
         };
     }
 }
@@ -592,7 +592,7 @@ If you want your app to be multilingual and let the users to choose a language, 
 To set a new language, use the **setLang\(\)** method of the _locale_ service. **setLocale\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed.
 
 {% hint style="danger" %}
-Do not call **setLang()** in lifetime handlers of JetView! It calls [app.refresh\(\)](jetapp-api.md#app-refresh) that re-renders all the views, which will start an infinite loop.
+Do not call **setLang\(\)** in lifetime handlers of JetView! It calls [app.refresh\(\)](jetapp-api.md#app-refresh) that re-renders all the views, which will start an infinite loop.
 {% endhint %}
 
 Let's create a simple page for app settings with a segmented button that will be used to choose languages. Note that the IDs of the button options should be the same as the locale file names \(e.g. "es", "en"\).
@@ -619,8 +619,8 @@ export default class SettingsView extends JetView {
 
 **toggleLanguage\(\)** is a class method that will:
 
-- get the value of the segmented button,
-- pass it to **setLang\(\)** that will set the locale.
+* get the value of the segmented button,
+* pass it to **setLang\(\)** that will set the locale.
 
 ```javascript
 // views/settings.js

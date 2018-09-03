@@ -2,12 +2,12 @@
 
 An app module is created as a new instance of the JetApp class. In this file, you will also typically include:
 
-* stylesheets (any CSS or LESS)
+* stylesheets \(any CSS or LESS\)
 * custom widgets
 * app-level plugins
 * app-level Webix settings
 
-This is how you can include a stylesheet. You can include several stylesheets, and when the app will be built, they all will be compiled into *app.css* that you can link to your *index.html* page and that will be put in *codebase* when you build the production files.
+This is how you can include a stylesheet. You can include several stylesheets, and when the app will be built, they all will be compiled into _app.css_ that you can link to your _index.html_ page and that will be put in _codebase_ when you build the production files.
 
 ```javascript
 //app.js
@@ -15,26 +15,26 @@ import "./styles/app.css";  // !
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout"
-		};
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 ```
 
 You can include various parameters into the app configuration. This is their list. The details are below.
 
 | Parameter | What For |
-| --- | --- |
+| :--- | :--- |
 | debug | to enable debugging |
 | router | to change a router |
 | routes | to shorten the app URL |
@@ -52,19 +52,19 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout" // !
-		};
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout" // !
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 ```
 
@@ -78,19 +78,19 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,  // !
-			start 	: "/top/layout"
-		};
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,  // !
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 ```
 
@@ -107,19 +107,19 @@ import "./styles/app.css";
 import { JetApp, EmptyRouter, UrlRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : UrlRouter,    // !
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout"
-		};
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : UrlRouter,    // !
+            debug     : !PRODUCTION,
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 ```
 
@@ -135,22 +135,22 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout",
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout",
             views: {
                 "start" : "area.list" // load /views/area/list.js
             }
-		};
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 ```
 
@@ -189,11 +189,11 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout",
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout",
             views: (name) => {
                 if (name === "modules.clients") //sources/modules/
                     return import("modules/clients");
@@ -201,14 +201,14 @@ export default class MyApp extends JetApp{
                 // load all other modules with default strategy
                 return name;
             }
-		};
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 ```
 
@@ -259,24 +259,24 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout",
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout",
             routes: {
                 "/hi"     : "/top/about",
                 "/form" : "/top/area.left.form",
                 "/list" : "/top/area.list",
             }
-		};
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );
+    webix.ready(() => new MyApp().render() );
 }
 ```
 
@@ -294,20 +294,20 @@ import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
-	constructor(config){
-		const defaults = {
+    constructor(config){
+        const defaults = {
             mode:"readonly",  //application wide configuration
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: !PRODUCTION,
-			start 	: "/top/layout"
-		};
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout"
+        };
 
-		super({ ...defaults, ...config });
-	}
+        super({ ...defaults, ...config });
+    }
 }
 
 if (!BUILD_AS_MODULE){
-	webix.ready(() => new MyApp().render() );   // mandatory!
+    webix.ready(() => new MyApp().render() );   // mandatory!
 }
 ```
 

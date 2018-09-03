@@ -4,7 +4,7 @@
 
 These few issues will make your life a lot easier, so during development, remember to:
 
-* include [webix_debug.js](https://blog.webix.com/ui-development-and-debug-with-webix-js/),
+* include [webix\_debug.js](https://blog.webix.com/ui-development-and-debug-with-webix-js/),
 * set [`debug:true` in the app configuration](part-ii-webix-jet-in-details/app-config.md#debugging),
 * handle the ["app:error:resolve"](part-ii-webix-jet-in-details/inner-events-and-error-handling.md#app-error-resolve) event,
 * check the quality of your code before each commit \(`npm run lint`\).

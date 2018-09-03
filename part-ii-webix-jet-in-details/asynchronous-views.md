@@ -165,8 +165,8 @@ export class DetailsView extends JetView {
 
 **webix.promise** has more useful methods, e.g.:
 
-- [defer\(\)](https://docs.webix.com/api__promise_defer.html) that creates a promise,
-- [resolve\(\)](https://docs.webix.com/api__promise_resolve.html) that creates and resolves a promise.
+* [defer\(\)](https://docs.webix.com/api__promise_defer.html) that creates a promise,
+* [resolve\(\)](https://docs.webix.com/api__promise_resolve.html) that creates and resolves a promise.
 
 ### A Simple View that Returns a Promise
 
