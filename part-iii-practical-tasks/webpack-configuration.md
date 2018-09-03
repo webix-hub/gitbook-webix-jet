@@ -152,7 +152,7 @@ plugins: [
 
 Now the app will be compiled without the locales.
 
-### Changing Paths tor Locales and Views
+## Changing Paths tor Locales and Views
 
 By default, views and locales are stores in **sources/views** and **sources/locales** correspondingly. If you want your app structure to be different, you can change the paths to views and locales in the Webpack config file:
 
