@@ -64,7 +64,7 @@ this.show("newpage1");
 
 [Live demo &gt;&gt;](https://snippet.webix.com/mgup06rx)
 
-## Shared Classes for Customized Views
+## Shared Classes
 
 Define a base class for newly-added views. It must have a constructor and **config\(\)**:
 

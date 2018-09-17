@@ -8,6 +8,7 @@ The JetView class has the following methods:
 | getParentView\(\) | call methods of a parent view |
 | getRoot\(\) | call methods of the Webix widget |
 | getSubView\(name\) | call the methods of a subview |
+| getSubViewInfo\(name\) | get the object with the info on the subview and a pointer to its parent |
 | getUrl\(\) | get the URL segment related to a view |
 | on\(app,"event:name",handler\) | attach an event |
 | refresh\(\) | repaint the view and its subviews |
@@ -137,7 +138,50 @@ export default class ListEditView extends JetView{
 }
 ```
 
+If you call **getSubView\(\)** without a parameter, it will return the view that is currently open as the subview of the calling view. In the example below, **OtherView** will be returned.
+
+{% code-tabs %}
+{% code-tabs-item title="views/top.js" %}
+```javascript
+export default class TopView extends JetView { 
+  config(){
+    return {
+      rows:[
+        {
+          view:"button", value:"getSubView",
+          click:() => console.log(this.getSubView())
+        }, 
+      	{
+          cols:[
+          	{ $subview:SomeView },
+            { $subview:true }  // the view that is shown here will be returned
+          ]
+        }
+      ]
+    };
+  }
+  init(){
+     this.show("other");
+     // show 'views/other.js' which e.g. contains the OtherView class
+  }
+}
+
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
 For more details on referencing views, [read the "Referencing" section](referencing-views.md).
+
+## this.getSubViewInfo\(\)
+
+This is the extended version of the [getSubView\(\)](https://webix.gitbook.io/webix-jet/~/edit/drafts/-LMb4Cn6Mp-grEk06Tyj/part-ii-webix-jet-in-details/jetview-api#this-getsubview) method. It returns the object with the info on the subview. The object contains 2 properties:
+
+1. **subview** which has
+
+   1. **id** - the ID of the top Webix widget inside the subview, 
+   2. **view** - the subview itself \(this is the return value of [getSubView\(\)](https://webix.gitbook.io/webix-jet/~/edit/drafts/-LMb4Cn6Mp-grEk06Tyj/part-ii-webix-jet-in-details/jetview-api#this-getsubview)\);
+
+2. **parent** which is the parent view of the subview.
 
 ## this.on\(\)
 
