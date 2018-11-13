@@ -419,7 +419,7 @@ Apart from the session model, the plugin configuration can include other setting
 
 #### Login with an external OAuth service \( Google, GitHub, etc. \)
 
-to be continued...
+[A demo of login with passport and Google OAuth2](https://github.com/webix-hub/jet-start/tree/node-passport)
 
 ### Theme plugin
 
