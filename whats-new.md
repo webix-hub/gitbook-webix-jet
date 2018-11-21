@@ -3,8 +3,40 @@
 ## Version 2.0 - November 22, 2018
 
 - [getUrl()](part-ii-webix-jet-in-details/jetview-api.md#this-geturl) and [getUrlString()](part-ii-webix-jet-in-details/jetview-api.md#this-geturlstring) for [app](part-ii-webix-jet-in-details/jetapp-api.md#app-geturl) and view, url related tests and fixes
-- 
+- removeView() of Webix widgets triggers destroy() of the Jet views inside them
+- getSubView() and contains() can be called for JetApp
+- refresh() of JetView and JetApp return promises
+- view.refresh now work for views with sub-elements:
 
+	There were 2 major issues in the previous solution
+
+	a)
+	rendering url was not calculated for top level views
+	it was expected that for top level views user will call app.refresh
+	but real usage is different
+
+	b)
+	The subviews were not destroyed but recreated during refresh.
+	As result old subviews were kept in memory and complex side-effects were possible.
+
+	As part of update app.refresh logic changed as well, not it triggers refresh
+	of the top view, instead of using its own custom logic.
+
+- app.refresh works when an app is inside a Webix Jet view
+- [fix] destroy sub-app when root view of sub app is destroyed
+- [update] order of destroy and init events
+
+	Update changes the order of events.
+	Now, when view A replaces view B, events will go like next
+
+	- B.destroy()
+	- A.init()
+
+	To do so, we remove direct destructor() calls from the rendering callback
+	and place the same call just after rendering new UI
+	( after this point we don't need old view anymore )
+- [add] subrouter to use with sub-modules
+- [update] option to configure polyglot in the Locale plugin
 
 ## Version 1.6 - June 26, 2018
 
