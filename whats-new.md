@@ -1,5 +1,11 @@
 # What's New
 
+## Version 2.0 - November 22, 2018
+
+- [getUrl()](part-ii-webix-jet-in-details/jetview-api.md#this-geturl) and [getUrlString()](part-ii-webix-jet-in-details/jetview-api.md#this-geturlstring) for [app](part-ii-webix-jet-in-details/jetapp-api.md#app-geturl) and view, url related tests and fixes
+- 
+
+
 ## Version 1.6 - June 26, 2018
 
 * new [WJET utility](part-iii-practical-tasks/wjet-utility-for-faster-prototyping.md) for faster prototyping

@@ -2,17 +2,18 @@
 
 Here you can find the list of all the **JetApp** methods, that you can make use of.
 
-| Method | Use to |
+| Method | Use |
 | :--- | :--- |
-| attachEvent\(event, handler\) | attach an event |
-| callEvent\(event\) | call an event |
-| detachEvent\(event\) | manually detach an event listener |
-| getService\(name,handler\) | access a service by its name |
+| attachEvent\(event, handler\) | attaches an event |
+| callEvent\(event\) | calls an event |
+| detachEvent\(event\) | detaches an event listener |
+| getService\(name,handler\) | returns a service |
+| getUrl() | returns an arrays of the URL segments |
 | refresh\(\) | repaints the UI of an app |
-| render\(container\) | render the app or the app module |
-| setService\(name\) | set a service |
-| show\(url\) | rebuild the app or app module according to the new URL |
-| use\(plugin, config\) | switch on a plugin |
+| render\(container\) | renders the app or the app module |
+| setService\(name\) | sets a service |
+| show\(url\) | rebuilds the app or app module according to the new URL |
+| use\(plugin, config\) | enables a plugin |
 
 ## app.attachEvent\(\)
 
@@ -119,6 +120,22 @@ export default class FormView extends JetView{
 ```
 
 You can read more about services in the ["View Communication"](view-communication.md) chapter.
+
+## app.getUrl()
+
+The method returns the app URL as an array of objects, each containing:
+
+- **index** (number) - the index of the URL segment,
+- **page** (string) - the segment itself,
+- **params** (object) - the list of URL parameters.
+
+```javascript
+this.app.getUrl();
+/* [
+	{ index:1, page:"top", params:{} },
+	{ index:2, page:"some", params:{} }
+]*/
+```
 
 ## app.refresh\(\)
 
