@@ -7,7 +7,7 @@ When your app is complete, you need to build it for production.
 If you are using _webpack.config.js_ from the **jet-start** project, you can run either of these commands:
 
 ```bash
-npm run build
+npm run build / yarn build
 ```
 
 or
@@ -26,9 +26,18 @@ To deploy the app on the back-end server \(e.g. Tomcat\), put the **codebase** f
 
 ### Webix Version
 
-By default, **index.html** uses the CDN version of Webix \(GPL\). If you are using Webix PRO, you need to change paths in **index.html** to the place where _webix.js_ and _webix.css_ are stored on your production server.
+By default, **index.html** uses the CDN version of Webix \(GPL\). If you are using Webix PRO, you need to change paths in **index.html** to the place where _webix.min.js_ and _webix.min.css_ are stored on your production server.
 
-After building the app, you need to include **webix.js** and **codebase/myapp.js**. There are no extra dependencies.
+After building the app, you need to include the following files:
+
+- **index.html**,
+- **myapp.js** and **myapp.css** from the **codebase** folder,
+- **webix.min.js**,
+- **webix.min.css** (or the needed skin stylesheet from the **skins** folder),
+- the **fonts** folder that contains Webix icons and fonts,
+- the **legacy** folder (used for IE compatibility).
+
+If you use icons outside the default icon set, also include a link to the stylesheet with the icons.
 
 ## Testing the App
 
