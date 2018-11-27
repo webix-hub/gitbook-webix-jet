@@ -136,19 +136,7 @@ Mind that if you synced a data component to a DataCollection, you must _perform 
 
 To return several types of data and distribute data chunks to different views, a shared data transport can be used.
 
-For example, this is the data model for a grid:
-
-```javascript
-//models/griddata.js
-import {sharedData} from "models/shareddata";
-
-const gridData = new webix.DataCollection();
-gridData.parse(sharedData("grid"));
-
-export gridData;
-```
-
-And here is the "shareddata" file that communicates with the shared data feed and can provide different data chunks for different views, including the grid:
+A shared data model can look like this:
 
 ```javascript
 //models/shareddata.js
@@ -165,7 +153,123 @@ export function sharedData(name){
 }
 ```
 
-Each view has its own model that stores data and all related API and uses _shareddata_ for data loading.
+The model communicates with the shared data feed and can provide different data chunks for different views, for example, specific data for a grid and common data for other components.
+
+Each component must have its own model as well. For example, this is the data model for a **grid**:
+
+```javascript
+//models/griddata.js
+import {sharedData} from "models/shareddata";
+
+const gridData = new webix.DataCollection();
+gridData.parse(sharedData("grid"));
+
+export gridData;
+```
+
+A component expects that **sharedData** will return an array of objects or a promise of an array of objects.  
+If you are returning data in a different format, you can add a data transformation for the promise chain:
+
+```js
+//models/griddata.js
+import {sharedData} from "models/shareddata";
+
+const gridData = new webix.DataCollection();
+let data = sharedData("grid");
+
+data.then(function(d){
+	gridData.parse(d.value);
+});
+
+export gridData;
+```
+
+A **grid** can use this model like this:
+
+```js
+// views/grid.js
+import {JetView} from "webix-jet";
+import {gridData} from "models/griddata";
+export default class GridView extends JetView{
+	config(){
+		return { view:"dataview", localId:"grid", autoConfig:true };
+	}
+	init(){
+		// for grids
+		this.$$("grid").sync(gridData);
+	}
+}
+```
+
+With **forms**, you should use a different approach:
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+import {gridData} from "models/griddata";
+export default class FormView extends JetView {
+	config(){
+		return { view:"form", localId:"form", elements:[...] };
+	}
+	init(){
+		// for form
+		this.$$("form").setValues(gridData.getItem(id));
+	}
+}
+```
+
+where `id` is the ID of the record from DataCollection that you want to load into the form.
+
+**Note:** if you have a single record in DataCollection, you can use the **DataRecord** object instead:
+
+```js
+// models/data.js
+import {sharedData} from "models/shareddata";
+export const data = new webix.DataRecord({});
+
+let temp = sharedData("grid");
+temp.then(function(d){
+	data.setValues(d.value);
+});
+```
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+import {data} from "models/data";
+export default class FormView extends JetView {
+	config(){
+		return { view:"form", localId:"form", elements:[...] };
+	}
+	init(){
+		// for form
+		this.$$("form").setValues(data);
+	}
+}
+```
+
+or just a plain JS object:
+
+```js
+import {sharedData} from "models/shareddata";
+
+export const data = {};
+export const ready = sharedData("grid").then(d => webix.extend(data,d) );
+```
+
+```js
+// views/form.js
+import {JetView} from "webix-jet";
+import {ready, data} from "models/data";
+export default class FormView extends JetView {
+	config(){
+		return { view:"form", localId:"form", elements:[...] };
+	}
+	init(){
+		ready.then( _ => this.$$("form").setValues(data) );
+	}
+}
+```
 
 ### 2. Dynamic Data for Big Data
 
