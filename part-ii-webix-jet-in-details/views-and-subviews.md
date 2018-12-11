@@ -397,7 +397,7 @@ Next you can create custom datatable views, each one can define parameters for t
 
 ```javascript
 // views/products.js
-import {BaseDatatable} from "webix-jet";
+import BaseDatatable from "views/basedatatable";
 import products from "models/products"; //data collection
 export default class ProductsView extends BaseDatatable {
     constructor(app, name){
