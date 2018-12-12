@@ -385,10 +385,10 @@ import {JetView} from "webix-jet";
 export default class BaseDatatable extends JetView {
     constructor(app, name, config){
         super(app, name);
-        this.config = config;
+        this.grid_config = config;
     }
     config(){
-        return { view:"datatable", columns: this.config.columns };
+        return { view:"datatable", columns: this.grid_config.columns };
     }
 }
 ```
