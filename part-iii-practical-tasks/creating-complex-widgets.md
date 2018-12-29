@@ -6,17 +6,18 @@ For complex cases, when you want to create a widget with multiple layouts, dynam
 
 ## How to Create
 
-Create a Jet app and run `yarn module` to build the source files. Make sure that the app is not rendered as a module:
+Create a Jet app and convert it into a new widget with **webix.protoUI\(\)** with **webix.ui.jetapp** as the base:
 
-```js
-// sources/myapp.js
+```javascript
+// sources/newwidget.js
 import {JetApp} from "webix-jet";
-export default class MyApp extends JetApp {
+export default class NewWidgetApp extends JetApp {
     constructor(){
         const defaults = {
             id		: APPNAME,
             version	: VERSION,
-            debug	: !PRODUCTION,
+			debug	: !PRODUCTION,
+			router	: EmptyRouter,
             start	: "/top/start"
         };
         super({ ...defaults, ...config });
@@ -26,23 +27,16 @@ export default class MyApp extends JetApp {
 // this!
 if (!BUILD_AS_MODULE){
     webix.ready(() => new MyApp().render() );
-}
-```
 
-Include the source files from the **codebase** folder and convert the app into a new widget based on **webix.ui.jetapp**:
-
-```javascript
-// index.html
 webix.protoUI({
     name:"new-widget",
-    app: MyApp
+    app: NewWidgetApp
 }, webix.ui.jetapp);
 ```
 
-Now this widget can be used like an ordinary Webix widget \(included on a page, in Webix layout, resized, etc.\):
+Later this widget can be used like an ordinary Webix widget \(included on a page, in Webix layout, resized, etc.\):
 
 ```javascript
-// index.html
 webix.ui({
     rows:[
         { view:"toolbar", elements:[...] },
