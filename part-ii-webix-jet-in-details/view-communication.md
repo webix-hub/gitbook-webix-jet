@@ -14,7 +14,7 @@ For instance, let's create a view that opens a form as a subview with some speci
 // views/data.js
 import {JetView} from "webix-jet";
 
-export default class DataView extends JetView{
+export default class DataView extends JetView {
     config(){
         return { cols:[
             { $subview:true }
@@ -26,13 +26,31 @@ export default class DataView extends JetView{
 }
 ```
 
+where `form` is a Jet view file with a form, e.g.:
+
+```javascript
+// views/form.js
+import {JetView} from "webix-jet";
+
+export default class FormView extends JetView {
+    config(){
+        return {
+			view:"form", elements:[
+				{ view:"text", name:"name" },
+				{ view:"text", name:"email" }
+			]
+		};
+    }
+}
+```
+
 ### Getting Parameters from Class Methods
 
-To access _id_ in the form, you need to get to the **url** parameter that is received by [init\(\)](views-and-subviews.md#init-view-url), [urlChange\(\)](views-and-subviews.md#urlchange-view-url) and [ready\(\)](views-and-subviews.md#ready-view-url) methods of a Jet class view. **url** is an array of objects, each with three properties:
+To access _id_ in the form, you need to get to the **url** parameter that is received by [init\(\)](views-and-subviews.md#init-view-url), [urlChange\(\)](views-and-subviews.md#urlchange-view-url) or [ready\(\)](views-and-subviews.md#ready-view-url) methods of a Jet class view. **url** is an array of objects, each with three properties:
 
 * **page** - the name of the URL element
-* **params** - the parameters after the URL
-* **index** - the number of the URL element
+* **params** - the URL parameters of the element
+* **index** - the index number of the URL element
 
 If any parameters were passed, you can get to them with _url\[n\].params.{parameter}_, where _n_ is the number of the URL segment.
 
@@ -60,11 +78,13 @@ export default class FormView extends JetView{
 }
 ```
 
-In this simple example, as soon as DataView is initialized, [urlChange\(\)](views-and-subviews.md#urlchange-view-url) of _FormView_ is called and the form is filled correct data.
+where `getData` is a function that returns a data record.
+
+In this simple example, as soon as DataView is initialized, [urlChange\(\)](views-and-subviews.md#urlchange-view-url) of _FormView_ is called and the form is filled with correct data.
 
 ### Setting / Getting Parameters with JetView Methods
 
-You can get URL parameters with [this.getParam\(\)](jetview-api.md#this-getparam). **getParam\(\)** lets the API access the URL parameters of the current view and its parent. This can be useful, as views and subviews quite often share a common parameter.
+You can also get URL parameters with [this.getParam\(\)](jetview-api.md#this-getparam). **getParam\(\)** lets the API access the URL parameters of the current view and its parent (while the **url** parameter allows you to get the URL parameters of the current view and its subviews). This can be useful, as views and subviews quite often share a common parameter.
 
 Consider a simple example with two views, a parent **page** and its subview **some**. The URL is:
 
@@ -107,13 +127,13 @@ export default class DetailsView extends JetView {
 }
 ```
 
-Here **sub** is a Jet view that will access the parent's parameter and display it:
+Here **SubView** is a Jet view that will access the parameter of the parent and display it:
 
 ```javascript
 // views/sub.js
 import {JetView} from "webix-jet";
 
-export default class sub extends JetView {
+export default class SubView extends JetView {
     config(){
         return {
             view:"template"
@@ -266,7 +286,7 @@ With ES6, the problem can also be solved with creating and requiring a module. I
 To set a service, call the [app.setService\(\)](jetapp-api.md#app-setservice) method. **setService\(\)** requires two parameters:
 
 * **service** - \(string\) the name of the service
-* **obj** - \(object\) methods that you want to call from other Jet views
+* **obj** - \(object\) all methods that you want to call from other Jet views
 
 For example, let's create a _masterTree_ view and let other views get the ID of a selected item in the master tree.
 
