@@ -92,7 +92,7 @@ import {JetView} from "webix-jet";
 export default class CustomersData extends JetView{
     constructor(app,name,data){
         super(app,name);
-        this._data = data;
+        this._componentData = data;
     }
     config(){
         return {
@@ -105,7 +105,7 @@ export default class CustomersData extends JetView{
         };
     }
     init(view){
-        view.parse(_data);
+        view.parse(this._componentData);
     }
 }
 ```
@@ -115,11 +115,14 @@ Then you can create a new instance of CustomerData in [config\(\)](views-and-sub
 ```javascript
 // views/customers.js
 import {JetView} from "webix-jet";
-import {getData} from "models/customers";
+import {getRecords} from "models/orders";
+import {getClients} from "models/customers";
 ...
 config(){
-    ...
-    var data = new CustomersData(this.app,"",getData());
+    row:[
+		new CustomersData(this.app,"",getRecords()),
+		new CustomersData(this.app,"",getClients())
+	]
 }
 ```
 
