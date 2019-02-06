@@ -374,13 +374,97 @@ Any view will be able to use the service as:
 
 ## Which Way of View Communication To Choose?
 
-Each of these ways is good for different cases of view communication.
+Each of these ways is good for different cases of view communication. Let's summarize the typical uses of each one.
 
-For example, it is better to use **URL parameters** to provide the information relevant for loading of the initial data into subview modules or for the initial state of Webix views.
+1\. It is better to use **URL parameters** to provide the information relevant for loading of the initial data into subview modules or for the initial state of Webix views.
 
-**Events** are necessary for reacting to actions by multiple receivers. The direction of communication with events is _upward_ - from subviews to parents.
+For example, when a row of a datatable is selected, another view is shown and given the ID of the row as a URL parameter:
 
-**Services** are relevant for storing a common state that can be used throughout the application or storing common methods that should be accessed by any Jet view. Communication with services _works in all directions_.
+```js
+// views/firstview.js
+import { JetView } from "webix-jet";
+import { some_data } from "models/somedata";
+export default class FirstView extends JetView {
+	config(){
+		return {
+			view:"datatable", autoConfig:true, data:some_data,
+			on:{
+				onAfterSelect:row => this.show("secondview?id="+row.id)
+			}
+		};
+	}
+}
+```
+
+When the other view is initialized, it receives the ID and uses it:
+
+```js
+// views/secondview.js
+import { JetView } from "webix-jet";
+import { some_data } from "models/somedata";
+export default class SecondView extends JetView {
+	config(){
+		return {
+			view:"list", template:"#some_value_from_data#",
+			data:some_data
+		};
+	}
+	init(view,url){
+		if (url[0].params.id)
+			view.select(id);
+	}
+}
+```
+
+2\. **Events** are necessary for reacting to actions by multiple receivers. A typical case is communication between subviews and parents, when a subview throws an event and the parent handles it:
+
+- when a datatable row is selected, the event is thrown
+
+```js
+// views/subview.js
+import { JetView } from "webix-jet";
+import { some_data } from "models/somedata";
+export default class SubView extends JetView {
+	config(){
+		return {
+			view:"datatable",  autoConfig:true, data:some_data,
+			on:{
+				onAfterSelect:row => this.app.callEvent("grid:record:select",[row])
+			}
+		}
+	}
+}
+```
+
+- the parent view reacts and selects a corresponding item in a list
+
+```js
+// views/parentview.js
+import { JetView } from "webix-jet";
+import { some_data } from "models/somedata";
+export default class ParentView extends JetView {
+	config(){
+		return {
+			rows:[
+				{ view:"toolbar", elements:[ /* some toolbar controls*/ ] },
+				{
+					cols:[
+						{ view:"list", localId:"list", template:"#name#", data:some_data },
+						{ $subview:true }	// here lives the datatable
+					]
+				}
+			]
+		}
+	}
+	init(){
+		this.on(this.app,"grid:record:select",row => {
+			this.$$("list").select(row.id);
+		});
+	}
+}
+```
+
+3\. **Services** are relevant for storing a common state that can be used throughout the application or storing common methods that should be accessed by any Jet view. Communication with services works for all views and subviews regardless of their relations (whether they are a subview and a parent or not) and their life-cycles (whether views exist in the app at the same moment or not).
 
 Also remember that you **can't use the same service for two instances of a view class**, e.g. if you create a file manager with two identical file views. For each instance of the class a new service is created. Use services if other ways aren't possible.
 
