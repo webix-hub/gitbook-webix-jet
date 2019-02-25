@@ -172,6 +172,49 @@ export default class Window extends JetView{
 }
 ```
 
+## Including Windows in the app URL
+
+Jet views inside windows can have complex structures, e.g. with several layers of subviews. In this case it would be useful to keep the UI of the window in the app URL and navigate inside the window in the same way as it is done for the rest of Jet views.
+
+The solution is to include a view with a window as a dynamic subview. The window will still be shown above the UI of the parent, but otherwise will behave as an ordinary subview. Follow these steps:
+
+1. create a *$subview:true* element in the parent view and add the **popup:true** property to it,
+2. show the window-view with *this.show()*.
+
+```js
+// views/top.js
+import { JetView } from "webix-jet";
+export default class TopView extends JetView{
+	config(){
+		return {
+			rows:[
+				{
+					view:"button", width: 120, value:"Data",
+					click:() => this.show("popup")
+				},
+				{ $subview:true, popup:true }
+			]
+		};
+	}
+}
+```
+
+"popup" is the file with the window, e.g.:
+
+```js
+import { JetView } from "webix-jet";
+export default class PopupView extends JetView {
+	config(){
+		return {
+			view:"window", head:false, position:"center",
+			body:{
+				template:"Window with data"
+			}
+		};
+	}
+}
+```
+
 ## Adding a Context Menu
 
 You can also attach a context menu to widgets with _this.ui\(\)_.

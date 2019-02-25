@@ -245,41 +245,73 @@ this.setParam("mode", "12", true); // some?mode=12
 
 ## this.show\(\)
 
-This method is used for in-app navigation. It loads view modules according to the path specified as a parameter:
+This method is used for in-app navigation. It loads view modules according to the path specified as a parameter.
+
+**Parameters**:
+
+- **path** (string, object) - the path to the module or a combination of parent-child modules with URL parameters or just URL parameters as an object,
+- **config** (object) - the configuration with the [**target** parameter](#optional-target-parameter).
+
+**Returns**: promise.
 
 ```javascript
 // views/toolbar.js
-const Toolbar = {
-    view: "toolbar",
-    elements: [
-        { view: "button", value:"Details",
-            click: () => {
-                this.show("details");
-            }
-    }]
-};
-export default Toolbar;
+import { JetView } from "webix-jet";
+export default class ToolbarView extends JetView{
+	config(){
+		return {
+			view: "toolbar",
+			elements: [
+				{
+					view: "button", value: "Details",
+					click: () => this.show("details")
+				}
+			]
+		};
+	}
+}
 ```
+
+### Passing URL Parameters
+
+You can use the **show()** method to pass URL parameters. You can do this by passing an object with the parameter:
+
+```javascript
+// views/toolbar.js
+const param = "42";
+this.show({ param });
+// /#!/toolbar?param=42
+```
+
+### Additional Actions
 
 **show\(\)** returns a _promise_. This is useful, when you plan to do something after a subview is rendered.
 
 ```javascript
 // views/toolbar.js
-const Toolbar = {
-    view: "toolbar",
-    elements: [
-        { view: "button", value:"Details",
-            click: () => {
-                this.show("details").then(/* do something */);
-            }
-    }]
-};
-export default Toolbar;
+import { JetView } from "webix-jet";
+export default class ToolbarView extends JetView{
+	config(){
+		return {
+			view: "toolbar",
+			elements: [
+				{
+					view: "button", value:"Details",
+					click: () => {
+						this.show("details").then(function(){
+							/* do something */
+						});
+					}
+				}
+			]
+		};
+	}
+}
 ```
 
 ### Optional _target_ Parameter
 
-If a view has several _$subview:true_ placeholders, you might want to show a subview instead of a certain placeholder. **this.show\(\)** has an optional parameter that will make it possible. You must give the subview placeholder a name and pass this name to **this.show\(\)**:
+A view can have named subviews, which is necessary when a view has several dynamic subviews. To render a module inside the named dynamic subview, call **this.show\(\)** with the second parameter -- the name of the subview.
 
 ```javascript
 // views/big.js
@@ -291,10 +323,10 @@ If a view has several _$subview:true_ placeholders, you might want to show a sub
     ]
 }
 ...
-this.show("small", { target:"right" })
+this.show("small", { target:"right" });
 ```
 
-_small_ is the name of a subview that will be placed in the right column of the _big_ view.
+_"small"_ is the name of a subview that will be placed in the right column of the _big_ view.
 
 The above code works the same as this:
 
@@ -302,7 +334,13 @@ The above code works the same as this:
 this.getSubView("right").show("small");
 ```
 
-_getSubView_ returns a subview by the name passed as a parameter.
+_getSubView()_ returns a subview by the name passed as a parameter.
+
+<!-- 
+Showing a subview in a new tab
+
+this.show("data",{ target:"_some" });
+ -->
 
 For more details on view navigation, [read the "Navigation" article](../part-i-basic-usage/in-app-navigation.md).
 

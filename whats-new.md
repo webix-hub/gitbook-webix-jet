@@ -5,8 +5,8 @@
 ### New Features
 
 * The ability to show views in new tabs
-* The ability to show windows like other views by including them in the app URL
-* Subviews in apps can have their own app URLs (*SubRouter*)
+* The ability to show windows like other views by [including them in the app URL](part-ii-webix-jet-in-details/popups-and-windows.md#including-windows-in-the-app-url)
+* Subviews in apps can have their own app URLs
 * *Menu plugin* can change URL parameters
 * *User plugin*: the ability to add several pages accessible for non-authorized users
 * *Locale plugin*: additional setting for setting Webix locales
@@ -16,6 +16,7 @@
 * *UrlRouter* shares the same settings with *HashRouter*
 * Webix Jet supports IE11+
 * *HashRouter* works more stable during in-browser navigation
+* *SubRouter* for sub-modules
 * The ability to use Webix Jet without Webpack
 * The ability to import Webix code as a module
 
