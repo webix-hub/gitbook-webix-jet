@@ -5,15 +5,18 @@
 * The ability to show views in new tabs
 * The ability to show windows like other views by including them in the app URL
 * Subviews in apps can have their own app URLs
-* Menu plugin can change URL parameters
-* User plugin: the ability to add several pages accessible for non-authorized users
-* Locale plugin: additional setting for Webix locale
-* Locale plugin: the ability to split localization and load parts on demand
-* Locale plugin: the ability to configure Polyglot
-* UrlRouter shares the same settings as HashRouter
+* *Menu plugin* can change URL parameters
+* *User plugin*: the ability to add several pages accessible for non-authorized users
+* *Locale plugin*: additional setting for setting Webix locales
+* *Locale plugin*: the ability to split localization and load parts on demand
+* *Locale plugin*: the ability to configure Polyglot
+* *Locale plugin*: the ability to disable locale loading from jet-locales
+* *UrlRouter* shares the same settings with *HashRouter*
+* Webix Jet supports IE11+
+* *HashRouter* works more stable during in-browser navigation
 * The ability to use Webix Jet without Webpack
 * The ability to import Webix code as a module
-* Webix Jet supports IE11+
+* The **refresh()** method for app and view returns a promise
 
 ## Version 1.6 - June 26, 2018
 
