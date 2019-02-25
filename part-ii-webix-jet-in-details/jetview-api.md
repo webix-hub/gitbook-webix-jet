@@ -2,21 +2,22 @@
 
 The JetView class has the following methods:
 
-| Method | Use it to |
+| Method | Use |
 | :--- | :--- |
-| getParam\(name, parent\) | give the API access to the URL parameters |
-| getParentView\(\) | call methods of a parent view |
-| getRoot\(\) | call methods of the Webix widget |
-| getSubView\(name\) | call the methods of a subview |
-| getSubViewInfo\(name\) | get the object with the info on the subview and a pointer to its parent |
-| getUrl\(\) | get the URL segment related to a view |
-| on\(app,"event:name",handler\) | attach an event |
-| refresh\(\) | repaint the view and its subviews |
-| setParam\(name, value\) | set the URL parameters |
-| show\("path"\) | show a view or a subview |
-| ui\(view\) | create a popup or a window |
-| use\(plugin, config\) | switch on a plugin |
-| $$\("controlID"\) | return Webix widgets inside a view |
+| getParam\(name, \[parent\]\) | returns the URL parameters |
+| getParentView\(\) | returns the parent view |
+| getRoot\(\) | returns the top Webix widget in the view |
+| getSubView\(name\) | returns a subview of the view |
+| getSubViewInfo\(name\) | returns the object with the info on the subview and a pointer to its parent |
+| getUrl\(\) | returns an array of the URL segments related to a view |
+| getUrlString() | returns the URL as a string	|
+| on\(app,"event:name",handler\) | attaches an event |
+| refresh\(\) | repaints the view and its subviews |
+| setParam\(name, value\) | sets the URL parameters |
+| show\("path"\) | shows a view or a subview |
+| ui\(view\) | creates a popup or a window |
+| use\(plugin, config\) | enables a plugin |
+| $$\("controlID"\) | returns Webix widgets inside a view |
 
 ## this.getParam\(\)
 
@@ -144,26 +145,26 @@ If you call **getSubView\(\)** without a parameter, it will return the view that
 {% code-tabs-item title="views/top.js" %}
 ```javascript
 export default class TopView extends JetView { 
-  config(){
-    return {
-      rows:[
-        {
-          view:"button", value:"getSubView",
-          click:() => console.log(this.getSubView())
-        }, 
-      	{
-          cols:[
-          	{ $subview:SomeView },
-            { $subview:true }  // the view that is shown here will be returned
-          ]
-        }
-      ]
-    };
-  }
-  init(){
-     this.show("other");
-     // show 'views/other.js' which e.g. contains the OtherView class
-  }
+	config(){
+		return {
+			rows:[
+				{
+					view:"button", value:"getSubView",
+					click:() => console.log(this.getSubView())
+				}, 
+				{
+					cols:[
+						{ $subview:SomeView },
+						{ $subview:true }  // the view that is shown here will be returned
+					]
+				}
+			]
+		};
+	}
+	init(){
+		this.show("other");
+		// show 'views/other.js' which e.g. contains the OtherView class
+	}
 }
 
 ```
@@ -313,7 +314,46 @@ Use **this.getUrl\(\)** method to get the URL as an array of segments, each one 
 * _params_ \(an object with URL parameters\)
 * _index_ \(the number of the segment starting from 1\)
 
-For example, you can get the URL segment related to the view by accessing the _page_ property:
+```javascript
+// views/some.js
+import {JetView} from "webix-jet";
+export default class SomeView extends JetView{
+    config(){
+        return {
+            view:"button", value:"Show URL", click: () => {
+                var url = this.getUrl();
+				//	[{ page:"some", params:{}, index:1 }]
+            }
+        };
+    }
+}
+```
+
+If you call this method from a dynamic subview (as opposed to the top view and a static subview), the method will return only the segments starting from this subview segment.
+
+```javascript
+//	views/top.js
+import {JetView} from "webix-jet";
+export default class SomeView extends JetView{
+    config(){
+        return {
+			cols:[
+				{ template:"Yop view" },
+				{ $subview:true }
+			]
+		};
+	}
+	init(){
+		this.show("some");
+		//	"Show Url" will return
+		//	[{ page:"some", params:{}, index:1 }]
+	}
+}
+```
+
+## this.getUrlString()
+
+Use this method to return the URL as a string:
 
 ```javascript
 // views/some.js
@@ -323,11 +363,32 @@ export default class SomeView extends JetView{
     config(){
         return {
             view:"button", value:"Show URL", click: () => {
-                var url = this.getUrl();  //URL as an array of segments
-                console.log(url[0].page); //"some"
+                var url = this.getUrlString();
+				// "/some"
             }
         };
     }
+}
+```
+
+If you call this method from a dynamic subview (as opposed to the top view and a static subview), the method will return only the part of URL starting from this subview segment.
+
+```javascript
+//	views/top.js
+import {JetView} from "webix-jet";
+export default class SomeView extends JetView{
+    config(){
+        return {
+			cols:[
+				{ template:"Yop view" },
+				{ $subview:true }
+			]
+		};
+	}
+	init(){
+		this.show("some");
+		//	"Show Url" will return "/some"
+	}
 }
 ```
 

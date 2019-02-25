@@ -2,9 +2,11 @@
 
 ## Version 2.0 - February 21, 2019
 
+### New Features
+
 * The ability to show views in new tabs
 * The ability to show windows like other views by including them in the app URL
-* Subviews in apps can have their own app URLs
+* Subviews in apps can have their own app URLs (*SubRouter*)
 * *Menu plugin* can change URL parameters
 * *User plugin*: the ability to add several pages accessible for non-authorized users
 * *Locale plugin*: additional setting for setting Webix locales
@@ -16,7 +18,17 @@
 * *HashRouter* works more stable during in-browser navigation
 * The ability to use Webix Jet without Webpack
 * The ability to import Webix code as a module
+
+### Changes in API and Inner Logic
+
+* [getUrl()](part-ii-webix-jet-in-details/jetview-api.md#this-geturl) and [getUrlString()](part-ii-webix-jet-in-details/jetview-api.md#this-geturlstring) for [app](part-ii-webix-jet-in-details/jetapp-api.md#app-geturl) and view
+* *removeView()* of Webix widgets triggers *destroy()* of the Jet views inside them
+* *getSubView()* and *contains()* can be called for JetApp
 * The **refresh()** method for app and view returns a promise
+* *view.refresh()* works for views with sub-elements
+* *app.refresh()* works when an app is inside a Webix Jet view
+* *app.refresh()* triggers refresh of the top view instead of using its own custom logic
+* The order of destroy and init events: first, the old view is destroyed, then the new view is initialized
 
 ## Version 1.6 - June 26, 2018
 
