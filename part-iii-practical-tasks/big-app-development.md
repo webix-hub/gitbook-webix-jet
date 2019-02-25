@@ -4,7 +4,7 @@
 
 If you develop a large app, it has sense to spit it into multiple modules, which can be developed and tested separately and combined into a single app on the last step of development.
 
-Webix Jet toolchain has been updated to support such kind of development [\[1\]](big-app-development.md#1). For new projects, just use the [jet-start](https://github.com/webix-hub/jet-start) pack. To update existing projects, check **webpack.config.js** against the [latest one](https://github.com/webix-hub/jet-start/blob/master/webpack.config.js) and update the **scripts** section in [package.json](https://github.com/webix-hub/jet-start/blob/master/package.json).
+Webix Jet toolchain has been updated to support such kind of development (Starting with Webix Jet 1.5). For new projects, just use the [jet-start](https://github.com/webix-hub/jet-start) pack. To update existing projects, check **webpack.config.js** against the [latest one](https://github.com/webix-hub/jet-start/blob/master/webpack.config.js) and update the **scripts** section in [package.json](https://github.com/webix-hub/jet-start/blob/master/package.json).
 
 CLI commands:
 
@@ -15,11 +15,11 @@ CLI commands:
 
 When the module is built, you can copy it to a subfolder of some other app, e.g. _sources/modules/_.
 
-### When to use _npm run module_
+### When to use _module_
 
 If you want to use the module as a part of another Webix Jet app:
 
-* use _**npm run module**_
+* use _**npm run module**_ or _**yarn module**_
 * import the JS and CSS files of your module from the subfolder you have put them into:
 
 ```javascript
@@ -43,14 +43,14 @@ Be sure to use webix-jet 1.4+
 
 Modules are much more lightweight than bundles with dependencies. So if you plan to create a lot of app modules, compile them this way.
 
-### When to use _npm run standalone_
+### When to use _standalone_
 
 If you want to use the module on a page without Webix Jet:
 
-* use _**npm run standalone**_
+* use _**npm run standalone**_ or _**yarn standalone**_
 * include the JS and CSS files of your module from the subfolder you have put them into:
 
-```markup
+```html
 <!-- index.html -->
 <script src="modules/app-name.js"></script>
 <link rel="stylesheet" type="text/css" href="modules/style.css">
@@ -77,11 +77,11 @@ export default class MyApp extends JetApp {
     //app config
     constructor(){
         const defaults = {
-            id         : APPNAME,
-            version : VERSION,
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter, //!
-            debug     : !PRODUCTION,
-            start     : "/top/start"
+            id     	: APPNAME,
+			version	: VERSION,
+            router  : BUILD_AS_MODULE ? EmptyRouter : HashRouter, //!
+            debug   : !PRODUCTION,
+            start   : "/top/start"
         };
         super({ ...defaults, ...config });
     }
@@ -102,9 +102,9 @@ webix.protoUI({
 Make sure the app config includes the EmptyRouter.
 {% endhint %}
 
-Now you can run `npm run standalone` to get a standalone bundle. Then you can copy the bundle to any subfolder of your app and use it:
+Now you can run `npm run standalone` or `yarn standalone` to get a standalone bundle. Then you can copy the bundle to any subfolder of your app and use it:
 
-```markup
+```html
 <script src="module/app-name.js"></script>
 <script>
     webix.ui({ view:"some-widget" })
@@ -113,11 +113,5 @@ Now you can run `npm run standalone` to get a standalone bundle. Then you can co
 
 This JetApp works as a widget and can be combined and sized like any other Webix UI widget.
 
-[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/tree/master/sources/webixview.js)
-
-## Footnotes
-
-#### \[1\]:
-
-Starting with Webix Jet 1.5
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/webixview.js)
 

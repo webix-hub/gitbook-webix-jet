@@ -1,48 +1,34 @@
 # What's New
 
-## Version 2.0 - November 22, 2018
+## Version 2.0 - February 21, 2019
 
-- the ability to use custom locales (the *setLangData()* method, the *polyglot* config property)
-- [update] option to configure polyglot in the Locale plugin
-- new SubRouter to use with sub-modules
-- [getUrl()](part-ii-webix-jet-in-details/jetview-api.md#this-geturl) and [getUrlString()](part-ii-webix-jet-in-details/jetview-api.md#this-geturlstring) for [app](part-ii-webix-jet-in-details/jetapp-api.md#app-geturl) and view, url related tests and fixes
+### New Features
 
-- *removeView()* of Webix widgets triggers *destroy()* of the Jet views inside them
-- *getSubView()* and *contains()* can be called for JetApp
-- *refresh()* of JetView and JetApp return promises
-- *view.refresh* now work for views with sub-elements:
+* The ability to show views in new tabs
+* The ability to show windows like other views by including them in the app URL
+* Subviews in apps can have their own app URLs (*SubRouter*)
+* *Menu plugin* can change URL parameters
+* *User plugin*: the ability to add several pages accessible for non-authorized users
+* *Locale plugin*: additional setting for setting Webix locales
+* *Locale plugin*: the ability to split localization and load parts on demand
+* *Locale plugin*: the ability to configure Polyglot
+* *Locale plugin*: the ability to disable locale loading from jet-locales
+* *UrlRouter* shares the same settings with *HashRouter*
+* Webix Jet supports IE11+
+* *HashRouter* works more stable during in-browser navigation
+* The ability to use Webix Jet without Webpack
+* The ability to import Webix code as a module
 
-	There were 2 major issues in the previous solution
+### Changes in API and Inner Logic
 
-	a)
-	rendering url was not calculated for top level views
-	it was expected that for top level views user will call app.refresh
-	but real usage is different
-
-	b)
-	The subviews were not destroyed but recreated during refresh.
-	As a result, old subviews were kept in memory and complex side-effects were possible.
-
-	As part of update, the app.refresh logic changed as well, now it triggers refresh
-	of the top view instead of using its own custom logic.
-
-- *app.refresh* works when an app is inside a Webix Jet view
-
-- [update] order of destroy and init events
-
-	Update changes the order of events.
-	Now, when view A replaces view B, events will go like next
-
-	- B.destroy()
-	- A.init()
-
-	To do so, we remove direct destructor() calls from the rendering callback
-	and place the same call just after rendering new UI
-	( after this point we don't need old view anymore )
-
-### Fixes
-
-- destroy sub-app when root view of sub app is destroyed
+* [getUrl()](part-ii-webix-jet-in-details/jetview-api.md#this-geturl) and [getUrlString()](part-ii-webix-jet-in-details/jetview-api.md#this-geturlstring) for [app](part-ii-webix-jet-in-details/jetapp-api.md#app-geturl) and view
+* *removeView()* of Webix widgets triggers *destroy()* of the Jet views inside them
+* *getSubView()* and *contains()* can be called for JetApp
+* The **refresh()** method for app and view returns a promise
+* *view.refresh()* works for views with sub-elements
+* *app.refresh()* works when an app is inside a Webix Jet view
+* *app.refresh()* triggers refresh of the top view instead of using its own custom logic
+* The order of destroy and init events: first, the old view is destroyed, then the new view is initialized
 
 ## Version 1.6 - June 26, 2018
 

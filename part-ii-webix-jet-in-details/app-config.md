@@ -1,13 +1,15 @@
 # App Config
 
-An app module is created as a new instance of the JetApp class. In this file, you will also typically include:
+An app module can be created as a new instance of the JetApp class or as an instance of a child class.
+
+In the app file, you will also typically include:
 
 * stylesheets \(any CSS or LESS\)
 * custom widgets
 * app-level plugins
 * app-level Webix settings
 
-This is how you can include a stylesheet. You can include several stylesheets, and when the app will be built, they all will be compiled into _app.css_ that you can link to your _index.html_ page and that will be put in _codebase_ when you build the production files.
+You can include several stylesheets, and when the app will be built, they all will be compiled into _app.css_ that you can link to your _index.html_ page and that will be put in _codebase_ when you build the production files.
 
 ```javascript
 //app.js

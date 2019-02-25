@@ -9,17 +9,24 @@ For complex cases, when you want to create a widget with multiple layouts, dynam
 Create a Jet app and convert it into a new widget with **webix.protoUI\(\)** with **webix.ui.jetapp** as the base:
 
 ```javascript
-// sources/newwidgetapp.js
-import {JetApp, routers} from "webix-jet";
+// sources/newwidget.js
+import {JetApp} from "webix-jet";
 export default class NewWidgetApp extends JetApp {
-    //app config
     constructor(){
-        super({
-            ...
-            router:EmptyRouter
-        });
+        const defaults = {
+            id		: APPNAME,
+            version	: VERSION,
+			debug	: !PRODUCTION,
+			router	: EmptyRouter,
+            start	: "/top/start"
+        };
+        super({ ...defaults, ...config });
     }
 }
+
+// this!
+if (!BUILD_AS_MODULE){
+    webix.ready(() => new MyApp().render() );
 
 webix.protoUI({
     name:"new-widget",
