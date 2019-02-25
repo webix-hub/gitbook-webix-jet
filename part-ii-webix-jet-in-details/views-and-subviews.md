@@ -481,7 +481,7 @@ export default class TopView extends JetView {
 }
 ```
 
-Subviews can also be included statically with the **$subview** keyword that points either to a class or file name:
+Subviews can also be included statically with the **$subview** keyword that points a class:
 
 ```javascript
 import Menu from "views/menu";
@@ -490,15 +490,13 @@ export default class TopView extends JetView {
         return {
             rows:[
                 { view:"button" },
-                { $subview:Menu },
-                //or
-                { $subview:"menu" }
+                { $subview:Menu }
             ]
         };
     }
 }
 ```
-
+<!-- 
 **$subview** can also point to a hierarchy of views:
 
 ```javascript
@@ -512,9 +510,9 @@ export default class TopView extends JetView {
         };
     }
 }
-```
+``` -->
 
-1. Subviews which are resolved based on the URL segments are called **dynamic**. To create them, you need to put a placeholder into the UI with the help of **$subview:true**:
+2\. Subviews which are resolved based on the URL segments are called **dynamic**. To create them, you need to put a placeholder into the UI with the help of **$subview:true**:
 
 ```javascript
 // views/top.js
@@ -524,22 +522,11 @@ export default class TopView extends JetView {
 ]}
 ```
 
-For example, here are three views created in different ways:
+For example, here are two views created in a different ways:
 
-* a class view
+- a simple object view that will be the parent
 
-```javascript
-// views/myview.js
-import {JetView} from "webix-jet";
-
-export default class MyView extends JetView {
-    config() => { template:"MyView text" };
-}
-```
-
-* a simple view object
-
-```javascript
+```js
 // views/details.js
 export default Details = { 
     cols: [
@@ -549,19 +536,27 @@ export default Details = {
 }
 ```
 
-* a view returned by a factory
+- a class view that will be the subview
 
 ```javascript
-// views/form.js
-export default Form = () => {
-    view:"form", elements:[
-        { view:"text", name:"email", required:true, label:"Email" },
-        { view:"button", value:"save" }
-    ]
+// views/myview.js
+import {JetView} from "webix-jet";
+export default class MyView extends JetView {
+    config(){
+		return { template:"MyView text" };
+	}
 }
 ```
 
-Let's group them into a bigger view:
+To combine them, the app URL must be *"/details/myview"*.
+
+<!--to be moved to big app development (probably)
+
+$subview:"someview/probablyseveral" is used for creating nodes at which the app has branches and the common app URL is no longer applicable
+
+a subview (and its subviews) created this way do not know anything about url changes of the parent and hence do not react with the urlChange method
+
+this feature is useful for complex apps the parts of which have complex structures of their own and work independently.
 
 ```javascript
 // views/bigview.js
@@ -570,24 +565,11 @@ import myview from "views/myview";
 export default BigView = {
     rows:[
         myview,
-        { $subview:"/details/form" }
+        { $subview:"/details/myview" }
     ]
 }
 ```
-
-Mind that all these views could be put in any order you want and it doesn't depend whether they are classes or objects, e.g.:
-
-```javascript
-// views/bigview.js
-import details from "views/details";
-
-export default BigView = {
-    rows:[
-        details,
-        { $subview:"/myview/form" }
-    ]
-}
-```
+-->
 
 #### View Inclusion into Popups and Windows
 
