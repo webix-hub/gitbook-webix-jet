@@ -409,8 +409,8 @@ Apart from the session model, the plugin configuration can include other setting
 * **afterLogin** \(string\) is the URL shown after logging in, by default taken from *app.config.start*;
 * **afterLogout** \(string\) is the URL shown after logging out, _"/login"_ by default;
 * **user** (object) includes some default user credentials;
-* **ping** \(number\) is the time interval for checking the current user status, 5000 ms by default;
-* **public** (function) allows adding pages accessible by unauthorized users.
+* **ping** \(number\) is the time interval for checking the current user status, 30000 ms by default;
+* **public** (function) allows adding [pages accessible by unauthorized users](#adding-public-pages).
 
 ```js
 app.use(plugins.User, {
@@ -504,7 +504,7 @@ app.use(plugins.User, {
 });
 ```
 
-#### Login with an external OAuth service \( Google, GitHub, etc. \)
+#### Login with an external OAuth service \(Google, GitHub, etc.\)
 
 [A demo of login with passport and Google OAuth2](https://github.com/webix-hub/jet-start/tree/node-passport)
 
