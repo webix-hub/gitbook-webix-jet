@@ -9,10 +9,10 @@
 * Several same-level subviews can have their [own app URLs](part-ii-webix-jet-in-details/views-and-subviews.md#3-several-dynamic-subviews) and work independently of each other
 * *Menu plugin* can change [URL parameters](part-ii-webix-jet-in-details/plugins.md#using-the-plugin-to-change-url-parameters)
 * *User plugin*: the ability to [add several pages accessible for non-authorized users](part-ii-webix-jet-in-details/plugins.md#adding-public-pages)
-* *Locale plugin*: additional setting for setting Webix locales
-* *Locale plugin*: the ability to split localization and load parts on demand
+* *Locale plugin*: additional configuration property for [setting Webix locales](part-ii-webix-jet-in-details/plugins.md#combining-with-webix-locales)
+* *Locale plugin*: the ability to [split localization and load parts on demand](part-ii-webix-jet-in-details/plugins.md#splitting-localization)
 * *Locale plugin*: the ability to configure Polyglot
-* *Locale plugin*: the ability to disable locale loading from jet-locales
+* *Locale plugin*: the ability to [disable locale loading from jet-locales](part-ii-webix-jet-in-details/plugins.md#path-for-the-locale-plugin)
 * *UrlRouter* shares the same settings with *HashRouter*
 * Webix Jet supports IE11+
 * *HashRouter* works more stable during in-browser navigation

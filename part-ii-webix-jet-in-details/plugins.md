@@ -642,7 +642,7 @@ The default locale is English. You can change it while enabling the plugin:
 
 ```javascript
 // app.js
-app.use(plugins.Locale,{lang:"es"});
+app.use(plugins.Locale,{ lang:"es" });
 ```
 
 #### Applying the Locale
@@ -766,6 +766,37 @@ You can also set **path** to a subfolder \(subpath\) inside the _jet-locale_ fol
 // app.js
 ...
 app.use(plugins.Locale, { path:"some" });
+```
+
+You can also disable locale loading from *jet-locales* using the same setting:
+
+```js
+app.use(plugins.Locale, { path:false });
+```
+
+#### Combining with Webix Locales
+
+The Locale plugin has the additional setting for using Webix locales alongside with the Jet app locale.
+
+```js
+app.use(plugins.Locale, {
+	webix:{
+		en:"en-US",
+		// ...other locales
+	}
+});
+// calls webix.i18n.setLocale("en-US")
+```
+
+#### Splitting Localization
+
+If a lot of text in your app needs to be translated, you can split localizations and load them when they are needed. The source of a locale can be inline or can come as a result of an AJAX request, e.g.:
+
+```js
+webix.ajax("/server/en/forms").then(data => {
+    data = data.json();
+    this.app.getService("locale").setLangData("en", data);
+});
 ```
 
 ## 2. Custom Plugins
