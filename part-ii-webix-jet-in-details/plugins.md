@@ -493,7 +493,7 @@ The **getStatus\(\)** method returns the current status of the user. It can rece
 
 The **User** plugin checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the plugin will check the status and warn the user if it has been changed.
 
-##### Adding Public Pages
+<h5 id="adding-public-pages">Adding Public Pages</h5>
 
 By default, unauthorized users can see only the "login" page. You can add other pages that all users are allowed to access. Use the **public** setting of the plugin configuration object. **public** must be a function that returns *true* for public pages and *false* for the rest:
 
