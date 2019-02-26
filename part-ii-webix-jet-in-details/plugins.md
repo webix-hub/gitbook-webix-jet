@@ -790,7 +790,7 @@ app.use(plugins.Locale, {
 
 #### Splitting Localization
 
-If a lot of text in your app needs to be translated, you can split localizations and load them when they are needed. The source of a locale can be inline or can come as a result of an AJAX request, e.g.:
+If a lot of text in your app needs to be translated, you can split localizations and load them when they are needed. The source of a locale can be anything, e.g. inline or a result of an AJAX request:
 
 ```js
 webix.ajax("/server/en/forms").then(data => {
