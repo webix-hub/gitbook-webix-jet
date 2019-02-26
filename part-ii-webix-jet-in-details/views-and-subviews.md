@@ -465,7 +465,9 @@ If you are not sure which one to use, use classes. A class with the [config\(\)]
 
 You can include views into each other. Views included into other views are called **subviews**, and they can be either static or dynamic.
 
-**1. Static subviews** are imported and placed into views directly.
+#### 1. Static subviews
+
+Static subviews are imported and placed into views directly.
 
 ```javascript
 import Menu from "views/menu";
@@ -496,84 +498,152 @@ export default class TopView extends JetView {
     }
 }
 ```
-<!-- 
-**$subview** can also point to a hierarchy of views:
 
-```javascript
-export default class TopView extends JetView {
-    config(){
-        return {
-            rows:[
-                { view:"button" },
-                { $subview:"menu/main" }
-            ]
-        };
-    }
-}
-``` -->
+You can include any number of static subviews.
 
-2\. Subviews which are resolved based on the URL segments are called **dynamic**. To create them, you need to put a placeholder into the UI with the help of **$subview:true**:
+#### 2. Dynamic Subviews
+
+Subviews which are resolved based on the URL segments are called **dynamic**. To create them, you need to put a placeholder into the UI with the help of **$subview:true**:
 
 ```javascript
 // views/top.js
-{ cols:[
-   { view:"menu" },
-   { $subview:true }
-]}
+{
+	cols:[
+		{ view:"menu" },
+		{ $subview:true }
+	]
+}
 ```
 
 For example, here are two views created in a different ways:
 
-- a simple object view that will be the parent
+- a class view that will be the parent
 
 ```js
 // views/details.js
-export default Details = { 
-    cols: [
-        { template:"Details text" },
-        { $subview:true } 
-    ]    
-}
-```
-
-- a class view that will be the subview
-
-```javascript
-// views/myview.js
 import {JetView} from "webix-jet";
-export default class MyView extends JetView {
-    config(){
-		return { template:"MyView text" };
+export default class DetailsView extends JetView {
+   	config(){
+		return {
+			rows: [
+				{ template:"Details", type:"header" },
+				{ $subview:true } 
+			]    
+		};
 	}
 }
 ```
 
-To combine them, the app URL must be *"/details/myview"*.
+- an object view that will be the subview
 
-<!--to be moved to big app development (probably)
+```javascript
+// views/myview.js
+export default MyView = {
+    template:"MyView text"
+}
+```
 
-$subview:"someview/probablyseveral" is used for creating nodes at which the app has branches and the common app URL is no longer applicable
+To combine them, the app URL must be *"/details/myview"*, e.g. you can set the start URL in the app config to combine the views from the start:
 
-a subview (and its subviews) created this way do not know anything about url changes of the parent and hence do not react with the urlChange method
+```js
+// myapp.js
+import "./styles/app.css";
+import { JetApp } from "webix-jet";
 
-this feature is useful for complex apps the parts of which have complex structures of their own and work independently.
+export default class MyApp extends JetApp{
+    constructor(config){
+        const defaults = {
+            start : "/details/myview" // !
+        };
+        super({ ...defaults, ...config });
+    }
+}
+
+webix.ready(() => new MyApp().render() );
+```
+
+#### 3. Several dynamic subviews
+
+Views can have several dynamic subviews. The corresponding URL segments are not shown in the address bar and are not included into the app URL. However, these subviews have app URLs of their own.
+
+This feature is useful for big apps, the parts of which have complex structures of their own and work independently. E.g. a typical case is a file manager with two file lists that can be navigated independently. The view with several dynamic views is a "node", at which the app URL forks and the URL "branches" sprout:
+
+```
+            top/bigview
+             |       |
+/details/myview     /details/myview
+```
+
+The syntax in this case can be of two types:
+
+1\. **$subview:"URL segment(s)"**
 
 ```javascript
 // views/bigview.js
-import myview from "views/myview";
-
-export default BigView = {
-    rows:[
-        myview,
-        { $subview:"/details/myview" }
-    ]
+import {JetView} from "webix-jet";
+export default class BigView extends JetView {
+   	config(){
+		return {
+			cols:[
+				{ $subview:"details" },			// one view
+				{ $subview:"details/myview" }	// a view and its subview
+			]
+		};
+	}
 }
 ```
--->
+
+2\. **$subview:true, name:"subviewName" (named dynamic subviews)**
+
+```js
+// views/bigview.js
+import {JetView} from "webix-jet";
+export default class BigView extends JetView {
+   	config(){
+		return {
+			cols: [
+				{ $subview:true, name:"left" },
+				{ $subview:true, name:"right" }
+			]     
+		};
+	}
+}
+```
+
+To show such dynamic subviews, call **this.show()** with the second parameter - the name of the subview as the target:
+
+```js
+// views/bigview.js
+init(){
+	this.show("details/myview", { target:"left" });
+	this.show("details/myview", { target:"right" });
+}
+```
+
+A subview created in this way does not "know" anything about the URL changes of the parent and hence does not react to them. This means that the **urlChange()** of the subview is called only for URL changes of the its own branch of the app URL.
+
+```js
+// views/details.js
+import {JetView} from "webix-jet";
+export default class DetailsView extends JetView {
+   	config(){
+		return {
+			rows: [
+				{ template:"Details", type:"header" },
+				{ $subview:true } 
+			]    
+		};
+	}
+	urlChange(){
+		const url = this.getUrlString();
+		// "details/myview"
+	}
+}
+```
 
 #### View Inclusion into Popups and Windows
 
-You can also include a view into a **popup or a window**:
+You can include a view into a **popup or a window**:
 
 ```javascript
 // views/some.js
@@ -581,7 +651,7 @@ import WindowView from "views/window";
 ...
 init(){
     this.win1 = this.ui(WindowView);
-    //this.win1.show();
+    //this.win1.showWin();
 }
 ```
 
@@ -590,12 +660,11 @@ where _WindowView_ is a view class like the following:
 ```javascript
 // views/window.js
 import {JetView} from "webix-jet";
-
 export default class WindowView extends JetView{
     config(){
-        return { view:"window", body:{} };
+        return { view:"window", body:{/* ...window content */} };
     }
-    show(target){
+    showWin(target){
         this.getRoot().show(target);
     }
 }
@@ -641,7 +710,7 @@ export var app1 = new JetApp({
 }); //no render!
 ```
 
-Note that this app module isn't rendered. The second important thing is the choice of the router. As this is the inner level, it can't have URL of its own. That's why _EmptyRouter_ is chosen. [Go to the "Routers" section](routers.md) for details.
+Note that this app module isn't rendered. The second important thing is the choice of the router. As this is the inner level, it can't have a URL of its own. That's why _EmptyRouter_ is chosen. [Go to the "Routers" section](routers.md) for details.
 
 Next, the app module is included into another view:
 
