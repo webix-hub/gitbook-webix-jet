@@ -61,15 +61,14 @@ Subview URLs are taken from menu option IDs or from values if there are no IDs. 
 ```javascript
 // views/top.js
 import {JetView} from "webix-jet";
-
 export default class TopView extends JetView {
     config(){
         return {
             rows:[
                 {
                     view:"menu", localId:"menu", data:[
-                        { id:"details", value:"Details"},  //show "/top/demo/details"
-                        { id:"dash", value:"Dash" }        //show "/top/dash"
+                        { id:"details", value:"Details" },  //show "/top/demo/details"
+                        { id:"dash", value:"Dash" }         //show "/top/dash"
                     ]
                 },
                 { $subview:true }
@@ -89,6 +88,53 @@ export default class TopView extends JetView {
 ```
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-start/blob/master/sources/views/top.js)
+
+#### Using the Plugin to Change URL Parameters
+
+You can set the Menu plugin in the way that it does not go to a different path, but changes a certain URL parameter. Use the **param** config setting for this. **param** accepts a string with the parameter name, e.g.:
+
+```js
+// views/top.js
+import {JetView} from "webix-jet";
+export default class TopView extends JetView {
+    config(){
+        return {
+            rows:[
+                {
+                    view:"list", localId:"users", data:[
+                        { id:"1", value:"Jason Daniels" },  //show "/top?user=1"
+                        { id:"2", value:"Kittie Stark" }    //show "/top?user=2"
+                    ]
+                },
+                { /* ...UI */ }
+            ]
+
+        };
+    }
+    init(){
+		this.use(plugins.Menu, {
+			id:"users",
+			param:"user"
+		});
+	}
+}
+```
+
+If you use the Menu plugin with param setting together with the [UrlParam](#urlparam-plugin), the parameter will be displayed in the URL as a URL segment:
+
+```js
+// views/top.js
+init(){
+	this.use(plugins.UrlParam, ["user"]);
+	this.use(plugins.Menu, {
+		id:"users",
+		param:"user"
+	});
+}
+
+//show "/top/1"
+//show "/top/2"
+```
 
 ### UnloadGuard Plugin
 
@@ -217,12 +263,12 @@ this.use(plugins.Status, {
 
 ### UrlParam Plugin
 
-The plugin allows using the URL fragments as parameters. It makes them accessible via [view.getParam\(\)](jetview-api.md#this-getparam) and correctly weeds them out of the URL.
+The plugin allows treating URL segments as parameters. It makes them accessible via [view.getParam\(\)](jetview-api.md#this-getparam) and correctly weeds them out of the URL.
 
 **UrlParam** is enabled with [this.use\(\)](jetview-api.md#this-use) with two parameters:
 
 * the plugin name;
-* an array with parameter\(s\).
+* an array with parameter name\(s\).
 
 Let's consider a simple example with a parent view **some** and its child **details**:
 
@@ -244,23 +290,22 @@ const details = { template:"Details" };
 export default details;
 ```
 
-When loading the URL _"/some/23/details"_, you need to treat _23_ as a parameter of **some**. Enable the plugin the [init\(\)](views-and-subviews.md#init-view-url) method of **some**:
+When loading the URL _"/some/23/details"_, you need to treat the segment after **some** (_23_) as a parameter of **some**. Enable the plugin in the [init\(\)](views-and-subviews.md#init-view-url) method of **some**:
 
 ```javascript
 // views/some.js
 import {JetView,plugins} from "webix-jet";
-
 export default class SomeView extends JetView{
-   ...
-   init(){
-       this.use(plugins.UrlParam, ["id"])
-       // now when loading /some/23/details
-       var id = this.getParam("id");//id === 23
-   }
+   	...
+   	init(){
+		this.use(plugins.UrlParam, ["id"])
+		// now when loading /some/23/details
+		var id = this.getParam("id"); //id === 23
+   	}
 }
 ```
 
-**details** will be rendered inside **some**, and the fragment _23_ will be displayed in the address bar, but will not be resolved.
+**details** will be rendered inside **some**, and the fragment _23_ will be displayed in the address bar, but will not be resolved as a view module.
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
 
