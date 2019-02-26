@@ -324,26 +324,33 @@ This section contains guidelines for using the plugin with a custom script.
 * [Demo of authorization, custom PHP script](https://github.com/webix-hub/jet-start/tree/php)
 * [Webix Jet with NodeJS Express](https://github.com/webix-hub/jet-start/tree/node-express)
 
-**Enabling the Plugin**
+##### Enabling the Plugin
 
 To enable the plugin, call [app.use\(\)](jetapp-api.md#app-use) with two parameters:
 
 * the plugin name,
 * the plugin configuration.
 
-The plugin configuration must contain at least the **session** model:
+##### The Session Model
 
-```javascript
-// myapp.js
-import {JetApp, plugins} from "webix-jet";
-import session from "models/session";
-...
-app.use(plugins.User, { model: session });
-```
+It is expected that the User plugin will be used with a specific session model configured by the developer according to the requirements needed for correct authorization.
 
-**The Session Model**
+The session model should contain three main methods:
 
-The plugin uses a **session** model, [check out an example](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js). The model contains requests to _php_ scripts for logging in, getting the current status, and logging out. The _session_ model includes the following functions:
+- login, 
+- logout, 
+- status.
+
+Each method should return a promise.
+
+Check out basic examples:
+
+- [PHP](https://github.com/webix-hub/jet-start/blob/php/sources/models/session.js).
+- [NodeJS Express](https://github.com/webix-hub/jet-start/blob/node-express/client/models/session.js)
+
+Both examples are nearly identical, all requests are implemented with **webix.ajax()**.
+
+E.g. the PHP session model contains requests to _php_ scripts for logging in, getting the current status, and logging out.
 
 * **status\(\)** returns the status of the current user
 
@@ -355,9 +362,14 @@ function status(){
 }
 ```
 
-* **login\(\)** logs the user in, returns an object with his/her access right settings, a promise of this object or _null_ if something went wrong. The parameters are:
-  * _user_ - username;
-  * _pass_ - password.
+* **login\(\)** logs the user in, returns an object with his/her access right settings, a promise of this object or _null_ if something went wrong.
+
+The parameters are:
+
+* _user_ - username;
+* _pass_ - password.
+
+**login()** must return a promise of user info.
 
 ```javascript
 // models/session.js
@@ -378,39 +390,68 @@ function logout(){
 }
 ```
 
-**Logging In**
+The session model is declared in the plugin configuration:
+
+```javascript
+// myapp.js
+import {JetApp, plugins} from "webix-jet";
+import session from "models/session";
+...
+app.use(plugins.User, { model: session });
+```
+
+##### Plugin Configuration
+
+Apart from the session model, the plugin configuration can include other settings:
+
+* **login** \(string\) is the URL of the login form, _"/login"_ by default;
+* **logout** \(string\) is the URL for logging out, _"/logout"_ by default;
+* **afterLogin** \(string\) is the URL shown after logging in, by default taken from *app.config.start*;
+* **afterLogout** \(string\) is the URL shown after logging out, _"/login"_ by default;
+* **user** (object) includes some default user credentials;
+* **ping** \(number\) is the time interval for checking the current user status, 5000 ms by default;
+* **public** (function) allows adding pages accessible by unauthorized users.
+
+```js
+app.use(plugins.User, {
+    model: session,
+    ping: 15000,
+    afterLogin: "someStartPage",
+    user: { /* ... */ }
+});
+```
+
+At this point, the User plugin will automatically redirect the user to the login page using the [built-in access guard](../part-iii-practical-tasks/jet-recipes#access-guard-app-level) until authorization succeeds.
+
+##### Logging In
 
 This is an example of a form for logging in:
 
 ```javascript
 // views/login.js
 import {JetView} from "webix-jet";
-
 export default class LoginView extends JetView{
-config(){
-    return {
-        view:"form",
-        rows:[
-            { view:"text", name:"login", label:"User Name", labelPosition:"top" },
-            { view:"text", type:"password", name:"pass", label:"Password", labelPosition:"top" },
-            { view:"button", value:"Login", click:()=>{
-                this.do_login(); //do_login() is implemented as a class method below
-            }, hotkey:"enter" }
-        ],
-        rules:{
-            login:webix.rules.isNotEmpty,
-            pass:webix.rules.isNotEmpty
-        }
-    };
+	config(){
+		return {
+			view:"form",
+			rows:[
+				{ view:"text", name:"login", label:"User Name" },
+				{ view:"text", type:"password", name:"pass", label:"Password" },
+				{ view:"button", value:"Login", click:() => {
+					this.do_login();
+					//do_login() calls user.login() and is implemented as a class method below
+				}, hotkey:"enter" }
+			],
+			rules:{
+				login:webix.rules.isNotEmpty,
+				pass:webix.rules.isNotEmpty
+			}
+		};
+	}
 }
 ```
 
-To implement logging in, you can use the **login\(\)** method of the _user_ service that is launched by the _User_ plugin. **login\(\)** must receive two parameters:
-
-* the username
-* the password
-
-**login\(\)** verifies them and if everything is fine, shows the _afterLogin_ page \(the start page by default\). Otherwise, it shows an error message.
+To implement logging in, you should use the **login\(\)** method of the _User_ plugin. Once the **login()** method is called and the response with some user credentials (JSON object with a name, for example) is received, the User plugin will automatically redirect the user to the specified start page and will consider the server response as user credentials.
 
 Let's define the **do\_login\(\)** method of _LoginView_ that will call **login\(\)**:
 
@@ -426,7 +467,7 @@ export default class LoginView extends JetView{
 
         if (form.validate()){
             const data = form.getValues();
-            user.login(data.login, data.pass).catch(function(){
+            user.login(data.login, data.pass).catch(function(xhr){
                 //error handler
             });
         }
@@ -440,27 +481,28 @@ export default class LoginView extends JetView{
 * The [complete _login.js_ file](https://github.com/webix-hub/jet-start/blob/php/sources/views/login.js);
 * The [demo on logging in with custom scripts](https://github.com/webix-hub/jet-start/tree/php).
 
-**Logging Out**
+##### Logging Out
 
 The **logout\(\)** method ends the current session and shows an _afterLogout_ page \(the login form by default\).
 
-**Getting User Info & Checking the User Status**
+##### Getting User Info & Checking the User Status
 
 The **getUser\(\)** method returns the data of the currently logged in user.
 
 The **getStatus\(\)** method returns the current status of the user. It can receive an optional Boolean parameter **server**: if it is set to _true_, the method will send an AJAX request to check the status.
 
-The **User** service checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the service will check the status and warn the user if it has been changed.
+The **User** plugin checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the plugin will check the status and warn the user if it has been changed.
 
-**Plugin Configuration**
+##### Adding Public Pages
 
-Apart from the session model, the plugin configuration can include other settings:
+By default, unauthorized users can see only the "login" page. You can add other pages that all users are allowed to access. Use the **public** setting of the plugin configuration object. **public** must be a function that returns *true* for public pages and *false* for the rest:
 
-* **login** \(string\) is the URL of the login form, _"/login"_ by default;
-* **logout** \(string\) is the URL for logging out, _"/logout"_ by default;
-* **afterLogin** \(string\) is the URL shown after logging in, the _start_ URL by default;
-* **afterLogout** \(string\) is the URL shown after logging out, _"/login"_ by default;
-* **ping** \(number\) is the time interval for checking the current user status, 5 minutes by default;
+```js
+app.use(plugins.User, {
+	model: session,
+	public: path => path.indexOf("top/data") > -1
+});
+```
 
 #### Login with an external OAuth service \( Google, GitHub, etc. \)
 

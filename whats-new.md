@@ -8,7 +8,7 @@
 * The ability to show windows like other views by [including them in the app URL](part-ii-webix-jet-in-details/popups-and-windows.md#including-windows-in-the-app-url)
 * Several same-level subviews can have their [own app URLs](part-ii-webix-jet-in-details/views-and-subviews.md#3-several-dynamic-subviews) and work independently of each other
 * *Menu plugin* can change [URL parameters](part-ii-webix-jet-in-details/plugins.md#using-the-plugin-to-change-url-parameters)
-* *User plugin*: the ability to add several pages accessible for non-authorized users
+* *User plugin*: the ability to [add several pages accessible for non-authorized users](part-ii-webix-jet-in-details/plugins.md#adding-public-pages)
 * *Locale plugin*: additional setting for setting Webix locales
 * *Locale plugin*: the ability to split localization and load parts on demand
 * *Locale plugin*: the ability to configure Polyglot
