@@ -160,7 +160,9 @@ init(){
 * the plugin name
 * the function that will define the behavior of the plugin
 
-The _UnloadGuard_ plugin can be used for form validation, for example. Let's have a look at a form with one input field that must not be empty:
+The _UnloadGuard_ plugin expects a function that returns *true* if the access must be granted and *false* if not. The function can also return a promise, resolved and rejected correspondingly.
+
+_UnloadGuard_ can be used for form validation, for example. Let's have a look at a form with one input field that must not be empty:
 
 ```javascript
 // views/form.js
@@ -178,7 +180,7 @@ export default class FormView extends JetView {
 }
 ```
 
-Let's enable the _UnloadGuard_ plugin and show a confirmation window if the input is invalid. Webix confirmation windows and other modal boxes return promises:
+Let's enable _UnloadGuard_ and show a confirmation window if the input is invalid. Webix confirmation windows and other modal boxes [return promises](https://docs.webix.com/desktop__message_boxes.html#modalmessageboxes).
 
 ```javascript
 // views/form.js
@@ -195,7 +197,7 @@ init(){
 }
 ```
 
-If the form input is not valid, the function returns a promise with a dialogue window. Depending on the answer, the promise either resolves and _UnloadGuard_ lets the user go to the next view, or it rejects. No pasaran.
+If the form input is not valid, the function returns a promise. Depending on the answer, the promise either resolves and _UnloadGuard_ lets the user go to the next view, or it rejects. No pasaran.
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/plugins-unload.js)
 

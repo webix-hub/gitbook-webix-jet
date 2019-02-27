@@ -4,7 +4,7 @@
 
 ### New Features
 
-* The ability to show views in new tabs
+* The ability to [show views in new windows](part-ii-webix-jet-in-details/jetview-api.md#optional-target-parameter)
 * The ability to show windows like other views by [including them in the app URL](part-ii-webix-jet-in-details/popups-and-windows.md#including-windows-in-the-app-url)
 * Several same-level subviews can have their [own app URLs](part-ii-webix-jet-in-details/views-and-subviews.md#3-several-dynamic-subviews) and work independently of each other
 * *Menu plugin* can change [URL parameters](part-ii-webix-jet-in-details/plugins.md#using-the-plugin-to-change-url-parameters)
@@ -22,9 +22,9 @@
 
 ### Changes in API and Inner Logic
 
-* [getUrl()](part-ii-webix-jet-in-details/jetview-api.md#this-geturl) and [getUrlString()](part-ii-webix-jet-in-details/jetview-api.md#this-geturlstring) for [app](part-ii-webix-jet-in-details/jetapp-api.md#app-geturl) and view
+* [*getUrl()*](part-ii-webix-jet-in-details/jetview-api.md#this-geturl) and [*getUrlString()*](part-ii-webix-jet-in-details/jetview-api.md#this-geturlstring) for [app](part-ii-webix-jet-in-details/jetapp-api.md#app-geturl) and view
 * *removeView()* of Webix widgets triggers *destroy()* of the Jet views inside them
-* *getSubView()* and *contains()* can be called for JetApp
+* [*getSubView()*](part-ii-webix-jet-in-details/jetapp-api.md#app-getsubview) and [*contains()*](part-ii-webix-jet-in-details/jetapp-api.md#app-contains) can be called for JetApp
 * The **refresh()** method for app and view returns a promise
 * *view.refresh()* works for views with sub-elements
 * *app.refresh()* works when an app is inside a Webix Jet view

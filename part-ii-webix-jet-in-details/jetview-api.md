@@ -4,29 +4,38 @@ The JetView class has the following methods:
 
 | Method | Use |
 | :--- | :--- |
-| getParam\(name, \[parent\]\) | returns the URL parameters |
+| contains() | returns *true* if the calling view contains SomeView |
+| getParam\(\) | returns the URL parameters |
 | getParentView\(\) | returns the parent view |
 | getRoot\(\) | returns the top Webix widget in the view |
-| getSubView\(name\) | returns a subview of the view |
-| getSubViewInfo\(name\) | returns the object with the info on the subview and a pointer to its parent |
+| getSubView\(\) | returns a subview of the view |
+| getSubViewInfo\(\) | returns the object with the info on the subview and a pointer to its parent |
 | getUrl\(\) | returns an array of the URL segments related to a view |
 | getUrlString() | returns the URL as a string	|
-| on\(app,"event:name",handler\) | attaches an event |
+| on\(\) | attaches an event |
 | refresh\(\) | repaints the view and its subviews |
-| setParam\(name, value\) | sets the URL parameters |
-| show\("path"\) | shows a view or a subview |
-| ui\(view\) | creates a popup or a window |
-| use\(plugin, config\) | enables a plugin |
-| $$\("controlID"\) | returns Webix widgets inside a view |
+| setParam\(\) | sets the URL parameters |
+| show\(\) | shows a view or a subview |
+| ui\(\) | creates a popup or a window |
+| use\(\) | enables a plugin |
+| $$\(\) | returns Webix widgets inside a view |
+
+## this.contains()
+
+The method checks if the calling Jet view contains the view from the parameter.
+
+**Parameters:** a Jet View.
+**Returns:** boolean.
 
 ## this.getParam\(\)
 
-Use **this.getParam\(\)** method to get the URL related data. **getParam\(\)** lets the API access the URL parameters \(variables\), including those of the parent view. This can be useful as views and subviews quite often share a common parameter.
+Use **this.getParam\(\)** method to get the URL parameters. **getParam\(\)** lets the API access the URL parameters \(variables\), including those of the parent view. This can be useful as views and subviews quite often share a common parameter.
 
-**getParam\(\)** takes two parameters:
-
+**Parameters:**
 * _name_ - \(mandatory, string\) the name of the parameter;
-* _parent_ - \(optional, Boolean\) _false_ by default; if _false_, it looks among those parameters that belong to the view that called the method; if _true_, it looks for parameters of the parent views.
+* _parent_ - \(optional, boolean\) _false_ by default; if _false_, it looks among those parameters that belong to the view that called the method; if _true_, it looks for parameters of the parent views.
+
+**Returns:** the parameter.
 
 For example, the URL is:
 
@@ -55,7 +64,13 @@ var id = this.getParam("id", true); //id == 12
 
 ## this.getParentView\(\)
 
-Use **this.getParentview\(\)** to get to the methods of the parent view. In this example, the child refers to its parent view with **this.getParentView\(\)** and calls its **getSelected\(\)** method:
+Use **this.getParentview\(\)** to get to the methods of the parent view.
+
+**Parameters:** none.
+
+**Returns:** a Jet view object.
+
+In this example, the child refers to its parent view with **this.getParentView\(\)** and calls its **getSelected\(\)** method:
 
 ```javascript
 // views/form.js
@@ -82,6 +97,10 @@ For more details, [read the "Referencing" section](referencing-views.md).
 
 Use **this.getRoot\(\)** to call methods of a Webix widget inside a Jet class view.
 
+**Parameters:** none.
+
+**Returns:** the top Webix view inside the calling Jet view. 
+
 ```javascript
 // views/form.js
 import {JetView} from "webix-jet";
@@ -105,39 +124,12 @@ For more details on referencing views, [read the "Referencing" section](referenc
 
 ## this.getSubView\(\)
 
-Use **this.getSubView\(\)** if you want to get to the methods of a subview. It looks for a subview by its name, which you will have to give to the subview. You can do it like this:
+Use **this.getSubView\(\)** if you want to get to the methods of a subview. It looks for a subview by its name, which you will have to give to the subview.
 
-```javascript
-// views/listedit.js
-import {JetView} from "webix-jet";
+**Parameters:**
+- *name* (string, optional) is the name of the subview
 
-export default class ListEditView extends JetView{
-    config(){
-        return {
-            cols:[
-                { $subview:"list", name:"list" },       //load "views/list"
-                { $subview:"form", name:"form" }        //load "views/form"
-            ]
-        }
-    }
-}
-```
-
-After you set the name to a subview, you can refer to it with **this.getSubView\(name\)** from the methods of the parent:
-
-```javascript
-// views/listedit.js
-import {JetView} from "webix-jet";
-
-export default class ListEditView extends JetView{
-    ...
-    ready(){
-        const list = this.getSubView("list").getRoot();
-        const form = this.getSubView("form").getRoot();
-        form.bind(list);
-    }
-}
-```
+**Returns:** a Jet view object.
 
 If you call **getSubView\(\)** without a parameter, it will return the view that is currently open as the subview of the calling view. In the example below, **OtherView** will be returned.
 
@@ -171,6 +163,29 @@ export default class TopView extends JetView {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
+If the calling view has several dynamic subviews, you can get to them by calling **getSubView()** with the name of the subview:
+
+```javascript
+// views/listedit.js
+import {JetView} from "webix-jet";
+
+export default class ListEditView extends JetView{
+    config(){
+        return {
+            cols:[
+                { $subview:"list", name:"list" },       //load "views/list"
+                { $subview:"form", name:"form" }        //load "views/form"
+            ]
+        }
+    }
+    ready(){
+        const list = this.getSubView("list").getRoot();
+        const form = this.getSubView("form").getRoot();
+        form.bind(list);
+    }
+}
+```
+
 For more details on referencing views, [read the "Referencing" section](referencing-views.md).
 
 ## this.getSubViewInfo\(\)
@@ -178,15 +193,23 @@ For more details on referencing views, [read the "Referencing" section](referenc
 This is the extended version of the [getSubView\(\)](https://webix.gitbook.io/webix-jet/~/edit/drafts/-LMb4Cn6Mp-grEk06Tyj/part-ii-webix-jet-in-details/jetview-api#this-getsubview) method. It returns the object with the info on the subview. The object contains 2 properties:
 
 1. **subview** which has
-
    1. **id** - the ID of the top Webix widget inside the subview, 
    2. **view** - the subview itself \(this is the return value of [getSubView\(\)](https://webix.gitbook.io/webix-jet/~/edit/drafts/-LMb4Cn6Mp-grEk06Tyj/part-ii-webix-jet-in-details/jetview-api#this-getsubview)\);
-
 2. **parent** which is the parent view of the subview.
 
 ## this.on\(\)
 
-Use **this.on\(\)** to attach events. This way of attaching an event is convenient, because it automatically detaches the event when the view that called it is destroyed. This helps to avoid memory leaks that may happen, especially in older browsers.
+Use **this.on\(\)** to attach event handlers.
+
+**Parameters:**
+- *obj* (object) is the app that includes the calling view or *webix*/Webix view or module that calls the event,
+- *name* (string) is the name of the event,
+- *code* (function) is the event handler.
+
+**Returns:**
+- *void* (if *obj* is the app) or the *id* of the event handler.
+
+This way of attaching an event handler is convenient, because it automatically detaches the event handler when the view that called it is destroyed. This helps to avoid memory leaks that may happen, especially in older browsers.
 
 ```javascript
 // views/form.js
@@ -205,11 +228,17 @@ For more details on attaching and calling events, read the ["View Communication"
 
 ## this.refresh\(\)
 
-Use the **refresh\(\)** method to repaint the view and its subviews after some changes in the UI:
+Use the **refresh\(\)** method to repaint the view and its subviews after some changes in the UI.
+
+**Parameters:** none.
+
+**Returns:** a promise.
 
 ```javascript
 // views/top.js
 this.refresh();
+
+this.refresh().then(() => { /* ...do something */ });
 ```
 
 When the method is called, the following happens:
@@ -219,9 +248,9 @@ When the method is called, the following happens:
 * **init** handlers of the view and its subviews are triggered,
 * subviews are recreated.
 
-{% hint style="warning" %}
+<!-- {% hint style="warning" %}
 **Important:** the **destroy\(\)** handler for the refreshed view is not called. That is why you need to provide safeguards in **init\(\)** to prevent double initialization.
-{% endhint %}
+{% endhint %} -->
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/refresh.js)
 
@@ -229,7 +258,7 @@ When the method is called, the following happens:
 
 Use **this.setParam\(\)** method to set the URL related data. You can use **setParam\(\)** to change a URL segment or a URL parameter.
 
-**setParam\(\)** has three parameters:
+**Parameters:**
 
 * the _name_ of the URL parameter,
 * the new _value_,
@@ -252,7 +281,7 @@ This method is used for in-app navigation. It loads view modules according to th
 - **path** (string, object) - the path to the module or a combination of parent-child modules with URL parameters or just URL parameters as an object,
 - **config** (object) - the configuration with the [**target** parameter](#optional-target-parameter).
 
-**Returns**: promise.
+**Returns**: a promise.
 
 ```javascript
 // views/toolbar.js
@@ -336,11 +365,12 @@ this.getSubView("right").show("small");
 
 _getSubView()_ returns a subview by the name passed as a parameter.
 
-<!-- 
-Showing a subview in a new tab
 
-this.show("data",{ target:"_some" });
- -->
+Showing a subview in a new window
+
+```js
+this.show("popup", { target:"_top" });
+```
 
 For more details on view navigation, [read the "Navigation" article](../part-i-basic-usage/in-app-navigation.md).
 

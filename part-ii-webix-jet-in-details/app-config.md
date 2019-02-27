@@ -253,7 +253,7 @@ const defaults = {
 
 ## Beautifying the URL
 
-If you do not want to display some parts of the app URL, you can hide them with the help of **routes** in the app configuration. For instance, you might want to display only the names of subviews in the URL:
+If you do not want to display some paths, you can replace them with shorter URLs with the help of **routes** in the app configuration. For instance, you might want to display only the names of subviews in the URL:
 
 ```javascript
 // myapp.js
@@ -283,6 +283,10 @@ if (!BUILD_AS_MODULE){
 ```
 
 Instead of a long URL with subdirectories and parent views, e.g. _"/top/area.left.form"_, the app URL will be displayed as _/form_.
+
+{% hint style="warning" %}
+Note that **routes** can be used to replaced the whole URL, not segments of the URL.
+{% endhint %}
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/routes.js)
 
