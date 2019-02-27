@@ -161,7 +161,11 @@ var app1 = new JetApp({
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/b686944b383745070fc977aa9123f01a36ce2b3c/sources/viewapp.js)
 
-## 5. Custom Routers
+## 5. Sub Router
+
+SubRouter is used for navigation in app modules that are included in other apps. It works for included apps by default and does not need initialization or anything else.
+
+## Custom Routers
 
 If these four routers aren't what you want, you can define your own.
 

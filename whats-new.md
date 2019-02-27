@@ -16,9 +16,9 @@
 * [*UrlRouter*](part-ii-webix-jet-in-details/routers.md#2-url-router) shares the same settings with [*HashRouter*](part-ii-webix-jet-in-details/routers.md#1-hash-router-default)
 * Webix Jet supports IE11+
 * *HashRouter* works more stable during in-browser navigation
-* *SubRouter* for sub-modules
-* The ability to use Webix Jet without Webpack
-* The ability to import Webix code as a module
+* New [*SubRouter*](part-ii-webix-jet-in-details/routers.md#5-sub-router) that enables navigation in sub-modules
+* The ability to use Webix Jet [without Webpack](part-iii-practical-tasks/using-webix-jet-without-webpack.md)
+* The ability to [import Webix code as a module](part-iii-practical-tasks/importing-webix-as-module.md)
 
 ### Changes in API and Inner Logic
 

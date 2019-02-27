@@ -31,6 +31,8 @@
   * [Using TypeScript](part-iii-practical-tasks/using-typescript.md)
   * [WJet Utility for Faster Prototyping](part-iii-practical-tasks/wjet-utility-for-faster-prototyping.md)
   * [Configuring Webpack](part-iii-practical-tasks/webpack-configuration.md)
+  * [Importing Webix as Module](part-iii-practical-tasks/importing-webix-as-module.md)
+  * [Using Webix Jet without Webpack](part-iii-practical-tasks/using-webix-jet-without-webpack.md)
   * [Changing the Port](part-iii-practical-tasks/working-with-package.json.md)
 * [Quick Development Guidelines](quick-development-guidelines.md)
 * [What's New](whats-new.md)

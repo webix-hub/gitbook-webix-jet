@@ -178,22 +178,19 @@ export default class FormView extends JetView {
 }
 ```
 
-Let's enable the _UnloadGuard_ plugin and show a confirmation window if the input is invalid:
+Let's enable the _UnloadGuard_ plugin and show a confirmation window if the input is invalid. Webix confirmation windows and other modal boxes return promises:
 
 ```javascript
 // views/form.js
 ...
 init(){
-    this.use(plugins.UnloadGuard, () => {
-        if (this.getRoot().validate())
-            return true;
-
-        return new Promise((res, rej) => {
-            webix.confirm({
-                text: "Are you sure?",
-                callback: a => a ? res() : rej()
-            });
-        });
+    this.use(plugins.UnloadGuard, () => { 
+		if (this.$$("form").validate())
+			return true;
+		return webix.confirm({
+			title:"Form is incomplete",
+			text: "Do you still want to leave?"
+		});
     });
 }
 ```
