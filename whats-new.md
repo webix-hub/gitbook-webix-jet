@@ -11,9 +11,9 @@
 * *User plugin*: the ability to [add several pages accessible for non-authorized users](part-ii-webix-jet-in-details/plugins.md#adding-public-pages)
 * *Locale plugin*: additional configuration property for [setting Webix locales](part-ii-webix-jet-in-details/plugins.md#combining-with-webix-locales)
 * *Locale plugin*: the ability to [split localization and load parts on demand](part-ii-webix-jet-in-details/plugins.md#splitting-localization)
-* *Locale plugin*: the ability to configure Polyglot
+* *Locale plugin*: the ability to [configure Polyglot](part-ii-webix-jet-in-details/plugins.md#configuring-polyglot)
 * *Locale plugin*: the ability to [disable locale loading from jet-locales](part-ii-webix-jet-in-details/plugins.md#path-for-the-locale-plugin)
-* *UrlRouter* shares the same settings with *HashRouter*
+* [*UrlRouter*](part-ii-webix-jet-in-details/routers.md#2-url-router) shares the same settings with [*HashRouter*](part-ii-webix-jet-in-details/routers.md#1-hash-router-default)
 * Webix Jet supports IE11+
 * *HashRouter* works more stable during in-browser navigation
 * *SubRouter* for sub-modules

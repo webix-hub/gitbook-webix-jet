@@ -44,6 +44,10 @@ If you set **routerPrefix** to an empty string, the app URL will look like this:
 https://myshop.com/#/sales/top
 ```
 
+### Other Settings
+
+There is one more setting that can be used to change the URL that is displayed in the address bar -- **routes**. For details, check the [app configuration chapter](app-config.md#beautifying-the-url).
+
 ## 2. URL Router
 
 If you choose UrlRouter, the app URL is displayed without a hashbang. There is a trick with this router: your server-side code should be compatible. You need to provide redirects to avoid error 404.
@@ -104,6 +108,10 @@ In your _index.html_ you should set the relative URL with the same prefix:
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/routers-url.js)
 
+### Other Settings
+
+There is one more setting that can be used to change the URL that is displayed in the address bar -- **routes**. For details, check the [app configuration chapter](app-config.md#beautifying-the-url).
+
 ## 3. Store Router
 
 With this guy, the app URL isn't displayed at all, but it is stored in the session storage. So no worries, you can still return to the previous and next views as if they are in the URL. This can be useful if you have a multilevel application \(apps are subviews of other apps\). The Store router is set for the enclosed apps because the address bar is already taken by the outer app. Suppose you have closed an app module with a deep level of subviews and expect to be in the same place of this app when you switch to it again. The Store router allows this.
@@ -160,10 +168,9 @@ If these four routers aren't what you want, you can define your own.
 A router must be a class with the following methods:
 
 * **constructor**\(callback, config\), where:
-  * _callback_ is a function called to set the correct URL,
-  * _config_ with the app configuration;
+	* _callback_ is a function called to set the correct URL,
+	* _config_ with the app configuration;
 * **set**\(path, config\), where:
-  * _path_ is the app URL,
-  * _config_ with the **silent** flag, if it is set, the callback is not called;
+	* _path_ is the app URL,
+	* _config_ with the **silent** flag, if it is set, the callback is not called;
 * **get**\(\) that returns the URL.
-

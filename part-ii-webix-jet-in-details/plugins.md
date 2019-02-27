@@ -799,6 +799,14 @@ webix.ajax("/server/en/forms").then(data => {
 });
 ```
 
+#### Configuring Polyglot
+
+The Locale plugin uses the [Polyglot library](http://airbnb.io/polyglot.js/), which has settings of its own. You can use these settings in the config of the plugin:
+
+```js
+this.use(plugins.Locale, { polyglot:{ /* ...Polyglot settings */ } });
+```
+
 ## 2. Custom Plugins
 
 You can create a service and use it as an app-level plugin.

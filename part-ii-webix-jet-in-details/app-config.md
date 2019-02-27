@@ -263,13 +263,13 @@ import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout",
+            router	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug	: !PRODUCTION,
+            start	: "/top/layout",
             routes: {
-                "/hi"     : "/top/about",
-                "/form" : "/top/area.left.form",
-                "/list" : "/top/area.list",
+                "/hi"	: "/top/about",
+                "/form"	: "/top/area.left.form",
+                "/list"	: "/top/area.list",
             }
         };
 
