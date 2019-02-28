@@ -366,7 +366,9 @@ this.getSubView("right").show("small");
 _getSubView()_ returns a subview by the name passed as a parameter.
 
 
-Showing a subview in a new window
+#### Showing a Subview in a New Window
+
+You can use the **target** parameter to show a view in a popup or a window:
 
 ```js
 this.show("popup", { target:"_top" });

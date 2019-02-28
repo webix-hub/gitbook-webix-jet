@@ -4,7 +4,7 @@
 
 ### New Features
 
-* The ability to [show views in new windows](part-ii-webix-jet-in-details/jetview-api.md#optional-target-parameter)
+* The ability to [show views in new windows](part-ii-webix-jet-in-details/jetview-api.md#showing-a-subview-in-a-new-window)
 * The ability to show windows like other views by [including them in the app URL](part-ii-webix-jet-in-details/popups-and-windows.md#including-windows-in-the-app-url)
 * Several same-level subviews can have their [own app URLs](part-ii-webix-jet-in-details/views-and-subviews.md#3-several-dynamic-subviews) and work independently of each other
 * *Menu plugin* can change [URL parameters](part-ii-webix-jet-in-details/plugins.md#using-the-plugin-to-change-url-parameters)
