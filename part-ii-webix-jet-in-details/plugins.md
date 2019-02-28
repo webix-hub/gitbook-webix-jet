@@ -336,9 +336,9 @@ It is expected that the User plugin will be used with a specific session model c
 
 The session model should contain three main methods:
 
-- login, 
-- logout, 
-- status.
+- login(), 
+- logout(), 
+- status().
 
 Each method should return a promise.
 
@@ -361,7 +361,7 @@ function status(){
 }
 ```
 
-* **login\(\)** logs the user in, returns an object with his/her access right settings, a promise of this object or _null_ if something went wrong.
+* **login\(\)** logs the user in, returns an object with user access right settings, a promise of this object or _null_ if something went wrong.
 
 The parameters are:
 
@@ -450,7 +450,7 @@ export default class LoginView extends JetView{
 }
 ```
 
-To implement logging in, you should use the **login\(\)** method of the _User_ plugin. Once the **login()** method is called and the response with some user credentials (JSON object with a name, for example) is received, the User plugin will automatically redirect the user to the specified start page and will consider the server response as user credentials.
+To implement logging in, you should call the **login\(\)** method of the plugin. Once **login()** is called and the response with some user credentials (JSON object with a name or a promise, for example) is received, the User plugin will automatically redirect the user to the specified start page and will consider the server response as user credentials.
 
 Let's define the **do\_login\(\)** method of _LoginView_ that will call **login\(\)**:
 
@@ -488,9 +488,9 @@ The **logout\(\)** method ends the current session and shows an _afterLogout_ pa
 
 The **getUser\(\)** method returns the data of the currently logged in user.
 
-The **getStatus\(\)** method returns the current status of the user. It can receive an optional Boolean parameter **server**: if it is set to _true_, the method will send an AJAX request to check the status.
+The **getStatus\(\)** method returns the current status of the user. It can receive an optional Boolean parameter the server: if it is set to _true_, the method will send an AJAX request to check the status.
 
-The **User** plugin checks every 5 minutes the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the plugin will check the status and warn the user if it has been changed.
+The User plugin checks every 5 minutes (time lapse is defined by the **ping** setting of the plugin) the current user status and warns a user if the status has been changed. For example, if a user logged in and didn't perform any actions on the page during some time, the plugin will check the status and warn the user if it has been changed.
 
 #### Adding Public Pages
 
@@ -504,6 +504,8 @@ app.use(plugins.User, {
 ```
 
 #### Login with an external OAuth service \(Google, GitHub, etc.\)
+
+If you need authorization with an OAuth service, you need to change the way to log in. **logout()** and **status()** in the session model are the same as for the custom script.
 
 [A demo of login with passport and Google OAuth2](https://github.com/webix-hub/jet-start/tree/node-passport)
 
