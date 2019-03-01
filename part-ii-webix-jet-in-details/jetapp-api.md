@@ -2,6 +2,8 @@
 
 Here you can find the list of all the **JetApp** methods, that you can make use of.
 
+#### Methods
+
 | Method | Use |
 | :--- | :--- |
 | attachEvent\(\) | attaches an event |
@@ -16,6 +18,12 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 | setService\(\) | sets a service |
 | show\(\) | rebuilds the app or app module according to the new URL |
 | use\(\) | enables a plugin |
+
+#### Properties
+
+| Property | Use |
+| :--- | :--- |
+| ready | promise that resolves when the app is rendered |
 
 ## app.attachEvent\(\)
 
@@ -195,10 +203,10 @@ If you want to repaint the UI of the application, call _app.refresh\(\)_. It wil
 
 The **render** method builds the UI of the application. If called without any parameters, it just renders the UI of the top view inside the page according to the start URL, specified in the app configuration.
 
-**Parameters:**
+**Optional parameters:**
 
 - *container* (string, HTMLElement, SubView object) where the app will be rendered
-- *url* (array) URL segments as objects with *page*, *params*, and *index*
+- *url* (array,string) URL segments as objects with *page*, *params*, and *index* or a URL as a string
 
 **Returns:** a promise.
 
