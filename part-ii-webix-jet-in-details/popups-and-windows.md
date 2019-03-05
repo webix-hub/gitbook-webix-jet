@@ -245,11 +245,11 @@ export default class TopView extends JetView {
         return {
             localId:"body", template:"A place for context"
         };
-    }  
+    }
     init(){
         var context = this.ui({
-        view:"contextmenu", localId:"context",
-        data:["Add","Rename","Delete",{ $template:"Separator" },"Info"]
+			view:"contextmenu", localId:"context",
+			data:["Add","Rename","Delete",{ $template:"Separator" },"Info"]
         });
         context.attachTo(this.$$("body").getNode());
     }

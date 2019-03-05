@@ -464,7 +464,7 @@ export default class SomeView extends JetView{
 
 ## this.ui\(\)
 
-**this.ui\(\)** call is equivalent to **webix.ui\(\)**. It creates a new instance of the view passed to it as a parameter. For example, you can create views inside popups or modal windows with **this.ui\(\)**. The good thing about this way is that it correctly destroys the window or popup when its parent view is destroyed.
+**this.ui\(\)** call is equivalent to **webix.ui\(\)**. It creates a new instance of the view passed to it as a parameter. It is advised to use **this.ui()** with Jet applications instead of **webix.ui()**, because components created this way are destroyed together with the related Jet view, which prevents memory leaks.
 
 ### _this.ui\(\)_ for Windows and Popups
 
@@ -521,10 +521,10 @@ _this.ui\(\)_ can return a Webix UI object:
 import {JetView} from "webix-jet";
 
 export default class TopView extends JetView {
-  ...
-  init(){
-      this.win = this.ui({ template:"test" });
-  }
+	// ...
+	init(){
+		this.win = this.ui({ template:"test" });
+	}
 }
 ```
 
@@ -538,7 +538,7 @@ import {JetView} from "webix-jet";
 
 export default class SubView extends JetView {
     config(){
-        return {template:"test"};
+        return { template:"test" };
     }
 };
 
@@ -564,7 +564,7 @@ export default class TopView extends JetView {
 
 ```javascript
 var SubView = {
-      template:"test"
+    template:"test"
 };
 
 class TopView extends JetView {
@@ -572,7 +572,7 @@ class TopView extends JetView {
         return {};
     }
     init(){
-        this.win = this.ui(SubView,{container:"here"});
+        this.win = this.ui(SubView,{ container:"here" });
     }
 }
 ```
@@ -580,7 +580,7 @@ class TopView extends JetView {
 where _"here"_ is the ID of a _div_ element on the page. _container_ can be an ID or an HTML element, e.g.:
 
 ```javascript
-this.win = this.ui(SubView,{container:document.getElementById("here")});
+this.win = this.ui(SubView,{ container:document.getElementById("here") });
 ```
 
 ## this.use\(\)
@@ -591,7 +591,7 @@ The method launches a plugin. For example, this is how the **Status** plugin can
 // views/data.js
 ...
 init(){
-    this.use(plugins.Status, { 
+    this.use(plugins.Status, {
         target: "app:status",
         ajax:true,
         expire: 5000

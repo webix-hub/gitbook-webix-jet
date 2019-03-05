@@ -47,7 +47,7 @@ export default class TopView extends JetView{
                     ]
                 },
                 { $subview:true }
-            ]       
+            ]
         };
     }
     init(){
@@ -186,7 +186,7 @@ Let's enable _UnloadGuard_ and show a confirmation window if the input is invali
 // views/form.js
 ...
 init(){
-    this.use(plugins.UnloadGuard, () => { 
+    this.use(plugins.UnloadGuard, () => {
 		if (this.$$("form").validate())
 			return true;
 		return webix.confirm({
@@ -251,7 +251,7 @@ export default class DataView extends JetView{
 ```javascript
 // views/data.js
 ...
-this.use(plugins.Status, { 
+this.use(plugins.Status, {
     target:"app:status",
     ajax:true,
     expire:5000
@@ -358,8 +358,8 @@ app.use(plugins.User, {
 
 The session model should contain three main methods:
 
-- login(), 
-- logout(), 
+- login(),
+- logout(),
 - status().
 
 Each method should return a promise.
@@ -461,6 +461,14 @@ export default class LoginView extends JetView{
 ##### Logging Out
 
 The **logout\(\)** method ends the current session and shows an _afterLogout_ page \(the login form by default\).
+
+This is how you can call the method:
+
+~~~js
+this.app.getService("user").logout();
+// or
+this.$scope.app.getService("user").logout();
+~~~
 
 ##### Getting User Info & Checking the User Status
 
