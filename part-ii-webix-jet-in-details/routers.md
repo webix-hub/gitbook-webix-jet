@@ -163,7 +163,17 @@ var app1 = new JetApp({
 
 ## 5. Sub Router
 
-SubRouter is used for navigation in app modules that are included in other apps. It works for included apps by default and does not need initialization or anything else.
+SubRouter is used for navigation in app modules that are included in other apps.
+
+```javascript
+// app1.js
+import {JetApp, SubRouter} from "webix-jet";
+
+var app1 = new JetApp({
+    start: "/form",
+    router: SubRouter
+});
+```
 
 ## Custom Routers
 
