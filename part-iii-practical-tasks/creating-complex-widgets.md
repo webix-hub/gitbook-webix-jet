@@ -69,7 +69,7 @@ modify the model in such a way, that a new DataCollection should be created for 
 
 ```javascript
 // models/records.js
-function init(){
+export function records(){
     const data = new webix.DataCollection({
         url:"data/records.php"
     });
@@ -87,7 +87,7 @@ import {records} from "models/records";
 export default class MyApp extends JetApp {
     constructor(config){
         super(config);
-        this.setService("records", records()); 
+        this.setService("records", records());
     }
 }
 ...
@@ -101,7 +101,7 @@ import {JetView} from "webix-jet";
 export default class MyView extends JetView {
     ...
     init(){
-        this.data = this.app.getService("records");
+        this.data = this.app.getService("records").data;
     }
 }
 ```
