@@ -411,7 +411,7 @@ function status(){
 }
 ```
 
-At this point, the User plugin will automatically redirect the user to the login page using the [built-in access guard](../part-iii-practical-tasks/jet-recipes#access-guard-app-level) until authorization succeeds.
+At this point, the User plugin will automatically redirect the user to the login page using the [built-in access guard](../part-iii-practical-tasks/jet-recipes.md#access-guard-app-level) until authorization succeeds.
 
 ##### Logging In
 
