@@ -62,6 +62,10 @@ To show the popup, you must get the **win1** property of the class and call the 
 
 **this.win1.show\(\)** renders the popup at a position, defined in the config of the popup \(_position:"center"_\). If you don't set position, **win1** will be rendered in the top left corner.
 
+### Note
+
+Windows and popups created with `this.ui` have a peculiar feature. Once a window is created, its config is put in an anonymous Jet view, initialized specifically for this purpose. As a result, the **$scope** property of a window will refer not to its master Jet view, but to this anonymous view. To get to the master view that created the window, call `this.$scope.getParentView()` from a simple function and `this.getParentView()` from an arrow function.
+
 ## Windows as Jet View Classes
 
 You can define windows and popups as view classes as well. Have a look at a similar popup, defined as a class:
@@ -256,15 +260,7 @@ export default class TopView extends JetView {
 }
 ```
 
-To remove the context menu when its parent is destroyed, call its destructor:
-
-```javascript
-// views/top.js
-...
-destroy(){
-    $$("context").destructor();
-}
-```
+You do not need to destroy the context menu when its master view is destroyed.
 
 [Check out the example &gt;&gt;](https://webix.com/snippet/e15ae356)
 
