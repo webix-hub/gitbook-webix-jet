@@ -271,7 +271,7 @@ export default class FormView extends JetView {
 }
 ```
 
-### 2. Dynamic Data for Big Data
+## 2. Dynamic Data for Big Data
 
 As browser resources are limited, big collections should not be stored on the client side. Dynamic model is for _big data_ \(less than 10K records\) _used only once_ that must not be cached.
 
