@@ -8,11 +8,19 @@ Clone or download the files and run:
 
 `npm install -g wjet` or `yarn global add wjet`
 
+## WJet and Windows
+
+{% hint style="danger" %}
+DO NOT USE GITBASH!!!
+{% endhint %}
+
+Use `cmd` or `powershell` instead.
+
 ## How to use
 
 To create a skeleton app, run the following commands:
 
-```text
+```bash
 mkdir myapp
 cd myapp
 wjet init
@@ -22,13 +30,13 @@ You will be offered to create a name for the app, choose ES6 or TypeScript, add 
 
 After running the tool, you still need to install dependencies
 
-```text
+```bash
 npm install
 ```
 
 and run the app
 
-```text
+```bash
 npm run start
 ```
 
@@ -36,7 +44,7 @@ npm run start
 
 To add localization or authorization, run the following command:
 
-```text
+```bash
 wjet add feature
 ```
 
@@ -46,19 +54,40 @@ If you choose `Authentication`, WJet will add the User plugin and the client sid
 
 ## Adding Webix Components
 
-To add a Webix component \(from [https://github.com/webix-hub/components](https://github.com/webix-hub/components)\), run the following command:
+To add a Webix component \(from [https://github.com/webix-hub/components](https://github.com/webix-hub/components)\), complex widget (e.g. Kanban or Spreadsheet) or a DHX widget (Scheduler, Gantt) run the following command:
 
-```text
+```bash
 wjet add widget
 ```
 
-After that you will choose the necessary component \(scheduler, gantt, etc\) and will be offered to create a view for the component.
+After that you will choose the component and will be offered to create a view for the component. Additionally, you will be able to create or choose a data model for the view.
 
-## WJet and Windows
+## Adding Jet Views
 
-{% hint style="danger" %}
-DO NOT USE GITBASH!!!
-{% endhint %}
+To add a new view, run:
 
-Use `cmd` or `powershell` instead.
+```bash
+wjet add view
+```
+
+There are several presets for views:
+
+- a view for navigation with subviews,
+- a view based on a complex widget,
+- a view for CRUD operations (a form or a datatable),
+- a view for data navigation (a view with several data components and/or a form).
+
+## Adding Models
+
+To add a new data model, run:
+
+```bash
+wjet add model
+```
+
+You can add the following kinds of models:
+
+- static (JS data),
+- a data collection,
+- a proxy for the server API.
 
