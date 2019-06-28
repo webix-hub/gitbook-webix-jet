@@ -69,7 +69,7 @@ where the folder structure is:
 	- some.js
 ```
 
-Alternatively, you can [provide shorter paths to views](./app-config.md#changing-view-creation-logic).
+Alternatively, you can [provide shorter paths to views](../part-ii-webix-jet-in-details/app-config.md#changing-view-creation-logic).
 
 ### _app.show\(\)_ with URL Parameters
 
@@ -166,7 +166,7 @@ where the folder structure is:
 	- some.js
 ```
 
-Alternatively, you can [provide shorter paths to views](./app-config.md#changing-view-creation-logic).
+Alternatively, you can [provide shorter paths to views](../part-ii-webix-jet-in-details/app-config.md#changing-view-creation-logic).
 
 ### _view.show\(\)_ with URL Parameters
 
