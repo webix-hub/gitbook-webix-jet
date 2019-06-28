@@ -52,6 +52,25 @@ Here is how you can rebuild the app UI with **app.show\(\)**. **this** refers to
 
 After a button click, the URL will change, and the app UI will be rebuilt according to it.
 
+### Showing Views in Subfolders
+
+If your **views** folder includes subfolders, you can show the views with the `subfolder.file` path:
+
+```javascript
+this.app.show("/demo/details.form");
+```
+
+where the folder structure is:
+
+```text
+- start.js
+- details
+	- form.js
+	- some.js
+```
+
+Alternatively, you can [provide shorter paths to views](./app-config.md#changing-view-creation-logic).
+
 ### _app.show\(\)_ with URL Parameters
 
 You can pass one or more parameters to show alongside the URL:
@@ -82,7 +101,7 @@ export default class LayoutView extends JetView {
                 { $subview:true }
             ]
         };
-    } 
+    }
 }
 ```
 
@@ -104,7 +123,7 @@ export default class LayoutView extends JetView {
                 { $subview:true }
             ]
         };
-    } 
+    }
 }
 
 //or
@@ -129,6 +148,25 @@ If you want to rebuild the whole app and load the **demo** view as the only view
 }}
 ...
 ```
+
+### Showing Views in Subfolders
+
+If your **views** folder includes subfolders, you can show the views with the `subfolder.file` path:
+
+```javascript
+this.show("details.form");
+```
+
+where the folder structure is:
+
+```text
+- start.js
+- details
+	- form.js
+	- some.js
+```
+
+Alternatively, you can [provide shorter paths to views](./app-config.md#changing-view-creation-logic).
 
 ### _view.show\(\)_ with URL Parameters
 

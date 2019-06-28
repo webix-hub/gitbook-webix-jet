@@ -21,16 +21,17 @@ Views are resolved one by one according to URL chunks in the address bar. _The l
 index.html#!/myview
 ```
 
-You can also include view files into subfolders:
+### Views in Folders
 
-views
+You can also include view files into subfolders to better organize the structure, e.g.:
 
 * start.js
 * details
+  * index.js	// main file in the folder
   * form.js
   * template.js
 
-To show the files in subfolders, reference them as _folder.file_, e.g.
+To show the main file, reference it as `\#!details`. To show the files in subfolders, reference them as _folder.file_, e.g.
 
 ```text
 \#!details.form
