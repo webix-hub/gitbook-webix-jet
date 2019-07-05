@@ -122,7 +122,9 @@ export default class DetailsView extends JetView {
         ]};
     }
     init(){
-        this.show("?id=1/sub");
+		this.setParam("id", 1, true);
+		// or this.show({ id:1 });
+        this.show("sub");
     }
 }
 ```
