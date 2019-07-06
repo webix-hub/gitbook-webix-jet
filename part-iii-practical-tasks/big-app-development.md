@@ -2,7 +2,7 @@
 
 ## Modules and Large App Development
 
-If you develop a large app, it has sense to spit it into multiple modules, which can be developed and tested separately and combined into a single app on the last step of development.
+If you develop a large app, it has sense to split it into multiple modules, which can be developed and tested separately and combined into a single app on the last step of development.
 
 Webix Jet toolchain has been updated to support such kind of development (Starting with Webix Jet 1.5). For new projects, just use the [jet-start](https://github.com/webix-hub/jet-start) pack. To update existing projects, check **webpack.config.js** against the [latest one](https://github.com/webix-hub/jet-start/blob/master/webpack.config.js) and update the **scripts** section in [package.json](https://github.com/webix-hub/jet-start/blob/master/package.json).
 
