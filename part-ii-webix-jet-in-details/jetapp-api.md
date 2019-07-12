@@ -6,24 +6,25 @@ Here you can find the list of all the **JetApp** methods, that you can make use 
 
 | Method | Use |
 | :--- | :--- |
-| attachEvent\(\) | attaches an event |
-| callEvent\(\) | calls an event |
-| contains() | checks if the app contains SomeView |
-| detachEvent\(\) | detaches an event listener |
-| getService\(\) | returns a service |
-| getSubView() | returns the current top view of the app |
-| getUrl() | returns an arrays of the URL segments |
-| refresh\(\) | repaints the UI of an app |
-| render\(\) | renders the app or the app module |
-| setService\(\) | sets a service |
-| show\(\) | rebuilds the app or app module according to the new URL |
-| use\(\) | enables a plugin |
+| **attachEvent** | attaches an event |
+| **callEvent** | calls an event |
+| **contains** | checks if the app contains SomeView |
+| **createView** | creates a new Jet view |
+| **detachEvent** | detaches an event listener |
+| **getService** | returns a service |
+| **getSubView** | returns the current top view of the app |
+| **getUrl** | returns an arrays of the URL segments |
+| **refresh** | repaints the UI of an app |
+| **render** | renders the app or the app module |
+| **setService** | sets a service |
+| **show** | rebuilds the app or app module according to the new URL |
+| **use** | enables a plugin |
 
 #### Properties
 
 | Property | Use |
 | :--- | :--- |
-| ready | promise that resolves when the app is rendered |
+| **ready** | promise that resolves when the app is rendered |
 
 ## app.attachEvent\(\)
 
@@ -103,6 +104,27 @@ The method returns *true* if the app contains the view from the parameter and *f
 **Parameters:** a Jet view.
 
 **Returns:** a boolean.
+
+## app.createView()
+
+The **createView** method creates a Jet view based on the UI configuration passed to it as a parameter.
+
+```js
+let view = this.app.createView(FormView); // FormView is a Jet view class
+this.getRoot().addView(view);
+```
+
+**Parameters:**
+
+- **ui** - the UI configuration of the view. It can be defined as:
+	- a Webix view object
+	- a Jet view class
+	- a Jet app class constructor call
+	- a Jet view class constructor call
+	- a factory function that returns a Webix view object
+- **name** (string, optional) - the name of the view
+
+**Returns:** object - the newly created view (instance of a Jet view class)
 
 ## app.detachEvent\(\)
 
