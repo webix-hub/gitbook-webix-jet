@@ -663,7 +663,7 @@ export default class MenuView extends JetView {
 
 If you want your app to be multilingual and let the users to choose a language, you can add a control for that.
 
-To set a new language, use the **setLang\(\)** method of the _locale_ service. **setLocale\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed.
+To set a new language, use the **setLang\(\)** method of the _locale_ service. **setLang\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed.
 
 {% hint style="danger" %}
 Do not call **setLang\(\)** in lifetime handlers of JetView! It calls [app.refresh\(\)](jetapp-api.md#app-refresh) that re-renders all the views, which will start an infinite loop.
