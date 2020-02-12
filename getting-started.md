@@ -12,7 +12,14 @@ To begin with, you can grab the app package from [https://github.com/webix-hub/j
 
 ```text
 npm install
-npm start
+npm run start
+```
+
+You can also use yarn:
+
+```bash
+yarn
+yarn start
 ```
 
 Next, open `http://localhost:8080` in the browser. You will see the application interface. Let's have a look at what it has inside.
@@ -185,7 +192,7 @@ export default class DataView extends JetView {
 This module returns a JetView-based class with two methods:
 
 * the _config\(\)_ method that returns the interface of the component that will be initialized. In this example, it's a datatable;
-* the _init\(\)_ method that specifies the component initialization behavior. When the component is created, data from the _records_ model will be loaded into it. 
+* the _init\(\)_ method that specifies the component initialization behavior. When the component is created, data from the _records_ model will be loaded into it.
 
 For more details about data loading, read:
 
