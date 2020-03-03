@@ -23,7 +23,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 
 More details on events:
 
-- ["JetApp Events"](api/jetapp-events.md)
+- ["JetApp Events"](api/jetapp-api/jetapp-events.md)
 - ["View Communication"](view-communication.md)
 - ["Inner Events and Error Handling"](inner-events-and-error-handling.md).
 
@@ -56,7 +56,7 @@ Normally, inner events are called automatically, so there is no need to use **ca
 
 More details on events:
 
-- ["JetApp Events"](api/jetapp-events.md)
+- ["JetApp Events"](api/jetapp-api/jetapp-events.md)
 - ["View Communication"](view-communication.md)
 - ["Inner Events and Error Handling"](inner-events-and-error-handling.md).
 
@@ -209,7 +209,7 @@ export default class treeView extends JetView{
 }
 ```
 
-**this** refers to the instance of the _treeView_ class if it is used in an _arrow function_ [\[1\]](api/jetapp-methods.md#1).
+**this** refers to the instance of the _treeView_ class if it is used in an _arrow function_ [\[1\]](api/jetapp-api/jetapp-methods.md#1).
 
 You can read more about services in the ["View Communication"](view-communication.md) chapter.
 

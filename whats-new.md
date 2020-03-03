@@ -22,9 +22,9 @@
 
 ### Changes in API and Inner Logic
 
-* [*getUrl()*](api/jetview-api.md#this-geturl) and [*getUrlString()*](api/jetview-api.md#this-geturlstring) for [app](api/jetapp-methods.md#app-geturl) and view
+* [*getUrl()*](api/jetview-api.md#this-geturl) and [*getUrlString()*](api/jetview-api.md#this-geturlstring) for [app](api/jetapp-api/jetapp-methods.md#app-geturl) and view
 * *removeView()* of Webix widgets triggers *destroy()* of the Jet views inside them
-* [*getSubView()*](api/jetapp-methods.md#app-getsubview) and [*contains()*](api/jetapp-methods.md#app-contains) can be called for JetApp
+* [*getSubView()*](api/jetapp-api/jetapp-methods.md#app-getsubview) and [*contains()*](api/jetapp-api/jetapp-methods.md#app-contains) can be called for JetApp
 * The **refresh()** method for app and view returns a promise
 * *view.refresh()* works for views with sub-elements
 * *app.refresh()* works when an app is inside a Webix Jet view
@@ -55,7 +55,7 @@
   * [getUrl](api/jetview-api.md#this-geturl)
 * [_UrlParam_](part-ii-webix-jet-in-details/plugins.md#urlparam-plugin) plugin
 * ability to set optional path for the [Locale plugin](part-ii-webix-jet-in-details/plugins.md#locale-plugin)
-* ["app:user:login"](part-ii-webix-jet-in-details/api/jetapp-events.md#app-user-login) and ["app:user:logout"](part-ii-webix-jet-in-details/api/jetapp-events.md#app-user-logout) events
+* ["app:user:login"](part-ii-webix-jet-in-details/api/jetapp-api/jetapp-events.md#app-user-login) and ["app:user:logout"](part-ii-webix-jet-in-details/api/jetapp-api/jetapp-events.md#app-user-logout) events
 
 ## Version 1.2 - December 12, 2017
 

@@ -6,7 +6,7 @@ These few issues will make your life a lot easier, so during development, rememb
 
 * use the [debug version of the source code](https://blog.webix.com/ui-development-and-debug-with-webix-js/),
 * set [`debug:true` in the app configuration](part-ii-webix-jet-in-details/app-config.md#debugging),
-* handle the ["app:error:resolve"](api/jetapp-events.md#app-error-resolve) event,
+* handle the ["app:error:resolve"](api/jetapp-api/jetapp-events.md#app-error-resolve) event,
 * check the quality of your code before each commit with \(`npm run lint`\).
 
 ## Jet-style Development
