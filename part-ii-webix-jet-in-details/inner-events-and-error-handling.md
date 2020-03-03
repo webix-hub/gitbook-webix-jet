@@ -40,7 +40,7 @@ export default class TopView extends JetView {
 }
 ```
 
-To handle a JetApp event on the app level, call the [app.attachEvent](jetapp-methods.md#app-attachevent) method:
+To handle a JetApp event on the app level, call the [app.attachEvent](api/jetapp-methods.md#app-attachevent) method:
 
 ```javascript
 // myapp.js
@@ -57,7 +57,7 @@ app.attachEvent("app:guard", function(url, view, nav){
 
 ![Redirecting users in apps with Webix Jet](../.gitbook/assets/appguard.png)
 
-Go to the [API Reference](jetapp-events.md) to see the full list of default app events.
+Go to the [API Reference](api/jetapp-events.md) to see the full list of default app events.
 
 ## Error Handling and Debugging
 
@@ -84,9 +84,9 @@ app.attachEvent("app:error:resolve", function() {
 
 All JetApp error events:
 
-- [app:error](jetapp-events.md#app-error) - a common event for all errors.
-- [app:error:resolve](jetapp-events.md#app-error-resolve) fires when Jet can't find a module by its name.
-- [app:error:render](jetapp-events.md#app-error-render) - the event that is triggered on errors during view rendering, mostly Webix UI related. It means that some view UI config has been written incorrectly.
-- [app:error:initview](jetapp-events.md#app-error-initview) - the event that is triggered when there is something wrong with view rendering, mostly Webix Jet related. It means that Jet, while rendering Webix UIs, was unable to render the app UI correctly.
+- [app:error](api/jetapp-events.md#app-error) - a common event for all errors.
+- [app:error:resolve](api/jetapp-events.md#app-error-resolve) fires when Jet can't find a module by its name.
+- [app:error:render](api/jetapp-events.md#app-error-render) - the event that is triggered on errors during view rendering, mostly Webix UI related. It means that some view UI config has been written incorrectly.
+- [app:error:initview](api/jetapp-events.md#app-error-initview) - the event that is triggered when there is something wrong with view rendering, mostly Webix Jet related. It means that Jet, while rendering Webix UIs, was unable to render the app UI correctly.
 
 The last two events are mostly helpful for the development stage.
