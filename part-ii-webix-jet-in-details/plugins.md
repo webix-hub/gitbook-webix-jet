@@ -15,7 +15,7 @@ These plugins are enabled for a specific view by [view.use\(\)](jetview-api.md#t
 
 **App Plugins**
 
-These plugins are enabled for the whole app with [app.use\(\)](api/jetapp-api/jetapp-methods.md#app-use):
+These plugins are enabled for the whole app with [app.use\(\)](api/jetapp-methods.md#app-use):
 
 * the User plugin
 * the Theme plugin
@@ -325,7 +325,7 @@ This section contains guidelines for using the plugin with a custom script.
 
 ##### Enabling the Plugin
 
-To enable the plugin, call [app.use\(\)](api/jetapp-api/jetapp-methods.md#app-use) with two parameters:
+To enable the plugin, call [app.use\(\)](api/jetapp-methods.md#app-use) with two parameters:
 
 * the plugin name,
 * the plugin configuration.
@@ -666,7 +666,7 @@ If you want your app to be multilingual and let the users to choose a language, 
 To set a new language, use the **setLang\(\)** method of the _locale_ service. **setLang\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed.
 
 {% hint style="danger" %}
-Do not call **setLang\(\)** in lifetime handlers of JetView! It calls [app.refresh\(\)](api/jetapp-api/jetapp-methods.md#app-refresh) that re-renders all the views, which will start an infinite loop.
+Do not call **setLang\(\)** in lifetime handlers of JetView! It calls [app.refresh\(\)](api/jetapp-methods.md#app-refresh) that re-renders all the views, which will start an infinite loop.
 {% endhint %}
 
 Let's create a simple page for app settings with a segmented button that will be used to choose languages. Note that the IDs of the button options should be the same as the locale file names \(e.g. "es", "en"\).
