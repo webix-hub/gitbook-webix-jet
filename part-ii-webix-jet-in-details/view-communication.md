@@ -203,7 +203,7 @@ Feel free to use the in-app event bus for view communication.
 
 ### Calling an Event
 
-To call/trigger an event, call [app.callEvent\(\)](jetapp-api.md#app-callevent). You can call the method by referencing the app with **this.app\(\)** from an _arrow function_ [\[1\]](view-communication.md#1):
+To call/trigger an event, call [app.callEvent\(\)](jetapp-methods.md#app-callevent). You can call the method by referencing the app with **this.app\(\)** from an _arrow function_ [\[1\]](view-communication.md#1):
 
 ```javascript
 // views/data.js
@@ -248,7 +248,7 @@ Once an event is attached, any other view can call it.
 
 #### One More Way: app.attachEvent\(\)
 
-One more way to attach an event is to call [app.attachEvent\(\)](jetapp-api.md#app-attachevent). This way you will have to detach the event manually [\[2\]](view-communication.md#2).
+One more way to attach an event is to call [app.attachEvent\(\)](jetapp-methods.md#app-attachevent). This way you will have to detach the event manually [\[2\]](view-communication.md#2).
 
 ```javascript
 // views/form.js
@@ -263,7 +263,7 @@ export default class FormView extends JetView{
 }
 ```
 
-To detach an event, call [app.detachEvent\(\)](jetapp-api.md#app-detachevent) when the view that attached the event is destroyed:
+To detach an event, call [app.detachEvent\(\)](jetapp-methods.md#app-detachevent) when the view that attached the event is destroyed:
 
 ```javascript
 // views/form.js
@@ -285,7 +285,7 @@ With ES6, the problem can also be solved with creating and requiring a module. I
 
 ### Initializing Services
 
-To set a service, call the [app.setService\(\)](jetapp-api.md#app-setservice) method. **setService\(\)** requires two parameters:
+To set a service, call the [app.setService\(\)](jetapp-methods.md#app-setservice) method. **setService\(\)** requires two parameters:
 
 * **service** - \(string\) the name of the service
 * **obj** - \(object\) all methods that you want to call from other Jet views
@@ -310,7 +310,7 @@ export default class treeView extends JetView{
 
 ### Using Services
 
-To get to the service and its methods, use the [app.getService\(\)](jetapp-api.md#app-getservice) method. **getService\(\)** requires one parameter - the **name** of the service.
+To get to the service and its methods, use the [app.getService\(\)](jetapp-methods.md#app-getservice) method. **getService\(\)** requires one parameter - the **name** of the service.
 
 This is how you can get the ID of the selected node in the master tree and use it to fill a form with correct values:
 
@@ -511,7 +511,7 @@ export default class ParentView extends JetView{
                     click:() => {
                         this.getSubView().setMode("readonly");
                     }
-                }, 
+                },
                 { $subview:"child" }    //load "views/child"
             ]
         };
@@ -530,9 +530,9 @@ Suppose you want to create a file manager resembling Total Commander. The parent
 ```javascript
 // views/manager.js
 ...
-config() { 
-    return { 
-        cols:[ 
+config() {
+    return {
+        cols:[
             { name:"left", $subview:"fileview" },     // "views/files"
             { name:"right", $subview:"fileview" }    // "views/files"
         ]

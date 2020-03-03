@@ -15,7 +15,7 @@ These plugins are enabled for a specific view by [view.use\(\)](jetview-api.md#t
 
 **App Plugins**
 
-These plugins are enabled for the whole app with [app.use\(\)](jetapp-api.md#app-use):
+These plugins are enabled for the whole app with [app.use\(\)](jetapp-methods.md#app-use):
 
 * the User plugin
 * the Theme plugin
@@ -26,7 +26,7 @@ These plugins are enabled for the whole app with [app.use\(\)](jetapp-api.md#app
 The Menu plugin simplifies your life if you plan to create a menu for navigation:
 
 * it sets subview URLs for menu options, buttons or other controls you plan to use for navigation;
-* it automatically highlights the right menu option after a page reload or change of the URL. 
+* it automatically highlights the right menu option after a page reload or change of the URL.
 
 ![Using the Menu plugin in Webix Jet](../.gitbook/assets/top_data.png)
 
@@ -170,7 +170,7 @@ import {JetView, plugins} from "webix-jet";
 
 export default class FormView extends JetView {
     config(){
-        return { 
+        return {
             view:"form", elements:[
                 { view:"text", name:"email", required:true, label:"Email" },
                 { view:"button", value:"save", click:() => this.show("details") }
@@ -325,7 +325,7 @@ This section contains guidelines for using the plugin with a custom script.
 
 ##### Enabling the Plugin
 
-To enable the plugin, call [app.use\(\)](jetapp-api.md#app-use) with two parameters:
+To enable the plugin, call [app.use\(\)](jetapp-methods.md#app-use) with two parameters:
 
 * the plugin name,
 * the plugin configuration.
@@ -417,7 +417,7 @@ At this point, the User plugin will automatically redirect the user to the login
 
 To implement logging in, you should call the **login\(\)** method of the plugin. Once **login()** is called and the response with some user credentials (JSON object with a name or a promise, for example) is received, the User plugin will automatically redirect the user to the specified start page and will consider the server response as user credentials.
 
-Let's define the **do\_login\(\)** method that will call **login\(\)** from a form: 
+Let's define the **do\_login\(\)** method that will call **login\(\)** from a form:
 
 ```javascript
 // views/login.js
@@ -666,7 +666,7 @@ If you want your app to be multilingual and let the users to choose a language, 
 To set a new language, use the **setLang\(\)** method of the _locale_ service. **setLang\(\)** takes one parameter - the name of the locale file. When a user chooses a language, a locale file is located and the app language is changed.
 
 {% hint style="danger" %}
-Do not call **setLang\(\)** in lifetime handlers of JetView! It calls [app.refresh\(\)](jetapp-api.md#app-refresh) that re-renders all the views, which will start an infinite loop.
+Do not call **setLang\(\)** in lifetime handlers of JetView! It calls [app.refresh\(\)](jetapp-methods.md#app-refresh) that re-renders all the views, which will start an infinite loop.
 {% endhint %}
 
 Let's create a simple page for app settings with a segmented button that will be used to choose languages. Note that the IDs of the button options should be the same as the locale file names \(e.g. "es", "en"\).

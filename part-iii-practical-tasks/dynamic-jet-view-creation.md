@@ -55,7 +55,7 @@ export function viewFactory(config){
 }
 ```
 
-Now you can create and register a new view and later navigate to it with [view.show\(\)](https://github.com/webix-hub/gitbook-webix-jet/tree/d48798e4857ff3da0569d3622d73b5407ee93bc4/part-iii-practical-tasks/part-ii-webix-jet-in-details/jetview-api.md#this-show) / [app.show\(\)](https://github.com/webix-hub/gitbook-webix-jet/tree/d48798e4857ff3da0569d3622d73b5407ee93bc4/part-iii-practical-tasks/part-ii-webix-jet-in-details/jetapp-api.md#app-show):
+Now you can create and register a new view and later navigate to it with [view.show\(\)](https://github.com/webix-hub/gitbook-webix-jet/tree/d48798e4857ff3da0569d3622d73b5407ee93bc4/part-iii-practical-tasks/api/jetview-api.md#this-show) / [app.show\(\)](https://github.com/webix-hub/gitbook-webix-jet/tree/d48798e4857ff3da0569d3622d73b5407ee93bc4/part-iii-practical-tasks/api/jetapp-methods.md#app-show):
 
 ```javascript
 localViews["newpage1"] = viewFactory({ template: "New Page 1" });

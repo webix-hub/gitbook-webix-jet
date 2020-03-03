@@ -1,34 +1,8 @@
-# JetApp API
-
-Here you can find the list of all the **JetApp** methods, that you can make use of.
-
-#### Methods
-
-| Method | Use |
-| :--- | :--- |
-| **attachEvent** | attaches an event |
-| **callEvent** | calls an event |
-| **contains** | checks if the app contains SomeView |
-| **createView** | creates a new Jet view |
-| **detachEvent** | detaches an event listener |
-| **getService** | returns a service |
-| **getSubView** | returns the current top view of the app |
-| **getUrl** | returns an arrays of the URL segments |
-| **refresh** | repaints the UI of an app |
-| **render** | renders the app or the app module |
-| **setService** | sets a service |
-| **show** | rebuilds the app or app module according to the new URL |
-| **use** | enables a plugin |
-
-#### Properties
-
-| Property | Use |
-| :--- | :--- |
-| **ready** | promise that resolves when the app is rendered |
+# JetApp Methods
 
 ## app.attachEvent\(\)
 
-Use this method to attach a custom event.
+Use this method to attach an event listener.
 
 **Parameters:**
 
@@ -36,25 +10,6 @@ Use this method to attach a custom event.
 - *handler* (function) the handler for the event.
 
 **Returns:** nothing.
-
-For example, attach a handler to an event from a Jet view:
-
-```javascript
-// views/form.js
-import {JetView} from "webix-jet";
-
-export default class FormView extends JetView{
-    init(){
-        this.app.attachEvent("save:form", function(){
-            this.show("aftersave");
-        });
-    }
-}
-```
-
-Events can be attached both in the app file and in view modules. Yet, if you attach an event listener with this method, you had better to detach it manually with **detachEvent\(\)** to eliminate a possibility of memory leaks.
-
-You can also attach an inner Jet event. For instance, from app:
 
 ```javascript
 // myapp.js
@@ -66,13 +21,18 @@ app.attachEvent("app:guard", function(url, view, nav){
 ...
 ```
 
-For more details on events, read ["View Communication"](view-communication.md) and ["Inner Events and Error Handling"](inner-events-and-error-handling.md).
+More details on events:
+
+- ["JetApp Events"](jetapp-events.md)
+- ["View Communication"](view-communication.md)
+- ["Inner Events and Error Handling"](inner-events-and-error-handling.md).
 
 ## app.callEvent\(\)
 
 Use this method to call a custom event.
 
 **Parameters:**
+
 - *name* (string) is the name of the event,
 - *params* (array) is the array of parameters.
 
@@ -85,9 +45,8 @@ import {JetView} from "webix-jet";
 export default class DataView extends JetView{
     config(){
         return {
-            view:"button", click:() => {
-                this.app.callEvent("save:form");
-            }
+            view:"button", click:() =>
+                this.app.callEvent("save:form")
         }
     }
 }
@@ -95,7 +54,11 @@ export default class DataView extends JetView{
 
 Normally, inner events are called automatically, so there is no need to use **callEvent** for them.
 
-For more details on events, read ["View Communication"](view-communication.md) and ["Inner Events and Error Handling"](inner-events-and-error-handling.md).
+More details on events:
+
+- ["JetApp Events"](jetapp-events.md)
+- ["View Communication"](view-communication.md)
+- ["Inner Events and Error Handling"](inner-events-and-error-handling.md).
 
 ## app.contains()
 
@@ -125,30 +88,6 @@ this.getRoot().addView(view);
 - **name** (string, optional) - the name of the view
 
 **Returns:** object - the newly created view (instance of a Jet view class)
-
-## app.detachEvent\(\)
-
-Use this method to detach event listeners added by **attachEvent** from Jet view classes. You should do this, because the lifetime of such an event listener is longer than the lifetime of the Jet view. So if the view is destroyed, but the event listener isn't detached, this may cause memory leaks, especially in older browsers.
-
-To detach an event, call **app.detachEvent** when the view that attached the event is destroyed:
-
-```javascript
-// views/form.js
-import {JetView} from "webix-jet";
-
-export default class FormView extends JetView{
-    init(){
-        this.app.attachEvent("save:form", function(){
-            this.show("aftersave");
-        });
-    }
-    destroy(){
-        this.app.detachEvent("save:form");
-    }
-}
-```
-
-For more details on events, read ["View Communication"](view-communication.md) and ["Inner Events and Error Handling"](inner-events-and-error-handling.md).
 
 ## app.getService\(\)
 
@@ -270,7 +209,7 @@ export default class treeView extends JetView{
 }
 ```
 
-**this** refers to the instance of the _treeView_ class if it is used in an _arrow function_ [\[1\]](jetapp-api.md#1).
+**this** refers to the instance of the _treeView_ class if it is used in an _arrow function_ [\[1\]](jetapp-methods.md#1).
 
 You can read more about services in the ["View Communication"](view-communication.md) chapter.
 
@@ -308,9 +247,8 @@ import session from "models/session";
 app.use(plugins.User, { model: session });
 ```
 
-### Footnotes
+## Footnotes
 
 #### \[1\]:
 
 To read more about how to reference apps and view classes, go to ["Referencing views"](referencing-views.md).
-

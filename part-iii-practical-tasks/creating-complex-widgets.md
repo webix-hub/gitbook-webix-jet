@@ -53,7 +53,7 @@ If you plan to use Jet app as a widget, keep in mind a few things:
 
 _1. **Do not use** any hard-coded **"id"** values_.
 
-This will prevent initializing more than one instance of the widget, because the IDs will be no longer unique. Instead, use **localId** and locate widgets inside the view with [this.$$\(\)](../part-ii-webix-jet-in-details/jetview-api.md#this-usdusd) or **queryView\(\)**.
+This will prevent initializing more than one instance of the widget, because the IDs will be no longer unique. Instead, use **localId** and locate widgets inside the view with [this.$$\(\)](../api/jetview-api.md#this-usdusd) or **queryView\(\)**.
 
 _2. Use **services** instead of **models** for data loading_.
 
