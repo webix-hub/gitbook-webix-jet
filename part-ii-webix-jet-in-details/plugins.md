@@ -289,7 +289,7 @@ const details = { template:"Details" };
 export default details;
 ```
 
-When loading the URL _"/some/23/details"_, you need to treat the segment after **some** (_23_) as a parameter of **some**. Enable the plugin in the [init\(\)](views-and-subviews.md#init-view-url) method of **some**:
+When loading the URL _"/some/23/details"_, you need to treat the segment after **some** (_23_) as a parameter of **some**. Enable the plugin in the [init\(\)](views.md#init-view-url) method of **some**:
 
 ```javascript
 // views/some.js

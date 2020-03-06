@@ -40,6 +40,8 @@ export default class TopView extends JetView {
 }
 ```
 
+This way of attaching an event handler is convenient, because it automatically detaches the event handler when the view that called it is destroyed. This helps to avoid memory leaks that may happen, especially in older browsers.
+
 To handle a JetApp event on the app level, call the [app.attachEvent](api/jetapp-methods.md#app-attachevent) method:
 
 ```javascript

@@ -6,7 +6,7 @@
 
 * The ability to [show views in new windows](api/jetview-api.md#showing-a-subview-in-a-new-window)
 * The ability to show windows like other views by [including them in the app URL](part-ii-webix-jet-in-details/popups-and-windows.md#including-windows-in-the-app-url)
-* Several same-level subviews can have their [own app URLs](part-ii-webix-jet-in-details/views-and-subviews.md#3-several-dynamic-subviews) and work independently of each other
+* Several same-level subviews can have their [own app URLs](part-ii-webix-jet-in-details/views.md#3-several-dynamic-subviews) and work independently of each other
 * *Menu plugin* can change [URL parameters](part-ii-webix-jet-in-details/plugins.md#using-the-plugin-to-change-url-parameters)
 * *User plugin*: the ability to [add several pages accessible for non-authorized users](part-ii-webix-jet-in-details/plugins.md#adding-public-pages)
 * *Locale plugin*: additional configuration property for [setting Webix locales](part-ii-webix-jet-in-details/plugins.md#combining-with-webix-locales)
@@ -45,7 +45,7 @@
 
 ## Version 1.4 - April 11, 2018
 
-* JetView class instances can be created [in **config\(\)**](part-ii-webix-jet-in-details/views-and-subviews.md#jetview-constructor)
+* JetView class instances can be created [in **config\(\)**](part-ii-webix-jet-in-details/views.md#jetview-constructor)
 
 ## Version 1.3 - January 11, 2018
 

@@ -21,7 +21,7 @@ Here you can find the list of all the **JetApp** methods, events, and properties
 
 ## Events
 
-| Event | Use |
+| Event | Fires |
 | :--- | :--- |
 | [app:render](jetapp-events.md#app-render) | before each view of an app is rendered |
 | [app:route](jetapp-events.md#app-route) | after navigation to a view |

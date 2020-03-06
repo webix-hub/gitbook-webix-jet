@@ -12,7 +12,7 @@ Promises are returned by all Ajax requests within Webix:
 
 ### A Promise Returned by _config\(\)_ of a Class View
 
-If your client-side depends on server-side data, you can fetch the data asynchronously and return a promise of them in the [config\(\)](views-and-subviews.md#config) lifetime handler of a Jet view. A promise can be returned by [webix.ajax\(\)](https://docs.webix.com/api__refs__ajax.html). After the promise resolves, the response is passed to a callback in **then\(\)**.
+If your client-side depends on server-side data, you can fetch the data asynchronously and return a promise of them in the [config\(\)](views.md#config) lifetime handler of a Jet view. A promise can be returned by [webix.ajax\(\)](https://docs.webix.com/api__refs__ajax.html). After the promise resolves, the response is passed to a callback in **then\(\)**.
 
 For example, let's load chart configuration with **webix.ajax\(\)**:
 
@@ -21,7 +21,7 @@ For example, let's load chart configuration with **webix.ajax\(\)**:
 import {JetView} from "webix-jet";
 
 export class StatisticsView extends JetView {
-    config() { 
+    config() {
         return webix.ajax("data/colors").then( data => {
             const colors = data.json();
             const chart = { view:"chart", series:[]};

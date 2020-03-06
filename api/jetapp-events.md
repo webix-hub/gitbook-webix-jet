@@ -41,6 +41,15 @@ app.attachEvent("app:route", function(url){
 
 **app:route** is used by the _Menu_ plugin to highlight menu options according to the URL.
 
+## app:urlchange
+
+The event fires when the app URL changes.
+
+**Parameters:**
+
+- **view** - the view for which the event is called
+- **url** - the URL segment of the view
+
 ## app:guard
 
 The **app:guard** event is triggered before navigation to another view.
@@ -168,3 +177,11 @@ app.attachEvent("app:error:initview", function(err,view){
     alert("Unable to render");
 });
 ```
+
+## app:error:server
+
+The event is called by the Status plugin when there is an error while setting a status.
+
+**Parameters:**
+
+- **err** - the error message or error object

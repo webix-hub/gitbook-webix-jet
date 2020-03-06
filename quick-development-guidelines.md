@@ -13,6 +13,6 @@ These few issues will make your life a lot easier, so during development, rememb
 
 And remember this important advice:
 
-* [reuse similar views](part-ii-webix-jet-in-details/views-and-subviews.md#3-class-views)
+* [reuse similar views](part-ii-webix-jet-in-details/views.md#class-views)
 * [don't address views from other modules by IDs](part-ii-webix-jet-in-details/view-communication.md)
 * [ensure that data is loaded before working with it](part-ii-webix-jet-in-details/asynchronous-views.md)

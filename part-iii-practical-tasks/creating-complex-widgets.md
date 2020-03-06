@@ -108,7 +108,7 @@ export default class MyView extends JetView {
 
 ## Dynamic Widget Loading
 
-If you want to load custom widget code on demand, you can split your code and import the bundles with widget code when it is needed. For example, widgets can be imported in [config\(\)](../part-ii-webix-jet-in-details/views-and-subviews.md#config) of a Jet view:
+If you want to load custom widget code on demand, you can split your code and import the bundles with widget code when it is needed. For example, widgets can be imported in [config\(\)](../part-ii-webix-jet-in-details/views.md#config) of a Jet view:
 
 ```javascript
 // views/statistics.js

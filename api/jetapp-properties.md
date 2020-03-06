@@ -42,6 +42,8 @@ export default class TopView extends JetView {
 }
 ```
 
+[Read more about app config](../part-ii-webix-jet-in-details/app-config.md).
+
 ### ready
 
 A promise that resolves when the app is rendered.

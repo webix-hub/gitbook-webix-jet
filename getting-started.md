@@ -152,7 +152,7 @@ The described way of inserting subviews into the main view is an alternative to 
 For more details on including subviews and in-app navigation, read the following chapters:
 
 * ["Creating views"](part-i-basic-usage/creating-views.md)
-* ["Views and Subviews"](part-ii-webix-jet-in-details/views-and-subviews.md#subview-including)
+* ["Views and Subviews"](part-ii-webix-jet-in-details/views.md#subview-including)
 * [In-App Navigation](part-i-basic-usage/in-app-navigation.md)
 * [Menu Plugin](part-ii-webix-jet-in-details/plugins.md#menu-plugin)
 

@@ -11,24 +11,24 @@ An app represents an application or an application module. It is used to group v
 
 ## The Syntax of Creation
 
-An app module is created as a new instance of the JetApp class.
+To create an app:
 
-1. Import the _JetApp_ class and create its instance.
+1. Import the _JetApp_ class, define your app class and extend JetApp.
 2. Define the start point, which is the start app URL. App configuration can include other properties like the app name, version, etc.
-3. Call the [render\(\)](https://github.com/webix-hub/gitbook-webix-jet/tree/2d186f59684fcf9977905010591510a0f43a5297/part-i-basic-usage/api/jetapp-methods.md#app-render) method of the JetApp instance to paint the UI on the page.
-4. Enclose it in **webix.ready\(\)** to ensure that HTML page is parsed completely before JS starts executing.
+3. Initialize your app with a class constructor.
+4. Call the [render\(\)](../api/jetapp-methods.md#app-render) method of JetApp to paint the UI on the page.
+5. Wrap it in **webix.ready\(\)** to ensure that the HTML page is parsed completely before JS starts executing.
 
 ```javascript
 // myapp.js
-import "./styles/app.css";
-import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
+import { JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout"
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,
+            start: "/top/layout"
         };
 
         super({ ...defaults, ...config });
@@ -44,19 +44,19 @@ You can open the needed URL and the UI will be rendered from the URL elements. T
 
 ## Adding Stylesheets
 
-This is how you can include a stylesheet. You can include several stylesheets \(any CSS or LESS\). When the app will be built, they all will be compiled into _app.css_that you can link to your _index.html_ page and that will be put in _codebase_ when you build the production files.
+This is how you can include a stylesheet. You can include several stylesheets \(any CSS or LESS\). When the app will be built, they all will be compiled into _myapp.css_ that you can link to your _index.html_ page and that will be put in _codebase_ when you build the production files.
 
 ```javascript
-//app.js
+//myapp.js
 import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
 export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout"
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,
+            start: "/top/layout"
         };
 
         super({ ...defaults, ...config });
@@ -70,10 +70,12 @@ if (!BUILD_AS_MODULE){
 
 ## App Configuration
 
-In the app configuration, for example, you can set the mode in which the app will work:
+In the app configuration, you can set any properties. They will be accessible throughout the app as app.config["nameOfProperty"].
+
+For example, you can set the mode in which the app will work:
 
 ```javascript
-// app.js
+// myapp.js
 import "./styles/app.css";
 import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 
@@ -81,9 +83,9 @@ export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
             mode:"readonly",  //application wide configuration
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout"
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,
+            start: "/top/layout"
         };
 
         super({ ...defaults, ...config });
@@ -110,7 +112,7 @@ if (this.app.config.mode === "readonly"){
 
 ## Routers
 
-Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is _HashRouter_. If you don't want to display the hashbang in the URL, you can change the router to _UrlRouter_:
+Webix Jet has four types of routers. The default router is _HashRouter_. If you don't want to display the hashbang in the URL, you can change the router to _UrlRouter_:
 
 ```javascript
 // myapp.js

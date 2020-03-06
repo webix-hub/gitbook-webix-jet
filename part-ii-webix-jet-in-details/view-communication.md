@@ -46,7 +46,7 @@ export default class FormView extends JetView {
 
 ### Getting Parameters from Class Methods
 
-To access _id_ in the form, you need to get to the **url** parameter that is received by [init\(\)](views-and-subviews.md#init-view-url), [urlChange\(\)](views-and-subviews.md#urlchange-view-url) or [ready\(\)](views-and-subviews.md#ready-view-url) methods of a Jet class view. **url** is an array of objects, each with three properties:
+To access _id_ in the form, you need to get to the **url** parameter that is received by [init\(\)](views.md#init-view-url), [urlChange\(\)](views.md#urlchange-view-url) or [ready\(\)](views.md#ready-view-url) methods of a Jet class view. **url** is an array of objects, each with three properties:
 
 * **page** - the name of the URL element
 * **params** - the URL parameters of the element
@@ -54,7 +54,7 @@ To access _id_ in the form, you need to get to the **url** parameter that is rec
 
 If any parameters were passed, you can get to them with _url\[n\].params.{parameter}_, where _n_ is the number of the URL segment.
 
-Let's access the _id_ parameter from [urlChange\(\)](views-and-subviews.md#urlchange-view-url) and fill the form with the values from a data record with ID = 1:
+Let's access the _id_ parameter from [urlChange\(\)](views.md#urlchange-view-url) and fill the form with the values from a data record with ID = 1:
 
 ```javascript
 // views/form.js
@@ -80,7 +80,7 @@ export default class FormView extends JetView{
 
 where `getData` is a function that returns a data record.
 
-In this simple example, as soon as DataView is initialized, [urlChange\(\)](views-and-subviews.md#urlchange-view-url) of _FormView_ is called and the form is filled with correct data.
+In this simple example, as soon as DataView is initialized, [urlChange\(\)](views.md#urlchange-view-url) of _FormView_ is called and the form is filled with correct data.
 
 ### Setting / Getting Parameters with JetView Methods
 

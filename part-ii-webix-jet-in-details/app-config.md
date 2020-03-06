@@ -1,39 +1,15 @@
 # App Config
 
-An app module can be created as a new instance of the JetApp class or as an instance of a child class.
+An app module is defined as an extension of the JetApp class (OOP inheritance).
 
-In the app file, you will also typically include:
+In the app file, you will typically include:
 
 * stylesheets \(any CSS or LESS\)
 * custom widgets
 * app-level plugins
 * app-level Webix settings
 
-You can include several stylesheets, and when the app will be built, they all will be compiled into _app.css_ that you can link to your _index.html_ page and that will be put in _codebase_ when you build the production files.
-
-```javascript
-//app.js
-import "./styles/app.css";  // !
-import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
-
-export default class MyApp extends JetApp{
-    constructor(config){
-        const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout"
-        };
-
-        super({ ...defaults, ...config });
-    }
-}
-
-if (!BUILD_AS_MODULE){
-    webix.ready(() => new MyApp().render() );
-}
-```
-
-You can include various parameters into the app configuration. This is their list. The details are below.
+You can include various parameters into the app configuration. The details are below.
 
 | Parameter | What For |
 | :--- | :--- |
@@ -56,9 +32,9 @@ import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout" // !
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,
+            start: "/top/layout" // !
         };
 
         super({ ...defaults, ...config });
@@ -72,7 +48,7 @@ if (!BUILD_AS_MODULE){
 
 ## Debugging
 
-It is highly recommended to enable the **debug** mode when developing Jet apps. You can enable debugging in the app configuration:
+You really should enable the **debug** mode during the development stage. When _debug_ is enabled, error messages are logged into console and a debugger will pause the app on errors. Note that `webix.debug({ events: true });` also should be switched on.
 
 ```javascript
 // myapp.js
@@ -82,9 +58,9 @@ import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,  // !
-            start     : "/top/layout"
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,  // !
+            start: "/top/layout"
         };
 
         super({ ...defaults, ...config });
@@ -96,14 +72,13 @@ if (!BUILD_AS_MODULE){
 }
 ```
 
-When _debug_ is enabled, error messages are logged into console and a debugger will pause the app on errors.
+[You can read more about debugging with Webix in this blog post](https://blog.webix.com/ui-development-and-debug-with-webix-js/).
 
 ## Choosing a Router
 
-Webix Jet has four types of routers. You should specify the preferred router in the app configuration as well. The default router is _HashRouter_. If you don't want to display the hashbang in the URL, you can change the router to _UrlRouter_:
+Webix Jet has four types of routers. The default router is _HashRouter_. If you don't want to display the hashbang in the URL, you can change the router to _UrlRouter_:
 
 ```javascript
-// myapp.js
 // myapp.js
 import "./styles/app.css";
 import { JetApp, EmptyRouter, UrlRouter } from "webix-jet";
@@ -111,9 +86,9 @@ import { JetApp, EmptyRouter, UrlRouter } from "webix-jet";
 export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : UrlRouter,    // !
-            debug     : !PRODUCTION,
-            start     : "/top/layout"
+            router: BUILD_AS_MODULE ? EmptyRouter : UrlRouter,    // !
+            debug: !PRODUCTION,
+            start: "/top/layout"
         };
 
         super({ ...defaults, ...config });
@@ -129,7 +104,7 @@ if (!BUILD_AS_MODULE){
 
 Use the **views** parameter to change the names of view modules inside your code.
 
-For example, if the module you want to show is in a subfolder and you want to shorten the URL of the module, you can do it in the app configuration:
+For example, if the module you want to show is in a subfolder and you want to shorten the URL of the module, you can do it in the **views** parameter:
 
 ```javascript
 // myapp.js
@@ -183,7 +158,7 @@ export default class TopView extends JetView {
 
 ### Code Splitting
 
-You can [split your code into bundles](https://webpack.js.org/guides/code-splitting/) and load them on demand \(lazy loading\), which can greatly influence the initial loading time of the application. Lazy loading of app code is possible in Webix Jet with the help of a custom **app.views** handler. Where you can just import the bundle on demand [\[2\]](app-config.md#2).
+You can [split your code into bundles](https://webpack.js.org/guides/code-splitting/) and load them on demand \(lazy loading\), which can greatly influence the initial loading time of the application. Lazy loading of app code is possible in Webix Jet with the help of a custom **app.views** handler. Where you can import the bundle on demand [\[2\]](app-config.md#2).
 
 ```javascript
 // myapp.js
@@ -193,9 +168,9 @@ import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
 export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout",
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,
+            start: "/top/layout",
             views: (name) => {
                 if (name === "modules.clients") //sources/modules/
                     return import("modules/clients");
@@ -214,7 +189,7 @@ if (!BUILD_AS_MODULE){
 }
 ```
 
-In **webpack.config.js**, you can define the chunk naming scheme \(the _chunkFilename_ property\) in output's configuration:
+In **webpack.config.js**, you can define the chunk naming scheme \(the _chunkFilename_ property\) in **output**:
 
 ```javascript
 // webpack.config.js
@@ -303,9 +278,9 @@ export default class MyApp extends JetApp{
     constructor(config){
         const defaults = {
             mode:"readonly",  //application wide configuration
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout"
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,
+            start: "/top/layout"
         };
 
         super({ ...defaults, ...config });
@@ -329,6 +304,32 @@ if (this.app.config.mode === "readonly"){
 ```
 
 **this** refers to the current instance of a Jet view class \[1\].
+
+## Adding Stylesheets
+
+You can include several stylesheets. When the app will be built, all stylesheets will be compiled into _app.css_. _app.css_ will be added to _/codebase_.
+
+```javascript
+//app.js
+import "./styles/app.css";  // !
+import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
+
+export default class MyApp extends JetApp{
+    constructor(config){
+        const defaults = {
+            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug: !PRODUCTION,
+            start: "/top/layout"
+        };
+
+        super({ ...defaults, ...config });
+    }
+}
+
+if (!BUILD_AS_MODULE){
+    webix.ready(() => new MyApp().render() );
+}
+```
 
 ## Footnotes
 

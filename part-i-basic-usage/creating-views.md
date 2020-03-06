@@ -75,7 +75,7 @@ You can embed multiple views that will change according to the URL. Instead of t
 import {JetView} from "webix-jet";
 
 export default class BigView extends JetView {
-    config: () => { 
+    config: () => {
             rows:[
                 { $subview: true },
                 { template:"BigView text" }
@@ -100,5 +100,5 @@ index.html#!/bigview/viewb
 
 For more information on other ways to define views and include subviews, read:
 
-* [Views and Subviews](../part-ii-webix-jet-in-details/views-and-subviews.md).
+* [Views and Subviews](../part-ii-webix-jet-in-details/views.md).
 
