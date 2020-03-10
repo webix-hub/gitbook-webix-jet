@@ -63,12 +63,16 @@ Then you can create a new instance of CustomerData in [config\(\)](../api/jetvie
 import {JetView} from "webix-jet";
 import {getRecords} from "models/orders";
 import {getClients} from "models/customers";
-...
-config(){
-    row:[
-		new CustomersData(this.app,"",getRecords()),
-		new CustomersData(this.app,"",getClients())
-	]
+
+export default class TopView extends JetView{
+    config(){
+        return {
+            rows:[
+                new CustomersData(this.app,"",getRecords()),
+                new CustomersData(this.app,"",getClients())
+            ]
+        };
+    }
 }
 ```
 
