@@ -78,13 +78,28 @@ export default class TopView extends JetView{
 
 ### JetView Methods
 
-Webix UI lifetime event handlers are implemented through **JetView** class methods. Here are the methods that you can redefine:
+Webix UI life-time handlers are implemented through **JetView** class methods. Here are the methods that you can redefine:
 
 * [config\(\)](../api/jetview-handlers.md#config)
 * [init\(\)](../api/jetview-handlers.md#init-view-url)
 * [urlChange\(\)](../api/jetview-handlers.md#urlchange-view-url)
 * [ready\(\)](../api/jetview-handlers.md#ready-view-url)
 * [destroy\(\)](../api/jetview-handlers.md#destroy)
+
+Life-time handlers are called in this specific order (as in the list above). When you deal with [views and subviews](subviews.md), this order for a parent view is 'broken' by life-time handlers of the subview. For instance, if the URL is changed to _a/b_, the order in which view class methods are called is the following:
+
+```text
+config a
+init a
+    config b
+    init b
+    urlChange b
+    ready b
+urlChange a
+ready a
+```
+
+[Test it >>](https://snippet.webix.com/rqfbv23k)
 
 [JetView also has other methods](../api/jetview-methods.md).
 
