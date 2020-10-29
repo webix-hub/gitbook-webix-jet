@@ -56,7 +56,8 @@ export default class BigView extends JetView{
         rows:[
             MyView,
             { template:"BigView text" }
-    ]}
+        ]
+    }
 }
 ```
 
@@ -76,10 +77,11 @@ import {JetView} from "webix-jet";
 
 export default class BigView extends JetView {
     config: () => {
-            rows:[
-                { $subview: true },
-                { template:"BigView text" }
-    ]}
+        rows:[
+            { $subview: true },
+            { template:"BigView text" }
+        ]
+    }
 }
 ```
 
@@ -100,5 +102,6 @@ index.html#!/bigview/viewb
 
 For more information on other ways to define views and include subviews, read:
 
-* [Views and Subviews](../part-ii-webix-jet-in-details/views.md).
+* [Views and Subviews](../part-ii-webix-jet-in-details/views.md)
+* [JetView API](../api/jetview-api.md)
 
