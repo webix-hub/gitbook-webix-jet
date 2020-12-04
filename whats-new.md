@@ -17,8 +17,8 @@
 * Webix Jet supports IE11+
 * *HashRouter* works more stable during in-browser navigation
 * New [*SubRouter*](part-ii-webix-jet-in-details/routers.md#5-sub-router) that enables navigation in sub-modules
-* The ability to use Webix Jet [without Webpack](part-iii-practical-tasks/using-webix-jet-without-webpack.md)
-* The ability to [import Webix code as a module](part-iii-practical-tasks/importing-webix-as-module.md)
+* The ability to use Webix Jet [without Webpack](part-iv-toolchain/using-webix-jet-without-webpack.md)
+* The ability to [import Webix code as a module](part-iv-toolchain/importing-webix-as-module.md)
 
 ### Changes in API and Inner Logic
 
@@ -33,14 +33,14 @@
 
 ## Version 1.6 - June 26, 2018
 
-* new [WJET utility](part-iii-practical-tasks/wjet-utility-for-faster-prototyping.md) for faster prototyping
+* new [WJET utility](part-iv-toolchain/wjet-utility-for-faster-prototyping.md) for faster prototyping
 * JetView has the [refresh\(\) method](api/jetview-api.md#this-refresh)
 * better support for ES6 modules: [app.views](part-ii-webix-jet-in-details/app-config.md#code-splitting) can return a promise of an ES6 module, which can be used for code-splitting
 
 ## Version 1.5 - April 24, 2018
 
-* the ability to compile a Jet app into a standalone bundle and [use it in other apps or as is](part-iii-practical-tasks/big-app-development.md#modules-and-large-app-development)
-* the ability to compile a Jet app as a component and [use it as a Webix widget](part-iii-practical-tasks/big-app-development.md#using-jet-app-as-a-widget)
+* the ability to compile a Jet app into a standalone bundle and [use it in other apps or as is](part-iv-toolchain/big-app-development.md#modules-and-large-app-development)
+* the ability to compile a Jet app as a component and [use it as a Webix widget](part-iv-toolchain/big-app-development.md#using-jet-app-as-a-widget)
 * [**this.$$\(\)**](api/jetview-api.md#this-usdusd) returns [widgets from the current Jet view only](part-ii-webix-jet-in-details/referencing-views.md#5-referencing-webix-widgets)
 
 ## Version 1.4 - April 11, 2018
@@ -49,7 +49,7 @@
 
 ## Version 1.3 - January 11, 2018
 
-* [TypeScript support](part-iii-practical-tasks/using-typescript.md)
+* [TypeScript support](part-iv-toolchain/using-typescript.md)
 * new API:
   * [getParam](api/jetview-api.md#this-getparam) and [setParam](api/jetview-api.md#this-setparam) methods to get/set URL parameters
   * [getUrl](api/jetview-api.md#this-geturl)

@@ -279,4 +279,4 @@ As a result, this is a two-level app.
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/viewapp.js).
 
-Jet apps can also behave as Webix widgets, for details, check ["Big app development"](../part-iii-practical-tasks/big-app-development.md).
+Jet apps can also behave as Webix widgets, for details, check ["Big app development"](../part-iv-toolchain/big-app-development.md).

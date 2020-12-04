@@ -1,4 +1,9 @@
-# WJet Utility for Faster Prototyping
+# \[DEPRECATED\] WJet Utility for Faster Prototyping
+
+{% hint style="warning" %}
+WJet is deprecated and is no longer maintained.
+{% endhint %}
+
 
 [WJet](https://github.com/webix-hub/wjet) is a Webix Jet command line tool that will help you begin working with Webix Jet.
 
