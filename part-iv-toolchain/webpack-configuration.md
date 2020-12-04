@@ -5,7 +5,7 @@ There are some cases when you might want to add some extra configuration for you
 ## Configuring Webix Jet to Work with a Backend Server
 
 {% hint style="info" %}
-These instructions are for the **development stage**. For production, [see this](deploying-and-testing.md).
+These instructions are for the **development stage**. For production, [see this](../part-iv-toolchain/deploying-and-testing.md).
 {% endhint %}
 
 Let's look at an example of configuring Webix Jet to work with the Apache Tomcat server.
