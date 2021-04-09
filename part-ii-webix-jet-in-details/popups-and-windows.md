@@ -74,7 +74,7 @@ You can define windows and popups as view classes as well. Have a look at a simi
 // views/window2.js
 import {JetView} from "webix-jet";
 
-export class WindowsView extends JetView {
+export default class WindowView extends JetView {
     config(){
         return {
             view:"popup",
@@ -93,7 +93,7 @@ Because this popup view is a class, you have to define the method \(or attach an
 // views/window2.js
 import {JetView} from "webix-jet";
 
-export class WindowsView extends JetView {
+export default class WindowView extends JetView {
     config(){
         return {
             view:"popup",
@@ -135,7 +135,7 @@ export default class TopView extends JetView {
         };
     }
     init(){
-        this.win2 = this.ui(WindowsView);
+        this.win2 = this.ui(WindowView);
     }
 }
 ```
