@@ -247,9 +247,9 @@ Use **this.setParam\(\)** method to set the URL related data. You can use **setP
 
 **Parameters:**
 
-* the _name_ of the URL parameter,
-* the new _value_,
-* \(optional\) _display_, if it is set to _true_, the parameter is displayed in the URL.
+* **id** - the name of the URL parameter or "",
+* **value** - the new value for a parameter or a URL segment (page name),
+* **url** \(optional\) - if it is set to _true_, **view.show** will be called, which in turn will trigger *urlChange* handlers of all involved views. Otherwise the change of the URL will be silent.
 
 For example, this is how you can change a URL parameter:
 
