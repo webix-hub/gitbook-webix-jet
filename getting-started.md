@@ -37,9 +37,9 @@ The codebase of the app consists of:
 
 ## How it Works
 
-The basic principle of creating an app is the following. The app is a single page. It is divided into multiple views, which will be kept in separate files. Thus, the process of controlling the behavior of the app gets much easier and quicker.
+The basic principle of creating an app is the following. The app is a single page. It is divided into multiple views, which are kept in separate files. Thus, the process of controlling the behavior of the app gets much easier and quicker.
 
-Navigation between pages works, when the URL of the page changes. The URL of the app is divided by a hashbang \(\#!\) into two parts:
+Navigation between pages works when the URL of the page changes. The URL of the app is divided by a hashbang \(\#!\) into two parts:
 
 * the main URL that is the web address of the app,
 * the app URL fragment that defines the UI \(_\#!/some/part_\).
@@ -84,7 +84,7 @@ The _views/top_ module defines the top level view, that contains a menu and incl
 ```javascript
 // views/top.js
 import {JetView} from "webix-jet";
-import start from "views/start"
+import start from "views/start";
 
 export default class TopView extends JetView {
     config(){
@@ -109,12 +109,12 @@ This module returns an object that differs from **start**. There are two variant
 
 A JetView-based class can have:
 
-* the _config\(\)_ method that returns the interface of the component that will be initialized. In this example, it's a menu;
+* the _config\(\)_ method that returns the interface of the component that will be initialized. In this example, it's a layout with a menu and **start** view next to it;
 * the lifetime handler methods that specify the component behavior during its life cycle.
 
 ## Creating Subviews
 
-As it has already been said, the app consists of a single page. How is the process of views manipulation organized?
+As it has already been said, the app consists of a single page. How is the view composition organized?
 
 Check out the following code:
 
@@ -170,7 +170,13 @@ export const data = new webix.DataCollection({
 });
 ```
 
-The module returns a data collection that loads data from the _data.php_ file.
+The model can also return data from a backend, e.g.:
+
+```javascript
+export const data = new webix.DataCollection({
+    url:"data.php"
+});
+```
 
 The _views/data_ module, which uses the model, has the following code:
 
