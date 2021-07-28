@@ -243,7 +243,7 @@ Let's group these views into an app module:
 // views/app1.js
 import {JetApp,EmptyRouter} from "webix-jet";
 
-export var app1 = new JetApp({
+export const app1 = new JetApp({
     start: "/form",
     router: EmptyRouter //!
 }); //no render!
@@ -269,7 +269,7 @@ Finally, this view can also be put into another app:
 // app2.js
 import {JetApp,HashRouter} from "webix-jet";
 
-var app2 = new JetApp({
+const app2 = new JetApp({
     start: "/page",
     router: HashRouter
 }).render();

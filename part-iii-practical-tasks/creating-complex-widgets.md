@@ -115,7 +115,7 @@ If you want to load custom widget code on demand, you can split your code and im
 import {JetView} from "webix-jet";
 export default class StatisticsView extends JetView{
     config(){
-        var widgets = import(/* webpackChunkName: "widgets" */ "modules/customgrid");
+        const widgets = import(/* webpackChunkName: "widgets" */ "modules/customgrid");
         return widgets.then(() => {
 
             return { rows:[

@@ -17,7 +17,7 @@ The app URL is displayed after a hashbang. As this router is set by default, the
 // myapp.js
 import {JetApp, HashRouter} from "webix-jet";
 
-var app = new JetApp({
+const app = new JetApp({
     start: "/demo/details",
     router: HashRouter //optional
 }).render();
@@ -31,7 +31,7 @@ You can hide the "!" in the app URL by using the **routerPrefix** parameter in t
 // myapp.js
 import {JetApp, HashRouter} from "webix-jet";
 
-var app = new JetApp({
+const app = new JetApp({
     start: "/demo/details",
     router: HashRouter, //optional
     routerPrefix:""
@@ -122,7 +122,7 @@ Here's an app module with a form view:
 // app1.js
 import {JetApp, StoreRouter} from "webix-jet";
 
-var app1 = new JetApp({
+const app1 = new JetApp({
     start: "/form",
     router: StoreRouter
 });
@@ -139,7 +139,7 @@ const PageView = () => ({
 // app2.js
 import {JetApp, HashRouter} from "webix-jet";
 
-var app2 = new JetApp({
+const app2 = new JetApp({
     start: "/page",
     router: HashRouter
 }).render();
@@ -153,7 +153,7 @@ If you don't want to store the app part of the URL, there's the EmptyRouter for 
 // app1.js
 import {JetApp, EmptyRouter} from "webix-jet";
 
-var app1 = new JetApp({
+const app1 = new JetApp({
     start: "/form",
     router: EmptyRouter
 });
@@ -169,7 +169,7 @@ SubRouter is used for navigation in app modules that are included in other apps.
 // app1.js
 import {JetApp, SubRouter} from "webix-jet";
 
-var app1 = new JetApp({
+const app1 = new JetApp({
     start: "/form",
     router: SubRouter
 });

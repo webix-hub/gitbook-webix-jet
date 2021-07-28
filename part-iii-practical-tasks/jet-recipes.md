@@ -63,7 +63,7 @@ import {JetView} from "webix-jet";
 
 export default class limited extends JetView{
     config(){
-        var ui = { view:"form", rows:[
+        const ui = { view:"form", rows:[
             { label:"Name", view:"text" },
             { label:"Email", view:"text" },
             {}
@@ -82,7 +82,7 @@ import {JetView} from "webix-jet";
 
 export default class limited extends JetView{
     config(){
-        var ui = { view:"form", rows:[
+        const ui = { view:"form", rows:[
             { label:"Name", view:"text" },
             { label:"Email", view:"text" }
         ]};
@@ -116,7 +116,7 @@ export class TopView extends JetView {
                         value:this.app.config.access,
                         options:["reader","writer"], click:function(){
                             // change access level, for demo only 
-                            var app = this.$scope.app;
+                            const app = this.$scope.app;
                             app.config.access = this.getValue();
                             webix.delay(function(){
                                 app.refresh();
@@ -251,7 +251,7 @@ webix.ready(() => {
     const size =  () => document.body.offsetWidth > 800 ? "wide" : "small";
     app.config.size = size();
     webix.event(window, "resize", function(){
-        var newSize = size();
+        const newSize = size();
         if (newSize != app.config.size){
             app.config.size = newSize;
             app.refresh();
@@ -307,7 +307,7 @@ import {data} from "../models/records";
 
 export default class ListB extends JetView {
     config(){
-        var config = {
+        const config = {
             view:"datatable",
             editable:true
         };

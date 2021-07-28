@@ -31,15 +31,15 @@ This is how you can get **id** from the **page** view:
 
 ```javascript
 //from page.js
-var id = this.getParam("id"); //id == 12
+const id = this.getParam("id"); //id == 12
 ```
 
 And this is how you can get **id** from **some**:
 
 ```javascript
 //from some.js
-var id = this.getParam("id");       //id == ""
-var id = this.getParam("id", true); //id == 12
+const id = this.getParam("id");       //id == ""
+const pid = this.getParam("id", true); //id == 12
 ```
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/urlparams.js)
@@ -67,7 +67,7 @@ export default class Child extends JetView{
         };
     }
     init(view){
-        var item = this.getParentView().getSelected();
+        const item = this.getParentView().getSelected();
         view.setValues(item);
     }
 }
@@ -363,7 +363,7 @@ export default class SomeView extends JetView{
     config(){
         return {
             view:"button", value:"Show URL", click: () => {
-                var url = this.getUrl();
+                const url = this.getUrl();
 				//	[{ page:"some", params:{}, index:1 }]
             }
         };
@@ -405,7 +405,7 @@ export default class SomeView extends JetView{
     config(){
         return {
             view:"button", value:"Show URL", click: () => {
-                var url = this.getUrlString();
+                const url = this.getUrlString();
 				// "/some"
             }
         };
@@ -533,7 +533,7 @@ export default class TopView extends JetView {
 **this.ui\(\)** has an optional parameter - _container_. If you provide it, the view will be rendered inside the container:
 
 ```javascript
-var SubView = {
+const SubView = {
     template:"test"
 };
 

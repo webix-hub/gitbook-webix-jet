@@ -175,7 +175,7 @@ Have a look at a simple example of a factory function that returns a promise tha
 ```javascript
 // views/promised.js
 const promised = () => {
-    var t = webix.promise.defer();
+    const t = webix.promise.defer();
     setTimeout(function(){
         t.resolve({ template:"Resolved by promise" });
     }, 1000);
@@ -194,8 +194,8 @@ import {JetView} from "webix-jet";
 
 class TopView extends JetView {
     config(){
-        var res = webix.promise.defer();
-        var ui = {
+        const res = webix.promise.defer();
+        const ui = {
             template:"Resolved by a promise"
         };
         setTimeout(function(){

@@ -34,11 +34,14 @@ export default class TopView extends JetView {
     config(){
         return {
             cols:[
-                { view:"button", value:"List", route:"data",
-                  click:function(id){
-                    var button = this;
-                    this.$scope.show(button.route);
-                }},
+                {
+                    view:"button",
+                    value:"List",
+                    route:"data",
+                    click:function(){
+                        this.$scope.show(this.config.route);
+                    }
+                },
                 { $subview: true }
             ]
         };

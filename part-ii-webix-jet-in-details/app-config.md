@@ -216,7 +216,7 @@ const defaults = {
     views: function(url){
         //implement your own logic here
         url = url.replace(/\./g, "/");
-        var view = require("jet-views/"+url);
+        const view = require("jet-views/"+url);
         if (view.__esModule) {
             view = view.default;
         }

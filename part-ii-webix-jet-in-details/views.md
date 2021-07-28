@@ -208,13 +208,13 @@ View objects can also be returned by a factory function.
 ```javascript
 /* views/details.js */
 export default () => {
-    var data = [];
-    for (var i = 0; i < 10; i++)
+    const data = [];
+    for (let i = 0; i < 10; i++)
         data.push({ value:i });
 
     return {
         view:"list", options:data
-    }
+    };
 }
 ```
 

@@ -69,7 +69,7 @@ If you include **webix.js** (not **webix.min.js**) and set the **debug** propert
 // myapp.js
 import {JetApp} from "webix-jet";
 
-var app = new JetApp({
+const app = new JetApp({
     debug: true // console.log and debugger on error
 });
 ```

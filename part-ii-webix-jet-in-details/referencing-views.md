@@ -191,7 +191,7 @@ export default class Child extends JetView{
         };
     }
     init(view){
-        var item = this.getParentView().getSelected();
+        const item = this.getParentView().getSelected();
         view.setValues(item);
     }
 }
@@ -217,7 +217,7 @@ export default class ListEditView extends JetView{
         }
     }
     ready(){
-        var list = this.getSubView("list").getRoot();
+        const list = this.getSubView("list").getRoot();
         this.getSubView("form").bindWith(list);
     }
 }

@@ -251,7 +251,7 @@ export default class TopView extends JetView {
         };
     }
     init(){
-        var context = this.ui({
+        const context = this.ui({
 			view:"contextmenu", localId:"context",
 			data:["Add","Rename","Delete",{ $template:"Separator" },"Info"]
         });

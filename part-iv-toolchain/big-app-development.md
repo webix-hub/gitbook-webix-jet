@@ -56,7 +56,7 @@ If you want to use the module on a page without Webix Jet:
 <link rel="stylesheet" type="text/css" href="modules/style.css">
 <script>
     webix.ready(function(){
-        var app = new appname.default();
+        const app = new appname.default();
         app.render(document.body);
     });
 </script>

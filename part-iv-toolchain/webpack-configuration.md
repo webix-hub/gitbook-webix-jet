@@ -71,7 +71,7 @@ By default, the app is built with one start file \(_admin.js_ in this example\):
 {% code-tabs-item title="webpack.config.js" %}
 ```javascript
 ...
-var config = {
+const config = {
     entry: "./sources/admin.js",
     output: {
         //...
@@ -112,7 +112,7 @@ By default, Webpack tries to resolve the locales in _sources/locales_. Delete th
 {% code-tabs %}
 {% code-tabs-item title="webpack.config.js" %}
 ```javascript
-var config = {
+const config = {
     ...
     resolve: {
         extensions: [".js"],
@@ -159,7 +159,7 @@ By default, views and locales are stores in **sources/views** and **sources/loca
 {% code-tabs %}
 {% code-tabs-item title="webpack.config.js" %}
 ```javascript
-var config = {
+const config = {
     ...
     resolve: {
         extensions: [".js"],

@@ -299,7 +299,7 @@ export default class FormView extends JetView{
         };
     }
     init(view){
-        var id = this.app.getService("masterTree").getSelected();
+        const id = this.app.getService("masterTree").getSelected();
         view.setValues(getData(id));
     }
 }

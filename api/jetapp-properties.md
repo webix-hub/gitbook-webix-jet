@@ -20,7 +20,7 @@ export class App extends JetApp {
 }
 
 // index.html
-var app = new App({
+const app = new App({
     url: "//localhost:3200/",
 });
 app.render(document.body);
@@ -50,7 +50,7 @@ A promise that resolves when the app is rendered.
 
 ```javascript
 // index.html
-var app = new App();
+const app = new App();
 app.render(document.body);
 app.ready.then(() => {
     /* do something */

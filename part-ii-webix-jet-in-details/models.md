@@ -140,7 +140,7 @@ A shared data model can look like this:
 
 ```javascript
 //models/shareddata.js
-var data = webix.ajax("some.json").then(a => a.json());
+const data = webix.ajax("some.json").then(a => a.json());
 export function sharedData(name){
     return data.then(a => {
         switch (name){
@@ -390,7 +390,7 @@ import {JetView} from "webix-jet";
 
 export default class DataView extends JetView{
     config(){
-        var ui = { view:"datatable", autoConfig:true };
+        const ui = { view:"datatable", autoConfig:true };
         ui.load("data.php");
         return ui;
     }
@@ -414,14 +414,14 @@ Let's recap main differences of the three ways to load and save data:
 You can use services instead of models as data sources. Suppose there is a list of customers and a grid that displays records on a selected customer. Here is how you can use a service that returns the ID of a selected list item:
 
 ```javascript
-var id = service.getSelected();
-var data = records.getData(id);
+const id = service.getSelected();
+const data = records.getData(id);
 ```
 
 A better and shorter way is:
 
 ```javascript
-var data = service.getNomenclature();
+const data = service.getNomenclature();
 ```
 
 ## 5. Using Webix Remote with Webix Jet
@@ -447,7 +447,7 @@ _webix.remote_ can also be used to create a DataCollection:
 
 ```javascript
 // models/nomencl.js
-var data = new DataCollection({
+const data = new DataCollection({
     url: webix.remote.nm.getData
 })
 ```
@@ -470,8 +470,8 @@ _1. You don't need to serialize data after loading._
 Compare the results of these two requests:
 
 ```javascript
-var data1 = webix.ajax("data/nomencl/154");         //"{"id":154,"name":"John"}"
-var data2 = webix.remote.nm.getNomenclature(154);    //{id:154,name:"John"}
+const data1 = webix.ajax("data/nomencl/154");         //"{"id":154,"name":"John"}"
+const data2 = webix.remote.nm.getNomenclature(154);    //{id:154,name:"John"}
 ```
 
 After receiving the response of the AJAX request, you have to call `JSON.parse(data1)` to turn a string into an object. The response of the second request is already an object.

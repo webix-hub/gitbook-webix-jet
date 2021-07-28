@@ -274,7 +274,7 @@ export default class TopView extends JetView {
         return {
             view:"datatable",
             subview: (obj, target) => {
-                var sub = new SubLayout(this.app, "", {
+                const sub = new SubLayout(this.app, "", {
                     title: obj.title 
                 });
                 this.ui(sub, { container: target });

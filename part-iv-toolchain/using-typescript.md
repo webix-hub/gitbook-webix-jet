@@ -58,7 +58,7 @@ Go to **webpack.config.js** and change the entry point and other **.js** files t
 
 ```javascript
 // webpack.config.js
-var config = {
+const config = {
     entry: "./sources/myapp.ts",
     ...
     resolve: {
@@ -72,7 +72,7 @@ Use a different transpiler: [**ts-loader**](https://github.com/TypeStrong/ts-loa
 
 ```javascript
 // webpack.config.js
-var config = {
+const config = {
     ...
     module: {
         rules: [

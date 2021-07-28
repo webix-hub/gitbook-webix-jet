@@ -299,7 +299,7 @@ export default class SomeView extends JetView{
    	init(){
 		this.use(plugins.UrlParam, ["id"])
 		// now when loading /some/23/details
-		var id = this.getParam("id"); //id === 23
+		const id = this.getParam("id"); //id === 23
    	}
 }
 ```
