@@ -210,6 +210,8 @@ The method creates a service.
 - *name* (string) is the name of the service,
 - *obj* (object) includes all methods and properties of the service that will be available to any view in the app.
 
+You can create services in views:
+
 ```javascript
 // views/tree.js
 import {JetView} from "webix-jet";
@@ -227,6 +229,23 @@ export default class TreeView extends JetView{
 ```
 
 **this** refers to the instance of the _treeView_ class if it is used in an _arrow function_ [\[1\]](jetapp-methods.md#1).
+
+You can also create services in app constructor:
+
+```javascript
+// myapp.js
+export default class MyApp extends JetApp{
+    constructor(config){
+        // ...config, plugins
+
+        this.setService("timer", {
+            startTimer(){
+                this.start = new Date();
+            }
+        });
+    }
+}
+```
 
 To access the service, use the [getService](jetapp-methods.md#app-getservice) method.
 
