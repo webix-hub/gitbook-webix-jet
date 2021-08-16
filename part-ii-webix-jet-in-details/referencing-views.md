@@ -165,13 +165,13 @@ export default class Parent extends JetView{
     config(){
         return {
             cols:[
-                { view:"list", select:true },
+                { view:"list", localId:"list", select:true },
                 { $subview:"form" }     //load "views/form"
             ]
-        }
+        };
     }
     getSelected(){
-        this.getRoot().queryView({view:"list"}).getSelectedItem();
+        return this.$$("list").getSelectedItem();
     }
 }
 ```
