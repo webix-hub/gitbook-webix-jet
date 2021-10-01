@@ -115,8 +115,8 @@ For example, if you need to create a lot of similar datatables, you can define a
 // views/basedatatable.js
 import {JetView} from "webix-jet";
 export default class BaseDatatable extends JetView {
-    constructor(app, name, config){
-        super(app, name);
+    constructor(app, config){
+        super(app);
         this.grid_config = config;
     }
     config(){
@@ -132,8 +132,8 @@ Next you can create custom datatable views, each one can define parameters for t
 import BaseDatatable from "views/basedatatable";
 import products from "models/products"; //data collection
 export default class ProductsView extends BaseDatatable {
-    constructor(app, name){
-        super(app, name, {
+    constructor(app){
+        super(app, {
             columns:[
                 {id:"id",header:""},
                 {id:"product",header:"Product"},

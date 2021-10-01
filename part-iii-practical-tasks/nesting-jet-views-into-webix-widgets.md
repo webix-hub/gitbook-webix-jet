@@ -242,8 +242,8 @@ Let's define the constructor that will call the parent constructor of the JetVie
 // views/subgrid.js
 import {JetView} from "webix-jet";
 export default class SubLayout extends JetView {
-    constructor(app, name, data){
-        super(app, name);
+    constructor(app, data){
+        super(app);
         this.customData = data;
     }
     config(){

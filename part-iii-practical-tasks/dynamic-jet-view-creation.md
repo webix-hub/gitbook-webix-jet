@@ -72,8 +72,8 @@ Define a base class for newly-added views. It must have a constructor and **conf
 // helpers/viewbase.js
 import {JetView} from "webix-jet";
 export default class ViewBase extends JetView {
-    constructor(app, name, config){
-        super(app, name);
+    constructor(app, config){
+        super(app);
         this._config = config;
     }
     config(){
