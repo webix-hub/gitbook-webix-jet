@@ -48,20 +48,6 @@ export default class Toolbar extends JetView {
 }
 ```
 
-This is one of the cases when arrow functions do not help to shorten the syntax. Have a look at the same task done with an arrow function:
-
-```javascript
-// views/toolbar.js
-...
-{ view: "button", value:"details",
-    click: () => {
-        this.show(this.getRoot().queryView({view:"button"}).getValue());
-    }
-}
-```
-
-**getRoot\(\)** is discussed below.
-
 ## 2. Reference to the App
 
 If you want to rebuild the app UI, you need to use _app.show\("/new/url"\)_. You can shorten the syntax with an **arrow function** and reference the app with **this.app**:
@@ -79,8 +65,6 @@ export default class ToolbarView extends JetView {
                 { view: "button", value:"details",
                     click: () => {
                         this.app.show("/demo/details");
-                        //or
-                        //this.app.show("/demo/" + this.getRoot().queryView({view:"button"}).getValue());
                     }
                 }
             ]

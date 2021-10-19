@@ -539,7 +539,7 @@ export default class SettingsView extends JetView {
         return {
             type:"space", rows:[
                 { template:"Settings", type:"header" },
-                { name:"skin", optionWidth: 120, view:"segmented", label:"Theme",
+                { localId:"skin", optionWidth: 120, view:"segmented", label:"Theme",
                     options:[
                         { id:"flat-default", value:"Default" },
                         { id:"flat-shady", value:"Shady" },
@@ -555,7 +555,7 @@ export default class SettingsView extends JetView {
 
 The option IDs of the segmented have two parts. The first part must be the same as the _title_ attribute of the link to a stylesheet. The **theme** service gets the theme name from this part of the ID, locates the correct stylesheet and sets the theme.
 
-Let's implement toggling themes as a method of the _SettingsView_ class. The **queryView** locates the segmented by its name and gets the user's choice. After that, the service sets the chosen theme by adding a corresponding CSS class name to the body of the HTML page.
+Let's implement toggling themes as a method of the _SettingsView_ class. The **$$** method locates the segmented by its local ID and gets the user's choice. After that, the service sets the chosen theme by adding a corresponding CSS class name to the body of the HTML page.
 
 ```javascript
 // views/settings.js
@@ -565,7 +565,7 @@ export default class SettingsView extends JetView {
     ...
     toggleTheme(){
         const themes = this.app.getService("theme");
-        const value = this.getRoot().queryView({ name:"skin" }).getValue();
+        const value = this.$$("skin").getValue();
         themes.setTheme(value);
     }
 }
@@ -680,7 +680,7 @@ export default class SettingsView extends JetView {
         return {
             type:"space", rows:[
                 { template:"Settings", type:"header" },
-                { name:"lang", optionWidth: 120, view:"segmented", label:"Language", options:[
+                { localId:"lang", optionWidth: 120, view:"segmented", label:"Language", options:[
                     { id:"en", value:"English" },
                     { id:"es", value:"Spanish" }
                 ], click:() => this.toggleLanguage() }, //will be implemented as a method of this class
@@ -703,7 +703,7 @@ export default class SettingsView extends JetView {
     ...
     toggleLanguage(){
         const langs = this.app.getService("locale");
-        const value = this.getRoot().queryView({ name:"lang" }).getValue();
+        const value = this.$$("lang").getValue();
         langs.setLang(value);
     }
 }

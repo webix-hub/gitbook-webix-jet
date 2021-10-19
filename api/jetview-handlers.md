@@ -46,20 +46,16 @@ export default class ToolbarView extends JetView{
         return {
             view:"toolbar", elements:[
                 { view:"label", label:"Demo" },
-                { view:"segmented", options:["details", "dash"] }
+                { view:"segmented", localId:"segmented", options:["details", "dash"] }
             ]
         };
     }
-    init(view, url){
+    init(_view, url){
         if (url.length > 1) //if there is a subview
-            view.queryView({
-                view:"segmented"
-            }).setValue(url[1].page);
+            this.$$("segmented").setValue(url[1].page);
     }
 }
 ```
-
-The segmented button is referenced by the Webix method [**queryView\(\)**](https://docs.webix.com/api__ui.baseview_queryview.html), while **view** is the top Webix widget in the view. _url\[1\].page_ is the name of the current subview \(_details_ or _dash_\).
 
 This is how you can load data to a Jet class view:
 
@@ -166,51 +162,57 @@ ready a
 * **view** - the Webix widget inside the Jet view class
 * **url** - the URL as an array of URL elements
 
-Here's how you can use **ready\(\)**. There are two simple views, a list and a form for editing the list:
+Here's how you can use **ready\(\)**. There is a bigger form that includes a smaller form. To fill both forms at the same time you should wait till the subform is fully rendered:
 
 ```javascript
-// views/list.js
-const list = {
-    view: "list",
-    select: true,
-    template: "#value#",
-    data: [{value:"one"},{value:"two"}]
-};
-
-// views/form.js
-const form = {
-    view: "form",
-    elements:[
-        {view: "text", name: "value", label: "Value"},
-        {view: "button", value: "Save", width: 90}
-    ]
-};
-```
-
-Let's include these views into one module and bind the list to the form:
-
-```javascript
-// views/listedit.js
+// views/subform.js
 import {JetView} from "webix-jet";
-
-export default class ListEditView extends JetView{
+export default class SumFormView extends JetView {
     config(){
         return {
-            cols:[
-                { $subview:"list" },   //load "views/list"
-                { $subview:"form" }    //load "views/form"
+            view: "form",
+            localId: "form",
+            elements:[
+                {view: "text", name: "name", label: "Name"},
+                {view: "datepicker", value: new Date(), label: "Date"},
+                // more controls
             ]
-        }
+        };
     }
-    ready(view){
-        const form = view.queryView({view:"form"});
-        const list = view.queryView({view:"list"});
-        form.bind(list);
+    SetValues(obj){
+        this.$$("form").setValues(obj);
+    }
+}
+
+// views/form.js
+import {JetView} from "webix-jet";
+import SubFormView from "views/subform";
+import {users} from "models/users";
+
+export default class FormView extends JetView {
+    config(){
+        return {
+            view: "form",
+            localId: "form",
+            elements:[
+                {view: "text", name: "email", label: "Email"},
+                {view: "text", name: "address", label: "Address"},
+                // more controls
+                {$subview: SubForm, name:"subform"},
+                {view: "button", value: "Save", width: 90},
+            ]
+        };
+    }
+    ready(){
+        const id = this.getParam("id");
+        if (id && users.exists(id)) {
+            const user = users.getItem(id);
+            this.$$("form").setValues(user);
+            this.getSubView("subform").SetValues(user);
+        }
     }
 }
 ```
-
-In the example, the form will be bound to the list only when both the list and the form are rendered.
 
 ## destroy\(\)
 
