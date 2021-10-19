@@ -265,7 +265,7 @@ This method is used for in-app navigation. It loads view modules according to th
 
 **Parameters**:
 
-- **path** (string, object) - the path to the module or a combination of parent-child modules with URL parameters or just URL parameters as an object,
+- **path** (string, object) - the path with one or several modules with URL parameters or just URL parameters as an object,
 - **config** (object) - the configuration with the [**target** parameter](jetview-methods.md#optional-target-parameter).
 
 **Returns**: a promise.

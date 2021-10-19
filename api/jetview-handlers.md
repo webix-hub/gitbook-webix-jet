@@ -82,7 +82,12 @@ export default class DataView extends JetView{
 
 ## urlChange\(\)
 
-**urlChange\(\)** is called every time the app URL is changed. It reacts to the change in the URL after **!\#** [\[1\]](views.md#1). **urlChange\(\)** is only called for the view that is rendered and for its parent.
+**urlChange\(\)** is called every time the app URL is changed. It reacts to the change in the URL after **!\#** [\[1\]](views.md#1).
+
+
+### When urlChange is called
+
+1. if a URL segment is changed, **urlChange\(\)** is called for the view that is rendered from that segment and for its parent
 
 Consider the following example. The initial URL is:
 
@@ -98,10 +103,24 @@ If you change it to:
 
 **urlChange\(\)** will be called for **preview** and **demo**. **demo** is not reconstructed. Such approach allows preserving parts of UI not affected by navigation, which improves performance and UX of the app. It is especially important if you have some complex widget in the parent view and do not want to fully reconstruct/reload it on subview navigation.
 
+2. if a URL parameter is changed, **urlChange\(\)** is called for the view-owner of the parameter and for its kids.
+
+For example, if you have the view structure like the following:
+
+```text
+/layout/demo/details
+```
+
+and set the **id** param for **layout** via [setParam](../api/jetview-methods.md#this-setparam) or [show](../api/jetview-methods.md#this-show), **urlChange\(\)** of **layout**, **demo**, and **details** will be called.
+
+### Method parameters
+
 The **urlChange** method receives two **parameters**:
 
 * **view** - the Webix widget inside the Jet view class
 * **url** - the URL as an array of URL elements
+
+### Example
 
 **urlChange\(\)** can be used to restore the state of the view according to the URL, e.g.:
 
@@ -112,17 +131,17 @@ import {JetView} from "webix-jet";
 export default class ToolbarView extends JetView{
     config(){
         return {
-            view:"toolbar", elements:[
+            view:"toolbar",
+            elements:[
                 { view:"label", label:"Demo" },
-                { view:"segmented", options:["details", "dash"] }
+                { view:"segmented", localId:"segmented", options:["details", "dash"] }
             ]
         };
     }
-    urlChange(view, url){
-        if (url.length > 1)
-            view.queryView({
-                view:"segmented"
-            }).setValue(url[1].page);
+    urlChange(_view, url){
+        if (url.length > 1){
+            this.$$("segmented").setValue(url[1].page);
+        }
     }
 }
 ```

@@ -122,7 +122,7 @@ In this simple example, when a table row is selected, a form is filled with the 
 
 ### Getting Parameters: Last Resort
 
-[getParam](../api/jetview-methods.md#this-getparam) can get URL parameters of the current view and its direct parent. If you really need to access parameters of subviews, you can use the **url** parameter of [lifetime handlers](../api/jetview-handlers.md). However, keep in mind that accessing parameters of other views is risky, because you must be sure in the current app structure.
+[getParam](../api/jetview-methods.md#this-getparam) can get URL parameters of the current view and its direct parent. If you really need to access parameters of subviews, you can use the **url** parameter of [lifetime handlers](../api/jetview-handlers.md). However, keep in mind that accessing parameters of other views is risky, because you must be sure of the current app structure.
 
 ```javascript
 // views/form.js
