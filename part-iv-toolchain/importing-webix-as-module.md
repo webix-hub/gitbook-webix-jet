@@ -46,36 +46,3 @@ export default class MyApp extends JetApp{
     }
 }
 ```
-
-## Alternative Solution
-
-The alternative solution will be to use the **script loader** for **webix.js**.
-
-1\. Add **script-loader** to the dependencies in **package.json**:
-
-```json
-"dependencies": {
-    "script-loader": "^0.7.2",
-    "webix": "^6.3.5",
-    "webix-jet": "^2.0.4"
-}
-```
-
-2\. Add the following lines in **webpack.config.js**:
-
-```js
-module.exports = {
-    module: {
-        rules: [
-            {
-                test: /\@xbs\/webix-pro\/webix\.js$/,
-                use: [ 'script-loader' ]
-            }
-        ]
-    }
-}
-```
-
-This solution will use the script-loader for **webix.js**, which will load **webix.js** as a global script, so it will be accessible to all the code. It is the same as including a script tag with **webix.js** inside of **index.html**.
-
-[Check out the demo >>](https://github.com/webix-hub/jet-start/tree/import-bundle)
