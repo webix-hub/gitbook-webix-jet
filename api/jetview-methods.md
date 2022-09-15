@@ -342,7 +342,7 @@ _getSubView()_ returns a subview by the name passed as a parameter.
 
 You can use the **target** parameter to show a view in a popup or a window:
 
-```js
+```javascript
 this.show("popup", { target:"_top" });
 ```
 

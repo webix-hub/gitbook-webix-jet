@@ -165,7 +165,7 @@ You can use the in-app event bus for view communication.
 
 To call/trigger an event, call [app.callEvent](api/jetapp-methods.md#app-callevent). You can call the method by referencing the app with **this.app** from an _arrow function_ [\[1\]](view-communication.md#1):
 
-```js
+```javascript
 // views/subview.js
 import { JetView } from "webix-jet";
 import { some_data } from "models/somedata";
@@ -197,7 +197,7 @@ You can attach an event handler to the event bus in one view and trigger the eve
 
 The best way to attach a listener is [this.on](jetview-api.md#this-on). The benefit of this way is that the event handler is automatically detached when the view that attached the event handler is destroyed. **this.on** can _handle_ app and Webix events.
 
-```js
+```javascript
 // views/parentview.js
 import { JetView } from "webix-jet";
 import { some_data } from "models/somedata";

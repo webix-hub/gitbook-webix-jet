@@ -58,7 +58,7 @@ For example, here are two views created in a different ways:
 
 - a class view that will be the parent
 
-```js
+```javascript
 // views/details.js
 import {JetView} from "webix-jet";
 export default class DetailsView extends JetView {
@@ -84,7 +84,7 @@ export default MyView = {
 
 To combine them, the app URL must be *"/details/myview"*, e.g. you can set the start URL in the app config to combine the views from the start:
 
-```js
+```javascript
 // myapp.js
 import "./styles/app.css";
 import { JetApp } from "webix-jet";
@@ -134,7 +134,7 @@ export default class BigView extends JetView {
 
 2\. **$subview:true, name:"subviewName" (named dynamic subviews)**
 
-```js
+```javascript
 // views/bigview.js
 import {JetView} from "webix-jet";
 export default class BigView extends JetView {
@@ -151,7 +151,7 @@ export default class BigView extends JetView {
 
 To show such dynamic subviews, call **this.show()** with the second parameter - the name of the subview as the target:
 
-```js
+```javascript
 // views/bigview.js
 init(){
 	this.show("details/myview", { target:"left" });
@@ -161,7 +161,7 @@ init(){
 
 A subview created in this way does not "know" anything about the URL changes of the parent and hence does not react to them. This means that the **urlChange()** of the subview is called only for URL changes of the its own branch of the app URL.
 
-```js
+```javascript
 // views/details.js
 import {JetView} from "webix-jet";
 export default class DetailsView extends JetView {

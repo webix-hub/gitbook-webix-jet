@@ -17,7 +17,7 @@ Please note that this way in not recommended, as the resulting file is relativel
 
 1\. Make Webix available for all includes by adding the following section in **webpack.config.js**:
 
-```js
+```javascript
 plugins: [
 	new webpack.ProvidePlugin({
 		// SET PATH TO WEBIX HERE
@@ -29,7 +29,7 @@ plugins: [
 
 2\. Import Webix:
 
-```js
+```javascript
 import { JetApp } from "webix-jet";
 import * as webix from "webix"; // use script !!!
 

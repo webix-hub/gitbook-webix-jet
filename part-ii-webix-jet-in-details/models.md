@@ -170,7 +170,7 @@ export gridData;
 A component expects that **sharedData** will return an array of objects or a promise of an array of objects.  
 If you are returning data in a different format, you can add a data transformation for the promise chain:
 
-```js
+```javascript
 //models/griddata.js
 import {sharedData} from "models/shareddata";
 
@@ -186,7 +186,7 @@ export gridData;
 
 A **grid** can use this model like this:
 
-```js
+```javascript
 // views/grid.js
 import {JetView} from "webix-jet";
 import {gridData} from "models/griddata";
@@ -203,7 +203,7 @@ export default class GridView extends JetView{
 
 With **forms**, you should use a different approach:
 
-```js
+```javascript
 // views/form.js
 import {JetView} from "webix-jet";
 import {gridData} from "models/griddata";
@@ -222,7 +222,7 @@ where `id` is the ID of the record from DataCollection that you want to load int
 
 **Note:** if you have a single record in DataCollection, you can use the **DataRecord** object instead:
 
-```js
+```javascript
 // models/data.js
 import {sharedData} from "models/shareddata";
 export const data = new webix.DataRecord({});
@@ -233,7 +233,7 @@ temp.then(function(d){
 });
 ```
 
-```js
+```javascript
 // views/form.js
 import {JetView} from "webix-jet";
 import {data} from "models/data";
@@ -250,14 +250,14 @@ export default class FormView extends JetView {
 
 or just a plain JS object:
 
-```js
+```javascript
 import {sharedData} from "models/shareddata";
 
 export const data = {};
 export const ready = sharedData("grid").then(d => webix.extend(data,d) );
 ```
 
-```js
+```javascript
 // views/form.js
 import {JetView} from "webix-jet";
 import {ready, data} from "models/data";

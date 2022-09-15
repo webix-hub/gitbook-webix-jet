@@ -185,7 +185,7 @@ The solution is to include a view with a window as a dynamic subview. The window
 1. create a *$subview:true* element in the parent view and add the **popup:true** property to it,
 2. show the window-view with *this.show()*.
 
-```js
+```javascript
 // views/top.js
 import { JetView } from "webix-jet";
 export default class TopView extends JetView{
@@ -205,7 +205,7 @@ export default class TopView extends JetView{
 
 "popup" is the file with the window, e.g.:
 
-```js
+```javascript
 import { JetView } from "webix-jet";
 export default class PopupView extends JetView {
 	config(){

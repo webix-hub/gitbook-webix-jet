@@ -74,7 +74,7 @@ The method returns *true* if the app contains the view from the parameter and *f
 
 The **createView** method creates a Jet view based on the UI configuration passed to it as a parameter.
 
-```js
+```javascript
 let view = this.app.createView(FormView); // FormView is a Jet view class
 this.getRoot().addView(view);
 ```
@@ -133,7 +133,7 @@ The method returns the current top view of the app.
 
 **Returns:** a Jet view (object).
 
-```js
+```javascript
 // views/some.js
 import {JetView} from "webix-jet";
 export default class FormView extends JetView{

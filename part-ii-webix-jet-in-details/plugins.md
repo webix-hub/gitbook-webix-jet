@@ -93,7 +93,7 @@ export default class TopView extends JetView {
 
 You can set the Menu plugin in the way that it does not go to a different path, but changes a certain URL parameter. Use the **param** config setting for this. **param** accepts a string with the parameter name, e.g.:
 
-```js
+```javascript
 // views/top.js
 import {JetView} from "webix-jet";
 export default class TopView extends JetView {
@@ -122,7 +122,7 @@ export default class TopView extends JetView {
 
 If you use the Menu plugin with param setting together with the [UrlParam](#urlparam-plugin), the parameter will be displayed in the URL as a URL segment:
 
-```js
+```javascript
 // views/top.js
 init(){
 	this.use(plugins.UrlParam, ["user"]);
@@ -343,7 +343,7 @@ The plugin configuration can include the following settings:
 * **ping** \(number\) is the time interval for checking the current user status, 30000 ms by default;
 * **public** (function) allows adding [pages accessible by unauthorized users](#adding-public-pages).
 
-```js
+```javascript
 import session from "models/session";
 // ...
 app.use(plugins.User, {
@@ -482,7 +482,7 @@ The User plugin checks every 5 minutes (time lapse is defined by the **ping** se
 
 By default, unauthorized users can see only the "login" page. You can add other pages that all users are allowed to access. Use the **public** setting of the plugin configuration object. **public** must be a function that returns *true* for public pages and *false* for the rest:
 
-```js
+```javascript
 app.use(plugins.User, {
 	model: session,
 	public: path => path.indexOf("top/data") > -1
@@ -757,7 +757,7 @@ app.use(plugins.Locale, { path:"some" });
 
 You can also disable locale loading from *jet-locales* using the same setting:
 
-```js
+```javascript
 app.use(plugins.Locale, { path:false });
 ```
 
@@ -765,7 +765,7 @@ app.use(plugins.Locale, { path:false });
 
 The Locale plugin has the additional setting for using Webix locales alongside with the Jet app locale.
 
-```js
+```javascript
 app.use(plugins.Locale, {
 	webix:{
 		en:"en-US",
@@ -779,7 +779,7 @@ app.use(plugins.Locale, {
 
 If a lot of text in your app needs to be translated, you can split localizations and load them when they are needed. The source of a locale can be anything, e.g. inline or a result of an AJAX request:
 
-```js
+```javascript
 webix.ajax("/server/en/forms").then(data => {
     data = data.json();
     this.app.getService("locale").setLangData("en", data);
@@ -790,7 +790,7 @@ webix.ajax("/server/en/forms").then(data => {
 
 The Locale plugin uses the [Polyglot library](http://airbnb.io/polyglot.js/), which has settings of its own. You can use these settings in the config of the plugin:
 
-```js
+```javascript
 this.use(plugins.Locale, { polyglot:{ /* ...Polyglot settings */ } });
 ```
 

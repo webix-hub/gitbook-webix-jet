@@ -7,6 +7,6 @@ If you really want to, you can drop Webpack and include Jet source code directly
 
 Once you include *es5/jet.js*, you will be able to use Jet like:
 
-```js
+```javascript
 class MyApp extends webix.jet.JetApp { /* ... */ }
 ```
