@@ -30,6 +30,7 @@
   * [Big App Development](part-iv-toolchain/big-app-development.md)  
   * [Using TypeScript](part-iv-toolchain/using-typescript.md)
   * [Configuring Webpack](part-iv-toolchain/webpack-configuration.md)
+  * [Using with Vite](part-iv-toolchain/using-with-vite.md)
   * [Importing Webix as Module](part-iv-toolchain/importing-webix-as-module.md)
   * [Using Webix Jet without Webpack](part-iv-toolchain/using-webix-jet-without-webpack.md)
   * [Changing the Port of the Dev Server](part-iv-toolchain/working-with-package.json.md)
