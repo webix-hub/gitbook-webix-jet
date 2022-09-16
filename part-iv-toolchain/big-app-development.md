@@ -4,7 +4,12 @@
 
 If you develop a large app, it has sense to split it into multiple modules, which can be developed and tested separately and combined into a single app on the last step of development.
 
-Webix Jet toolchain has been updated to support such kind of development (Starting with Webix Jet 1.5). For new projects, just use the [jet-start](https://github.com/webix-hub/jet-start) pack. To update existing projects, check **webpack.config.js** against the [latest one](https://github.com/webix-hub/jet-start/blob/master/webpack.config.js) and update the **scripts** section in [package.json](https://github.com/webix-hub/jet-start/blob/master/package.json).
+Webix Jet toolchain has been updated to support such kind of development (Starting with Webix Jet 1.5). For new projects, just use the [jet-start](https://github.com/webix-hub/jet-start) pack.
+
+To update existing projects:
+
+- check **webpack.config.js** against the [latest one](https://github.com/webix-hub/jet-start/blob/master/webpack.config.js)
+- update the **scripts** section in [package.json](https://github.com/webix-hub/jet-start/blob/master/package.json).
 
 CLI commands:
 
@@ -20,7 +25,7 @@ When the module is built, you can copy it to a subfolder of some other app, e.g.
 If you want to use the module as a part of another Webix Jet app:
 
 * use _**npm run module**_ or _**yarn module**_
-* import the JS and CSS files of your module from the subfolder you have put them into:
+* import the JS and CSS files of your module from the subfolder you have put them into and initialize the app:
 
 ```javascript
 // views/someview.js
@@ -31,7 +36,7 @@ config(){
     return {
         rows:[
             ToolbarView,
-            new OtherApp()
+            new OtherApp({ app: this.app })
         ]
     };
 }
@@ -47,7 +52,28 @@ Modules are much more lightweight than bundles with dependencies. So if you plan
 
 If you want to use the module on a page without Webix Jet:
 
+* `app.js` should contain explicit import of all views:
+
+```javascript
+export default class MyApp extends JetApp{
+    constructor(config){
+        const views = (name) => require("./views/"+name);
+        const defaults = {
+            /* ... */
+            views,
+            start   : "/top/start"
+        };
+        super({ ...defaults, ...config });
+    }
+}
+```
+
 * use _**npm run standalone**_ or _**yarn standalone**_
+
+{% hint style="info" %}
+The compiled sources should be copied to the main application or published on npm. Otherwise, if the sources are simply imported from one project to another, Webpack will try to use different webix-jet instances, while only one instance will ensure correct initialization.
+{% endhint %}
+
 * include the JS and CSS files of your module from the subfolder you have put them into:
 
 ```html

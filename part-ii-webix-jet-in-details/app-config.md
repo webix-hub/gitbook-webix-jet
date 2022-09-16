@@ -14,6 +14,7 @@ You can include various parameters into the app configuration. The details are b
 | Parameter | What For |
 | :--- | :--- |
 | debug | to enable debugging |
+| name | to set the name of the app |
 | router | to change a router |
 | routes | to shorten the app URL |
 | start | to set the start app URL |

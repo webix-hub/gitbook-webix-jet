@@ -4,12 +4,15 @@
 
 Stores app configuration settings (both default and the ones you added to the JetApp constructor).
 
+[Read more about app config](../part-ii-webix-jet-in-details/app-config.md).
+
 ```javascript
 // app.js
 import { JetApp } from "webix-jet";
 export class App extends JetApp {
 	constructor(config) {
         const defaults = {
+            name:"App",
 			version: VERSION,
 			debug: DEBUG,
 			start: "/top",
@@ -41,8 +44,6 @@ export default class TopView extends JetView {
     }
 }
 ```
-
-[Read more about app config](../part-ii-webix-jet-in-details/app-config.md).
 
 ### ready
 
