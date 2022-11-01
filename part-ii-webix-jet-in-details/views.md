@@ -37,7 +37,7 @@ You can create new instances of Jet class views with a constructor. This is very
 import {JetView} from "webix-jet";
 export default class CustomersData extends JetView{
     constructor(app, data){
-        super(app,name);
+        super(app, data);
         this._componentData = data;
     }
     config(){
