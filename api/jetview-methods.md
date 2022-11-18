@@ -169,7 +169,7 @@ export default class ListEditView extends JetView{
 }
 ```
 
-For more details on referencing views, [read the "Referencing" section](referencing-views.md).
+For more details on referencing views, [read the "Referencing" section](../part-ii-webix-jet-in-details/referencing-views.md).
 
 ## this.getSubViewInfo\(\)
 
@@ -598,7 +598,7 @@ export default class ToolbarView extends JetView {
 }
 ```
 
-For details, [read the "Referencing" section](referencing-views.md).
+For details, [read the "Referencing" section](../part-ii-webix-jet-in-details/referencing-views.md).
 
 ## Footnotes
 
