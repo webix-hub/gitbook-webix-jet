@@ -1,5 +1,32 @@
 # What's New
 
+## Version 3.0 - May 10, 2023
+
+* Toolchain migrated to Vite
+* *onInit* event triggers during the init of jet views
+* Predefined *_hidden* view
+* Views can be overridden at runtime
+* App can have a custom view loader
+* Objects can be used as view params
+* Ability to define app and view params through **config()** or **show()** commands
+* Jetapp view doesn't copy methods of the app on self
+* Popup subviews leave empty elements in parent collections
+
+## Versions 2.1.1 - 2.1.7
+
+* The ability to use a map of overrides in the view config
+* Improved TypeScript support (locate views through generics)
+* Correct handling of top-level JetView submodules on navigation
+* Fixes to routers
+
+## Version 2.1 - July 8, 2019
+
+* Better routing logic (including subviews)
+* *webix.fullscreen* support for JetView elements
+* Typed results for navigation rejections (NavigationBlocked error)
+* UnloadGuard: optimizations to guard triggers
+* Various other fixes
+
 ## Version 2.0 - February 21, 2019
 
 ### New Features
