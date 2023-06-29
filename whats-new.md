@@ -1,6 +1,6 @@
 # What's New
 
-## Version 3.0 - May 10, 2023
+## Version 3.0 - May 25, 2023
 
 * Toolchain migrated to Vite
 * *onInit* event triggers during the init of jet views
