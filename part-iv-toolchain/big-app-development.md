@@ -4,27 +4,30 @@
 
 If you develop a large app, it has sense to split it into multiple modules, which can be developed and tested separately and combined into a single app on the last step of development.
 
-Webix Jet toolchain has been updated to support such kind of development (Starting with Webix Jet 1.5). For new projects, just use the [jet-start](https://github.com/webix-hub/jet-start) pack.
+Starting with Webix Jet 3.0, the toolchain has been migrated to Vite, and it is now possible to build apps as modules using Vite (read about building with Webpack [here](https://webix.gitbook.io/webix-jet/part-iv-toolchain/big-app-development-with-webpack)). If you have an existing project that uses Webpack and you wish to migrate to Vite, follow these steps:
 
-To update existing projects:
+- provide [vite.config.js](https://github.com/webix-hub/jet-start/blob/vite-standalone/vite.config.js)
+- set env variables via the [.env](https://github.com/webix-hub/jet-start/blob/vite-standalone/.env) file
+- update your JetApp entry file according to this structure - [myapp.js](https://github.com/webix-hub/jet-start/blob/vite-standalone/sources/myapp.js)
+- update the scripts section in [package.json](https://github.com/webix-hub/jet-start/blob/vite-standalone/package.json) (set the vite build command in particular)
 
-- check **webpack.config.js** against the [latest one](https://github.com/webix-hub/jet-start/blob/master/webpack.config.js)
-- update the **scripts** section in [package.json](https://github.com/webix-hub/jet-start/blob/master/package.json).
+For new projects, please refer to the corresponding [jet-start](https://github.com/webix-hub/jet-start/tree/vite-standalone) branch.
 
 CLI commands:
 
 | Command | What it does |
 | :--- | :--- |
-| `npm run module` or `yarn module` | builds a standalone module, which is stored in **dist/module/** \(a JS and a CSS files\); the module **doesn't** include _webix-jet_ |
-| `npm run standalone` or `yarn standalone` | builds a standalone module, which is stored in **dist/full/** \(a JS and a CSS files\); the module **includes all dependencies** |
+| `yarn build` or `npm run build` | builds a standalone module, which is stored in **dist/assets/** \(a JS and a CSS file\); the module **doesn't** include _webix-jet_ by default|
+
+If you want to include *webix-jet* in your app, you need to exclude *webix-jet* from external dependencies in [rollupOptions](https://rollupjs.org/configuration-options/#external) of your [vite.config.js](https://github.com/webix-hub/jet-start/blob/vite-standalone/vite.config.js#L13) file. You can also define a separate config for such builds.
 
 When the module is built, you can copy it to a subfolder of some other app, e.g. _sources/modules/_.
 
-### When to use _module_
+### Building a bundle with no dependencies
 
 If you want to use the module as a part of another Webix Jet app:
 
-* use _**npm run module**_ or _**yarn module**_
+* use **yarn build** or **npm run build**
 * import the JS and CSS files of your module from the subfolder you have put them into and initialize the app:
 
 ```javascript
@@ -43,37 +46,15 @@ config(){
 ```
 
 {% hint style="info" %}
-Be sure to use webix-jet 1.4+
+Be sure to use webix-jet 3.0+
 {% endhint %}
 
 Modules are much more lightweight than bundles with dependencies. So if you plan to create a lot of app modules, compile them this way.
 
-### When to use _standalone_
+### Building a bundle with dependencies
 
-If you want to use the module on a page without Webix Jet:
-
-* `app.js` should contain explicit import of all views:
-
-```javascript
-export default class MyApp extends JetApp{
-    constructor(config){
-        const views = (name) => require("./views/"+name);
-        const defaults = {
-            /* ... */
-            views,
-            start   : "/top/start"
-        };
-        super({ ...defaults, ...config });
-    }
-}
-```
-
-* use _**npm run standalone**_ or _**yarn standalone**_
-
-{% hint style="info" %}
-The compiled sources should be copied to the main application or published on npm. Otherwise, if the sources are simply imported from one project to another, Webpack will try to use different webix-jet instances, while only one instance will ensure correct initialization.
-{% endhint %}
-
+* modify the [vite.config.js](https://github.com/webix-hub/jet-start/blob/vite-standalone/vite.config.js#L13) file to exclude *webix-jet* as an external dependency (or define a separate config for such builds)
+* use **yarn build** or **npm run build**
 * include the JS and CSS files of your module from the subfolder you have put them into:
 
 ```html
@@ -98,29 +79,47 @@ If you want to nest an app module into Webix layout, you should create a custom 
 
 ```javascript
 // sources/myapp.js
-import {JetApp} from "webix-jet";
-export default class MyApp extends JetApp {
-    //app config
-    constructor(){
-        const defaults = {
-            id     	: APPNAME,
-			version	: VERSION,
-            router  : BUILD_AS_MODULE ? EmptyRouter : HashRouter, //!
-            debug   : !PRODUCTION,
-            start   : "/top/start"
-        };
-        super({ ...defaults, ...config });
-    }
+import "./styles/app.css";
+import {JetApp, EmptyRouter, HashRouter, plugins } from "webix-jet";
+
+// dynamic import of views
+const modules = import.meta.glob("./views/**/*.js");
+const views = name => modules[`./views/${name}.js`]().then(x => x.default);
+
+// locales, optional
+const locales = import.meta.glob("./locales/*.js");
+const words = name => locales[`./locales/${name}.js`]().then(x => x.default);
+
+export default class MyApp extends JetApp{
+	constructor(config){
+		const defaults = {
+			id 		: import.meta.env.VITE_APPNAME,
+			version : import.meta.env.VITE_VERSION,
+			router 	: import.meta.env.VITE_BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+			debug 	: !import.meta.env.PROD,
+			start 	: "/top/start",
+			// set custom view loader, mandatory
+			views
+		};
+
+		super({ ...defaults, ...config });
+
+		// locales plugin, optional
+		this.use(plugins.Locale, {
+			path: words,
+			storage: this.webix.storage.session
+		});
+	}
 }
 
-if (!BUILD_AS_MODULE){
-    webix.ready(() => new MyApp().render() );
+if (!import.meta.env.VITE_BUILD_AS_MODULE){
+	webix.ready(() => new MyApp().render() );
 }
 
 // add this
 webix.protoUI({
-    name:"some-widget",
-    app: MyApp
+  name:"some-widget",
+  app: MyApp
 }, webix.ui.jetapp);
 ```
 
@@ -128,7 +127,7 @@ webix.protoUI({
 Make sure the app config includes the EmptyRouter.
 {% endhint %}
 
-Now you can run `npm run standalone` or `yarn standalone` to get a standalone bundle. Then you can copy the bundle to any subfolder of your app and use it:
+Now you can run `yarn build` or `npm run build` (with the correct config) to get a standalone bundle. Then you can copy the bundle to any subfolder of your app and use it:
 
 ```html
 <script src="module/app-name.js"></script>
