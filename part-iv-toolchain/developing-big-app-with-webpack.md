@@ -139,5 +139,5 @@ Now you can run `npm run standalone` or `yarn standalone` to get a standalone bu
 
 This JetApp works as a widget and can be combined and sized like any other Webix UI widget.
 
-[Check out the demo >>](https://github.com/webix-hub/jet-demos/tree/master/sources/webixview.js)
+[Check out the demo >>](https://github.com/webix-hub/jet-demos/blob/533f9ead6a41ce0715eefb9c568fab904f663424/sources/webixview.js)
 

@@ -4,7 +4,7 @@
 
 If you develop a large app, it has sense to split it into multiple modules, which can be developed and tested separately and combined into a single app on the last step of development.
 
-Starting with Webix Jet 3.0, the toolchain has been migrated to Vite, and it is now possible to build apps as modules using Vite (read about building with Webpack [here](https://webix.gitbook.io/webix-jet/part-iv-toolchain/big-app-development-with-webpack)). If you have an existing project that uses Webpack and you wish to migrate to Vite, follow these steps:
+Starting with Webix Jet 3.0, the toolchain has been migrated to Vite, and it is now possible to build apps as modules using Vite (read about building with Webpack [here](https://webix.gitbook.io/webix-jet/part-iv-toolchain/developing-big-app-with-webpack)). If you have an existing project that uses Webpack and you wish to migrate to Vite, follow these steps:
 
 - provide [vite.config.js](https://github.com/webix-hub/jet-start/blob/vite-standalone/vite.config.js)
 - set env variables via the [.env](https://github.com/webix-hub/jet-start/blob/vite-standalone/.env) file
