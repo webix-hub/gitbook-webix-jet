@@ -274,8 +274,7 @@ You can give complex IDs, e.g. _"root\_view:control"_ or _"control:function"_. T
 }
 ```
 
-If you use *this.$$\(id\)* 
-with a global ID, it's the same as *webix.$$\(id\)*.
+If you use this.$$\(id\) with a global ID, it's the same as webix.$$\(id\).
 
 ## Footnotes
 
