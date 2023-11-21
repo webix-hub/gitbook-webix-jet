@@ -68,8 +68,8 @@ export default class TopView extends JetView{
     config(){
         return {
             rows:[
-                new CustomersData(this.app,"",getRecords()),
-                new CustomersData(this.app,"",getClients())
+                new CustomersData(this.app, getRecords()),
+                new CustomersData(this.app, getClients())
             ]
         };
     }
