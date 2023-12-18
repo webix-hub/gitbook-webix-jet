@@ -12,7 +12,7 @@ But if you really need to include Webix as a module, you can do this in two ways
 ## Building a Huge Bundle of Webix and the App
 
 {% hint style="warning" %}
-Please note that this way in not recommended, as the resulting file is relatively big and will work better as a separate script, without bundling in the single *app.js*.
+Please note that this way is not recommended, as the resulting file is relatively big and will work better as a separate script, without bundling in the single *app.js*.
 {% endhint %}
 
 1\. Make Webix available for all includes by adding the following section in **webpack.config.js**:
