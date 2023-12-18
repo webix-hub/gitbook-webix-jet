@@ -193,9 +193,7 @@ Calling events is necessary mostly for custom events. Inner Jet events and Webix
 
 You can attach an event handler to the event bus in one view and trigger the event in another view.
 
-#### Preferable Way: this.on
-
-The best way to attach a listener is [this.on](jetview-api.md#this-on). The benefit of this way is that the event handler is automatically detached when the view that attached the event handler is destroyed. **this.on** can _handle_ app and Webix events.
+A listener can be attached with [this.on](jetview-api.md#this-on). The benefit of this way is that the event handler is automatically detached when the view is destroyed. **this.on** can _handle_ app and Webix events.
 
 ```javascript
 // views/parentview.js
@@ -227,25 +225,6 @@ export default class ParentView extends JetView {
 	}
 }
 ```
-
-#### One More Way: app.attachEvent
-
-One more way to attach an event listener is to call [app.attachEvent](api/jetapp-methods.md#app-attachevent).
-
-```javascript
-// views/form.js
-import {JetView} from "webix-jet";
-
-export default class FormView extends JetView{
-    init(){
-        this.app.attachEvent("save:form", function(){
-            this.show("aftersave");
-        });
-    }
-}
-```
-
-This event listener will stay as long as the app works.
 
 ## Services
 
