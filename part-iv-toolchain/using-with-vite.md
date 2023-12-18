@@ -1,6 +1,6 @@
 # Using with Vite
 
-Starting with Webix Jet 3.0, the toolchain has been migrated to Vite. Read more about it [here](https://webix.gitbook.io/webix-jet/part-iv-toolchain/big-app-development). There are some differences from usage with WebPack:
+You can use Jet with other app bundlers instead of WebPack. For example, [Vite](https://vitejs.dev/). There are some differences from usage with WebPack:
 
 - the `.env` file is added, it stores global constants:
 
@@ -72,10 +72,11 @@ export default class MyApp extends JetApp{
         //...
 
         // patch locales loader, optional
-        this.use(plugins.Locale, {
-			path: words,
-			storage: this.webix.storage.session
-		});
+        this.use(plugins.Locale, { path: false, storage: this.webix.storage.session });
+        const ls = this.getService("locale");
+        ls.setLang = (lang, silent) =>
+            words(lang).then(w => ls.setLangData(lang, w, silent));
+        ls.setLang(ls.getLang(), true);
     }
 }
 ```
@@ -97,4 +98,4 @@ export default class MyApp extends JetApp{
 
 - the dev server is at ```http://localhost:5173```.
 
-You can see the full code of the demo [here](https://github.com/webix-hub/jet-start/tree/master).
+You can see the full code of the demo in the [vite branch of jet-start](https://github.com/webix-hub/jet-start/tree/vite).
