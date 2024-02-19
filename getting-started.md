@@ -22,7 +22,7 @@ yarn
 yarn start
 ```
 
-Next, open `http://localhost:8080` in the browser. You will see the application interface. Let's have a look at what it has inside.
+Next, open `http://localhost:5173` in the browser. You will see the application interface. Let's have a look at what it has inside.
 
 ## The Application Structure
 

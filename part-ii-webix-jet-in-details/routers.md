@@ -67,7 +67,7 @@ webix.ready(() => {
 });
 ```
 
-Next, configure http redirects by adding a fallback. For webpack dev server from a starter kit, this can be done in _webpack.config_:
+Next, configure http redirects by adding a fallback. If you use the Webpack dev server from a starter kit, this can be done in _webpack.config_:
 
 ```javascript
 // webpack.config.js
@@ -98,10 +98,10 @@ webix.ready(() => {
 
 In your _index.html_ you should set the relative URL with the same prefix:
 
-```markup
+```html
 <!-- index.html -->
 <script type="text/javascript">
-    if(document.location.pathname == "/index.html")
+    if (document.location.pathname == "/index.html")
         document.location.href = "/myapp";
 </script>
 ```

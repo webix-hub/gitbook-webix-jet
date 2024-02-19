@@ -157,54 +157,6 @@ export default class TopView extends JetView {
 
 [Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/viewresolve.js)
 
-### Code Splitting
-
-You can [split your code into bundles](https://webpack.js.org/guides/code-splitting/) and load them on demand \(lazy loading\), which can greatly influence the initial loading time of the application. Lazy loading of app code is possible in Webix Jet with the help of a custom **app.views** handler. Where you can import the bundle on demand [\[2\]](app-config.md#2).
-
-```javascript
-// myapp.js
-import "./styles/app.css";
-import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
-
-export default class MyApp extends JetApp{
-    constructor(config){
-        const defaults = {
-            router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug: !PRODUCTION,
-            start: "/top/layout",
-            views: (name) => {
-                if (name === "modules.clients") //sources/modules/
-                    return import("modules/clients");
-
-                // load all other modules with default strategy
-                return name;
-            }
-        };
-
-        super({ ...defaults, ...config });
-    }
-}
-
-if (!BUILD_AS_MODULE){
-    webix.ready(() => new MyApp().render() );
-}
-```
-
-In **webpack.config.js**, you can define the chunk naming scheme \(the _chunkFilename_ property\) in **output**:
-
-```javascript
-// webpack.config.js
-...
-output: {
-    ...
-    filename: "[name].js",
-    chunkFilename: "[name].bundle.js"
-    // will be 'clients.bundle.js' in this case
-}
-```
-
-[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/bundles.js)
-
 ### Custom Logic of Creating Views
 
 You can also implement your own logic of view creating. Define **views** as a function for that:
