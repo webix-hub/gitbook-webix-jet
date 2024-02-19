@@ -22,12 +22,11 @@ npm install
 npm start
 ```
 
-* open the app at _localhost:8080_.
+* open the app at _localhost:5173_.
 
 ## Troubleshooting
 
-* If you get `can not resolve` error in webpack, make sure you add the alias and the path to the lib in question in **webpack.config.js**. [Check the docs](https://webpack.js.org/configuration/resolve/).
-* If something else goes wrong, use the [starter jet repo](https://github.com/webix-hub/jet-start) as the base for migration and replace the sources folder as above.
+* If something goes wrong, use the [starter jet repo](https://github.com/webix-hub/jet-start) as the base for migration and replace the sources folder as above.
 
 ## Migrating views
 

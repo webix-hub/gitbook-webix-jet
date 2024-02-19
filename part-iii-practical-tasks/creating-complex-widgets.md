@@ -106,31 +106,3 @@ export default class MyView extends JetView {
 }
 ```
 
-## Dynamic Widget Loading
-
-If you want to load custom widget code on demand, you can split your code and import the bundles with widget code when it is needed. For example, widgets can be imported in [config\(\)](../part-ii-webix-jet-in-details/views.md#config) of a Jet view:
-
-```javascript
-// views/statistics.js
-import {JetView} from "webix-jet";
-export default class StatisticsView extends JetView{
-    config(){
-        const widgets = import(/* webpackChunkName: "widgets" */ "modules/customgrid");
-        return widgets.then(() => {
-
-            return { rows:[
-                { type:"header", template:"Sales 2018" },
-                { view:"custom-grid" }
-            ]};
-
-        });
-    }
-}
-```
-
-{% hint style="info" %}
-This works for both custom Webix widgets and Jet apps as custom widgets.
-{% endhint %}
-
-[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/bundles.js)
-
