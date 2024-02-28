@@ -103,59 +103,56 @@ if (!BUILD_AS_MODULE){
 
 ## Changing View Creation Logic
 
-Use the **views** parameter to change the names of view modules inside your code.
+If you use Webix Jet 3.0+, which is build with Vite, you can use its dynamic import. If you use older versions or your custom Webpack setup, proceed to [Using with Webpack](part-iv-toolchain/webpack-configuration.md#changing-view-creation-logic).
 
-For example, if the module you want to show is in a subfolder and you want to shorten the URL of the module, you can do it in the **views** parameter:
+After switching to Vite (Jet 3.0+), the app configuration requires a custom view loader, defined as a function or a direct assignment of an imported module.
 
-```javascript
-// myapp.js
-import "./styles/app.css";
-import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
+For example, let’s say you have two folders in your project, “views” and “views_custom”, with the following file distribution:
 
-export default class MyApp extends JetApp{
-    constructor(config){
-        const defaults = {
-            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-            debug     : !PRODUCTION,
-            start     : "/top/layout",
-            views: {
-                "start" : "area.list" // load /views/area/list.js
-            }
-        };
-
-        super({ ...defaults, ...config });
-    }
-}
-
-if (!BUILD_AS_MODULE){
-    webix.ready(() => new MyApp().render() );
-}
+```bash
+views/
+  - start.js
+  - top.js
+    - area/
+        - list.js
 ```
 
-In this example, **list** module is stored in the **area** subfolder in _/views_ \(_/views/area/list.js_\). Later, you can show the view by the new name, e.g.:
+Then you can use [multiple patterns](https://vitejs.dev/guide/features#multiple-patterns) in Vite’s `import.meta.glob` and provide the correct path to each module in views:
 
-```javascript
-// views/top
-import {JetView} from "webix-jet";
+```js
+// views/index.js
+// note: because of the placement of this file in the project, 
+// this relative path points to all files in "views" folder and all its subfolders
 
-export default class TopView extends JetView {
-    config(){
-        return {
-            cols:[
-                { view:"button", value:"start",
-                  click:() => {
-                    this.show("start");
-                }},
-                { $subview: true }
-            ]
-        };
-    }
-}
+const modules = import.meta.glob(["./**/*.js"]);
+
+// custom aliases
+const aliases = {
+    list: "area.list"
+};
+
+const views = name => {
+	if (aliases[name]) name = aliases[name];
+	const mod = modules[`./${name.replace(/\./g, "/")}.js`];
+    if (!mod) return modules["./404.js"]().then((x) => x.default);
+	return modules[path]().then(x => x.default);
+};
 ```
 
-**this** in the button click handler refers to the current instance of a Jet view class [\[1\]](app-config.md#1).
+```js
+// sources/app.js
+import {JetApp} from "webix-jet";
+import { views } from "./views/index";
 
-[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/viewresolve.js)
+const app = new JetApp({
+	start:		"/top/list",	// "list" should represent module from "views/area/list.js"
+	views,
+});
+
+export default app;
+```
+
+[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-start/blob/cb90f9e20bad52f08d83111c895fac40d745850b/sources/myapp.js#L4)
 
 ### Custom Logic of Creating Views
 

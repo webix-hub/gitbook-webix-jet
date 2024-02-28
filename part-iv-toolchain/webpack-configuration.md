@@ -4,6 +4,62 @@ Since Webix Jet 3.0, the default bundler we use in demos is Vite. Still, you can
 
 There are also some cases when you might want to add some extra configuration for your app. You can change the default Webpack configuration and get the expected result.
 
+## Changing View Creation Logic
+
+Use the **views** parameter to change the names of view modules inside your code.
+
+For example, if the module you want to show is in a subfolder and you want to shorten the URL of the module, you can do it in the **views** parameter:
+
+```javascript
+// myapp.js
+import "./styles/app.css";
+import {JetApp, EmptyRouter, HashRouter } from "webix-jet";
+
+export default class MyApp extends JetApp{
+    constructor(config){
+        const defaults = {
+            router     : BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+            debug     : !PRODUCTION,
+            start     : "/top/layout",
+            views: {
+                "start" : "area.list" // load /views/area/list.js
+            }
+        };
+
+        super({ ...defaults, ...config });
+    }
+}
+
+if (!BUILD_AS_MODULE){
+    webix.ready(() => new MyApp().render() );
+}
+```
+
+In this example, **list** module is stored in the **area** subfolder in _/views_ \(_/views/area/list.js_\). Later, you can show the view by the new name, e.g.:
+
+```javascript
+// views/top
+import {JetView} from "webix-jet";
+
+export default class TopView extends JetView {
+    config(){
+        return {
+            cols:[
+                { view:"button", value:"start",
+                  click:() => {
+                    this.show("start");
+                }},
+                { $subview: true }
+            ]
+        };
+    }
+}
+```
+
+**this** in the button click handler refers to the current instance of a Jet view class [\[1\]](app-config.md#1).
+
+[Check out the demo &gt;&gt;](https://github.com/webix-hub/jet-demos/blob/master/sources/viewresolve.js)
+
 ## Configuring Webix Jet to Work with a Backend Server
 
 {% hint style="info" %}
